@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/globals.css">
+    <link rel="stylesheet" href="styles/footerStyle.css">
+    <link rel="stylesheet" href="styles/headerStyle.css">
+    <title>Home</title>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main class="main-content">
+        <div class="recommended">
+            <h2>Recomendados</h2>
+            <div class="card-container" id="cardContainer">
+                <!-- Tarjetas de juegos recomendados -->
+            </div>
+        </div>
+
+        <section class="ads-container">
+            adss
+        </section>
+
+        <section class="categories-container" id="categoriesContainer">
+            categorias
+        </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="js/main.js">
+        //Cargamos el script
+    </script> 
+    <script>
+        //Cargamos el header y el footer dinamicamente
+        loadComponent('components/header.html', 'header');
+        loadComponent('components/footer.html', 'footer');
+    </script>
+</body>
+</html>

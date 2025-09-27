@@ -1,0 +1,67 @@
+:root{
+    /* Color Primario */
+    --color-primario-400: #E55A3C;
+    --color-primario-200: #FF7F66;
+    --color-primario-100: #FFF7F5;
+    
+    /*Color Secundario*/
+    --color-secundarioDorado-400: #C06020;
+    --color-secundarioDorado-300: #ED8936;
+    --color-secundarioDorado-200: #F6AD55;
+    
+    /*Color de texo*/
+    --color-texto-500: #1B202B;
+    --color-texto-400: #2D3748;
+    --color-texto-300: #868686;
+    --color-texto-200: #A8A8A8;
+    --color-texto-100: #CACACA;
+    
+    /*Color del fondo*/
+    --color-baseFondo-300: #E0D3B1;
+    --color-baseFondo-200: #F2F2DC;
+    --color-baseFondo-100: #F2DCDC;
+
+    /*-----------------------------------------------------*/
+
+    /*Tipografia*/
+    --fuente-principal: 'Fredoka', sans-serif;
+    --peso-semi-bold: 600;
+
+    /* Tamaños */
+    --tamano-titulo-xl: 64px;
+    --tamano-titulo-lg: 36px;
+    --tamano-titulo-md: 28px;
+    --tamano-titulo-sm: 24px;
+
+    --tamano-texto-md: 14px;
+    
+}
+
+body{
+    /*Fondo Pantalla*/
+    background-image: url('assets/img/fondo-pantalla.svg');
+    background-repeat: repeat;         /* Repite la imagen en mosaico */
+    background-position: top left;     /* Comienza desde la esquina superior izquierda */
+    background-size: auto; 
+}
+
+*{
+    h1, h2, h3, h4, h5, h6, p{
+        font-family: var(--fuente-principal);
+        font-weight: var(--peso-semi-bold);
+    }
+
+    h1{font-size: var(--tamano-titulo-xl);}
+    h2{font-size: var(--tamano-titulo-lg);}
+    h3{font-size: var(--tamano-titulo-md);}
+    h4{font-size: var(--tamano-titulo-sm);}
+    p{font-size: var(--tamano-texto-md);}
+
+
+    a {
+        text-decoration: none; /* Quita el subrayado */
+        color: black;
+    }
+    
+}
+/*-----------------------------------------------------*/

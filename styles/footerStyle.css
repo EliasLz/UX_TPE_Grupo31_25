@@ -1,0 +1,33 @@
+footer{
+    display : flex;
+    flex-direction: column;
+}
+
+.content-links{
+    background-color: var(--color-secundarioDorado-400);
+
+    display: grid;
+    grid-template-columns: 3fr 1fr 0.1fr;
+
+}
+
+.link{
+    display: flex;
+    justify-content: space-around;
+}
+
+.description{
+    justify-items: center;
+}
+
+.networks{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+.copyright{
+    background-color: var(--color-baseFondo-300);
+    border: 0;
+    justify-items: center;
+}
