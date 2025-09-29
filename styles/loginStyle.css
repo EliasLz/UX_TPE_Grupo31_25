@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  height: 100vh;                 /* Ocupa toda la altura de la pantalla */
+  display: flex;
+  justify-content: center;       /* Centra horizontalmente */
+  align-items: center;           /* Centra verticalmente */
+}
+
+section{
+    width: 50%;
+    background-color: var(--color-secundarioDorado-200);
+    border-radius: 50px;
+    text-align: center;
+}
+
+form{
+    width: 50%;
+    text-align: center;
+}
+
+.form-register{
+    background-color: white;
+}
+
+.register-button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}

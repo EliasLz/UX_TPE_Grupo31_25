@@ -24,8 +24,8 @@ footer{
 .networks{
     display: flex;
     justify-content: space-evenly;
+    width: 100%;
 }
-
 
 .copyright{
     background-color: var(--color-baseFondo-300);

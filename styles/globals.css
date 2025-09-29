@@ -88,6 +88,22 @@ input {
   color: inherit;            /* Hereda el color del texto */
 }
 
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+form input{
+    padding-left: 12px;
+    height: 110%;
+    /*text-align: center;
+    /*align-items: center;       /* Centra verticalmente */
+    /*justify-content: center;   /* Centra horizontalmente */
+    border: none;
+    background-color: var(--color-baseFondo-300);
+    border-radius: 50px;
+
+}
 
 
 /*-----------------------------------------------------*/
