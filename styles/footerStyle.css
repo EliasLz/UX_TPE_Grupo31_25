@@ -1,6 +1,7 @@
 footer{
     display : flex;
     flex-direction: column;
+    border: 0;
 }
 
 .content-links{
@@ -30,4 +31,8 @@ footer{
     background-color: var(--color-baseFondo-300);
     border: 0;
     justify-items: center;
+}
+
+h4{
+    margin: 0;
 }
