@@ -1,4 +1,6 @@
-// Función para cargar un componente dinámicamente
+import { fetchGames } from "./fetchApi.js";
+
+// Función para cargar un componente dinámicamente.
 function loadComponent(urlComponent, idDestination) {
     fetch(urlComponent) //--> Ruta del componente que queremos cargar
         .then(response => {
@@ -19,27 +21,95 @@ function loadComponent(urlComponent, idDestination) {
         .catch(error => {
             console.error('Hubo un error al cargar el componente:', error);
         });
-    }
-
-    //Funcion para la busqueda de juegos
-function searchGame(){
-        const searchForm = document.getElementById('searchForm');
-        const searchInput = document.getElementById('searchInput');
-
-        if(!searchForm || !searchInput) return;
-
-        //TODO:: Terminar de implementar la busqueda cuando se IMPLEMENTE la API
 }
 
-//Funcion para mostrar los juegos por genero.
-async function filterByGenre(){
-    const genreSelect = document.getElementById('categoriesContainer');
-    if(!genreSelect) return;
+//Funcion para crear las cards de los juegos de forma dinamica.
+function createGameCard(game) {
+    return `
+        <div class="game-card">
+            <div class="game-card-image-container">
+                <img 
+                    src="${game.background_image_low_res}" 
+                    alt="Imagen de ${game.name}" 
+                    class="game-card-image"
+                >
+                <div class="game-card-overlay">
+                    <h3 class="game-card-title">${game.name}</h3>
+                </div>
+            </div>
+        </div>
+    `;
+}
 
-    const datos = await fetchGames();
-    if(!datos){
-        return console.log('No se pudieron obtener los datos de los juegos.')
-    }
-
+//Funcion para crear las secciones de carrusel por genero. 
+function createCarouselSection(genreName, games) {
+    const gameCards = games.map(game => createGameCard(game)).join('');
     
+    return `
+        <section class="carousel-section">
+            <h2 class="carousel-title">${genreName}</h2>
+            <div class="carousel-track categories-container" id="carousel-${genreName.replace(/\s/g, '-')}-track">
+                ${gameCards}
+            </div>
+        </section>
+    `;
 }
+
+//Agrupamos los juegos por genero  --> Con repetidos, ya que algunos juegos tienen mas de una categoria.
+function groupGamesByGenre(games) {
+    const grouped = {};
+    
+    games.forEach(game => {
+        if (game.genres && game.genres.length > 0) {
+            
+            game.genres.forEach(genre => {
+                const genreName = genre.name;
+
+                if (!grouped[genreName]) {
+                    grouped[genreName] = [];
+                }
+                
+                grouped[genreName].push(game);
+            });
+        }
+    });
+    
+    return grouped;
+}
+
+//Funcion para renderizar las cards segun la cantidad de categorias.
+async function renderCategories(){
+    const container = document.getElementById('categoriesContainer');
+    if(!container) {
+        console.log('No se encontro el contenedor de categorias');
+        return;
+    }
+
+    try {
+        const games = await fetchGames();
+
+        if (!games || games.length === 0) {
+            container.innerHTML = '<p>No hay juegos disponibles.</p>';
+            return;
+        }
+        const gamesByGenre = groupGamesByGenre(games);
+
+        for(const genreName in gamesByGenre){
+            if(gamesByGenre.hasOwnProperty(genreName)){
+                const gamesInGenre = gamesByGenre[genreName];
+                const carousel = createCarouselSection(genreName, gamesInGenre);
+                container.insertAdjacentHTML('beforeend', carousel);
+            }
+        }
+
+    } catch (error) {
+        console.error('Error al renderizar las categorias:', error);
+        container.innerHTML = '<p>Error al cargar las categorias.</p>';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+        loadComponent('components/header.html', 'header');
+        loadComponent('components/footer.html', 'footer');
+        renderCategories();
+    })
