@@ -1,0 +1,231 @@
+/* 1. ESTILOS BASE Y UTILITIES */
+
+body {
+    /* Centrado global: centra el contenedor principal en la pantalla */
+    display: flex;
+    align-items: center;           /* Centra verticalmente */
+    justify-content: center; 
+    margin: 0;
+    padding: 20px;
+    gap: 30px; 
+    box-sizing: border-box;
+}
+
+h1, h2, h4{
+    color: white;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+/* Contenedor principal: la tarjeta naranja */
+.card-naranja {
+    background-color: var(--color-secundarioDorado-200); /* Color naranja base */
+    padding: 30px 20px 10px;
+    border-radius: 40px; /* Bordes redondeados grandes */
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+    
+    /* Configuración para centrar el contenido interno */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+}
+
+/* La tarjeta interna: el área blanca de los formularios */
+.card-interna-blanca {
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 2. ESTILOS DE COMPONENTES REUTILIZABLES */
+
+/* Estilo para todos los inputs de texto/password/email */
+.input-redondeado {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Bordes redondeados para inputs */
+    box-sizing: border-box;
+    font-size: 1em;
+    background-color: white;
+}
+
+/* Estilo genérico para todos los botones de acción: rojo y redondeado */
+.boton-redondo-rojo {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    
+    background-color: var(--color-primario-400);
+    color: white;
+    border: none;
+    border-radius: 25px; /* Totalmente redondo */
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+}
+
+.boton-redondo-rojo p {
+    margin: 0;
+}
+
+/* 3. ESTILOS ESPECÍFICOS DE SECCIÓN */
+
+/* LOGIN: Estilos de cabecera y enlaces */
+.login h1 {
+    margin: 0;
+    font-size: 2em;
+    margin-bottom: 25px;
+}
+
+.login h4 {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+/* Contenedor de botones sociales */
+.accounts {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.boton-redondo-rojo img {
+    width: 20%;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* Sobrescribe el ancho de los botones sociales para que ocupen la mitad */
+.accounts .boton-redondo-rojo {
+    width: 50%; 
+}
+
+/* Enlace Registrarse: estilo de texto */
+.register-button{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-top: 15px;
+    gap: 8px;
+}
+
+.register-button .boton-redondo-rojo {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--color-primario-400); 
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: underline;
+    box-shadow: none;
+    width: auto; /* Permite que el botón solo ocupe el espacio del texto */
+    padding: 5px;
+    margin: 0;
+}
+
+/* REGISTER: Estilos de formulario */
+.register h2 {
+    font-size: 1.5em;
+    margin-bottom: 25px;
+}
+
+.form-register {
+    text-align: left; /* Alinea los labels a la izquierda */
+}
+
+.form-register label {
+    display: block;
+    margin-top: 10px;
+    color: #555;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+/* Estilo del contenedor de términos de uso */
+.terms {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.terms p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #333;
+}
+
+/* Botón Volver */
+.boton-volver {
+    width: 150px;
+    background-color: var(--color-secundarioDorado-200);
+    border: 1px solid white;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* Estilo para hacer que el texto de informacion sea sutil */
+.optional-text {
+    font-weight: normal; /* Menos negrita que el resto del label */
+    font-size: 0.8em;  /* Un poco más pequeño */
+    margin-left: 5px;  /* Pequeño espacio del texto principal */
+    margin-bottom: 10px;
+}
+
+form .optional-text{
+    color: #888;
+}
+
+/* Ajustes específicos para inputs y formularios */
+.input-password{
+    margin: 0;
+}
+
+
+
+.logo-welcome{
+    width: 150px;
+    height: auto;
+}
+
+.imagen-con-degrade {
+    width: 300px; /* Define el tamaño de tu contenedor */
+    height: 300px;
+    
+    /* 1. Combinamos el degradado (primera capa) y la imagen (segunda capa) */
+    background-image: 
+        /* Degradado Radial: va del centro (transparente) hacia afuera (negro) */
+        radial-gradient(circle at center, 
+            transparent 50%,      /* En el centro (50%) es totalmente transparente */
+            var(--color-secundarioDorado-200) 70%,  /* A partir del 70% empieza a ser dorado semi-opaco */
+            var(--color-secundarioDorado-200) 100% /* En el borde (100%) es dorado casi opaco */
+        ),
+        /* URL de la Imagen: la imagen de fondo */
+        url('../assets/Logo4.svg'); 
+        
+    /* 2. Aseguramos que la imagen cubra todo el contenedor */
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+}
+

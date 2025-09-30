@@ -17,7 +17,10 @@ button{
     padding: 0;
 }
 
-
+form{
+    display: flex;
+    flex-direction: row;
+}
 .search-container{
     background-color: var(--color-baseFondo-300);
     border-radius: 50px;
