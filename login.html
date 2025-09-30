@@ -5,34 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/globals.css">
-    <link rel="stylesheet" href="styles/prueba.css">
+    <link rel="stylesheet" href="styles/loginStyle.css">
     <title>Login</title>
 </head>
 <body>
     
-    <section class="login card-naranja">
+    <section id="login" class="login card-naranja">
         <img src="assets/Logo2.svg" alt="Logo">
         <h1>Conectarse</h1>
 
         <form class="card-interna-blanca" id="searchForm">
             <input type="text" placeholder="Usuario" class="input-redondeado">
             <input type="password" placeholder="Clave" class="input-redondeado">
-            <button type="submit" class="boton-redondo-rojo">Iniciar Sesion</button>
+            <button type="submit" class="button-red">Iniciar Sesion</button>
         </form>
 
         <h4>Conectarse con</h4>
         <div class="accounts">
-            <button class="boton-redondo-rojo"><img src="assets/icons/facebook.svg" alt="Facebook">Facebook</button>
-            <button class="boton-redondo-rojo"><img src="assets/icons/instagram.svg" alt="Google">Google</button>
+            <button class="button-red"><img src="assets/icons/facebook.svg" alt="Facebook">Facebook</button>
+            <button class="button-red"><img src="assets/icons/instagram.svg" alt="Google">Google</button>
         </div>
 
         <div class="register-button cont-register">
             <h4>No estas registrado?</h4>
-            <button class="boton-redondo-rojo">Registrarse</button>
+            <button id="button-register" class="button-red">Registrarse</button>
         </div>
     </section>
 
-    <section class="register card-naranja">
+    <section id="captcha" class="captcha card-naranja hiden">
+        <img src="assets/Logo2.svg" alt="Logo">
+        
+        <form class="captcha-form card-interna-blanca" id="pre-captcha-form">
+            <h3>Verificación de Seguridad</h3>
+            <div class="captcha-question">
+                <p id="captcha-question">¿Cuánto es X + Y?</p> 
+            </div>
+            
+            <input type="number" id="captcha-answer" placeholder="Tu respuesta" class="input-redondeado">
+            
+            <p id="captcha-message" class="message-hidden"></p>
+            
+            <button type="submit" id="buttom-captcha" class="button-red">Verificar CAPTCHA</button>
+        </form>
+
+        <button id="button-back" class="boton-volver">Volver</button>
+    </section>
+
+    <section id="register" class="register card-naranja hiden">
         <img src="assets/Logo2.svg" alt="Logo">
         <h2>Complete los campos</h2>
 
@@ -65,22 +84,24 @@
                 <p>Acepto los terminos y condiciones</p>
             </div>
 
-            <button type="submit" class="boton-redondo-rojo">Crear Cuenta</button>
+            <button type="submit" class="button-red">Crear Cuenta</button>
         </form>
 
-        <button class="boton-volver">Volver</button>
+        <button id="button-back" class="boton-volver">Volver</button>
     </section>
 
-    <section class="welcome card-naranja">
-        <div class="imagen-con-degrade">
+    <section id="welcome" class="welcome card-naranja hiden">
+        <div class="image-gradient">
         </div>
         <h2>Tu cuenta ha sido creada</h2>
 
-        <button class="boton-redondo-rojo">Jugar!</button>
+        <button class="button-red">Jugar!</button>
 
         <p class="optional-text">Tu perfil es público y otros usuarios pueden enviar 
             solicitudes de amistar. Puedes cambiar esto en tus preferencias de privacidad </p>
 
     </section>
+
+    <script src="js/login.js"></script>
 </body>
 </html>
