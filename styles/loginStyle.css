@@ -1,37 +1,238 @@
+/* 1. ESTILOS BASE Y UTILITIES */
+
 body {
-  margin: 0;
-  height: 100vh;                 /* Ocupa toda la altura de la pantalla */
-  display: flex;
-  justify-content: center;       /* Centra horizontalmente */
-  align-items: center;           /* Centra verticalmente */
+    /* Centrado global: centra el contenedor principal en la pantalla */
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    margin: 0;
+    padding: 20px;
+    gap: 30px; 
+    box-sizing: border-box;
 }
 
-section{
-    width: 50%;
+h1, h2, h4{
+    color: white;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+/* Contenedor principal: la tarjeta naranja */
+.card-naranja {
     background-color: var(--color-secundarioDorado-200);
-    border-radius: 50px;
+    padding: 30px 20px 10px;
+    border-radius: 40px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
     text-align: center;
 }
 
-form{
-    width: 50%;
-    text-align: center;
-}
-
-.form-register{
+.card-interna-blanca {
     background-color: white;
+    padding: 20px 30px;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.button-red {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    
+    background-color: var(--color-primario-400);
+    color: white;
+    border: none;
+    border-radius: 25px; 
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+}
+
+.button-red p {
+    margin: 0;
+}
+
+
+.login h1 {
+    margin: 0;
+    font-size: 2em;
+    margin-bottom: 25px;
+}
+
+.login h4 {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+
+.accounts {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.button-red img {
+    width: 20%;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.accounts .button-red {
+    width: 50%; 
 }
 
 .register-button{
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    align-items: baseline;
+    margin-top: 15px;
+    gap: 8px;
 }
 
-.terms{
+.register-button .button-red {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--color-primario-400); 
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: underline;
+    box-shadow: none;
+    width: auto;
+    padding: 5px;
+    margin: 0;
+}
+
+
+.register h2 {
+    margin-bottom: 25px;
+    margin-top: 0;
+}
+
+.form-register {
+    text-align: left;
+}
+
+.form-register label {
+    display: block;
+    margin-top: 10px;
+    color: #555;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.terms {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.terms p {
+    margin: 0;
+    color: var(--color-texto-300);
+}
+
+.boton-volver {
+    width: 150px;
+    background-color: var(--color-secundarioDorado-200);
+    border: 1px solid white;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+
+.optional-text {
+    font-weight: normal;
+    font-size: 0.8em;
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+
+form .optional-text{
+    color: #888;
+}
+
+.input-password{
+    margin: 0;
+}
+
+.logo-welcome{
+    width: 150px;
+    height: auto;
+}
+
+.image-gradient {
+    width: 300px; 
+    height: 300px;
+ 
+    background-image: 
+        radial-gradient(circle at center, 
+            transparent 50%,  
+            var(--color-secundarioDorado-200) 70%,
+            var(--color-secundarioDorado-200) 100% 
+        ),
+        url('../assets/Logo4.svg'); 
+        
+
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+}
+
+
+.captcha-question {
+    background-color: var(--color-secundarioDorado-200);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.captcha-question p {
+    margin: 0;
+}
+
+.message-hidden {
+    display: none;
+    margin-top: 5px;
+    font-size: 0.9em;
+}
+
+.message-error {
+    color: red; 
+    font-weight: bold;
+    display: block ;
+}
+
+.message-success {
+    color: green;
+    font-weight: bold;
+    display: block ;
+}
+
+.hiden{
+    display: none;
 }
