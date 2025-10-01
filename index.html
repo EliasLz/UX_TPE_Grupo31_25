@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/globals.css">
+    <link rel="stylesheet" href="styles/spiner.css">
     <link rel="stylesheet" href="styles/recommended.css">
     <link rel="stylesheet" href="styles/carousel.css">
     <link rel="stylesheet" href="styles/footerStyle.css">
@@ -12,8 +13,19 @@
     <title>Games Toons</title>
 </head>
 <body>
-    <div id="header"></div>
+    <div id="loader-screen">
+        <div class="loader-content">
+            <div class="spinner"></div> 
 
+            <div class="progress-bar-container">
+                <div id="progress-bar-fill"></div>
+            </div>
+
+            <div id="progress-text">0%</div>
+        </div>
+    </div>
+
+    <div id="header"></div>
     <main class="main-content">
         <div class="recommended">
             <h2>Recomendados</h2>
@@ -29,7 +41,6 @@
         <section class="categories-container" id="categoriesContainer">
         </section>
     </main>
-
     <div id="footer"></div>
 
     <script type="module" src="js/main.js">

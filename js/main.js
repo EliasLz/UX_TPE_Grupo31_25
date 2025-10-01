@@ -1,4 +1,5 @@
 import { fetchGames } from "./fetchApi.js";
+import {simulateProgress} from "./spiner.js"
 
 // Función para cargar un componente dinámicamente.
 function loadComponent(urlComponent, idDestination) {
@@ -191,6 +192,7 @@ async function renderCategories(){
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{
+        simulateProgress();
         loadComponent('components/header.html', 'header');
         loadComponent('components/footer.html', 'footer');
         renderCategories();
