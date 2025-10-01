@@ -46,7 +46,7 @@ function validarRespuesta() {
 // Controlamos el envio del formulario
 document.addEventListener('DOMContentLoaded', function() {
     //generamos captcha
-    generarPreguntaSeguridad();
+    
 
     // Capturamos el evento del fornmulario
     document.addEventListener('submit', function(e){
@@ -85,12 +85,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
 // Controlamos el boton registro
 botonRegistro = document.getElementById('button-register');
 botonRegistro.addEventListener('click', function(e){
     e.preventDefault();
-
+    generarPreguntaSeguridad();
     login.classList.toggle('hiden');
     captcha.classList.toggle('hiden');
 
@@ -98,16 +97,18 @@ botonRegistro.addEventListener('click', function(e){
 
 // Controlamos el boton volver
 const botonesVolver = document.querySelectorAll('#button-back');
-botonesVolver.forEach(boton => {
-    boton.addEventListener('click', function(e){
-        e.preventDefault();
+    botonesVolver.forEach(boton => {
+        boton.addEventListener('click', function(e){
+            e.preventDefault();
 
-        if(!captcha.classList.contains('hiden')){
-            captcha.classList.toggle('hiden');
-            login.classList.toggle('hiden');
-        } else if(!register.classList.contains('hiden')){
-            register.classList.toggle('hiden');
-            captcha.classList.toggle('hiden');
-            generarPreguntaSeguridad(); // Regeneramos la pregunta al volver
-        }
-    })});
+            if(!captcha.classList.contains('hiden')){
+                captcha.classList.toggle('hiden');
+                login.classList.toggle('hiden');
+            } else if(!register.classList.contains('hiden')){
+                register.classList.toggle('hiden');
+                captcha.classList.toggle('hiden');
+                generarPreguntaSeguridad(); // Regeneramos la pregunta al volver
+            }
+        })
+    }
+);

@@ -15,15 +15,15 @@
         <h1>Conectarse</h1>
 
         <form class="card-interna-blanca" id="searchForm">
-            <input type="text" placeholder="Usuario" class="input-redondeado">
-            <input type="password" placeholder="Clave" class="input-redondeado">
+            <input type="text" placeholder="Usuario" required>
+            <input type="password" placeholder="Clave" required>
             <button type="submit" class="button-red">Iniciar Sesion</button>
         </form>
 
         <h4>Conectarse con</h4>
         <div class="accounts">
             <button class="button-red"><img src="assets/icons/facebook.svg" alt="Facebook">Facebook</button>
-            <button class="button-red"><img src="assets/icons/instagram.svg" alt="Google">Google</button>
+            <button class="button-red"><img src="assets/icons/google.svg" alt="Google">Google</button>
         </div>
 
         <div class="register-button cont-register">
@@ -41,7 +41,7 @@
                 <p id="captcha-question">¿Cuánto es X + Y?</p> 
             </div>
             
-            <input type="number" id="captcha-answer" placeholder="Tu respuesta" class="input-redondeado">
+            <input type="number" id="captcha-answer" placeholder="Tu respuesta" required>
             
             <p id="captcha-message" class="message-hidden"></p>
             
@@ -57,30 +57,30 @@
 
         <form class="form-register card-interna-blanca" action="">
             <label for="">Nombre</label>
-            <input type="text" placeholder="Juan" class="input-redondeado">
+            <input type="text" placeholder="Juan" required>
 
             <label for="">Apellido</label>
-            <input type="text" placeholder="Contreras" class="input-redondeado">
+            <input type="text" placeholder="Contreras" required>
 
             <label for="">Edad</label>
-            <input type="number" placeholder="Edad" class="input-redondeado" min="0" max="100">
+            <input type="number" placeholder="Edad"" min="0" max="100" required>
                 
             <label for="">Apodo <span class="optional-text">(Opcional)</span></label>
-            <input type="text" placeholder="Juancho" class="input-redondeado">
+            <input type="text" placeholder="Juancho">
             
             <label for="">Correo Electronico</label>
-            <input type="email" placeholder="juancontreras@gmail.com" class="input-redondeado">
+            <input type="email" placeholder="juancontreras@gmail.com" required>
             
             <label for="">Clave</label>
-            <input type="password" class="input-redondeado input-password">
+            <input type="password" class="input-password" required>
             <span class="optional-text">Debe tener 8 digitos. Al menos una mayuscula, un numero y un caracter</span>
             
             <label for="">Repetir Clave</label>
-            <input type="password" class="input-redondeado">
+            <input type="password" required>
 
             <label for="">Terminos de uso</label>
             <div class="terms">
-                <input type="checkbox">
+                <input type="checkbox" required>
                 <p>Acepto los terminos y condiciones</p>
             </div>
 

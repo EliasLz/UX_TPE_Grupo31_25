@@ -3,7 +3,7 @@
 body {
     /* Centrado global: centra el contenedor principal en la pantalla */
     display: flex;
-    align-items: center;           /* Centra verticalmente */
+    align-items: center; 
     justify-content: center; 
     margin: 0;
     padding: 20px;
@@ -22,22 +22,20 @@ img {
 
 /* Contenedor principal: la tarjeta naranja */
 .card-naranja {
-    background-color: var(--color-secundarioDorado-200); /* Color naranja base */
+    background-color: var(--color-secundarioDorado-200);
     padding: 30px 20px 10px;
-    border-radius: 40px; /* Bordes redondeados grandes */
+    border-radius: 40px;
     max-width: 400px;
     width: 100%;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     box-sizing: border-box;
-    
-    /* Configuración para centrar el contenido interno */
+
     display: flex;
     flex-direction: column;
     align-items: center; 
     text-align: center;
 }
 
-/* La tarjeta interna: el área blanca de los formularios */
 .card-interna-blanca {
     background-color: white;
     padding: 20px 30px;
@@ -47,21 +45,7 @@ img {
     box-sizing: border-box;
 }
 
-/* 2. ESTILOS DE COMPONENTES REUTILIZABLES */
 
-/* Estilo para todos los inputs de texto/password/email */
-.input-redondeado {
-    width: 100%;
-    padding: 10px 15px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 20px; /* Bordes redondeados para inputs */
-    box-sizing: border-box;
-    font-size: 1em;
-    background-color: white;
-}
-
-/* Estilo genérico para todos los botones de acción: rojo y redondeado */
 .button-red {
     width: 100%;
     padding: 10px;
@@ -70,7 +54,7 @@ img {
     background-color: var(--color-primario-400);
     color: white;
     border: none;
-    border-radius: 25px; /* Totalmente redondo */
+    border-radius: 25px; 
     cursor: pointer;
     font-size: 1.1em;
     font-weight: bold;
@@ -82,9 +66,7 @@ img {
     margin: 0;
 }
 
-/* 3. ESTILOS ESPECÍFICOS DE SECCIÓN */
 
-/* LOGIN: Estilos de cabecera y enlaces */
 .login h1 {
     margin: 0;
     font-size: 2em;
@@ -96,7 +78,7 @@ img {
     margin-bottom: 15px;
 }
 
-/* Contenedor de botones sociales */
+
 .accounts {
     display: flex;
     justify-content: space-between;
@@ -110,12 +92,10 @@ img {
     vertical-align: middle;
 }
 
-/* Sobrescribe el ancho de los botones sociales para que ocupen la mitad */
 .accounts .button-red {
     width: 50%; 
 }
 
-/* Enlace Registrarse: estilo de texto */
 .register-button{
     display: flex;
     flex-direction: row;
@@ -133,19 +113,19 @@ img {
     font-weight: bold;
     text-decoration: underline;
     box-shadow: none;
-    width: auto; /* Permite que el botón solo ocupe el espacio del texto */
+    width: auto;
     padding: 5px;
     margin: 0;
 }
 
-/* REGISTER: Estilos de formulario */
+
 .register h2 {
-    font-size: 1.5em;
     margin-bottom: 25px;
+    margin-top: 0;
 }
 
 .form-register {
-    text-align: left; /* Alinea los labels a la izquierda */
+    text-align: left;
 }
 
 .form-register label {
@@ -156,21 +136,17 @@ img {
     font-size: 1em;
 }
 
-/* Estilo del contenedor de términos de uso */
 .terms {
     display: flex;
-    align-items: center;
-    margin-top: 15px;
+    margin-top: 5px;
     margin-bottom: 20px;
 }
 
 .terms p {
     margin: 0;
-    font-size: 0.9em;
-    color: #333;
+    color: var(--color-texto-300);
 }
 
-/* Botón Volver */
 .boton-volver {
     width: 150px;
     background-color: var(--color-secundarioDorado-200);
@@ -184,11 +160,11 @@ img {
     margin-top: 15px;
 }
 
-/* Estilo para hacer que el texto de informacion sea sutil */
+
 .optional-text {
-    font-weight: normal; /* Menos negrita que el resto del label */
-    font-size: 0.8em;  /* Un poco más pequeño */
-    margin-left: 5px;  /* Pequeño espacio del texto principal */
+    font-weight: normal;
+    font-size: 0.8em;
+    margin-left: 5px;
     margin-bottom: 10px;
 }
 
@@ -196,7 +172,6 @@ form .optional-text{
     color: #888;
 }
 
-/* Ajustes específicos para inputs y formularios */
 .input-password{
     margin: 0;
 }
@@ -207,32 +182,26 @@ form .optional-text{
 }
 
 .image-gradient {
-    width: 300px; /* Define el tamaño de tu contenedor */
+    width: 300px; 
     height: 300px;
-    
-    /* 1. Combinamos el degradado (primera capa) y la imagen (segunda capa) */
+ 
     background-image: 
-        /* Degradado Radial: va del centro (transparente) hacia afuera (negro) */
         radial-gradient(circle at center, 
-            transparent 50%,      /* En el centro (50%) es totalmente transparente */
-            var(--color-secundarioDorado-200) 70%,  /* A partir del 70% empieza a ser dorado semi-opaco */
-            var(--color-secundarioDorado-200) 100% /* En el borde (100%) es dorado casi opaco */
+            transparent 50%,  
+            var(--color-secundarioDorado-200) 70%,
+            var(--color-secundarioDorado-200) 100% 
         ),
-        /* URL de la Imagen: la imagen de fondo */
         url('../assets/Logo4.svg'); 
         
-    /* 2. Aseguramos que la imagen cubra todo el contenedor */
+
     background-size: cover;
     background-position: center;
     border-radius: 10px;
 }
 
 
-
-/* Contenedor de la pregunta */
 .captcha-question {
-    /* Le damos un fondo para que se destaque un poco */
-    background-color: var(--color-secundarioDorado-200); /* Color naranja de tu tema */
+    background-color: var(--color-secundarioDorado-200);
     color: white;
     padding: 10px;
     border-radius: 10px;
@@ -246,7 +215,6 @@ form .optional-text{
     margin: 0;
 }
 
-/* Estilo para los mensajes de error/éxito */
 .message-hidden {
     display: none;
     margin-top: 5px;
@@ -254,13 +222,13 @@ form .optional-text{
 }
 
 .message-error {
-    color: #e85a4f; /* Rojo de tus botones */
+    color: red; 
     font-weight: bold;
     display: block ;
 }
 
 .message-success {
-    color: #28a745; /* Un verde estándar para éxito */
+    color: green;
     font-weight: bold;
     display: block ;
 }
