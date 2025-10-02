@@ -32,6 +32,7 @@
     --tamano-titulo-lg: 36px;
     --tamano-titulo-md: 28px;
     --tamano-titulo-sm: 24px;
+    --tamano-titulo-smsm: 15px;
 
     --tamano-texto-md: 14px;
     
@@ -61,7 +62,7 @@ main{
 }
 
 *{
-    h1, h2, h3, h4, h5, h6, p{
+    h1, h2, h3, h4, h5, h6, p,{
         font-family: var(--fuente-principal);
         font-weight: var(--peso-semi-bold);
     }
@@ -70,6 +71,7 @@ main{
     h2{font-size: var(--tamano-titulo-lg);}
     h3{font-size: var(--tamano-titulo-md);}
     h4{font-size: var(--tamano-titulo-sm);}
+    h5{font-size: var(--tamano-titulo-smsm);}
     p{font-size: var(--tamano-texto-md);}
 
 
