@@ -1,4 +1,5 @@
 import { fetchGames } from "./fetchApi.js";
+import {simulateProgress} from "./spiner.js"
 
 // Función para cargar un componente dinámicamente.
 export function loadComponent(urlComponent, idDestination) {
@@ -39,6 +40,88 @@ function createGameCard(game) {
             </div>
         </div>
     `;
+}
+
+function createRecommendedCard(game) {
+    return `
+        <div class="recommended-card">
+            <div class="game-card-image-container">
+                <img 
+                    src="${game.background_image_low_res}" 
+                    alt="Imagen de ${game.name}" 
+                    class="game-card-image"
+                >
+                <div class="game-card-overlay">
+                    <h3 class="game-card-title">${game.name}</h3>
+                </div>
+            </div>
+            
+            <div class="game-card-info" style="display: none;"></div>
+        </div>
+    `;
+}
+
+
+//Funcion para seleccionar los juegos recomendados.
+function selectRecommendedGames(games) {
+    let recommendedList = [];
+    
+    const pegSolitarie = games.find(game => game.id === 1); //--> Aseguramos que el Peg Solitarie este siempre.
+    
+    if (pegSolitarie) {
+        recommendedList.push(pegSolitarie);
+    }
+
+    const candidates = games.filter(game => 
+        game.rating > 4.5 && game.id !== 1
+    );
+    
+
+    const countNeeded = 9 - recommendedList.length; 
+    
+    const getRandomIndex = (max) => Math.floor(Math.random() * max);
+
+    for (let i = 0; i < countNeeded && candidates.length > 0; i++) {
+        const randomIndex = getRandomIndex(candidates.length);
+        
+        // Agregamos el juego seleccionado
+        recommendedList.push(candidates[randomIndex]);
+        
+        // Eliminamos el juego del array de candidatos para evitar duplicados
+        candidates.splice(randomIndex, 1);
+    }
+    
+    return recommendedList;
+}
+
+async function renderRecommended() {
+    const container = document.getElementById('recommendedContainer');
+    
+    if (!container) {
+        console.error('No se encontro el contenedor de juegos recomendados');
+        return;
+    }
+
+    try {
+        const games = await fetchGames(); 
+        
+        // Seleccionamos los 3 juegos recomendados con la lógica especial
+        const recommendedGames = selectRecommendedGames(games);
+
+        if (recommendedGames.length === 0) {
+            container.innerHTML = '<p>No hay juegos recomendados.</p>';
+            return;
+        }
+
+        recommendedGames.forEach(game => {
+            const cardHTML = createRecommendedCard(game);
+            container.insertAdjacentHTML('beforeend', cardHTML);
+        });
+
+    } catch (error) {
+        console.error('Error al renderizar los recomendados:', error);
+        container.innerHTML = '<p>Error al cargar los juegos recomendados.</p>';
+    }
 }
 
 //Funcion para crear las secciones de carrusel por genero. 
@@ -109,7 +192,9 @@ async function renderCategories(){
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{
+        simulateProgress();
         loadComponent('components/header.html', 'header');
         loadComponent('components/footer.html', 'footer');
         renderCategories();
+        renderRecommended();
     })

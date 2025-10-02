@@ -10,58 +10,98 @@
 </head>
 <body>
     
-    <section class="login">
+    <section id="login" class="login card-naranja">
         <img src="assets/Logo2.svg" alt="Logo">
         <h1>Conectarse</h1>
 
-        <form class="search-container" id="searchForm">
-            <input type="text" placeholder="Usuario">
-            <input type="password" placeholder="Clave">
-            <button type="submit"><p>Iniciar Sesion</p></button>
+        <form class="card-interna-blanca" id="searchForm">
+            <input type="text" placeholder="Usuario" required>
+            <input type="password" placeholder="Clave" required>
+            <button type="submit" class="button-red">Iniciar Sesion</button>
         </form>
 
         <h4>Conectarse con</h4>
         <div class="accounts">
-            <button>Facebook</button>
-            <button>Google</button>
+            <button class="button-red"><img src="assets/icons/facebook.svg" alt="Facebook">Facebook</button>
+            <button class="button-red"><img src="assets/icons/google.svg" alt="Google">Google</button>
         </div>
 
-        <div class="register-button">
+        <div class="register-button cont-register">
             <h4>No estas registrado?</h4>
-            <a href="">Registrarse</a>
+            <button id="button-register" class="button-red">Registrarse</button>
         </div>
     </section>
 
-    <section>
+    <section id="captcha" class="captcha card-naranja hiden">
+        <img src="assets/Logo2.svg" alt="Logo">
+        
+        <form class="captcha-form card-interna-blanca" id="pre-captcha-form">
+            <h3>Verificación de Seguridad</h3>
+            <div class="captcha-question">
+                <p id="captcha-question">¿Cuánto es X + Y?</p> 
+            </div>
+            
+            <input type="number" id="captcha-answer" placeholder="Tu respuesta" required>
+            
+            <p id="captcha-message" class="message-hidden"></p>
+            
+            <button type="submit" id="buttom-captcha" class="button-red">Verificar CAPTCHA</button>
+        </form>
+
+        <button id="button-back" class="boton-volver">Volver</button>
+    </section>
+
+    <section id="register" class="register card-naranja hiden">
         <img src="assets/Logo2.svg" alt="Logo">
         <h2>Complete los campos</h2>
 
-        <form class="form-register" action="">
-            <label for=""><h3>Nombre</h3></label>
-            <input type="text" name="" id="" placeholder="Juan">
+        <form class="form-register card-interna-blanca" action="">
+            <label for="">Nombre</label>
+            <input type="text" placeholder="Juan" required>
 
-            <label for=""><h3>Apellido</h3></label>
-            <input type="text" name="" id="" placeholder="Contreras">
+            <label for="">Apellido</label>
+            <input type="text" placeholder="Contreras" required>
 
-            <label for=""><h3>Edad</h3></label>
-            <input type="number" name="" id="" placeholder="Contreras">
+            <label for="">Edad</label>
+            <input type="number" placeholder="Edad"" min="0" max="100" required>
+                
+            <label for="">Apodo <span class="optional-text">(Opcional)</span></label>
+            <input type="text" placeholder="Juancho">
             
-            <label for=""><h3>Apodo</h3></label>
-            <input type="number" name="" id="" placeholder="Juancho">
+            <label for="">Correo Electronico</label>
+            <input type="email" placeholder="juancontreras@gmail.com" required>
             
-            <label for=""><h3>Correo Electronico</h3></label>
-            <input type="email" name="" id="" placeholder="juancontreras@gmail.com">
+            <label for="">Clave</label>
+            <input type="password" class="input-password" required>
+            <span class="optional-text">Debe tener 8 digitos. Al menos una mayuscula, un numero y un caracter</span>
             
-            <label for=""><h3>Clave</h3></label>
-            <input type="password" name="" id="">
-            
-            <label for=""><h3>Repetir Clave</h3></label>
-            <input type="password" name="" id="">
+            <label for="">Repetir Clave</label>
+            <input type="password" required>
 
-            <label for=""><h3>Terminos de uso</h3></label>
+            <label for="">Terminos de uso</label>
+            <div class="terms">
+                <input type="checkbox" required>
+                <p>Acepto los terminos y condiciones</p>
+            </div>
 
+            <button type="submit" class="button-red">Crear Cuenta</button>
         </form>
 
+        <button id="button-back" class="boton-volver">Volver</button>
     </section>
+
+    <section id="welcome" class="welcome card-naranja hiden">
+        <div class="image-gradient">
+        </div>
+        <h2>Tu cuenta ha sido creada</h2>
+
+        <button class="button-red">Jugar!</button>
+
+        <p class="optional-text">Tu perfil es público y otros usuarios pueden enviar 
+            solicitudes de amistar. Puedes cambiar esto en tus preferencias de privacidad </p>
+
+    </section>
+
+    <script src="js/login.js"></script>
 </body>
 </html>
