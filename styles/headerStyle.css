@@ -26,3 +26,21 @@ form{
     border-radius: 50px;
     padding: 5px;
 }
+
+.logo-menu{
+    display: flex;
+    align-items: center;
+    width: 200px;
+    gap: 150px;
+}
+form input{
+    margin: 0;
+}
+.logo-menu .logo{
+    height: 70px;
+    width: 100%;
+}
+
+.logo-menu{
+    margin-left: 150px;
+}
