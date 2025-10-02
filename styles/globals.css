@@ -31,23 +31,24 @@
     --tamano-titulo-xl: 64px;
     --tamano-titulo-lg: 36px;
     --tamano-titulo-md: 28px;
-    --tamano-titulo-sm: 16px;
+    --tamano-titulo-sm: 24px;
 
     --tamano-texto-md: 14px;
-    
+
 }
 
 html, body {
     margin: 0;
     padding: 0;
-    
+    height: 100%;
 }
 
 body{
+    /*Fondo Pantalla*/
     background-image: url('../assets/img/fondo-pantalla.svg');
     background-color: var(--color-baseFondo-300);
-    background-repeat: repeat;        
-    background-position: top left; 
+    background-repeat: repeat;         /* Repite la imagen en mosaico */
+    background-position: top left;     /* Comienza desde la esquina superior izquierda */
     background-size: 50%;
 
     display: flex;
@@ -56,7 +57,7 @@ body{
 }
 
 main{
-    flex: 1; 
+    flex: 1; /* Ocupa el espacio restante */
 }
 
 *{
@@ -73,21 +74,18 @@ main{
 
 
     a {
-        font-size: var(--tamano-titulo-sm);
-        font-family: var(--fuente-principal);
-        font-weight: var(--peso-semi-bold);
-        text-decoration: none; 
+        text-decoration: none; /* Quita el subrayado */
         color: black;
     }
-    
+
 }
 
 
 input {
-  border: none;              
-  background-color: transparent; 
-  outline: none;           
-  color: inherit;  
+  border: none;              /* Quita el borde */
+  background-color: transparent; /* Fondo transparente */
+  outline: none;             /* Quita el borde al hacer foco */
+  color: inherit;            /* Hereda el color del texto */
 }
 
 form{
@@ -98,19 +96,14 @@ form{
 form input{
     padding-left: 12px;
     height: 110%;
-    padding: 5px 10px;
-    margin-bottom: 8px;
-    border: 1px solid #ccc;
-    background-color: white;
-    border-radius: 20px;
+    /*text-align: center;
+    /*align-items: center;       /* Centra verticalmente */
+    /*justify-content: center;   /* Centra horizontalmente */
+    border: none;
+    background-color: var(--color-baseFondo-300);
+    border-radius: 50px;
 
 }
 
-.main-content {
-    max-width: 1200px; 
-    margin-left: auto; 
-    margin-right: auto; 
-    padding: 0 20px; 
-}
 
 /*-----------------------------------------------------*/

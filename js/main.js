@@ -2,7 +2,7 @@ import { fetchGames } from "./fetchApi.js";
 import {simulateProgress} from "./spiner.js"
 
 // Función para cargar un componente dinámicamente.
-function loadComponent(urlComponent, idDestination) {
+export function loadComponent(urlComponent, idDestination) {
     fetch(urlComponent) //--> Ruta del componente que queremos cargar
         .then(response => {
             if (!response.ok) {

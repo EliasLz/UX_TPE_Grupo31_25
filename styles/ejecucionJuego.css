@@ -1,0 +1,12 @@
+ul.breadcrumb {
+    list-style: none;
+    display: flex;
+    background-color: var(--color-baseFondo-200);
+    font-family: var(--fuente-principal);
+    font-weight: var(--peso-semi-bold);
+}
+ul.breadcrumb li+li::before {
+
+    content: ">>";
+    margin: 0 8px;
+}
