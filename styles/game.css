@@ -1,0 +1,52 @@
+ul.breadcrumb {
+    list-style: none;
+    display: flex;
+    background-color: var(--color-baseFondo-200);
+    font-family: var(--fuente-principal);
+    font-weight: var(--peso-semi-bold);
+    margin: 5px 0;
+    padding: 5px 0;
+}
+ul.breadcrumb li+li::before {
+
+    content: ">>";
+    margin: 0 8px;
+}
+
+.gameContainer, .gameScreen {
+    position: relative;
+    display: inline;
+}
+
+.gameCover {
+    width: 50%;
+    height: auto;
+}
+
+.playButton {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 138px;
+    height: 29px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 460%;   /*esto está mal, quiero moverlo 30% hacia arriba verticalmente de su padre, q paso?*/
+
+    font-family: var(--fuente-principal);
+    color: #EDF2F7;
+    background-color: var(--color-primario-400);
+    padding: 5px 15px;
+    border: 1px solid var(--color-texto-500);
+    border-radius: 22px;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.playIcon {
+    height: 100%;
+    width: auto;
+    background: transparent;
+}
