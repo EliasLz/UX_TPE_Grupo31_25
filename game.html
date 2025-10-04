@@ -39,6 +39,7 @@
 
 
 <!--<div id="header"></div>-->
+<!-- El breadcrumb -->
 <nav>
     <ul class="breadcrumb">
         <li><a href="game.html">Juegos</a></li>
@@ -47,47 +48,64 @@
     </ul>
 </nav>
 <main>
-    <section class="gameContainer">
-        <div class="gameScreen"> <!-- Contenedor pantalla del juego -->
-            <img
-                    src="assets/img/peg-solitarie.jpg"
-                    alt="Portada: Peg Solitaire Simpsons Edition"
-                    class="gameCover"
-            >
-            <button Class="playButton">
-                <img src="assets/icons/Play.svg" alt="PlayButton" class="playIcon">
-                Jugar ahora</button>
-        </div>
-
-        <div class="panelJuego">
-
-        </div> <!-- Controles: like, dislike, favorito, compartir, pantalla completa -->
-
-    </section>
-
-    <aside>
-        <section>
-            <article> <!-- Cards otros juegos derecha -->
-            </article>
+    <div class="widthContainer">
+        <!-- Ventana de ejecución del juego -->
+        <section class="gameContainer">
+            <!-- Pantalla de juego -->
+            <div class="gameScreen">
+                <img
+                        src="assets/img/peg-solitarie.jpg"
+                        alt="Portada: Peg Solitaire Simpsons Edition"
+                        class="gameCover"
+                >
+                <!-- Boton para inciar el juego -->
+                <button class="playButton">
+                    <img src="assets/icons/Play.svg" alt="playIcon" class="playIcon">
+                    Jugar ahora</button>
+            </div>
+            <!-- Botonera de la ventana de ejecución -->
+            <div class="gameButtonbar">
+                <!-- Contenedor botones ubicados del lado izquierdo -->
+                <div class="buttonGroup">
+                    <button class="iconButton">
+                        <img src="assets/icons/like.svg" alt="likeIcon">
+                    </button>
+                    <button class="iconButton">
+                        <img src="assets/icons/dislike.svg" alt="dislikeIcon">
+                    </button>
+                    <button class="iconButton">
+                        <img src="assets/icons/favorite.svg" alt="favoriteIcon">
+                    </button>
+                </div>
+                <!-- Contenedor botones ubicados del lado derecho -->
+                <div class="buttonGroup">
+                    <button class="iconButton">
+                    <img src="assets/icons/shortcut.svg" alt="shortcutIcon">
+                    </button>
+                    <button class="iconButton">
+                        <img src="assets/icons/share.svg" alt="shareIcon">
+                    </button>
+                    <button class="iconButton">
+                        <img src="assets/icons/expand.svg" alt="expandIcon">
+                    </button>
+                </div>
+            </div>
         </section>
+        <!-- Cards juegos a la derecha de ventana ejecución -->
+        <aside class="proxCardPubli">
+        </aside>
+    </div>
+    <!-- Carrusel plublicitario inferior -->
+    <aside class="proxCarruselPubli">
+        <img src="assets/img/cocacola.jpg" alt="buscar" style="width: 100%; height: auto">
     </aside>
 
-    <aside role="region" aria-roledescription="carousel">
-        <!-- Carrusel plublicitario inferior -->
-    </aside>
-
-    <header><!-- Navegación y búsqueda --></header>
-
-    <nav aria-label="breadcrumb"><!-- Migas de pan --></nav>
-
-    <main>
-        <section><!-- Ventana del juego --></section>
-        <aside><!-- Sidebar con juegos y ads --></aside>
-    </main>
-
-    <section><!-- Carrusel de publicidad -->
-
-    </section>
+    <!--<div class = "testing">-->
+    <!--    <div style="border: 2px solid black; background-color: blue;width: 100px; height: 100px">-->
+    <!--    </div>-->
+    <!--    <div style="background-color: yellow;width: 100px; height: 100px">-->
+    <!--    </div>-->
+    <!--</div>-->
 
 </main>
 

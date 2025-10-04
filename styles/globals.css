@@ -76,6 +76,8 @@ main{
     a {
         text-decoration: none; /* Quita el subrayado */
         color: black;
+        cursor: pointer;
+
     }
 
 }
@@ -102,8 +104,10 @@ form input{
     border: none;
     background-color: var(--color-baseFondo-300);
     border-radius: 50px;
-
 }
 
+button {
+    cursor: pointer;
+}
 
 /*-----------------------------------------------------*/
