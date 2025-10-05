@@ -1,10 +1,12 @@
 main {
     margin: 0 30px;
 }
+
 .widthContainer {
     display: flex;
     justify-content: space-between;
 }
+
 button:hover {
     opacity: 0.8;
     transform: scale(1.1);
@@ -24,7 +26,7 @@ ul.breadcrumb {
     list-style: none;
     display: flex;
     background-color: var(--color-baseFondo-200);
-    font-family: var(--fuente-principal);
+    /*font-family: var(--fuente-principal);*/
     font-weight: var(--peso-semi-bold);
     font-size: var(--tamano-texto-md);
     margin: 5px 0;
@@ -50,6 +52,7 @@ ul.breadcrumb li + li::before {
     display: flex;
     gap: 8px;
     justify-content: center;
+    align-items: center;
     box-sizing: border-box;
     width: 140px;
     height: 38px;
@@ -65,11 +68,9 @@ ul.breadcrumb li + li::before {
     border: 1px solid var(--color-texto-500);
     border-radius: 10px;
     font-size: 13px;
-    cursor: pointer;
 }
 
 button.playButton:hover {
-    opacity: 0.8;
     transform: scale(1.1) translateX(-50%);
 }
 
@@ -111,17 +112,43 @@ button.playButton:active {
     height: 100%;
     /*pointer-events: none; !* Evita que la imagen interfiera con los clicks *!*/
 }
-
-/* lo de acá abajo hay que quitarlo y cambiarlo por carruseles y cards publi */
-.proxCarruselPubli{
-    position: relative;
-    width: 900px;
-    height: 155px;
-    margin: 10px 0;
+.textContent{
+    background-color: var(--color-baseFondo-200);
+    border-radius: 30px;
+    box-sizing: border-box;
+    padding: 15px 75px 15px 75px;
+    width: 1000px;
+    height: 100%;
 }
 
-.proxCardPubli{
+ .gameQuality{
+     display: flex;
+     gap: 3px;
+     width: 500px;
+     height: 20px;
+ }
+ img.gameQuality{
+     height: 100%;
+     width: auto;
+ }
+
+
+
+
+
+/* lo de acá abajo hay que quitarlo y cambiarlo por carruseles y cards publi */
+.proxCarruselPubli {
+    position: relative;
+    width: 1000px;
+    height: 155px;
+    margin: 10px 0;
+    border-radius: 10px;
+    background-image: url('../assets/img/cocacola.jpg');
+    background-size: cover;
+}
+
+.proxCardPubli {
     background-color: #2D3748;
-    width: 380px;
+    width: 280px;
     height: 616px;
 }

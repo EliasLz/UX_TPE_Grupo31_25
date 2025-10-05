@@ -31,8 +31,6 @@
         <button>
             <img src="assets/icons/Mexico.svg" alt="Seleccionar idioma">
         </button>
-
-
     </div>
 </header>
 
@@ -54,9 +52,9 @@
             <!-- Pantalla de juego -->
             <div class="gameScreen">
                 <img
-                        src="assets/img/peg-solitarie.jpg"
-                        alt="Portada: Peg Solitaire Simpsons Edition"
-                        class="gameCover"
+                    src="assets/img/peg-solitarie.jpg"
+                    alt="Portada: Peg Solitaire Simpsons Edition"
+                    class="gameCover"
                 >
                 <!-- Boton para inciar el juego -->
                 <button class="playButton">
@@ -95,12 +93,64 @@
         <aside class="proxCardPubli">
         </aside>
     </div>
+
     <!-- Carrusel plublicitario inferior -->
     <aside class="proxCarruselPubli">
-        <img src="assets/img/cocacola.jpg" alt="buscar" style="width: 100%; height: auto">
     </aside>
 
-    <!--<div class = "testing">-->
+    <!--Sección info del juego-->
+    <section style="display: flex; flex-direction: column; gap: 5px">
+        <!--Articulo descripción del juego-->
+        <article class="textContent">
+        <h3>PEG SOLITAIRE SIMPSONS EDITION</h3>
+        <div class="gameQuality">
+            <img src="assets/icons/star.svg" alt="starIcon"></img>
+            <img src="assets/icons/star.svg" alt="starIcon"></img>
+            <img src="assets/icons/star.svg" alt="starIcon"></img>
+            <img src="assets/icons/star.svg" alt="starIcon"></img>
+            <img src="assets/icons/emptyStar.svg" alt="starIcon" style="margin: 0 10px 0 0"></img>
+
+            <p class="metaText"> 9999999 me gusta</p>
+        </div>
+        <p>Pon a prueba tu ingenio en este clásico solitario de fichas, ahora con una divertida temática de Los Simpson. Mueve las piezas inspiradas en los personajes de Springfield y trata de dejar solo una en el tablero. ¡Un reto simple de aprender, pero difícil de dominar, con todo el humor amarillo de la  familia más famosa de la TV!</p>
+        </article>
+        <!--Articulo guia de juego-->
+        <article class="textContent">
+            <h3>Instrucciones para jugar</h3>
+            <p>Objetivo del juego:
+                El objetivo es dejar una única ficha en el tablero, idealmente en el centro. Cuantas más fichas quites, mejor será tu puntuación.</p>
+            <p>Cómo se juega:
+                1. Realiza un movimiento: Un movimiento consiste en saltar con una ficha por encima de otra adyacente (horizontal o verticalmente, nunca en diagonal) y caer en un agujero vacío inmediatamente después.
+                2. Elimina la ficha: La ficha sobre la que has saltado es retirada del tablero.
+                3. Repite: Sigue haciendo movimientos que sigan esta regla. Puedes hacer varios saltos en un solo turno si la posición lo permite</p>
+            <div class = "doubleCenterFlex">
+                <p> Ejemplo: </p>
+                <img src="assets/img/pegGuide.jpg" alt="guideGame"></img>
+            </div>
+        </article>
+
+        <!--Sección comentarios-->
+        <h3>Deja tu comentario debajo!</h3>
+        <section class="textContent">
+            <!--Input comentar-->
+            <div>
+                <img src="assets/icons/user.svg" alt="userIcon"></img>
+                <label for="comment">¿Que te parecio este juego?</label>
+                <input type="text" id="comment" name="comment">
+                <button>Comentar</button>
+
+            </div>
+
+
+        </section>
+
+    </section>
+
+
+
+
+
+<!--<div class = "testing">-->
     <!--    <div style="border: 2px solid black; background-color: blue;width: 100px; height: 100px">-->
     <!--    </div>-->
     <!--    <div style="background-color: yellow;width: 100px; height: 100px">-->
