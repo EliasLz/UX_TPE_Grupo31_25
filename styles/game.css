@@ -133,9 +133,11 @@ button.playButton:active {
     background-color: var(--color-baseFondo-200);
     border-radius: 30px;
     box-sizing: border-box;
-    padding: 15px 75px 15px 75px;
+    padding: 15px 110px 15px 50px;
     width: 1000px;
     height: 100%;
+    max-width: 100%;
+    hyphens: auto;
 }
 
 /* Calificación de estrellas */
@@ -237,12 +239,14 @@ button.playButton:active {
 
 .proxCardPubli {
     background-color: forestgreen;
-    width: 450px;
+    width: 440px;
     height: 602px;
+    border-radius: 30px;
 }
 
 .proxCardPubli2 {
     background-color: forestgreen;
-    width: 450px;
+    width: 440px;
     height: auto;
+    border-radius: 30px;
 }

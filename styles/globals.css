@@ -72,7 +72,7 @@ h2 { font-size: var(--tamano-titulo-lg); }
 h3 { font-size: var(--tamano-titulo-md); }
 h4 { font-size: var(--tamano-titulo-sm); }
 p { font-size: var(--tamano-texto-md);
-    white-space: pre-line;
+    /*white-space: pre-line;*/
     /*font-weight:100;*/}
 p.metaText { font-size: var(--tamano-texto-meta);
              color: var(--color-texto-300);
