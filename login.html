@@ -55,32 +55,32 @@
         <img src="assets/Logo2.svg" alt="Logo">
         <h2>Complete los campos</h2>
 
-        <form class="form-register card-interna-blanca" action="">
+        <form class="form-register card-interna-blanca" id="form-register" action="" >
             <label for="">Nombre</label>
-            <input type="text" placeholder="Juan" required>
-
+            <input type="text" id="name" placeholder="Juan" required>
+            
             <label for="">Apellido</label>
-            <input type="text" placeholder="Contreras" required>
-
+            <input type="text" id="last-name" placeholder="Contreras" required>
+            
             <label for="">Edad</label>
-            <input type="number" placeholder="Edad"" min="0" max="100" required>
-                
+            <input type="number" id="age" placeholder="Edad" min="0" max="100" required>
+            
             <label for="">Apodo <span class="optional-text">(Opcional)</span></label>
-            <input type="text" placeholder="Juancho">
+            <input type="text" id="nickname" placeholder="Juancho">
             
             <label for="">Correo Electronico</label>
-            <input type="email" placeholder="juancontreras@gmail.com" required>
+            <input type="email" id="email" placeholder="juancontreras@gmail.com" required>
             
             <label for="">Clave</label>
-            <input type="password" class="input-password" required>
+            <input type="password" id="password" class="input-password" required>
             <span class="optional-text">Debe tener 8 digitos. Al menos una mayuscula, un numero y un caracter</span>
             
             <label for="">Repetir Clave</label>
-            <input type="password" required>
-
+            <input type="password" id="repate-password" required>
+            
             <label for="">Terminos de uso</label>
             <div class="terms">
-                <input type="checkbox" required>
+                <input type="checkbox" id="check" required>
                 <p>Acepto los terminos y condiciones</p>
             </div>
 
@@ -92,10 +92,15 @@
 
     <section id="welcome" class="welcome card-naranja hiden">
         <div class="image-gradient">
+            <img src="assets/Logo5.svg" class="image-party" alt="">
         </div>
+        <img src="assets/Confetis.svg" class="image-down" alt="">
         <h2>Tu cuenta ha sido creada</h2>
 
-        <button class="button-red">Jugar!</button>
+        <div class="play">
+            <span class="play-icon"><img class="icon" src="assets/icons/play-outline 2.svg" alt="play"></span>
+            <a class="play-title" href="index.html">Jugar!!</a>
+        </div>
 
         <p class="optional-text">Tu perfil es público y otros usuarios pueden enviar 
             solicitudes de amistar. Puedes cambiar esto en tus preferencias de privacidad </p>
