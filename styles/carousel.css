@@ -80,3 +80,10 @@
 
 /* ---------------- */
 
+.ads-container {
+    background-color: #ffffff; 
+    border-radius: 30px; 
+    padding: 10px; 
+    margin-bottom: 20px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
