@@ -38,7 +38,8 @@ ul.breadcrumb li + li::before {
     margin: 0 8px;
 }
 
-.gameContainer, .gameScreen {
+/*Esto no me deja usarlo en una global*/
+.gameContainer, .gameScreen, .commentInputContainer{
     position: relative;
     display: inline-block;
     line-height: 0;
@@ -123,20 +124,77 @@ button.playButton:active {
 
  .gameQuality{
      display: flex;
-     gap: 3px;
+     gap: 0px;
      width: 500px;
      height: 20px;
  }
- img.gameQuality{
-     height: 100%;
-     width: auto;
- }
+
+/* NO SE DEJA DAR ESTILO*/
+/*.commentInputContainer{*/
+/*    width: 540px;*/
+/*    height: 138px;*/
+/*    gap: 10px;*/
+/*    margin: 0 0 100px 0;*/
+/*    background-color: yellow;   */
+/*}*/
+/*NO SE DEJA DAR ESTILO*/
+/*button.commentInputContainer{*/
+/*    box-sizing: border-box;*/
+/*    width: 140px;*/
+/*    height: 38px;*/
+
+/*    color: #EDF2F7;*/
+/*    background-color: var(--color-primario-400);*/
+/*    padding: 5px 5px;*/
+/*    border: 1px solid var(--color-texto-500);*/
+/*    border-radius: 10px;*/
+/*    font-size: 13px;*/
+/*}*/
+
+.usersCommentsConteiner{
+    flex-direction: column;
+    position: relative;
+    line-height: 0;
+}
+.userCommentConteiner{
+    display: flex;
+    align-items: flex-start;
+    justify-content: left;   /* navegador ignora esta linea */
+    gap: 30px;
+    padding: 10px 100px 20px 20px;
+    margin: 10px 0 10px 0;
+    border-bottom: solid var(--color-texto-500) 1px;
+
+}
+
+.avatarCotainer {
+    flex-direction: column;
+    width: 79px;
+    height: 77px;
+    border-radius: 50%;
+    overflow: hidden; /* Oculta las esquinas que sobresalen */
+}
+
+.pageIndex{
+    display: flex;
+    list-style: none;
+    gap: 12px;
+    align-items: center;
+}
 
 
+/* esto deberia ser "activo" pero lo hice fijo para tener que hacer el scrip */
+.pageIndex li:first-child a{
+    color: var(--color-secundarioDorado-400);
+    text-decoration: underline;
+}
 
+/*Esta creo que no hace falta*/
+/*.pageIndex li {*/
+/*    display: inline-block;*/
+/*}*/
 
-
-/* lo de acá abajo hay que quitarlo y cambiarlo por carruseles y cards publi */
+/* BORRADOR: cambiar por publis tipo carruseles y cards  */
 .proxCarruselPubli {
     position: relative;
     width: 1000px;
@@ -148,7 +206,13 @@ button.playButton:active {
 }
 
 .proxCardPubli {
-    background-color: #2D3748;
-    width: 280px;
-    height: 616px;
+    background-color: forestgreen;
+    width: 450px;
+    height: 602px;
+}
+
+.proxCardPubli2 {
+    background-color: forestgreen;
+    width: 450px;
+    height: auto;
 }

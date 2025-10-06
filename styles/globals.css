@@ -115,6 +115,10 @@ form input{
     justify-content: center;
 }
 
-
+.resizes{
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+}
 
 /*-----------------------------------------------------*/
