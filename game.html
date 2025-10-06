@@ -34,9 +34,10 @@
     </div>
 </header>
 
-
+<!-- El Header -->
 <!--<div id="header"></div>-->
-<!-- El breadcrumb -->
+
+<!-- El Breadcrumb -->
 <nav>
     <ul class="breadcrumb">
         <li><a href="game.html">Juegos</a></li>
@@ -44,27 +45,30 @@
         <li>Ps Simpsons Edition</li>
     </ul>
 </nav>
+
 <main>
-    <!-- Ejecución del juego + Cards a la derecha -->
+    <!-- Sepera: Ejecución del juego (izquierda) <- I -> (Cards a la derecha) -->
     <div class="widthContainer">
-        <!-- Ventana de ejecución del juego -->
+
+        <!-- Ventana de ejecución del juego (Pantalla + Botonera) -->
         <section class="gameContainer">
-            <!-- Pantalla de juego -->
+            <!-- La Pantalla de juego -->
             <div class="gameScreen">
                 <img
                         src="assets/img/peg-solitarie.jpg"
                         alt="Portada: Peg Solitaire Simpsons Edition"
                         class="gameCover"
                 >
-                <!-- Boton para inciar el juego -->
+                <!-- Boton iniciar juego -->
                 <button class="playButton">
                     <img src="assets/icons/Play.svg" alt="playIcon" class="playIcon">
                     Jugar ahora
                 </button>
             </div>
-            <!-- Botonera de la ventana de ejecución -->
+
+            <!-- Contenedor Botonera de la ventana de ejecución -->
             <div class="gameButtonbar">
-                <!-- Contenedor botones ubicados del lado izquierdo -->
+                <!-- Botones ubicados del lado izquierdo -->
                 <div class="buttonGroup">
                     <button class="iconButton">
                         <img src="assets/icons/like.svg" alt="likeIcon">
@@ -76,7 +80,7 @@
                         <img src="assets/icons/favorite.svg" alt="favoriteIcon">
                     </button>
                 </div>
-                <!-- Contenedor botones ubicados del lado derecho -->
+                <!-- Botones ubicados del lado derecho -->
                 <div class="buttonGroup">
                     <button class="iconButton">
                         <img src="assets/icons/shortcut.svg" alt="shortcutIcon">
@@ -90,7 +94,9 @@
                 </div>
             </div>
         </section>
+
         <!-- BORRADOR: Cards juegos a la derecha de ventana ejecución -->
+        <!-- podría estar ubicado en el main, depende el diseño del carrusel -->
         <aside class="proxCardPubli">
         </aside>
     </div>
@@ -99,15 +105,16 @@
     <aside class="proxCarruselPubli">
     </aside>
 
-    <!--Sección info del juego y Comentarios + Cards a la decha -->
+    <!-- Info del juego + Comentarios (izquierda) <- I -> Cards a la (derecha) -->
     <div class="widthContainer">
-        <!--Sección info del juego y Comentarios -->
+        <!--Sección info del juego + Sección Comentarios -->
         <div>
             <!--Sección info del juego-->
             <section style="display: flex; flex-direction: column; gap: 5px">
                 <!--Articulo descripción del juego-->
                 <article class="textContent">
                     <h3>PEG SOLITAIRE SIMPSONS EDITION</h3>
+                    <!-- Calificación de estrellas-->
                     <div class="gameQuality">
                         <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
                         <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
@@ -125,6 +132,7 @@
                         familia
                         más famosa de la TV!</p>
                 </article>
+
                 <!--Articulo guia de juego-->
                 <article class="textContent">
                     <h3>Instrucciones para jugar</h3>
@@ -148,9 +156,9 @@
                 </article>
             </section>
 
-            <!--Sección Comentarios -->
+            <!-- Sección Comentarios -->
             <section>
-                <!--Input comentar-->
+                <!-- Input para ingresar compentario -->
                 <h3>Deja tu comentario debajo!</h3>
                 <div class="textContent doubleCenterFlex commentInputContainer">
                     <img src="assets/icons/user.svg" alt="userIcon" class="resizes"></img>
@@ -164,15 +172,18 @@
                 <h3>Comentarios de la comunidad</h3>
                 <section class="textContent usersCommentsConteiner">
                     <article class="userCommentConteiner">
-                        <!--Perfil de usuario-->
+                        <!-- Perfil de usuario -->
                         <div>
+                            <!-- Contenedor imagen de perfil -->
                             <div class="avatarCotainer">
                                 <img src="assets/img/userAvatar1.jpg" alt="userAvatar" class="resizes"></img></div>
+                            <!-- Informacion del usuario -->
                             <p>Fulanito Chico</p>
                             <p class="metaText">Jugados: 518</p>
                         </div>
                         <!--Califiacion de estrellas-->
                         <div>
+                            <!-- Calificación de estrellas-->
                             <div class="gameQuality">
                                 <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
                                 <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
@@ -199,6 +210,7 @@
                             <p class="metaText">Jugados: 518</p>
                         </div>
                         <div>
+                            <!-- Calificación de estrellas-->
                             <div class="gameQuality">
                                 <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
                                 <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
@@ -224,6 +236,7 @@
                             <p class="metaText">Jugados: 518</p>
                         </div>
                         <div>
+                            <!-- Calificación de estrellas-->
                             <div class="gameQuality">
                                 <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
                                 <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
@@ -248,6 +261,7 @@
                             <p class="metaText">Jugados: 518</p>
                         </div>
                         <div>
+                            <!-- Calificación de estrellas-->
                             <div class="gameQuality">
                                 <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
                                 <img src="assets/icons/emptyStar.svg" alt="starIcon" class="resizes"></img>
@@ -274,7 +288,7 @@
                             <li><a href="game.html">2</a></li>
                             <li><a href="game.html">3</a></li>
                             <!-- Puntos suspensivos -->
-                            <li><span class="flex items-center justify-center w-10 h-10 text-gray-400">...</span></li>
+                            <li><span>...</span></li>
                             <li><a href="game.html">10</a></li>
                         </ul>
                     </nav>

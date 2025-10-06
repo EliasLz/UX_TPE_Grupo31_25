@@ -1,10 +1,7 @@
+/* Globales Game:
+    debería pasarlas algunas global? */
 main {
     margin: 0 30px;
-}
-
-.widthContainer {
-    display: flex;
-    justify-content: space-between;
 }
 
 button:hover {
@@ -21,7 +18,14 @@ button:focus-visible {
     outline-offset: 2px;
     border-radius: 4px;
 }
+/*Para separar contenido del main veticalmente:
+    Podría estar en global */
+.widthContainer {
+    display: flex;
+    justify-content: space-between;
+}
 
+/* El Breadcrumb */
 ul.breadcrumb {
     list-style: none;
     display: flex;
@@ -33,22 +37,27 @@ ul.breadcrumb {
     padding: 3px 0;
 }
 
+/* Decoración del Breadcrumb */
 ul.breadcrumb li + li::before {
     content: ">>";
     margin: 0 8px;
 }
 
-/*Esto no me deja usarlo en una global*/
+/* Contenedor de referencia:
+No me deja usarlo en una global, ni me gusta como quedó*/
 .gameContainer, .gameScreen, .commentInputContainer{
     position: relative;
     display: inline-block;
     line-height: 0;
 }
 
-.gameCover {
-    height: auto;
-}
+/* Es necesario decirle al contenido de pantalla que se ajuste al contenedor ventana? */
+/*.gameCover {*/
+/*    height: auto;*/
+/*}*/
 
+/*Boton iniciar juego:
+    me obliga a repetir fuente y color*/
 .playButton {
     display: flex;
     gap: 8px;
@@ -71,6 +80,7 @@ ul.breadcrumb li + li::before {
     font-size: 13px;
 }
 
+/* Estados del boton iniciar juego */
 button.playButton:hover {
     transform: scale(1.1) translateX(-50%);
 }
@@ -79,12 +89,14 @@ button.playButton:active {
     transform: scale(0.95) translateX(-50%);
 }
 
+/* Icono del boton iniciar juego */
 .playIcon {
     height: 100%;
     width: auto;
     background: transparent;
 }
 
+/* Botonera de la ventana de ejecución */
 .gameButtonbar {
     position: relative;
     display: flex;
@@ -94,6 +106,7 @@ button.playButton:active {
     padding: 0 10px;
 }
 
+/* Grupo botones izquierdos y derechos */
 .buttonGroup {
     display: flex;
     align-items: center;
@@ -111,8 +124,11 @@ button.playButton:active {
     background: transparent;
     width: 100%;
     height: 100%;
+    /* Ver si en las pruebas de uso si es necesario */
     /*pointer-events: none; !* Evita que la imagen interfiera con los clicks *!*/
 }
+
+/* Contenedores para contenidos con parrafos */
 .textContent{
     background-color: var(--color-baseFondo-200);
     border-radius: 30px;
@@ -122,14 +138,16 @@ button.playButton:active {
     height: 100%;
 }
 
+/* Calificación de estrellas */
  .gameQuality{
      display: flex;
-     gap: 0px;
+     gap: 0;
      width: 500px;
      height: 20px;
  }
 
-/* NO SE DEJA DAR ESTILO*/
+ /* ARREGLAR */
+/* NO SE DEJA DAR ESTILO AL INPUT COMENTARIO*/
 /*.commentInputContainer{*/
 /*    width: 540px;*/
 /*    height: 138px;*/
@@ -151,11 +169,14 @@ button.playButton:active {
 /*    font-size: 13px;*/
 /*}*/
 
+/* Contenedor general de comentarios publicados */
 .usersCommentsConteiner{
     flex-direction: column;
     position: relative;
     line-height: 0;
 }
+
+/* Contenedor individual de comentario publicado */
 .userCommentConteiner{
     display: flex;
     align-items: flex-start;
@@ -167,6 +188,7 @@ button.playButton:active {
 
 }
 
+/* Contenedor imagen de perfil */
 .avatarCotainer {
     flex-direction: column;
     width: 79px;
@@ -175,6 +197,7 @@ button.playButton:active {
     overflow: hidden; /* Oculta las esquinas que sobresalen */
 }
 
+/* Indice páginas de comentarios */
 .pageIndex{
     display: flex;
     list-style: none;
@@ -182,6 +205,9 @@ button.playButton:active {
     align-items: center;
 }
 
+.pageIndex a:hover {
+    color: var(--color-texto-300);
+}
 
 /* esto deberia ser "activo" pero lo hice fijo para tener que hacer el scrip */
 .pageIndex li:first-child a{
@@ -189,11 +215,15 @@ button.playButton:active {
     text-decoration: underline;
 }
 
-/*Esta creo que no hace falta*/
+/*Testear: Esta creo que no hace falta*/
 /*.pageIndex li {*/
 /*    display: inline-block;*/
 /*}*/
 
+
+
+
+/* --------------------------------------------------------------------------- */
 /* BORRADOR: cambiar por publis tipo carruseles y cards  */
 .proxCarruselPubli {
     position: relative;
