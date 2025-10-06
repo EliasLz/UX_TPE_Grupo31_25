@@ -1,3 +1,7 @@
+.main-content{
+    margin: 0 50px;
+}
+
 .carousel-section {
     background-color: #ffffff; 
     border-radius: 30px; 
@@ -47,6 +51,7 @@
     gap: 10px; 
     padding-left: 10px; 
     padding-right: 10px;
+    margin-left: 20px;
 }
 
 .game-card {
@@ -72,3 +77,6 @@
     overflow: hidden;
     text-overflow: ellipsis; 
 }
+
+/* ---------------- */
+

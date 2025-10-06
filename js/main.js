@@ -1,5 +1,5 @@
 import { fetchGames } from "./fetchApi.js";
-import {simulateProgress} from "./spiner.js"
+import {simulateProgress} from "./spiner.js";
 
 // Función para cargar un componente dinámicamente.
 export function loadComponent(urlComponent, idDestination) {
@@ -132,7 +132,7 @@ function createCarouselSection(genreName, games) {
         <section class="carousel-section">
             <h2 class="carousel-title">${genreName}</h2>
             <div class="carousel-track categories-container" id="carousel-${genreName.replace(/\s/g, '-')}-track">
-                ${gameCards}
+            ${gameCards}
             </div>
         </section>
     `;

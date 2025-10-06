@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/globals.css">
+    <link rel="stylesheet" href="styles/game.css">
+    <link rel="stylesheet" href="styles/footerStyle.css">
+    <link rel="stylesheet" href="styles/headerStyle.css">
+    <title>Game</title>
+</head>
+
+<body>
+
+<header>
+    <div class="logo-menu">
+        <img src="assets/icons/menuHamburguesa.svg" alt="Menu Hamburguesa">
+        <img class="logo" src="assets/Logo2.svg" alt="Logo">
+    </div>
+
+    <form>
+        <input type="text" id="searchInput" name="search" placeholder="Buscar Juego" autocomplete="off">
+
+        <button type="submit" class="search-icon">
+            <img src="assets/icons/lupa.svg" alt="buscar">
+        </button>
+    </form>
+
+    <div>
+        <button>
+            <img src="assets/icons/Mexico.svg" alt="Seleccionar idioma">
+        </button>
+    </div>
+</header>
+
+<!-- El Header -->
+<!--<div id="header"></div>-->
+
+<!-- El Breadcrumb -->
+<nav>
+    <ul class="breadcrumb">
+        <li><a href="game.html">Juegos</a></li>
+        <li><a href="game.html">Puzzle</a></li>
+        <li>Ps Simpsons Edition</li>
+    </ul>
+</nav>
+
+<main>
+    <!-- Sepera: Ejecución del juego (izquierda) <- I -> (Cards a la derecha) -->
+    <div class="widthContainer">
+
+        <!-- Ventana de ejecución del juego (Pantalla + Botonera) -->
+        <section class="gameContainer">
+            <!-- La Pantalla de juego -->
+            <div class="gameScreen">
+                <img
+                        src="assets/img/peg-solitarie.jpg"
+                        alt="Portada: Peg Solitaire Simpsons Edition"
+                        class="gameCover"
+                >
+                <!-- Boton iniciar juego -->
+                <button class="playButton">
+                    <img src="assets/icons/Play.svg" alt="playIcon" class="playIcon">
+                    Jugar ahora
+                </button>
+            </div>
+
+            <!-- Contenedor Botonera de la ventana de ejecución -->
+            <div class="gameButtonbar">
+                <!-- Botones ubicados del lado izquierdo -->
+                <div class="buttonGroup">
+                    <button class="iconButton">
+                        <img src="assets/icons/like.svg" alt="likeIcon">
+                    </button>
+                    <button class="iconButton">
+                        <img src="assets/icons/dislike.svg" alt="dislikeIcon">
+                    </button>
+                    <button class="iconButton">
+                        <img src="assets/icons/favorite.svg" alt="favoriteIcon">
+                    </button>
+                </div>
+                <!-- Botones ubicados del lado derecho -->
+                <div class="buttonGroup">
+                    <button class="iconButton">
+                        <img src="assets/icons/shortcut.svg" alt="shortcutIcon">
+                    </button>
+                    <button class="iconButton">
+                        <img src="assets/icons/share.svg" alt="shareIcon">
+                    </button>
+                    <button class="iconButton">
+                        <img src="assets/icons/expand.svg" alt="expandIcon">
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- BORRADOR: Cards juegos a la derecha de ventana ejecución -->
+        <!-- podría estar ubicado en el main, depende el diseño del carrusel -->
+        <aside class="proxCardPubli">
+        </aside>
+    </div>
+
+    <!-- BORRADOR: Carrusel plublicitario inferior -->
+    <aside class="proxCarruselPubli">
+    </aside>
+
+    <!-- Info del juego + Comentarios (izquierda) <- I -> Cards a la (derecha) -->
+    <div class="widthContainer">
+        <!--Sección info del juego + Sección Comentarios -->
+        <div>
+            <!--Sección info del juego-->
+            <section style="display: flex; flex-direction: column; gap: 5px">
+                <!--Articulo descripción del juego-->
+                <article class="textContent">
+                    <h3>PEG SOLITAIRE SIMPSONS EDITION</h3>
+                    <!-- Calificación de estrellas-->
+                    <div class="gameQuality">
+                        <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                        <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                        <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                        <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                        <img src="assets/icons/emptyStar.svg" alt="starIcon" style="margin: 0 10px 0 0"
+                             class="resizes"></img>
+                        <p class="metaText"> 9999999 me gusta</p>
+                    </div>
+                    <p>Pon a prueba tu ingenio en este clásico solitario de fichas, ahora con una divertida temática de
+                        Los
+                        Simpson. Mueve las piezas inspiradas en los personajes de Springfield y trata de dejar solo una
+                        en el
+                        tablero. ¡Un reto simple de aprender, pero difícil de dominar, con todo el humor amarillo de la
+                        familia
+                        más famosa de la TV!</p>
+                </article>
+
+                <!--Articulo guia de juego-->
+                <article class="textContent">
+                    <h3>Instrucciones para jugar</h3>
+                    <p>Objetivo del juego:
+                        El objetivo es dejar una única ficha en el tablero, idealmente en el centro. Cuantas más fichas
+                        quites,
+                        mejor será tu puntuación.</p>
+                    <p>Cómo se juega:
+                        1. Realiza un movimiento: Un movimiento consiste en saltar con una ficha por encima de otra
+                        adyacente
+                        (horizontal o verticalmente, nunca en diagonal) y caer en un agujero vacío inmediatamente
+                        después.
+                        2. Elimina la ficha: La ficha sobre la que has saltado es retirada del tablero.
+                        3. Repite: Sigue haciendo movimientos que sigan esta regla. Puedes hacer varios saltos en un
+                        solo turno
+                        si la posición lo permite</p>
+                    <div class="doubleCenterFlex">
+                        <p> Ejemplo: </p>
+                        <img src="assets/img/pegGuide.jpg" alt="guideGame"></img>
+                    </div>
+                </article>
+            </section>
+
+            <!-- Sección Comentarios -->
+            <section>
+                <!-- Input para ingresar compentario -->
+                <h3>Deja tu comentario debajo!</h3>
+                <div class="textContent doubleCenterFlex commentInputContainer">
+                    <img src="assets/icons/user.svg" alt="userIcon" class="resizes"></img>
+                    <label for="comment">¿Que te parecio este juego?</label>
+                    <input type="text" id="comment" name="comment" class="resizes commentInput"
+                           placeholder="debería estar vacio">
+                    <button class="resizes">Comentar</button>
+                </div>
+
+                <!--Comentarios publicados por la comunidad-->
+                <h3>Comentarios de la comunidad</h3>
+                <section class="textContent usersCommentsConteiner">
+                    <article class="userCommentConteiner">
+                        <!-- Perfil de usuario -->
+                        <div>
+                            <!-- Contenedor imagen de perfil -->
+                            <div class="avatarCotainer">
+                                <img src="assets/img/userAvatar1.jpg" alt="userAvatar" class="resizes"></img></div>
+                            <!-- Informacion del usuario -->
+                            <p>Fulanito Chico</p>
+                            <p class="metaText">Jugados: 518</p>
+                        </div>
+                        <!--Califiacion de estrellas-->
+                        <div>
+                            <!-- Calificación de estrellas-->
+                            <div class="gameQuality">
+                                <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/emptyStar.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/emptyStar.svg" alt="starIcon" class="resizes"></img>
+                            </div>
+                            <p class="metaText">Septiembre 28, 2024</p>
+                            <br></br>
+                            <p>¡Guau! Me pareció un desafío increíble. Al principio, pensé que era fácil, pero la
+                                estrategia de
+                                los movimientos es mucho más compleja de lo que parece. La verdad, me gusta que te hagan
+                                pensar.
+                                Me divertí un montón, aunque me frustré un poco en el nivel del "Día de los Muertos"
+                                porque no
+                                podía dejar a Homero solo en el centro. ¡Pura lógica! Un 10 de 10.</p>
+                        </div>
+                    </article>
+                    <article class="userCommentConteiner">
+                        <div>
+                            <div class="avatarCotainer"><img src="assets/img/userAvatar2.jpg" alt="userAvatar"
+                                                             class="resizes"></img></div>
+                            <p>Fulanito Chico</p>
+                            <p class="metaText">Jugados: 518</p>
+                        </div>
+                        <div>
+                            <!-- Calificación de estrellas-->
+                            <div class="gameQuality">
+                                <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/emptyStar.svg" alt="starIcon" class="resizes"></img>
+                            </div>
+                            <p class="metaText"> Octubre 12, 2025</p>
+                            <br></br>
+                            <p>¡ME ENCANTA! Es el mejor juego que he probado en mucho tiempo. Los personajes son súper
+                                graciosos, y ver cómo Marge, Lisa y los demás desaparecen cuando los saltas es muy
+                                divertido. Mi
+                                parte favorita fue cuando apareció el Abuelo Simpson. Ojalá hubiera más niveles con
+                                Burns o
+                                Krusty. ¡Quiero que hagan uno igual pero con la familia de Ned Flanders!</p>
+                        </div>
+                    </article>
+                    <article class="userCommentConteiner">
+                        <div>
+                            <div class="avatarCotainer"><img src="assets/img/userAvatar3.jpg" alt="userAvatar"
+                                                             class="resizes"></img></div>
+                            <p>Fulanito Chico</p>
+                            <p class="metaText">Jugados: 518</p>
+                        </div>
+                        <div>
+                            <!-- Calificación de estrellas-->
+                            <div class="gameQuality">
+                                <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                            </div>
+                            <p class="metaText"> Septiembre 11, 2001</p>
+                            <br></br>
+                            <p>¡¡¡¡¡ES INCREÍBLEEEEE!!!! Me re vició. Jugué como 10 veces seguidas y no me cansé. Cuando
+                                logré
+                                dejar a Homero solo al final, ¡sentí que había ganado la lotería! Se lo recomendé a mi
+                                primo y a
+                                mis amigos. Ojalá hubiera más juegos así en la página. ¡Muy, muy divertido!</p>
+                        </div>
+                    </article>
+                    <article class="userCommentConteiner">
+                        <div>
+                            <div class="avatarCotainer"><img src="assets/img/userAvatar4.jpg" alt="userAvatar"
+                                                             class="resizes"></img></div>
+                            <p>Fulanito Chico</p>
+                            <p class="metaText">Jugados: 518</p>
+                        </div>
+                        <div>
+                            <!-- Calificación de estrellas-->
+                            <div class="gameQuality">
+                                <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/emptyStar.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/emptyStar.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/emptyStar.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/emptyStar.svg" alt="starIcon" class="resizes"></img>
+                            </div>
+                            <p class="metaText">Abril 44, 2026</p>
+                            <br></br>
+                            <p>Uhm... me pareció un poco aburrido. No sé, no tiene acción. Yo prefiero los juegos donde
+                                tienes
+                                que saltar, correr o lanzar cosas. Me gusta que sea de Los Simpson, pero los muñecos no
+                                se
+                                mueven ni hacen ruidos. Me gustó la música, pero me quedé dormido a la mitad. Le doy un
+                                1, solo
+                                porque es de Los Simpson.</p>
+                        </div>
+                    </article>
+
+                    <!--Indice páginas de comentarios-->
+                    <nav class="doubleCenterFlex">
+                        <ul class="pageIndex">
+                            <li><a href="game.html">1</a></li>
+                            <li><a href="game.html">2</a></li>
+                            <li><a href="game.html">3</a></li>
+                            <!-- Puntos suspensivos -->
+                            <li><span>...</span></li>
+                            <li><a href="game.html">10</a></li>
+                        </ul>
+                    </nav>
+                </section>
+            </section>
+        </div>
+
+        <!--Cards a la derecha -->
+        <aside class="proxCardPubli2">
+        </aside>
+    </div>
+
+</main>
+
+<!--<div id="footer"></div>-->
+
+<!--Cargamos el script-->
+<!--<script type="module" src="js/main.js">-->
+<!--</script>-->
+
+
+<footer>
+    <section class="content-links" style="margin: 100px 0 0 0;">
+
+        <div class="link">
+            <div class="">
+                <h2>Mi sitio</h2>
+
+                <a href="">Mi Perfil</a>
+                <a href=""><h4>Mis preferencias de notificaciones</h4></a>
+                <a href=""><h4>Mis preferencias de cuenta</h4></a>
+                <a href=""><h4>Cerrar Sesion</h4></a>
+            </div>
+
+            <div class="">
+                <h2>Link del sitio</h2>
+
+                <a href=""><h4>Inicio</h4></a>
+                <a href=""><h4>Privacidad y seguridad</h4></a>
+                <a href=""><h4>Privacidad y seguridad</h4></a>
+                <a href=""><h4>Ayuda</h4></a>
+                <a href=""><h4>Desarrolladores</h4></a>
+                <a href=""><h4>Publicidad</h4></a>
+                <a href=""><h4>Condiciones</h4></a>
+            </div>
+
+            <div class="">
+                <h2>Ayuda y Soporte</h2>
+
+                <a href=""><h4>Preguntas fercuentes</h4></a>
+                <a href=""><h4>Formas de uso</h4></a>
+                <a href=""><h4>Enviar comentarios</h4></a>
+                <a href=""><h4>Mapa del sitio completo</h4></a>
+                <a href=""><h4>Informacion del copyright</h4></a>
+            </div>
+        </div>
+
+        <div class="description">
+            <div>
+                <img src="assets/Logo3.svg" alt="Logo de pagina">
+            </div>
+
+            <p>¡Olvídate del aburrimiento con Games Toons! La mayor selección de juegos gratis está aquí,
+                para que lleves la diversión al siguiente nivel. Juega online y sin preocupaciones: puedes
+                jugar a todos nuestros juegos sin descargar. ¡Pero cuidado! Nuestros juegos de accion solo
+                son aptos para los más atrevidos; competirás con grandes pilotos en nuestros juegos de carreras;
+                podrás poner a prueba al estratega que llevas dentro en todos nuestros juegos de estrategia
+                ¡Todos los juegos gratis y sin descargar!
+            </p>
+
+            <h5>Compartir en...</h5>
+            <div class="networks">
+                <img src="assets/icons/facebook.svg" alt="facebook">
+                <img src="assets/icons/instagram.svg" alt="instagram">
+                <img src="assets/icons/twitter.svg" alt="twitter">
+            </div>
+
+        </div>
+
+        <button>Boton llevar hasta arriba</button>
+    </section>
+
+    <section class="copyright">
+        <p>© 2025 derechos reservados Games Toons!</p>
+    </section>
+
+</footer>
+
+
+</body>
+</html>

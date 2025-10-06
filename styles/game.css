@@ -1,0 +1,248 @@
+/* Globales Game:
+    debería pasarlas algunas global? */
+main {
+    margin: 0 30px;
+}
+
+button:hover {
+    opacity: 0.8;
+    transform: scale(1.1);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+button:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+/*Para separar contenido del main veticalmente:
+    Podría estar en global */
+.widthContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* El Breadcrumb */
+ul.breadcrumb {
+    list-style: none;
+    display: flex;
+    background-color: var(--color-baseFondo-200);
+    /*font-family: var(--fuente-principal);*/
+    font-weight: var(--peso-semi-bold);
+    font-size: var(--tamano-texto-md);
+    margin: 5px 0;
+    padding: 3px 0;
+}
+
+/* Decoración del Breadcrumb */
+ul.breadcrumb li + li::before {
+    content: ">>";
+    margin: 0 8px;
+}
+
+/* Contenedor de referencia:
+No me deja usarlo en una global, ni me gusta como quedó*/
+.gameContainer, .gameScreen, .commentInputContainer{
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+}
+
+/* Es necesario decirle al contenido de pantalla que se ajuste al contenedor ventana? */
+/*.gameCover {*/
+/*    height: auto;*/
+/*}*/
+
+/*Boton iniciar juego:
+    me obliga a repetir fuente y color*/
+.playButton {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 140px;
+    height: 38px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 40%;
+
+    font-family: var(--fuente-principal);
+    color: #EDF2F7;
+    background-color: var(--color-primario-400);
+    padding: 5px 5px;
+    border: 1px solid var(--color-texto-500);
+    border-radius: 10px;
+    font-size: 13px;
+}
+
+/* Estados del boton iniciar juego */
+button.playButton:hover {
+    transform: scale(1.1) translateX(-50%);
+}
+
+button.playButton:active {
+    transform: scale(0.95) translateX(-50%);
+}
+
+/* Icono del boton iniciar juego */
+.playIcon {
+    height: 100%;
+    width: auto;
+    background: transparent;
+}
+
+/* Botonera de la ventana de ejecución */
+.gameButtonbar {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--color-texto-300);
+    height: 38px;
+    padding: 0 10px;
+}
+
+/* Grupo botones izquierdos y derechos */
+.buttonGroup {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+}
+
+.iconButton {
+    background: transparent;
+    height: 70%;
+    transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.iconButton img {
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    /* Ver si en las pruebas de uso si es necesario */
+    /*pointer-events: none; !* Evita que la imagen interfiera con los clicks *!*/
+}
+
+/* Contenedores para contenidos con parrafos */
+.textContent{
+    background-color: var(--color-baseFondo-200);
+    border-radius: 30px;
+    box-sizing: border-box;
+    padding: 15px 75px 15px 75px;
+    width: 1000px;
+    height: 100%;
+}
+
+/* Calificación de estrellas */
+ .gameQuality{
+     display: flex;
+     gap: 0;
+     width: 500px;
+     height: 20px;
+ }
+
+ /* ARREGLAR */
+/* NO SE DEJA DAR ESTILO AL INPUT COMENTARIO*/
+/*.commentInputContainer{*/
+/*    width: 540px;*/
+/*    height: 138px;*/
+/*    gap: 10px;*/
+/*    margin: 0 0 100px 0;*/
+/*    background-color: yellow;   */
+/*}*/
+/*NO SE DEJA DAR ESTILO*/
+/*button.commentInputContainer{*/
+/*    box-sizing: border-box;*/
+/*    width: 140px;*/
+/*    height: 38px;*/
+
+/*    color: #EDF2F7;*/
+/*    background-color: var(--color-primario-400);*/
+/*    padding: 5px 5px;*/
+/*    border: 1px solid var(--color-texto-500);*/
+/*    border-radius: 10px;*/
+/*    font-size: 13px;*/
+/*}*/
+
+/* Contenedor general de comentarios publicados */
+.usersCommentsConteiner{
+    flex-direction: column;
+    position: relative;
+    line-height: 0;
+}
+
+/* Contenedor individual de comentario publicado */
+.userCommentConteiner{
+    display: flex;
+    align-items: flex-start;
+    justify-content: left;   /* navegador ignora esta linea */
+    gap: 30px;
+    padding: 10px 100px 20px 20px;
+    margin: 10px 0 10px 0;
+    border-bottom: solid var(--color-texto-500) 1px;
+
+}
+
+/* Contenedor imagen de perfil */
+.avatarCotainer {
+    flex-direction: column;
+    width: 79px;
+    height: 77px;
+    border-radius: 50%;
+    overflow: hidden; /* Oculta las esquinas que sobresalen */
+}
+
+/* Indice páginas de comentarios */
+.pageIndex{
+    display: flex;
+    list-style: none;
+    gap: 12px;
+    align-items: center;
+}
+
+.pageIndex a:hover {
+    color: var(--color-texto-300);
+}
+
+/* esto deberia ser "activo" pero lo hice fijo para tener que hacer el scrip */
+.pageIndex li:first-child a{
+    color: var(--color-secundarioDorado-400);
+    text-decoration: underline;
+}
+
+/*Testear: Esta creo que no hace falta*/
+/*.pageIndex li {*/
+/*    display: inline-block;*/
+/*}*/
+
+
+
+
+/* --------------------------------------------------------------------------- */
+/* BORRADOR: cambiar por publis tipo carruseles y cards  */
+.proxCarruselPubli {
+    position: relative;
+    width: 1000px;
+    height: 155px;
+    margin: 10px 0;
+    border-radius: 10px;
+    background-image: url('../assets/img/cocacola.jpg');
+    background-size: cover;
+}
+
+.proxCardPubli {
+    background-color: forestgreen;
+    width: 450px;
+    height: 602px;
+}
+
+.proxCardPubli2 {
+    background-color: forestgreen;
+    width: 450px;
+    height: auto;
+}
