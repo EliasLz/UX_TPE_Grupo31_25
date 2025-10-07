@@ -55,8 +55,6 @@ function createRecommendedCard(game) {
                     <h3 class="game-card-title">${game.name}</h3>
                 </div>
             </div>
-            
-            <div class="game-card-info" style="display: none;"></div>
         </div>
     `;
 }
@@ -73,7 +71,7 @@ function selectRecommendedGames(games) {
     }
 
     const candidates = games.filter(game => 
-        game.rating > 4.5 && game.id !== 1
+        game.rating > 4.3 && game.id !== 1
     );
     
 
@@ -117,6 +115,9 @@ async function renderRecommended() {
             const cardHTML = createRecommendedCard(game);
             container.insertAdjacentHTML('beforeend', cardHTML);
         });
+
+        // Inicializar comportamiento de carrusel (botones + desplazamiento por secciones)
+        initCarousel(container);
 
     } catch (error) {
         console.error('Error al renderizar los recomendados:', error);
@@ -182,6 +183,10 @@ async function renderCategories(){
                 const gamesInGenre = gamesByGenre[genreName];
                 const carousel = createCarouselSection(genreName, gamesInGenre);
                 container.insertAdjacentHTML('beforeend', carousel);
+                // Inicializar controles para el track recién creado
+                const trackId = `carousel-${genreName.replace(/\s/g, '-')}-track`;
+                const trackEl = document.getElementById(trackId);
+                if (trackEl) setupTrackControls(trackEl);
             }
         }
 
@@ -189,6 +194,101 @@ async function renderCategories(){
         console.error('Error al renderizar las categorias:', error);
         container.innerHTML = '<p>Error al cargar las categorias.</p>';
     }
+}
+
+
+// Inicializa los controles de carrusel para un contenedor de track
+function initCarousel(rootContainer) {
+    // Selecciona tracks dentro del root (si es el recommendedContainer el track son las .recommended-card dentro)
+    // Para compatibilidad, soportamos contenedores que tienen children .recommended-card o .game-card
+    const track = rootContainer.classList.contains('card-container') ? rootContainer : null;
+    
+    // Si es recommended (card-container)
+    if (track) {
+        setupTrackControls(track);
+    }
+    
+    // También inicializar todos los carousel-track generados en las categorias
+    const otherTracks = document.querySelectorAll('.carousel-track');
+    otherTracks.forEach(t => setupTrackControls(t));
+}
+
+function setupTrackControls(track) {
+    // Evitar inicializar dos veces
+    if (track.dataset.carouselInit === 'true') return;
+    track.dataset.carouselInit = 'true';
+    
+    // Crear wrapper para posicionar botones
+    const wrapper = document.createElement('div');
+    wrapper.className = 'carousel-wrapper';
+    // Insertar wrapper antes del track y mover el track dentro
+    track.parentNode.insertBefore(wrapper, track);
+    wrapper.appendChild(track);
+    
+    // Crear botones
+    const btnPrev = document.createElement('button');
+    btnPrev.className = 'carousel-btn carousel-btn-prev';
+    btnPrev.setAttribute('aria-label', 'Anterior');
+    btnPrev.innerText = '<';
+    
+    const btnNext = document.createElement('button');
+    btnNext.className = 'carousel-btn carousel-btn-next';
+    btnNext.setAttribute('aria-label', 'Siguiente');
+    btnNext.innerText = '>';
+    
+    wrapper.appendChild(btnPrev);
+    wrapper.appendChild(btnNext);
+    
+    // Mostrar botones solo al hover del wrapper
+    wrapper.classList.add('carousel-hoverable');
+    
+    // Manejador de desplazamiento por secciones
+    const updateSize = () => {
+        const card = track.querySelector('.game-card, .recommended-card');
+        if (!card) {
+            track._cardWidth = 200; // Valor por defecto si no hay cards
+            track._visibleCount = 3;
+            return;
+        }
+        const cardRect = card.getBoundingClientRect();
+        const trackStyle = getComputedStyle(track);
+
+        const gapValue = parseFloat(trackStyle.gap) || parseFloat(trackStyle.columnGap) || 0;
+        const cardWidth = cardRect.width + gapValue;
+        track._cardWidth = cardWidth;
+        // calcular cuantas entran en el ancho visible del track
+        const visible = Math.max(1, Math.floor(track.getBoundingClientRect().width / cardWidth));
+        track._visibleCount = visible;
+    };
+    
+    // Inicializar tamaños
+    updateSize();
+    window.addEventListener('resize', () => {
+        updateSize();
+    });
+    
+    const scrollBySection = (direction) => {
+        const step = track._cardWidth * track._visibleCount;
+        const newPos = track.scrollLeft + (direction === 'next' ? step : -step);
+        track.scrollTo({ left: newPos, behavior: 'smooth' });
+    };
+    
+    btnNext.addEventListener('click', () => scrollBySection('next'));
+    btnPrev.addEventListener('click', () => scrollBySection('prev'));
+
+    
+    // Optional: hide prev when at start and hide next at end
+    const updateButtons = () => {
+        btnPrev.disabled = track.scrollLeft <= 0 + 1;
+        btnNext.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+    };
+    
+    track.addEventListener('scroll', () => {
+        updateButtons();
+    });
+    
+    // Initial state
+    setTimeout(updateButtons, 50);
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{

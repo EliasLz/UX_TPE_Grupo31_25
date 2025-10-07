@@ -10,6 +10,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
+
 .carousel-title {
     padding: 0 10px; 
     font-size: 1.1em;
@@ -53,6 +54,55 @@
     padding-right: 10px;
     margin-left: 20px;
 }
+.carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+/* wrapper que contendrá el track y los botones */
+.carousel-wrapper {
+    position: relative;
+}
+
+.carousel-hoverable .carousel-btn {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.carousel-hoverable:hover .carousel-btn {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.carousel-btn:disabled {
+    opacity: 0;
+    cursor: default;
+}
+
+.carousel-btn-prev { left: 8px; }
+.carousel-btn-next { right: 8px; }
+
+/* Hacer que el scroll sea suave por defecto */
+.carousel-track {
+    scroll-behavior: smooth;
+}
 
 .game-card {
     width: 130px; 
@@ -78,12 +128,3 @@
     text-overflow: ellipsis; 
 }
 
-/* ---------------- */
-
-.ads-container {
-    background-color: #ffffff; 
-    border-radius: 30px; 
-    padding: 10px; 
-    margin-bottom: 20px; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-}
