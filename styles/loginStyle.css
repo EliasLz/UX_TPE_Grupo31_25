@@ -58,7 +58,7 @@ img {
     border-radius: 25px; 
     cursor: pointer;
     font-size: 1.1em;
-    font-weight: bold;
+    font-weight: var(--peso-bold);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s;
 }
@@ -262,7 +262,6 @@ form .optional-text{
 }
 
 /* Boton jugar*/
-
 .play{
     position: relative;
     list-style: none;
@@ -320,6 +319,7 @@ form .optional-text{
     justify-content: center;
     align-items: center;
 }
+
 .play-icon .icon{
     color: #777;
     font-size: 1.75em;
@@ -327,8 +327,6 @@ form .optional-text{
     transition-delay: 0.25s;
     width: 50px;
 }
-
-
 
 .play:hover .icon{
     transform: scale(0);

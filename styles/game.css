@@ -48,7 +48,14 @@ No me deja usarlo en una global, ni me gusta como quedó*/
 .gameContainer, .gameScreen, .commentInputContainer{
     position: relative;
     display: inline-block;
-    line-height: 0;
+    display: flex;
+}
+
+.commentInput{
+    background-color: white;
+    width: 300px;
+    height: 250px;
+    border-radius: 25px;
 }
 
 /* Es necesario decirle al contenido de pantalla que se ajuste al contenedor ventana? */
@@ -147,6 +154,12 @@ button.playButton:active {
      width: 500px;
      height: 20px;
  }
+
+.containerComment{
+    display: flex;
+    flex-direction: column;
+}
+
 
  /* ARREGLAR */
 /* NO SE DEJA DAR ESTILO AL INPUT COMENTARIO*/

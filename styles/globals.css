@@ -25,13 +25,18 @@
 
     /*Tipografia*/
     --fuente-principal: 'Fredoka', sans-serif;
-    --peso-semi-bold: 600;
+
+    /*Peso*/
+    --peso-bold: 600;
+    --peso-semi-bold: 400;
+    --peso-regular: 300;
 
     /* Tamaños */
     --tamano-titulo-xl: 2.5em;
     --tamano-titulo-lg: 1.5em;
     --tamano-titulo-md: 1.25em;
     --tamano-titulo-sm: 1em;
+
     --tamano-texto-md: 0.7em;
     --tamano-texto-meta: 0.6em;
 }
@@ -72,8 +77,9 @@ h2 { font-size: var(--tamano-titulo-lg); }
 h3 { font-size: var(--tamano-titulo-md); }
 h4 { font-size: var(--tamano-titulo-sm); }
 p { font-size: var(--tamano-texto-md);
-    /*white-space: pre-line;*/
-    /*font-weight:100;*/}
+    white-space: pre-line;
+    font-weight: var(--peso-semi-bold);
+}
 p.metaText { font-size: var(--tamano-texto-meta);
              color: var(--color-texto-300);
              display: flex;
@@ -85,6 +91,9 @@ a {
     cursor: pointer;
 }
 
+span{
+    font-weight: 600;
+}
 
 input {
   border: none;              /* Quita el borde */
@@ -105,8 +114,6 @@ form input{
     border: 1px solid #ccc;
     background-color: white;
     border-radius: 20px;
-
-
 }
 
 .doubleCenterFlex{

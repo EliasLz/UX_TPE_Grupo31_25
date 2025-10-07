@@ -107,5 +107,15 @@ submitForm.addEventListener('submit', (e)=>{
 
     register.classList.toggle('hiden');
     welcome.classList.toggle('hiden');
-    console.log("formulario enviado");
 })
+
+
+// El usuario navega hacia el index.html
+document.getElementById('searchForm').addEventListener('submit', navIndex);
+document.getElementById('button-facebook').addEventListener('click', navIndex);
+document.getElementById('button-google').addEventListener('click', navIndex);
+
+function navIndex(e){
+    e.preventDefault();
+    window.location.href = "index.html"
+}
