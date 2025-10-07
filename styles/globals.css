@@ -36,7 +36,6 @@
     --tamano-titulo-lg: 1.5em;
     --tamano-titulo-md: 1.25em;
     --tamano-titulo-sm: 1em;
-
     --tamano-texto-md: 0.7em;
     --tamano-texto-meta: 0.6em;
 }
@@ -69,7 +68,7 @@ main{
 }
 
 h1, h2, h3, h4 {
-    font-weight: var(--peso-semi-bold);
+    font-weight: var(--peso-bold);
 }
 
 h1 { font-size: var(--tamano-titulo-xl); }
@@ -77,13 +76,12 @@ h2 { font-size: var(--tamano-titulo-lg); }
 h3 { font-size: var(--tamano-titulo-md); }
 h4 { font-size: var(--tamano-titulo-sm); }
 p { font-size: var(--tamano-texto-md);
-    white-space: pre-line;
-    font-weight: var(--peso-semi-bold);
 }
 p.metaText { font-size: var(--tamano-texto-meta);
              color: var(--color-texto-300);
              display: flex;
-             align-items: center;}
+             align-items: center;
+}
 
 a {
     text-decoration: none;
@@ -92,7 +90,8 @@ a {
 }
 
 span{
-    font-weight: 600;
+    font-weight: var(--peso-bold);
+
 }
 
 input {
@@ -126,6 +125,12 @@ form input{
     height: 100%;
     width: auto;
     object-fit: cover;
+}
+
+.columnFlex{
+    display: flex;
+    flex-direction: column;
+    gap: 5px
 }
 
 /*-----------------------------------------------------*/

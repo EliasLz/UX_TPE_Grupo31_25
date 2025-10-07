@@ -1,20 +1,20 @@
 <header>
     <div class="logo-menu">
         <img src="assets/icons/menuHamburguesa.svg" alt="Menu Hamburguesa">
-        <a href="index.html"><img class="logo" src="assets/Logo2.png" alt="Logo"></a>
+        <a href="index.html"><img class="logo" src="assets/Logo2.svg" alt="Logo"></a>
     </div>
 
-    <form>
-        <input type="text" id="searchInput" name="search" placeholder="Buscar Juego" autocomplete="off">
-            
-        <button type="submit" class="search-icon">
-            <img src="assets/icons/lupa.svg" alt="buscar">
-        </button>
+    <form action="/search" method="get" class="doubleCenterFlex searchInputContainer">
+        <input class="searchInput" type="text" id="searchInput" name="search" placeholder="Buscar Juego" autocomplete="off">
+        <div>
+            <img  class="sesss" src="assets/icons/lupa.svg" alt="buscar">
+        </div>
     </form>
 
     <div>
         <button>
-            <img src="assets/icons/Mexico.svg" alt="Seleccionar idioma">
+
+            <div class="languageImg"><img src="assets/icons/Mexico.svg" alt="Seleccionar idioma"></div>
         </button>
     </div>
 </header>

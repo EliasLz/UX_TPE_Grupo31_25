@@ -18,6 +18,7 @@ button:focus-visible {
     outline-offset: 2px;
     border-radius: 4px;
 }
+
 /*Para separar contenido del main veticalmente:
     Podría estar en global */
 .widthContainer {
@@ -30,11 +31,9 @@ ul.breadcrumb {
     list-style: none;
     display: flex;
     background-color: var(--color-baseFondo-200);
-    /*font-family: var(--fuente-principal);*/
-    font-weight: var(--peso-semi-bold);
     font-size: var(--tamano-texto-md);
     margin: 5px 0;
-    padding: 3px 0;
+    padding: 3px 32px;
 }
 
 /* Decoración del Breadcrumb */
@@ -45,23 +44,12 @@ ul.breadcrumb li + li::before {
 
 /* Contenedor de referencia:
 No me deja usarlo en una global, ni me gusta como quedó*/
-.gameContainer, .gameScreen, .commentInputContainer{
+.gameContainer, .gameScreen {
     position: relative;
     display: inline-block;
-    display: flex;
+    line-height: 0;
 }
 
-.commentInput{
-    background-color: white;
-    width: 300px;
-    height: 250px;
-    border-radius: 25px;
-}
-
-/* Es necesario decirle al contenido de pantalla que se ajuste al contenedor ventana? */
-/*.gameCover {*/
-/*    height: auto;*/
-/*}*/
 
 /*Boton iniciar juego:
     me obliga a repetir fuente y color*/
@@ -110,7 +98,7 @@ button.playButton:active {
     justify-content: space-between;
     background-color: var(--color-texto-300);
     height: 38px;
-    padding: 0 10px;
+    padding: 0 30px;
 }
 
 /* Grupo botones izquierdos y derechos */
@@ -131,12 +119,10 @@ button.playButton:active {
     background: transparent;
     width: 100%;
     height: 100%;
-    /* Ver si en las pruebas de uso si es necesario */
-    /*pointer-events: none; !* Evita que la imagen interfiera con los clicks *!*/
 }
 
 /* Contenedores para contenidos con parrafos */
-.textContent{
+.textContent {
     background-color: var(--color-baseFondo-200);
     border-radius: 30px;
     box-sizing: border-box;
@@ -147,60 +133,88 @@ button.playButton:active {
     hyphens: auto;
 }
 
-/* Calificación de estrellas */
- .gameQuality{
-     display: flex;
-     gap: 0;
-     width: 500px;
-     height: 20px;
- }
-
-.containerComment{
-    display: flex;
-    flex-direction: column;
+#noPuedoCreerQueTengaQueHacerUnIdSoloPorEsto {
+    gap: 40px;
 }
 
+/* Calificación de estrellas */
+.gameQuality {
+    display: flex;
+    gap: 0;
+    width: 500px;
+    height: 20px;
+}
 
- /* ARREGLAR */
-/* NO SE DEJA DAR ESTILO AL INPUT COMENTARIO*/
-/*.commentInputContainer{*/
-/*    width: 540px;*/
-/*    height: 138px;*/
-/*    gap: 10px;*/
-/*    margin: 0 0 100px 0;*/
-/*    background-color: yellow;   */
-/*}*/
-/*NO SE DEJA DAR ESTILO*/
-/*button.commentInputContainer{*/
-/*    box-sizing: border-box;*/
-/*    width: 140px;*/
-/*    height: 38px;*/
+.likesValue {
+    margin-left: 10px;
+}
 
-/*    color: #EDF2F7;*/
-/*    background-color: var(--color-primario-400);*/
-/*    padding: 5px 5px;*/
-/*    border: 1px solid var(--color-texto-500);*/
-/*    border-radius: 10px;*/
-/*    font-size: 13px;*/
-/*}*/
+.commentInputContainer {
+    position: relative;
+    display: flex;
+    align-items: self-end;
+    justify-content: space-between;
+    height: auto;
+}
+
+.commentInput {
+    position: relative;
+    width: 600px;
+    background: var(--color-primario-100);
+    border: 2px solid var(--color-texto-100);
+    border-radius: 8px;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.commentInput:focus-within {
+    border-color: var(--color-secundarioDorado-200);
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+.comentAvatarImg {
+    min-width: 55px;
+    min-height: 55px;
+}
 
 /* Contenedor general de comentarios publicados */
-.usersCommentsConteiner{
+.usersCommentsConteiner {
     flex-direction: column;
     position: relative;
-    line-height: 0;
+}
+
+.commentButton {
+    box-sizing: border-box;
+    width: 140px;
+    height: 38px;
+    color: var(--color-texto-500);
+    background-color: var(--color-primario-200);
+    padding: 5px 5px;
+    border: 1px solid var(--color-texto-500);
+    border-radius: 10px;
+    font-size: 13px;
+
 }
 
 /* Contenedor individual de comentario publicado */
-.userCommentConteiner{
+.userCommentConteiner {
     display: flex;
     align-items: flex-start;
-    justify-content: left;   /* navegador ignora esta linea */
-    gap: 30px;
+    justify-content: left; /* navegador ignora esta linea */
+    gap: 100px;
     padding: 10px 100px 20px 20px;
     margin: 10px 0 10px 0;
     border-bottom: solid var(--color-texto-500) 1px;
+    flex-shrink: 0;
 
+}
+
+/* Contenedor perfil + info usuario */
+.profileConteiner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 /* Contenedor imagen de perfil */
@@ -209,11 +223,11 @@ button.playButton:active {
     width: 79px;
     height: 77px;
     border-radius: 50%;
-    overflow: hidden; /* Oculta las esquinas que sobresalen */
+    overflow: hidden;
 }
 
 /* Indice páginas de comentarios */
-.pageIndex{
+.pageIndex {
     display: flex;
     list-style: none;
     gap: 12px;
@@ -224,18 +238,10 @@ button.playButton:active {
     color: var(--color-texto-300);
 }
 
-/* esto deberia ser "activo" pero lo hice fijo para tener que hacer el scrip */
-.pageIndex li:first-child a{
+.pageIndex li:first-child a {
     color: var(--color-secundarioDorado-400);
     text-decoration: underline;
 }
-
-/*Testear: Esta creo que no hace falta*/
-/*.pageIndex li {*/
-/*    display: inline-block;*/
-/*}*/
-
-
 
 
 /* --------------------------------------------------------------------------- */
@@ -246,7 +252,7 @@ button.playButton:active {
     height: 155px;
     margin: 10px 0;
     border-radius: 10px;
-    background-image: url('../assets/img/cocacola.jpg');
+    background-image: url('../assets/img/cocacola.svg');
     background-size: cover;
 }
 
@@ -263,3 +269,4 @@ button.playButton:active {
     height: auto;
     border-radius: 30px;
 }
+

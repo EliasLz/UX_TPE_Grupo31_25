@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/globals.css">
     <link rel="stylesheet" href="styles/game.css">
-    <link rel="stylesheet" href="styles/footerStyle.css">
+    <link rel="stylesheet" href="styles/footerStylee.css">
     <link rel="stylesheet" href="styles/headerStyle.css">
     <title>Game</title>
 </head>
@@ -16,20 +16,21 @@
 <header>
     <div class="logo-menu">
         <img src="assets/icons/menuHamburguesa.svg" alt="Menu Hamburguesa">
-        <img class="logo" src="assets/Logo2.svg" alt="Logo">
+        <a href="index.html"><img class="logo" src="assets/Logo2.svg" alt="Logo"></a>
     </div>
 
-    <form>
-        <input type="text" id="searchInput" name="search" placeholder="Buscar Juego" autocomplete="off">
-
-        <button type="submit" class="search-icon">
-            <img src="assets/icons/lupa.svg" alt="buscar">
-        </button>
+    <form action="/search" method="get" class="doubleCenterFlex searchInputContainer">
+        <input class="searchInput" type="text" id="searchInput" name="search" placeholder="Buscar Juego"
+               autocomplete="off">
+        <div>
+            <img class="sesss" src="assets/icons/lupa.svg" alt="buscar">
+        </div>
     </form>
 
     <div>
         <button>
-            <img src="assets/icons/Mexico.svg" alt="Seleccionar idioma">
+
+            <div class="languageImg"><img src="assets/icons/Mexico.svg" alt="Seleccionar idioma"></div>
         </button>
     </div>
 </header>
@@ -47,7 +48,7 @@
 </nav>
 
 <main>
-    <!-- Sepera: Ejecución del juego (izquierda) <- I -> (Cards a la derecha) -->
+    <!-- Separa: Ejecución del juego (izquierda) <- I -> (Cards a la derecha) -->
     <div class="widthContainer">
 
         <!-- Ventana de ejecución del juego (Pantalla + Botonera) -->
@@ -55,7 +56,7 @@
             <!-- La Pantalla de juego -->
             <div class="gameScreen">
                 <img
-                        src="assets/img/peg-solitarie.jpg"
+                        src="assets/img/peg-solitarie.svg"
                         alt="Portada: Peg Solitaire Simpsons Edition"
                         class="gameCover"
                 >
@@ -110,7 +111,7 @@
         <!--Sección info del juego + Sección Comentarios -->
         <div>
             <!--Sección info del juego (contiene Descripción + Guía) -->
-            <section style="display: flex; flex-direction: column; gap: 5px">
+            <section class="columnFlex">
                 <!--Articulo descripción del juego-->
                 <article class="textContent">
                     <h3>PEG SOLITAIRE SIMPSONS EDITION</h3>
@@ -120,25 +121,31 @@
                         <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
                         <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
                         <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
-                        <img src="assets/icons/emptyStar.svg" alt="starIcon" style="margin: 0 10px 0 0"
-                             class="resizes"></img>
-                        <p class="metaText"> 9999999 me gusta</p>
+                        <img src="assets/icons/emptyStar.svg" alt="starIcon" class="resizes"></img>
+                        <p class="metaText likesValue"> 9999999 me gusta</p>
                     </div>
-                    <p>Pon a prueba tu ingenio en este clásico solitario de fichas, ahora con una divertida temática de Los Simpson. Mueve las piezas inspiradas en los personajes de Springfield y trata de dejar solo una en el tablero. ¡Un reto simple de aprender, pero difícil de dominar, con todo el humor amarillo de la familia más famosa de la TV!</p>
+                    <p>Pon a prueba tu ingenio en este clásico solitario de fichas, ahora con una divertida temática de
+                        Los Simpson. Mueve las piezas inspiradas en los personajes de Springfield y trata de dejar solo
+                        una en el tablero. ¡Un reto simple de aprender, pero difícil de dominar, con todo el humor
+                        amarillo de la familia más famosa de la TV!</p>
                 </article>
 
                 <!--Articulo guia de juego-->
                 <article class="textContent">
                     <h3>Instrucciones para jugar</h3>
-                    <p>Objetivo del juego:
-                        El objetivo es dejar una única ficha en el tablero, idealmente en el centro. Cuantas más fichas quites, mejor será tu puntuación.</p>
-                    <p>Cómo se juega:
-                        1. Realiza un movimiento: Un movimiento consiste en saltar con una ficha por encima de otra adyacente (horizontal o verticalmente, nunca en diagonal) y caer en un agujero vacío inmediatamente después.
+                    <p><span>Objetivo del juego:</span>
+                        El objetivo es dejar una única ficha en el tablero, idealmente en el centro. Cuantas más fichas
+                        quites, mejor será tu puntuación.</p>
+                    <p><span>Cómo se juega:</span>
+                        1. Realiza un movimiento: Un movimiento consiste en saltar con una ficha por encima de otra
+                        adyacente (horizontal o verticalmente, nunca en diagonal) y caer en un agujero vacío
+                        inmediatamente después.
                         2. Elimina la ficha: La ficha sobre la que has saltado es retirada del tablero.
-                        3. Repite: Sigue haciendo movimientos que sigan esta regla. Puedes hacer varios saltos en un solo turno si la posición lo permite.</p>
-                    <div class="doubleCenterFlex" style = "gap: 20px">
+                        3. Repite: Sigue haciendo movimientos que sigan esta regla. Puedes hacer varios saltos en un
+                        solo turno si la posición lo permite.</p>
+                    <div class="doubleCenterFlex" id="noPuedoCreerQueTengaQueHacerUnIdSoloPorEsto">
                         <p> Ejemplo:</p>
-                        <img src="assets/img/pegGuide.jpg" alt="guideGame"></img>
+                        <img src="assets/img/pegGuide.svg" alt="guideGame"></img>
                     </div>
                 </article>
             </section>
@@ -147,12 +154,13 @@
             <section>
                 <!-- Input para ingresar comentario -->
                 <h3>Deja tu comentario debajo!</h3>
-                <div class="textContent doubleCenterFlex commentInputContainer">
-                    <img src="assets/icons/user.svg" alt="userIcon" class="resizes"></img>
-                    <label for="comment">¿Que te parecio este juego?</label>
-                    <input type="text" id="comment" name="comment" class="resizes commentInput"
-                           placeholder="debería estar vacio">
-                    <button class="resizes">Comentar</button>
+                <div class="textContent commentInputContainer">
+                    <img src="assets/icons/user.svg" alt="userIcon" class="comentAvatarImg"></img>
+                    <form action="/comment" method="post" class="columnFlex">
+                        <label for="comment">¿Que te parecio este juego?</label>
+                        <input type="text" id="comment" name="comment" class="commentInput">
+                    </form>
+                    <button class="commentButton   ">Comentar</button>
                 </div>
 
                 <!--Comentarios publicados por la comunidad-->
@@ -160,15 +168,15 @@
                 <section class="textContent usersCommentsConteiner">
                     <article class="userCommentConteiner">
                         <!-- Perfil de usuario -->
-                        <div>
+                        <div class="profileConteiner">
                             <!-- Contenedor imagen de perfil -->
                             <div class="avatarCotainer">
-                                <img src="assets/img/userAvatar1.jpg" alt="userAvatar" class="resizes"></img></div>
+                                <img src="assets/img/userAvatar1.svg" alt="userAvatar" class="resizes"></img></div>
                             <!-- Informacion del usuario -->
-                            <p>Fulanito Chico</p>
+                            <p><span>Fulanito Chico</span></p>
                             <p class="metaText">Jugados: 518</p>
                         </div>
-                        <!--Califiacion de estrellas-->
+                        <!-- Contenedor comentario -->
                         <div>
                             <!-- Calificación de estrellas-->
                             <div class="gameQuality">
@@ -179,21 +187,19 @@
                                 <img src="assets/icons/emptyStar.svg" alt="starIcon" class="resizes"></img>
                             </div>
                             <p class="metaText">Septiembre 28, 2024</p>
-                            <br></br>
                             <p>¡Guau! Me pareció un desafío increíble. Al principio, pensé que era fácil, pero la
-                                estrategia de
-                                los movimientos es mucho más compleja de lo que parece. La verdad, me gusta que te hagan
-                                pensar.
-                                Me divertí un montón, aunque me frustré un poco en el nivel del "Día de los Muertos"
-                                porque no
-                                podía dejar a Homero solo en el centro. ¡Pura lógica! Un 10 de 10.</p>
+                                estrategia de los movimientos es mucho más compleja de lo que parece. La verdad, me
+                                gusta que te hagan pensar. Me divertí un montón, aunque me frustré un poco en el nivel
+                                del "Día de los Muertos" porque no podía dejar a Homero solo en el centro. ¡Pura lógica!
+                                Un 10 de 10.</p>
                         </div>
                     </article>
                     <article class="userCommentConteiner">
-                        <div>
-                            <div class="avatarCotainer"><img src="assets/img/userAvatar2.jpg" alt="userAvatar" class="resizes"></img></div>
-                            <p>Fulanito Chico</p>
-                            <p class="metaText">Jugados: 518</p>
+                        <div class="profileConteiner">
+                            <div class="avatarCotainer">
+                                <img src="assets/img/userAvatar2.svg" alt="userAvatar" class="resizes"></img></div>
+                            <p><span>Pocoveo Casimiro</span></p>
+                            <p class="metaText">Jugados: -1</p>
                         </div>
                         <div>
                             <!-- Calificación de estrellas-->
@@ -205,7 +211,6 @@
                                 <img src="assets/icons/emptyStar.svg" alt="starIcon" class="resizes"></img>
                             </div>
                             <p class="metaText"> Octubre 12, 2025</p>
-                            <br></br>
                             <p>¡ME ENCANTA! Es el mejor juego que he probado en mucho tiempo. Los personajes son súper
                                 graciosos, y ver cómo Marge, Lisa y los demás desaparecen cuando los saltas es muy
                                 divertido. Mi
@@ -215,10 +220,12 @@
                         </div>
                     </article>
                     <article class="userCommentConteiner">
-                        <div>
-                            <div class="avatarCotainer"><img src="assets/img/userAvatar3.jpg" alt="userAvatar" class="resizes"></img></div>
-                            <p>Fulanito Chico</p>
-                            <p class="metaText">Jugados: 518</p>
+                        <div class="profileConteiner">
+                            <div class="avatarCotainer">
+                                <img src="assets/img/userAvatar3.svg" alt="userAvatar"
+                                     class="resizes"></img></div>
+                            <p><span>Changuchito Kid Ultra Combo Turbo FX Max Experience</span></p>
+                            <p class="metaText">Jugados: 01001101</p>
                         </div>
                         <div>
                             <!-- Calificación de estrellas-->
@@ -229,8 +236,7 @@
                                 <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
                                 <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
                             </div>
-                            <p class="metaText"> Septiembre 11, 2001</p>
-                            <br></br>
+                            <p class="metaText"> Diciembre 31, 1999</p>
                             <p>¡¡¡¡¡ES INCREÍBLEEEEE!!!! Me re vició. Jugué como 10 veces seguidas y no me cansé. Cuando
                                 logré
                                 dejar a Homero solo al final, ¡sentí que había ganado la lotería! Se lo recomendé a mi
@@ -239,12 +245,39 @@
                         </div>
                     </article>
                     <article class="userCommentConteiner">
-                        <div>
-                            <div class="avatarCotainer"><img src="assets/img/userAvatar4.jpg" alt="userAvatar" class="resizes"></img></div>
-                            <p>Fulanito Chico</p>
-                            <p class="metaText">Jugados: 518</p>
+                        <div class="profileConteiner">
+                            <div class="avatarCotainer">
+                                <img src="assets/img/userAvatar2.svg" alt="userAvatar" class="resizes"></img></div>
+                            <p><span>Pocoveo Casimiro</span></p>
+                            <p class="metaText">Jugados: -1</p>
                         </div>
-                        <div class = "textContent">
+                        <div>
+                            <!-- Calificación de estrellas-->
+                            <div class="gameQuality">
+                                <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
+                                <img src="assets/icons/emptyStar.svg" alt="starIcon" class="resizes"></img>
+                            </div>
+                            <p class="metaText"> Octubre 12, 2025</p>
+                            <p>¡ME ENCANTA! Es el mejor juego que he probado en mucho tiempo. Los personajes son súper
+                                graciosos, y ver cómo Marge, Lisa y los demás desaparecen cuando los saltas es muy
+                                divertido. Mi
+                                parte favorita fue cuando apareció el Abuelo Simpson. Ojalá hubiera más niveles con
+                                Burns o
+                                Krusty. ¡Quiero que hagan uno igual pero con la familia de Ned Flanders!</p>
+                        </div>
+                    </article>
+                    </article>
+                    <article class="userCommentConteiner">
+                        <div class="profileConteiner">
+                            <div class="avatarCotainer"><img src="assets/img/userAvatar4.svg" alt="userAvatar"
+                                                             class="resizes"></img></div>
+                            <p><span>Soledad Resola</span></p>
+                            <p class="metaText">Jugados: 1/2</p>
+                        </div>
+                        <div>
                             <!-- Calificación de estrellas-->
                             <div class="gameQuality">
                                 <img src="assets/icons/star.svg" alt="starIcon" class="resizes"></img>
@@ -254,8 +287,10 @@
                                 <img src="assets/icons/emptyStar.svg" alt="starIcon" class="resizes"></img>
                             </div>
                             <p class="metaText">Abril 44, 2026</p>
-                            <br></br>
-                            <p>Uhm... me pareció un poco aburrido. No sé, no tiene acción. Yo prefiero los juegos donde tienes que saltar, correr o lanzar cosas. Me gusta que sea de Los Simpson, pero los muñecos no se mueven ni hacen ruidos. Me gustó la música, pero me quedé dormido a la mitad. Le doy un 1, solo porque es de Los Simpson.</p>
+                            <p>Uhm... me pareció un poco aburrido. No sé, no tiene acción. Yo prefiero los juegos donde
+                                tienes que saltar, correr o lanzar cosas. Me gusta que sea de Los Simpson, pero los
+                                muñecos no se mueven ni hacen ruidos. Me gustó la música, pero me quedé dormido a la
+                                mitad. Le doy un 1, solo porque es de Los Simpson.</p>
                         </div>
                     </article>
 
@@ -289,40 +324,40 @@
 
 
 <footer>
-    <section class="content-links" style="margin: 100px 0 0 0;">
+    <section class="content-links">
+        <nav>
+            <h2>Mi sitio</h2>
+            <ul class="footerNav">
+                <li class="sacaLosPuntitos"><a href="index.html">Mi Perfil</a></li>
+                <li class="sacaLosPuntitos"><a href="index.html">Mis preferencias de notificaciones</a></li>
+                <li class="sacaLosPuntitos"><a href="index.html">Mis preferencias de cuenta</a></li>
+                <li class="sacaLosPuntitos"><a href="index.html">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
 
-        <div class="link">
-            <div class="">
-                <h2>Mi sitio</h2>
-
-                <a href="">Mi Perfil</a>
-                <a href=""><h4>Mis preferencias de notificaciones</h4></a>
-                <a href=""><h4>Mis preferencias de cuenta</h4></a>
-                <a href=""><h4>Cerrar Sesion</h4></a>
-            </div>
-
-            <div class="">
+        <nav>
+            <ul>
                 <h2>Link del sitio</h2>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="index.html">Privacidad y seguridad</a></li>
+                <li><a href="index.html">Privacidad y seguridad</a></li>
+                <li><a href="index.html">Ayuda</a></li>
+                <li><a href="index.html">Desarrolladores</a></li>
+                <li><a href="index.html">Publicidad</a></li>
+                <li><a href="index.html">Condiciones</a></li>
+            </ul>
+        </nav>
 
-                <a href=""><h4>Inicio</h4></a>
-                <a href=""><h4>Privacidad y seguridad</h4></a>
-                <a href=""><h4>Privacidad y seguridad</h4></a>
-                <a href=""><h4>Ayuda</h4></a>
-                <a href=""><h4>Desarrolladores</h4></a>
-                <a href=""><h4>Publicidad</h4></a>
-                <a href=""><h4>Condiciones</h4></a>
-            </div>
-
-            <div class="">
+        <nav>
+            <ul>
                 <h2>Ayuda y Soporte</h2>
-
-                <a href=""><h4>Preguntas fercuentes</h4></a>
-                <a href=""><h4>Formas de uso</h4></a>
-                <a href=""><h4>Enviar comentarios</h4></a>
-                <a href=""><h4>Mapa del sitio completo</h4></a>
-                <a href=""><h4>Informacion del copyright</h4></a>
-            </div>
-        </div>
+                <li><a href="index.html">Preguntas frecuentes</a></li>
+                <li><a href="index.html">Formas de uso</a></li>
+                <li><a href="index.html">Enviar comentarios</a></li>
+                <li><a href="index.html">Mapa del sitio completo</a></li>
+                <li><a href="index.html">Información del copyright</a></li>
+            </ul>
+        </nav>
 
         <div class="description">
             <div>
@@ -337,20 +372,19 @@
                 ¡Todos los juegos gratis y sin descargar!
             </p>
 
-            <h5>Compartir en...</h5>
+            <h5>Comparte en</h5>
             <div class="networks">
                 <img src="assets/icons/facebook.svg" alt="facebook">
                 <img src="assets/icons/instagram.svg" alt="instagram">
                 <img src="assets/icons/twitter.svg" alt="twitter">
             </div>
-
         </div>
 
         <button>Boton llevar hasta arriba</button>
     </section>
 
     <section class="copyright">
-        <p>© 2025 derechos reservados Games Toons!</p>
+        <p>© 2025 derechos reservados Games Toons</p>
     </section>
 
 </footer>
