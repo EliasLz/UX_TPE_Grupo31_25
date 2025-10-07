@@ -35,13 +35,11 @@
 
 .game-card-overlay {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)); 
-    padding: 15px 5px 5px 5px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    inset: 0;
+    display: block;
+    padding: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    transition: 0.25s ease;
 }
 
 .carousel-track {
@@ -99,7 +97,6 @@
 .carousel-btn-prev { left: 8px; }
 .carousel-btn-next { right: 8px; }
 
-/* Hacer que el scroll sea suave por defecto */
 .carousel-track {
     scroll-behavior: smooth;
 }
@@ -115,9 +112,14 @@
     border: 1px solid #e0d9d0;
     transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out;
     cursor: pointer;
+    
 }
 
 .game-card-overlay .game-card-title {
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    bottom: 10px;
     font-size: 0.9em;
     font-weight: 700;
     color: #ffffff;
@@ -126,5 +128,61 @@
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis; 
+    transition: transform 0.35s cubic-bezier(.2,.8,.2,1), opacity 0.2s;
+    transform: translateY(0);
+    z-index: 5;
+}
+
+.game-card-overlay::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 36px);
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 14px solid var(--color-secundarioDorado-200);
+    opacity: 0;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+    z-index: 6;
+}
+
+.game-card-overlay::after {
+    content: 'JUGAR';
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 8px);
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    opacity: 0;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+    z-index: 6;
+}
+
+.game-card:hover .game-card-overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.75), rgba(0,0,0,0.25));
+}
+
+.game-card:hover .game-card-overlay .game-card-title {
+    transform: translateY(-60px);
+}
+
+.game-card:hover .game-card-overlay::before {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+.game-card:hover .game-card-overlay::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
 }
 
