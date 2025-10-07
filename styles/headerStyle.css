@@ -30,12 +30,13 @@ form{
 .logo-menu{
     display: flex;
     align-items: center;
-    width: 200px;
-    gap: 150px;
+    gap: 15px;
 }
+
 form input{
     margin: 0;
 }
+
 .logo-menu .logo{
     height: 70px;
     width: 100%;
