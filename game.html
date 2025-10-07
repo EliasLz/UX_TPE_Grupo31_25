@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/globals.css">
     <link rel="stylesheet" href="styles/game.css">
     <link rel="stylesheet" href="styles/footerStyle.css">
@@ -13,26 +15,7 @@
 
 <body>
 
-<header>
-    <div class="logo-menu">
-        <img src="assets/icons/menuHamburguesa.svg" alt="Menu Hamburguesa">
-        <img class="logo" src="assets/Logo2.svg" alt="Logo">
-    </div>
-
-    <form>
-        <input type="text" id="searchInput" name="search" placeholder="Buscar Juego" autocomplete="off">
-
-        <button type="submit" class="search-icon">
-            <img src="assets/icons/lupa.svg" alt="buscar">
-        </button>
-    </form>
-
-    <div>
-        <button>
-            <img src="assets/icons/Mexico.svg" alt="Seleccionar idioma">
-        </button>
-    </div>
-</header>
+    <div id="header"></div>
 
 <!-- El Header -->
 <!--<div id="header"></div>-->
@@ -136,7 +119,7 @@
                 <!--Articulo guia de juego-->
                 <article class="textContent">
                     <h3>Instrucciones para jugar</h3>
-                    <p>Objetivo del juego:
+                    <p><span>Objetivo del juego:</span>
                         El objetivo es dejar una única ficha en el tablero, idealmente en el centro. Cuantas más fichas
                         quites,
                         mejor será tu puntuación.</p>
@@ -160,11 +143,13 @@
             <section>
                 <!-- Input para ingresar compentario -->
                 <h3>Deja tu comentario debajo!</h3>
-                <div class="textContent doubleCenterFlex commentInputContainer">
+                <div class="textContent commentInputContainer">
                     <img src="assets/icons/user.svg" alt="userIcon" class="resizes"></img>
-                    <label for="comment">¿Que te parecio este juego?</label>
-                    <input type="text" id="comment" name="comment" class="resizes commentInput"
-                           placeholder="debería estar vacio">
+                    <div class="containerComment">
+                        <label for="comment">¿Que te parecio este juego?</label>
+                        <input type="text" id="comment" name="comment" class="resizes commentInput"
+                               placeholder="debería estar vacio">
+                    </div>
                     <button class="resizes">Comentar</button>
                 </div>
 
@@ -310,73 +295,11 @@
 <!--</script>-->
 
 
-<footer>
-    <section class="content-links" style="margin: 100px 0 0 0;">
+    <div id="footer"></div>
 
-        <div class="link">
-            <div class="">
-                <h2>Mi sitio</h2>
-
-                <a href="">Mi Perfil</a>
-                <a href=""><h4>Mis preferencias de notificaciones</h4></a>
-                <a href=""><h4>Mis preferencias de cuenta</h4></a>
-                <a href=""><h4>Cerrar Sesion</h4></a>
-            </div>
-
-            <div class="">
-                <h2>Link del sitio</h2>
-
-                <a href=""><h4>Inicio</h4></a>
-                <a href=""><h4>Privacidad y seguridad</h4></a>
-                <a href=""><h4>Privacidad y seguridad</h4></a>
-                <a href=""><h4>Ayuda</h4></a>
-                <a href=""><h4>Desarrolladores</h4></a>
-                <a href=""><h4>Publicidad</h4></a>
-                <a href=""><h4>Condiciones</h4></a>
-            </div>
-
-            <div class="">
-                <h2>Ayuda y Soporte</h2>
-
-                <a href=""><h4>Preguntas fercuentes</h4></a>
-                <a href=""><h4>Formas de uso</h4></a>
-                <a href=""><h4>Enviar comentarios</h4></a>
-                <a href=""><h4>Mapa del sitio completo</h4></a>
-                <a href=""><h4>Informacion del copyright</h4></a>
-            </div>
-        </div>
-
-        <div class="description">
-            <div>
-                <img src="assets/Logo3.svg" alt="Logo de pagina">
-            </div>
-
-            <p>¡Olvídate del aburrimiento con Games Toons! La mayor selección de juegos gratis está aquí,
-                para que lleves la diversión al siguiente nivel. Juega online y sin preocupaciones: puedes
-                jugar a todos nuestros juegos sin descargar. ¡Pero cuidado! Nuestros juegos de accion solo
-                son aptos para los más atrevidos; competirás con grandes pilotos en nuestros juegos de carreras;
-                podrás poner a prueba al estratega que llevas dentro en todos nuestros juegos de estrategia
-                ¡Todos los juegos gratis y sin descargar!
-            </p>
-
-            <h5>Compartir en...</h5>
-            <div class="networks">
-                <img src="assets/icons/facebook.svg" alt="facebook">
-                <img src="assets/icons/instagram.svg" alt="instagram">
-                <img src="assets/icons/twitter.svg" alt="twitter">
-            </div>
-
-        </div>
-
-        <button>Boton llevar hasta arriba</button>
-    </section>
-
-    <section class="copyright">
-        <p>© 2025 derechos reservados Games Toons!</p>
-    </section>
-
-</footer>
-
+    <script type="module" src="js/main.js">
+        //Cargamos el script como un modulo
+    </script>
 
 </body>
 </html>
