@@ -27,7 +27,7 @@ export function loadComponent(urlComponent, idDestination) {
 //Funcion para crear las cards de los juegos de forma dinamica.
 function createGameCard(game) {
     return `
-        <div class="game-card">
+        <div class="game-card" data-game-id="${game.id}">
             <div class="game-card-image-container">
                 <img 
                     src="${game.background_image_low_res}" 
@@ -44,7 +44,7 @@ function createGameCard(game) {
 
 function createRecommendedCard(game) {
     return `
-        <div class="recommended-card">
+        <div class="recommended-card" data-game-id="${game.id}">
             <div class="game-card-image-container">
                 <img 
                     src="${game.background_image_low_res}" 
@@ -58,7 +58,6 @@ function createRecommendedCard(game) {
         </div>
     `;
 }
-
 
 //Funcion para seleccionar los juegos recomendados.
 function selectRecommendedGames(games) {
@@ -116,8 +115,10 @@ async function renderRecommended() {
             container.insertAdjacentHTML('beforeend', cardHTML);
         });
 
-        // Inicializar comportamiento de carrusel (botones + desplazamiento por secciones)
-        initCarousel(container);
+    // Inicializar comportamiento de carrusel (botones + desplazamiento por secciones)
+    initCarousel(container);
+    // Adjuntar manejador de clicks en las cards
+    attachCardClickHandlers(container);
 
     } catch (error) {
         console.error('Error al renderizar los recomendados:', error);
@@ -241,6 +242,9 @@ function setupTrackControls(track) {
     
     // Mostrar botones solo al hover del wrapper
     wrapper.classList.add('carousel-hoverable');
+
+    // Adjuntar manejador de clicks para navegar a game.html si es id=1
+    attachCardClickHandlers(track);
     
     // Manejador de desplazamiento por secciones
     const updateSize = () => {
@@ -277,7 +281,6 @@ function setupTrackControls(track) {
     btnPrev.addEventListener('click', () => scrollBySection('prev'));
 
     
-    // Optional: hide prev when at start and hide next at end
     const updateButtons = () => {
         btnPrev.disabled = track.scrollLeft <= 0 + 1;
         btnNext.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
@@ -287,8 +290,31 @@ function setupTrackControls(track) {
         updateButtons();
     });
     
-    // Initial state
     setTimeout(updateButtons, 50);
+}
+
+// Detectar clicks en .game-card o .recommended-card
+function attachCardClickHandlers(container) {
+    if (!container) return;
+    // Evitar adjuntar múltiples veces
+    if (container.dataset.cardHandler === 'true') return;
+    container.dataset.cardHandler = 'true';
+
+    container.addEventListener('click', (e) => {
+        // Buscamos data-game-id
+        let el = e.target;
+        while (el && el !== container) {
+            if (el.dataset && el.dataset.gameId) {
+                const id = el.dataset.gameId;
+                if (id === '1' || id === 1) {
+                    // Redirigir a game.html (puedes agregar query string si necesitas identificar el juego)
+                    window.location.href = 'game.html';
+                }
+                return;
+            }
+            el = el.parentNode;
+        }
+    });
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{
