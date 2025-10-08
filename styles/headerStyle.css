@@ -91,43 +91,29 @@ form input{
     align-items: center;
     padding: 0 10px 20px;
     color: white;
-    position: relative; /* Para el z-index */
-    z-index: 1001; /* Asegura que esté por encima de todo */
+    position: relative; 
+    z-index: 1001; 
     width: max-content;
 
-    /*-----------------------------------------------------------------------------------------------------------------------------*/
-    position: absolute; /* CLAVE: Posicionado relativo al body o header */
-    top: 63px; /* Colócalo justo debajo del header (header tiene height: 63px) */
-    left: 0; /* Alineado a la izquierda */
-    
-    max-height: 0; /* ¡CLAVE! Oculto por defecto con altura 0 */
-    overflow: hidden; /* Oculta el contenido cuando la altura es 0 */
-    
-    transition: max-height 0.4s ease-in-out; /* Transición para el efecto de despliegue */
-    
-    /* Estilos de Contenido */
+    position: absolute; 
+    top: 63px;
+    left: 0; 
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.8s ease-in-out;
     display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
-    
-    /* Usar 100% de ancho o un valor específico */
-    width: 300px; /* Definimos un ancho fijo para el menú */
-    
-    /* Aseguramos que el menú se muestre sobre el contenido */
+    width: 300px;
     z-index: 1000; 
-    
-    /* Nota: Se ha quitado el padding superior/inferior para que la transición de altura se vea limpia */
     padding: 0 0 0 0; 
 }
 
-/* CLASE QUE JavaScript AÑADIRÁ PARA MOSTRAR EL MENÚ */
 .menu.active {
-    max-height: 1000px; /* Valor grande que exceda la altura máxima del menú. */
-    /* Aquí podrías volver a poner el padding vertical si es necesario, si lo habías quitado */
+    max-height: max-content;
     padding-bottom: 20px;
 }
-    /*-----------------------------------------------------------------------------------------------------------------------------*/
 
 
 .user{
