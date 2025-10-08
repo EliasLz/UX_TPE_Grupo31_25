@@ -1,0 +1,104 @@
+/* Responsive styles específicos para index.html */
+
+/* Mobile: up to 480px */
+@media (max-width: 480px) {
+  .main-content {
+    margin: 0 12px;
+  }
+
+  .recommended {
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-top: 18px;
+  }
+
+  .card-container {
+    gap: 10px;
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+
+  .recommended-card {
+    min-width: 200px;
+    border-radius: 10px;
+  }
+
+  .game-card {
+    width: 100px;
+  }
+
+  .game-card .game-card-image-container {
+    height: 72px;
+  }
+
+  .carousel-btn {
+    display: none; /* ocultar flechas en móvil; el usuario puede deslizar con touch */
+  }
+
+  /* Ocultar logo en el header en pantallas pequeñas */
+  header .logo { display: none !important; }
+
+  .ads-card {
+    width: 200px;
+  }
+
+  .ads-card-image-wrapper {
+    height: 140px;
+  }
+
+  h2 { font-size: 1.2rem; }
+  body { background-size: 140%; }
+}
+
+/* Tablet: 481px - 1024px */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .main-content {
+    margin: 0 24px;
+  }
+
+  .recommended {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .card-container {
+    gap: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .recommended-card {
+    min-width: 240px;
+  }
+
+  .game-card {
+    width: 120px;
+  }
+
+  .game-card .game-card-image-container {
+    height: 90px;
+  }
+
+  .carousel-btn { width: 32px; height: 32px; }
+
+  .ads-card { width: 240px; }
+  .ads-card-image-wrapper { height: 160px; }
+
+  h2 { font-size: 1.35rem; }
+}
+
+/* Desktop: 1025px and up (small adjustments) */
+@media (min-width: 1025px) {
+  .main-content { margin: 0 50px; }
+  .recommended-card { min-width: 280px; }
+  .game-card { width: 130px; }
+  .ads-card { width: 280px; }
+}
+
+/* Accessibility: respect reduce-motion on index too */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track, .card-container, .ads-auto-wrap {
+    scroll-behavior: auto !important;
+    animation: none !important;
+  }
+}
