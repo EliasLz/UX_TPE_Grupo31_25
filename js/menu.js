@@ -4,8 +4,8 @@ export function mainHamburguer(){
 
         function toggleMenu() {
             sideMenu.classList.toggle('active');
-        }       
-        // 3. Agregar el Event Listener al botón de hamburguesa
+        }
+        
         menuToggle.addEventListener('click', (event) => {
             // Evita que el clic se propague al documento inmediatamente
             event.stopPropagation(); 
