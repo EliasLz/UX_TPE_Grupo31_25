@@ -6,6 +6,10 @@ header{
     background-color: var(--color-secundarioDorado-300);
     height: 63px;
     padding: 0 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    z-index: 1002;
+
+    position: relative; 
 }
 
 button{
@@ -79,3 +83,132 @@ form input{
 }
 
 
+/*Menu hamburguesa*/
+.menu{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    padding: 0 10px 20px;
+    color: white;
+    position: relative; /* Para el z-index */
+    z-index: 1001; /* Asegura que esté por encima de todo */
+    width: max-content;
+
+    /*-----------------------------------------------------------------------------------------------------------------------------*/
+    position: absolute; /* CLAVE: Posicionado relativo al body o header */
+    top: 63px; /* Colócalo justo debajo del header (header tiene height: 63px) */
+    left: 0; /* Alineado a la izquierda */
+    
+    max-height: 0; /* ¡CLAVE! Oculto por defecto con altura 0 */
+    overflow: hidden; /* Oculta el contenido cuando la altura es 0 */
+    
+    transition: max-height 0.4s ease-in-out; /* Transición para el efecto de despliegue */
+    
+    /* Estilos de Contenido */
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    
+    /* Usar 100% de ancho o un valor específico */
+    width: 300px; /* Definimos un ancho fijo para el menú */
+    
+    /* Aseguramos que el menú se muestre sobre el contenido */
+    z-index: 1000; 
+    
+    /* Nota: Se ha quitado el padding superior/inferior para que la transición de altura se vea limpia */
+    padding: 0 0 0 0; 
+}
+
+/* CLASE QUE JavaScript AÑADIRÁ PARA MOSTRAR EL MENÚ */
+.menu.active {
+    max-height: 1000px; /* Valor grande que exceda la altura máxima del menú. */
+    /* Aquí podrías volver a poner el padding vertical si es necesario, si lo habías quitado */
+    padding-bottom: 20px;
+}
+    /*-----------------------------------------------------------------------------------------------------------------------------*/
+
+
+.user{
+    background-color: var(--color-secundarioDorado-300);
+    border-radius: 0 0 25px 25px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    border-radius: 0 0 25px 25px; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+}
+
+
+.card-user{
+    display: block;
+    z-index: 1;
+    
+}
+.card-user h3{
+    margin: 0;
+}
+
+.user-logo{
+    height: 75px;
+    padding-top: 15px;
+} 
+
+.info-user{
+    background-color: var(--color-secundarioDorado-400);
+    margin: 0 10px 3px 10px;
+    border-radius: 25px 25px 0 0;
+}
+
+.config-menu{
+    background-color: var(--color-secundarioDorado-400);
+    margin: 0 10px 5px 10px;
+    border-radius:  0 0 25px 25px;
+    padding: 20px;
+}
+
+.config-menu ul{
+    text-align: left;
+    padding-top: 10px;
+}
+
+.user-vip{
+    display: flex;
+    justify-content: center;
+    width: max-content;
+    background-color: var(--color-texto-400);
+    border-radius: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+.user-vip p{
+    font-size: var(--tamano-titulo-sm);
+    color: var(--color-secundarioDorado-400);
+    margin: 5px 15px;
+    cursor: pointer;
+}
+
+.networks-menu ul{
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 10px;
+    padding-left: 0;
+}
+
+.category{
+    background-color: var(--color-secundarioDorado-400);
+    border-radius: 0 0 50px 50px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    padding: 0 10% 10% 10%;
+    z-index: -1;
+}
+
+.tittle-category{
+    background-color: var(--color-baseFondo-200);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 60px;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    cursor: pointer;
+}
