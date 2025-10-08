@@ -1,9 +1,11 @@
 import { fetchGames } from "./fetchApi.js";
 import {simulateProgress} from "./spiner.js";
+import { mainHamburguer } from "./menu.js";
 
 // Función para cargar un componente dinámicamente.
 export function loadComponent(urlComponent, idDestination) {
-    fetch(urlComponent) //--> Ruta del componente que queremos cargar
+    // Devolver la promise para permitir esperar la carga desde quien llame
+    return fetch(urlComponent) //--> Ruta del componente que queremos cargar
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error al cargar el componente: ${response.statusText}`);
@@ -449,10 +451,11 @@ function initAdsAutoScroll() {
 // usamos timeout corto para dar tiempo a que el DOM esté completamente renderizado
 setTimeout(() => initAdsAutoScroll(), 200);
 
-document.addEventListener('DOMContentLoaded', ()=>{
+document.addEventListener('DOMContentLoaded', async ()=>{
         simulateProgress();
-        loadComponent('components/header.html', 'header');
-        loadComponent('components/footer.html', 'footer');
+        await loadComponent('components/header.html', 'header');
+        await loadComponent('components/footer.html', 'footer');
         renderCategories();
         renderRecommended();
+        mainHamburguer();
     })
