@@ -4,7 +4,8 @@ export function mainHamburguer(){
 
         function toggleMenu() {
             sideMenu.classList.toggle('active');
-        }       
+        }
+        
         menuToggle.addEventListener('click', (event) => {
             event.stopPropagation(); 
             toggleMenu();
