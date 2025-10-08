@@ -102,7 +102,7 @@ async function renderRecommended() {
     try {
         const games = await fetchGames(); 
         
-        // Seleccionamos los 3 juegos recomendados con la lógica especial
+        // Seleccionamos los 3 juegos recomendados.
         const recommendedGames = selectRecommendedGames(games);
 
         if (recommendedGames.length === 0) {
@@ -115,9 +115,7 @@ async function renderRecommended() {
             container.insertAdjacentHTML('beforeend', cardHTML);
         });
 
-    // Inicializar comportamiento de carrusel (botones + desplazamiento por secciones)
     initCarousel(container);
-    // Adjuntar manejador de clicks en las cards
     attachCardClickHandlers(container);
 
     } catch (error) {
@@ -271,12 +269,28 @@ function setupTrackControls(track) {
         updateSize();
     });
     
+    // Aplica skew a todas las cards del track antes de desplazar y lo remueve después
+    const applySkewToAll = (dir) => {
+        const cards = Array.from(track.querySelectorAll('.game-card, .recommended-card'));
+        if (!cards.length) return;
+
+        const cls = dir === 'next' ? 'skew-x-next' : 'skew-x-prev';
+        cards.forEach(c => c.classList.add(cls));
+
+        const removeAfter = 340; // ms (debe coincidir con la transición en CSS)
+        setTimeout(() => {
+            cards.forEach(c => c.classList.remove(cls));
+        }, removeAfter + 20);
+    };
+
     const scrollBySection = (direction) => {
         const step = track._cardWidth * track._visibleCount;
         const newPos = track.scrollLeft + (direction === 'next' ? step : -step);
+        // aplicar skew a todo el track
+        applySkewToAll(direction);
         track.scrollTo({ left: newPos, behavior: 'smooth' });
     };
-    
+
     btnNext.addEventListener('click', () => scrollBySection('next'));
     btnPrev.addEventListener('click', () => scrollBySection('prev'));
 
@@ -346,7 +360,7 @@ function initAdsAutoScroll() {
         inner.appendChild(item);
     });
     
-    // Clonar individualmente los items y añadirlos al final para crear el loop (evita anidamientos)
+    // Clonar individualmente los items y añadirlos al final para crear el loop
     originalItems.forEach(item => {
         const clone = item.cloneNode(true);
         inner.appendChild(clone);
