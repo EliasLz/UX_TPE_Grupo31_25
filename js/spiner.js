@@ -8,6 +8,12 @@ const totalSteps = DURATION / INTERVAL;
 let currentStep = 0;
 
 export function simulateProgress() {
+    const currentPage = window.location.pathname
+
+    if(currentPage === '/game.html'){
+        return;
+    }
+
     const interval = setInterval(() => {
         currentStep++;
 
