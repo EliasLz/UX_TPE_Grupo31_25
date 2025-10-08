@@ -61,16 +61,18 @@
 
 .recommended-card .game-card-overlay {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)); 
-    padding: 15px 5px 5px 5px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    inset: 0;
+    display: block;
+    padding: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
+    transition: background 0.25s ease;
 }
 
 .recommended-card .game-card-title {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 16px; /* posición inicial */
     font-size: 1.1em;
     font-weight: 700;
     color: #ffffff;
@@ -79,4 +81,62 @@
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: transform 0.35s cubic-bezier(.2,.8,.2,1), opacity 0.2s;
+    transform: translateY(0);
+    z-index: 5;
+}
+
+
+.recommended-card .game-card-overlay::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 40px);
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 16px solid var(--color-secundarioDorado-200);
+    opacity: 0;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+    z-index: 6;
+}
+
+.recommended-card .game-card-overlay::after {
+    content: 'JUGAR';
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 8px);
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 1rem;
+    opacity: 0;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+    z-index: 6;
+}
+
+.recommended-card:hover .game-card-overlay {
+    transition-delay: 0.4s;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.75), rgba(0,0,0,0.25));
+}
+
+.recommended-card:hover .game-card-overlay .game-card-title {
+    transform: translateY(-165px);
+}
+
+.recommended-card:hover .game-card-overlay::before {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+.recommended-card:hover .game-card-overlay::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
 }
