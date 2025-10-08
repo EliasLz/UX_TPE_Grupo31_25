@@ -63,7 +63,7 @@ form input{
     background-color: var(--color-secundarioDorado-300);
     line-height: 0;
 }
-
+/* tiene este nombre feo porque si lo combio deja de funcionar. Sí, no tiene sentido, pero es así */
 .sesss{
     align-items: center;
     position: absolute;
@@ -78,7 +78,7 @@ form input{
 
 }
 .languageImg img {
-    height: 55px;
+    height: 40px;
     width: auto;
 }
 

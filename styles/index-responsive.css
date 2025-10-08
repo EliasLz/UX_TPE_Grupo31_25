@@ -1,0 +1,105 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Mobile: up to 480px */
+@media (max-width: 480px) {
+    .main-content {
+        margin: 0;
+        padding: 0 8px;
+    }
+
+    .recommended {
+        padding: 0 8px;
+        margin-top: 12px;
+    }
+
+    .card-container {
+        gap: 8px;
+        padding: 0 4px;
+    }
+
+    .recommended-card {
+        min-width: 180px;
+        border-radius: 10px;
+    }
+
+    .game-card {
+        width: 90px;
+    }
+
+    .game-card .game-card-image-container {
+        height: 64px;
+    }
+
+    .carousel-btn {
+        display: none; 
+    }
+
+    header .logo { display: none !important; }
+
+    .ads-card {
+        width: 180px;
+    }
+
+    .ads-card-image-wrapper {
+        height: 120px;
+    }
+
+    h2 { font-size: 1.1rem; }
+    body { background-size: 120%; }
+}
+
+/* Tablet: 481px - 1024px */
+@media (min-width: 481px) and (max-width: 1024px) {
+    .main-content {
+        margin: 0;
+        padding: 0 16px;
+    }
+
+    .recommended {
+        padding: 0 12px;
+    }
+
+    .card-container {
+        gap: 10px;
+        padding: 0 6px;
+    }
+
+    .recommended-card {
+        min-width: 200px;
+    }
+
+    .game-card {
+        width: 110px;
+    }
+
+    .game-card .game-card-image-container {
+        height: 80px;
+    }
+
+    .carousel-btn { width: 28px; height: 28px; }
+
+    .ads-card { width: 200px; }
+    .ads-card-image-wrapper { height: 140px; }
+
+    h2 { font-size: 1.2rem; }
+}
+
+/* Desktop: 1025px and up */
+@media (min-width: 1025px) {
+    .main-content { margin: 0; padding: 0 32px; }
+    .recommended-card { min-width: 240px; }
+    .game-card { width: 120px; }
+    .ads-card { width: 240px; }
+}
+
+/* Accessibility: respect reduce-motion on index too */
+@media (prefers-reduced-motion: reduce) {
+    .carousel-track, .card-container, .ads-auto-wrap {
+        scroll-behavior: auto !important;
+        animation: none !important;
+    }
+}
