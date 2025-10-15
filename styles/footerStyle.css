@@ -2,7 +2,6 @@ footer{
     display : flex;
     flex-direction: column;
     margin-top: 100px;
-
 }
 
 .content-links{
@@ -10,14 +9,13 @@ footer{
     position: relative;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
 }
 
 footer ul{
     list-style: none;
     width: auto;
-
 }
 
 .description{
@@ -47,13 +45,23 @@ footer a img {
 }
 
 .backTopButton{
+    margin-left: 5px;
     padding: 0;
     border: none;
     background: none;
-    width: fit-content;
     height: fit-content;
     padding-top: 40px;
 
+}
+
+#toTop img{
+    border-radius: 30px 0 0 30px;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.1s ease-out;    
+}
+#toTop img:hover {
+    box-shadow: 0 7px 12px rgba(0, 0, 0, 0.5);
 }
 
 .copyright{
@@ -61,3 +69,6 @@ footer a img {
     justify-items: center;
 }
 
+.footerNav{
+    margin: 0 10px;
+}

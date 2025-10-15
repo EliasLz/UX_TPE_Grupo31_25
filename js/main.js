@@ -26,6 +26,20 @@ export function loadComponent(urlComponent, idDestination) {
         });
 }
 
+//Funcion para agregar el evento de ir al tope de la pagina con el boton del footer.
+function initializeBackToTopButton(){
+    const toTopBotton = document.getElementById('toTop');
+    if(!toTopBotton) return;
+
+    toTopBotton.addEventListener('click', (event) => {
+        window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    })
+    });
+}
+
+
 //Funcion para crear las cards de los juegos de forma dinamica.
 function createGameCard(game) {
     return `
@@ -457,5 +471,6 @@ document.addEventListener('DOMContentLoaded', async ()=>{
         await loadComponent('components/footer.html', 'footer');
         renderCategories();
         renderRecommended();
+        initializeBackToTopButton();
         mainHamburguer();
     })
