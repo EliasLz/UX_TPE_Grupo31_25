@@ -466,11 +466,10 @@ function initAdsAutoScroll() {
 setTimeout(() => initAdsAutoScroll(), 200);
 
 document.addEventListener('DOMContentLoaded', async ()=>{
-        simulateProgress();
-        await loadComponent('components/header.html', 'header');
-        await loadComponent('components/footer.html', 'footer');
-        renderCategories();
-        renderRecommended();
-        initializeBackToTopButton();
-        mainHamburguer();
-    })
+    simulateProgress();
+    await loadComponent('components/header.html', 'header');
+    await loadComponent('components/footer.html', 'footer');
+    renderCategories();
+    renderRecommended();
+    mainHamburguer();
+})
