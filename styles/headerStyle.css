@@ -203,8 +203,12 @@ ul li:hover{
     background-color: #a14f18;
     border-radius: 30px;
 }
+
+#menuToggle{
+    padding: 5px;
+}
+
 #menuToggle:hover{
     background-color: #c5712d;
-    padding: 5px;
     border-radius: 5px;
 }
