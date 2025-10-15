@@ -471,5 +471,6 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     await loadComponent('components/footer.html', 'footer');
     renderCategories();
     renderRecommended();
+    initializeBackToTopButton();
     mainHamburguer();
 })
