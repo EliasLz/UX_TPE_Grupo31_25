@@ -1,6 +1,7 @@
 import { fetchGames } from "./fetchApi.js";
 import {simulateProgress} from "./spiner.js";
 import { mainHamburguer } from "./menu.js";
+import { ejecution } from "./gameEjecution.js";
 
 // Función para cargar un componente dinámicamente.
 export function loadComponent(urlComponent, idDestination) {
@@ -473,4 +474,5 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     renderRecommended();
     initializeBackToTopButton();
     mainHamburguer();
+    ejecution();
 })
