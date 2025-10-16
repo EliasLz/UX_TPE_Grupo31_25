@@ -24,19 +24,21 @@ form{
 form input{
     margin: 0;
 }
-.logo-menu{
+
+.options{
+    
     display: flex;
+    gap: 1rem;
     align-items: center;
-    gap: 25px;
 }
 
-.logo-menu img{
+.options img{
     margin-left: 23px;
     height: 32px;
     width: auto;
 }
 
-.logo-menu a img{
+.options a img{
     height: 55px;
     width: auto;
 }
@@ -83,17 +85,17 @@ form input{
 }
 
 
+
 /*Menu hamburguesa*/
 .menu{
     display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
+    /* justify-content: flex-start;
+    align-items: center; */
     padding: 0 10px 20px;
     color: white;
-    position: relative; 
+    /* position: relative; 
     z-index: 1001; 
-    width: max-content;
+    width: max-content; */
 
     position: absolute; 
     top: 63px;
@@ -101,13 +103,10 @@ form input{
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.8s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
+
     width: 300px;
     z-index: 1000; 
-    padding: 0 0 0 0; 
+    padding: 0; 
 }
 
 .menu.active {
@@ -124,9 +123,15 @@ form input{
     box-shadow: 0 2px 5px rgba(0,0,0,0.6);
 }
 
-
+.config{
+    position: absolute;
+    right: 0; 
+    left: auto;
+}
 .card-user{
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     z-index: 1;
     
 }
@@ -136,13 +141,16 @@ form input{
 
 .user-logo{
     height: 75px;
-    padding-top: 15px;
+    margin: 5px;
 } 
 
 .info-user{
     background-color: var(--color-secundarioDorado-400);
     margin: 0 10px 3px 10px;
     border-radius: 25px 25px 0 0;
+    padding: 10px;
+    width: 93%;
+    text-align: center;
 }
 
 .config-menu{
@@ -201,11 +209,16 @@ form input{
 
 ul li:hover{
     background-color: #a14f18;
+    color: white ;
     border-radius: 30px;
+}
+ul li:hover a {
+    color: white; 
 }
 
 #menuToggle{
     padding: 5px;
+    cursor: pointer;
 }
 
 #menuToggle:hover{
