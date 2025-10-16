@@ -47,7 +47,7 @@ html, body {
 
 body{
     /*Fondo Pantalla*/
-    background-image: url('../assets/img/fondo-pantalla.svg');
+    background-image: url('../assets/img/fondo-pantalla.png');
     background-color:rgba(224, 211, 177, 1);
     background-repeat: repeat;         /* Repite la imagen en mosaico */
     background-position: top left;     /* Comienza desde la esquina superior izquierda */
