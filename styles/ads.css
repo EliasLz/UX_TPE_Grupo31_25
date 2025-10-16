@@ -5,8 +5,8 @@
 }
 
 .ads-card-container {
-    display: block; /* ahora contendrá un wrapper interno que será flex */
-    overflow: hidden; /* ocultamos el scroll nativo */
+    display: block;
+    overflow: hidden;
     scroll-snap-type: x mandatory;
     gap: 12px;
     padding-bottom: 10px;
@@ -24,7 +24,6 @@
 }
 
 .ads-card { 
-    width: 280px;
     flex-shrink: 0;
     height: auto; 
     scroll-snap-align: start; 
@@ -42,17 +41,14 @@
 }
 
 .ads-card-image-wrapper {
-    height: 180px;
-    width: 100%;
     overflow: hidden;
     position: relative;
 }
 
 .ads-card-image {
     width: 100%;
-    height: 100%;
+    height: 200px;
     display: block;
-    object-fit: cover;
 }
 
 .ads-card-overlay {

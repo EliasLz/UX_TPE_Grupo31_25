@@ -93,7 +93,6 @@
     .main-content { margin: 0; padding: 0 32px; }
     .recommended-card { min-width: 240px; }
     .game-card { width: 120px; }
-    .ads-card { width: 240px; }
 }
 
 /* Accessibility: respect reduce-motion on index too */
