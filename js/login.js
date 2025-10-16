@@ -107,6 +107,9 @@ submitForm.addEventListener('submit', (e)=>{
 
     register.classList.toggle('hiden');
     welcome.classList.toggle('hiden');
+
+    //Redireccionamos al index
+    initRedirection()
 })
 
 
@@ -114,6 +117,39 @@ submitForm.addEventListener('submit', (e)=>{
 document.getElementById('searchForm').addEventListener('submit', navIndex);
 document.getElementById('button-facebook').addEventListener('click', navIndex);
 document.getElementById('button-google').addEventListener('click', navIndex);
+//Redireccionamiento al index.html
+function initRedirection(){
+    const countDownContainer = document.getElementById('countDown');
+
+    if(!countDownContainer) return;
+
+    countDownContainer.innerHTML = 'Redirigiendo al inicio<span id="dots"></span>' //--> Aqui insertaremos los puntos suspensivos.
+    const dotsElement = document.getElementById('dots');
+
+    let dotsCount = 0;
+    let intervalId;
+
+    function animateDots(){
+        dotsCount = (dotsCount + 1) % 4; // Ciclo entre 0, 1, 2, 3 puntos
+
+        let dots = '';
+        for(let i = 0; i < dotsCount; i++){
+            dots += '.';
+        }
+        dotsElement.textContent = dots;
+    }
+
+    intervalId = setInterval(animateDots, 500);
+
+    setTimeout(() => {
+        clearInterval(intervalId);
+        countDownContainer.textContent = 'Redireccion completada. ¡Bienvenido!';
+        setTimeout(() => {
+            window.location.href = '/index.html';
+        }, 1000);
+    }, 4000)
+}
+
 
 function navIndex(e){
     e.preventDefault();
