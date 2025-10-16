@@ -48,7 +48,6 @@ No me deja usarlo en una global, ni me gusta como quedó*/
 .game-container, .gameScreen {
     position: relative;
     display: inline-block;
-    line-height: 0;
 }
 
 /* ANIMACIÓN: Implementación */
@@ -332,10 +331,12 @@ button.playButton:active {
 
 .config-option {
     margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
 }
 
 .config-option label {
-    display: block;
+    font-size: 12px;
     font-weight: bold;
     margin-bottom: 5px;
 }

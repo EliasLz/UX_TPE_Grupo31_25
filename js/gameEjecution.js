@@ -47,8 +47,8 @@ function configureGame() {
                     </div>
 
                     <div class="config-option">
-                        <input type="checkbox" id="useHelp" name="useHelp">
                         <label for="useHelp">Habilitar "Ayudita" (+5 segundos de penalización por uso).</label>
+                        <input type="checkbox" id="useHelp" name="useHelp">
                     </div>
                     
                     <div style="text-align: center; margin-top: 20px;">

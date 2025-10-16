@@ -16,12 +16,12 @@ button{
     border: 0;
     padding: 0;
 }
-form{
+form .doubleCenterFlex{
     display: flex;
     flex-direction: row;
 }
 
-form input{
+form input .searchInputContainer{
     margin: 0;
 }
 
