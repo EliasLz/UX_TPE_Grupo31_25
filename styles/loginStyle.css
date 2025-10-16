@@ -138,6 +138,7 @@ img {
     display: flex;
     margin-top: 5px;
     margin-bottom: 20px;
+    align-items: center;
 }
 
 .terms p {

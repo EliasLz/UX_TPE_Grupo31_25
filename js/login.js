@@ -2,7 +2,6 @@ let respuestaCorrecta;
 
 
 const login = document.getElementById('login');
-const captcha = document.getElementById('captcha');
 const register = document.getElementById('register');
 const welcome = document.getElementById('welcome');
 
@@ -38,17 +37,14 @@ function validarRespuesta() {
     }
 }
 
-const captchaForm =  document.getElementById('pre-captcha-form');
-captchaForm.addEventListener('submit', (e)=>{    
-    e.preventDefault();
-    formCaptcha = document.getElementById('pre-captcha-form');
+function resetMessage(){
 
     validarRespuesta();
 
-    const botonCaptcha = document.getElementById('buttom-captcha');
+    const botonCaptcha = document.getElementById('button-submit');
     botonCaptcha.disabled = true;
     
-    const inputCaptcha = formCaptcha.querySelector('#captcha-answer');
+    const inputCaptcha = document.querySelector('#captcha-answer');
     inputCaptcha.disabled = true;
 
     //Esperamos 1000 milisegundos (1 segundos)
@@ -62,14 +58,15 @@ captchaForm.addEventListener('submit', (e)=>{
         } else {
             botonCaptcha.disabled = false; 
             inputCaptcha.disabled = false; 
-            captcha.classList.toggle('hiden');
             register.classList.toggle('hiden');
+            welcome.classList.toggle('hiden');
+            initRedirection();
             }
     }, 1000); // 
     
     return;
 
-});
+};
 
 // Controlamos el boton registro
 botonRegistro = document.getElementById('button-register');
@@ -77,7 +74,7 @@ botonRegistro.addEventListener('click', function(e){
     e.preventDefault();
     generarPreguntaSeguridad();
     login.classList.toggle('hiden');
-    captcha.classList.toggle('hiden');
+    register.classList.toggle('hiden');
 
 })
 
@@ -87,13 +84,9 @@ const botonesVolver = document.querySelectorAll('#button-back');
         boton.addEventListener('click', function(e){
             e.preventDefault();
 
-            if(!captcha.classList.contains('hiden')){
-                captcha.classList.toggle('hiden');
-                login.classList.toggle('hiden');
-            } else if(!register.classList.contains('hiden')){
+            if(!register.classList.contains('hiden')){
                 register.classList.toggle('hiden');
-                captcha.classList.toggle('hiden');
-                generarPreguntaSeguridad();
+                login.classList.toggle('hiden');
             }
         })
     }
@@ -104,12 +97,7 @@ const botonesVolver = document.querySelectorAll('#button-back');
 const submitForm = document.getElementById('form-register');
 submitForm.addEventListener('submit', (e)=>{
     e.preventDefault();
-
-    register.classList.toggle('hiden');
-    welcome.classList.toggle('hiden');
-
-    //Redireccionamos al index
-    initRedirection()
+    resetMessage();
 })
 
 
