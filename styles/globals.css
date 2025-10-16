@@ -87,6 +87,7 @@ a {
     text-decoration: none;
     color: var(--color-texto-500);
     cursor: pointer;
+    padding: 0 5px;
 }
 
 span{

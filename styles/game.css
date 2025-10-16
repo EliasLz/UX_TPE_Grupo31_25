@@ -29,9 +29,8 @@ ul.breadcrumb {
     list-style: none;
     display: flex;
     background-color: var(--color-baseFondo-200);
-    font-size: var(--tamano-texto-md);
     margin: 5px 0;
-    padding: 3px 32px;
+    padding: 10px 32px;
 }
 
 /* Decoración del Breadcrumb */
