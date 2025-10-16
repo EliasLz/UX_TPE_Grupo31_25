@@ -23,5 +23,25 @@ export const mockGame = [
             "name": "Puzzle"
         }
         ]
+    },
+    {
+        "id": 2,
+        "name": "BLOCKA",
+        "released": "2025-08-01",
+        "background_image_low_res": "../assets/img/BLOCKA.png",
+        "rating": 5,
+        "description": "Challenging puzzle game with different play styles and images, test your intellect with the incredible BLOCKA game!",
+        "platforms": [
+        {
+            "id": 1,
+            "name": "PC"
+        }
+        ],
+        "genres": [
+        {
+            "id": 2,
+            "name": "Puzzle"
+        }
+        ]
     }
 ];

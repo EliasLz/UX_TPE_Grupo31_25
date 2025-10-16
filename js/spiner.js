@@ -10,7 +10,7 @@ let currentStep = 0;
 export function simulateProgress() {
     const currentPage = window.location.pathname
 
-    if(currentPage === '/game.html'){
+    if(currentPage != '/index.html'){
         return;
     }
 
