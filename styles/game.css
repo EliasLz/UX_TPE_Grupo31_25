@@ -286,7 +286,7 @@ button.playButton:active {
 .proxCardPubli {
     background-color: forestgreen;
     width: 440px;
-    height: 602px;
+    height: auto;
     border-radius: 30px;
 }
 
