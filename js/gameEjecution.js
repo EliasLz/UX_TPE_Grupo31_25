@@ -13,6 +13,8 @@ const IMAGE_BANK = [
     'assets/img-Blocka/Puma.jpg',
 ];
 
+let puzzlePieces = [];
+
 export function ejecution() {
     const playButton = document.getElementById('playButton');
 
@@ -124,60 +126,86 @@ function playGame(pieces, imagenUrl){
         const altoPieza = imagen.height / FILAS;
 
         // Recorremos cada fila y columna para dibujar las piezas
+        puzzlePieces = [];
         for (let fila = 0; fila < FILAS; fila++) {
             for (let col = 0; col < COLUMNAS; col++) {
-                
-                // --- El truco está en esta función ---
-                // ctx.drawImage(imagen, sx, sy, sAncho, sAlto, dx, dy, dAncho, dAlto);
-                //
-                // * s = source (origen), se refiere al área a recortar de la imagen original.
-                // * d = destination (destino), se refiere a dónde dibujar en el canvas.
+                puzzlePieces.push({
+                    col: col,
+                    row: fila,
+                    rotation: Math.floor(Math.random() * 4) * 90 // Rotación inicial aleatoria (0, 90, 180, 270)
+                });
 
-                const sourceX = col * anchoPieza;      // Coordenada X del recorte en la imagen original
-                const sourceY = fila * altoPieza;      // Coordenada Y del recorte en la imagen original
-
-                // Dibujamos la pieza recortada en el canvas
-                ctx.drawImage(
-                    imagen,
-                    sourceX, sourceY,          // Inicio del recorte en la imagen original (sx, sy)
-                    anchoPieza, altoPieza,     // Tamaño del recorte (sAncho, sAlto)
-                    sourceX, sourceY,          // Posición donde dibujar en el canvas (dx, dy)
-                    anchoPieza, altoPieza      // Tamaño del dibujo en el canvas (dAncho, dAlto)
-                );
-
-                // EXTRA: Dibujamos un borde para ver la separación de las piezas
-                ctx.strokeStyle = 'black';
-                ctx.lineWidth = 2;
-                ctx.strokeRect(sourceX, sourceY, anchoPieza, altoPieza);
+                drawPuzzle(ctx, imagen, anchoPieza, altoPieza, COLUMNAS, FILAS);
             }
         }
     };
 
-    // --- 3. INTERACTIVIDAD: ¿Cómo editar una pieza? ---
-    canvas.addEventListener('click', (evento) => {
-        // Obtenemos las coordenadas del clic relativas al canvas
+    canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+
+    canvas.addEventListener('mousedown', (evento) => {
+
         const rect = canvas.getBoundingClientRect();
         const x = evento.clientX - rect.left;
         const y = evento.clientY - rect.top;
 
-        // Calculamos a qué pieza (fila y columna) corresponden esas coordenadas
         const anchoPieza = canvas.width / COLUMNAS;
         const altoPieza = canvas.height / FILAS;
 
         const columnaClickeada = Math.floor(x / anchoPieza);
         const filaClickeada = Math.floor(y / altoPieza);
 
-        // Mostramos en la consola qué pieza fue presionada
         console.log(`¡Clic en la pieza! Fila: ${filaClickeada}, Columna: ${columnaClickeada}`);
 
-        // ¡Aquí es donde pondrías tu lógica de edición!
-        // Por ejemplo, podrías aplicar un filtro de escala de grises solo a esa pieza.
+        const piezaIndex = puzzlePieces.findIndex(p => p.col === columnaClickeada && p.row === filaClickeada);
+        if(piezaIndex !== -1){
+            let rotation = 0;
+            if(evento.button === 0){
+                rotation = 90;
+            }else if(evento.button === 2){
+            rotation = -90;
+            }
+
+            if(rotation !== 0){
+                puzzlePieces[piezaIndex].rotation += rotation;
+                puzzlePieces[piezaIndex].rotation = (puzzlePieces[piezaIndex].rotation + 360 % 360 ) % 360;
+                drawPuzzle(ctx, imagen, anchoPieza, altoPieza, COLUMNAS, FILAS);
+            }
+        }
     });
 };
 
+function drawPuzzle(ctx, imagen, anchoPieza, altoPieza, COLUMNAS, FILAS) {
 
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
+    console.log(ctx)
 
+    puzzlePieces.forEach(pieza => {
+        const rotation = pieza.rotation;
+        const sourceX = pieza.col * anchoPieza;
+        const sourceY = pieza.row * altoPieza;
 
+        ctx.save();
 
+        const destinoX = sourceX + anchoPieza / 2;
+        const destinoY = sourceY + altoPieza / 2;
 
+        ctx.translate(destinoX, destinoY);
+
+        ctx.rotate(rotation * Math.PI / 180);
+
+        ctx.drawImage(
+            imagen,
+            sourceX, sourceY,
+            anchoPieza, altoPieza,
+            -anchoPieza / 2, -altoPieza / 2,
+            anchoPieza, altoPieza
+        );
+
+        ctx.restore();
+
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(sourceX, sourceY, anchoPieza, altoPieza);
+    });
+}
