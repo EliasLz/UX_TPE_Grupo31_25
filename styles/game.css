@@ -43,8 +43,7 @@ ul.breadcrumb li + li::before {
     margin: 0 8px;
 }
 
-/* Contenedor de referencia:
-No me deja usarlo en una global, ni me gusta como quedó*/
+/* Contenedor de referencia: */
 .game-container {
     display: flex;
     flex-direction: column;
@@ -52,9 +51,14 @@ No me deja usarlo en una global, ni me gusta como quedó*/
     max-width: 960px;
     margin: 0 auto;
     position: relative;
+    min-height: 450px;
 }
 
 .gameScreen{
+    width: 100%;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
     position: relative;
 }
 
@@ -332,9 +336,13 @@ button.playButton:active {
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     width: 90%;
+    height: auto;
     max-width: 500px;
     color: #333;
-    animation: fadeIn 0.3s ease-out; /* Animación de aparición */
+    align-self: center;
+    width: 90%;
+    max-width: 500px;
+    animation: fadeIn 0.3s ease-out;
 }
 
 .config-menu h3 {
