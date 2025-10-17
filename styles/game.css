@@ -45,9 +45,23 @@ ul.breadcrumb li + li::before {
 
 /* Contenedor de referencia:
 No me deja usarlo en una global, ni me gusta como quedó*/
-.game-container, .gameScreen {
+.game-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
     position: relative;
-    display: inline-block;
+}
+
+.gameScreen{
+    position: relative;
+}
+
+.gameCover {
+    width: 100%;
+    display: block;
+    object-fit: cover;
 }
 
 /* ANIMACIÓN: Implementación */
@@ -383,10 +397,6 @@ button.playButton:active {
     transition: all 0.2s ease;
 }
 
-.game-container {
-    min-height: 400px;
-    width: 100%;
-}
 
 /* Animación opcional */
 @keyframes fadeIn {
