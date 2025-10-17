@@ -2,7 +2,7 @@ const loaderScreen = document.getElementById('loader-screen');
 const progressBarFill = document.getElementById('progress-bar-fill');
 const progressText = document.getElementById('progress-text');
 
-const DURATION = 5000;
+const DURATION = 10;
 const INTERVAL = 50;
 const totalSteps = DURATION / INTERVAL;
 let currentStep = 0;

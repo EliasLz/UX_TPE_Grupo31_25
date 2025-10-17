@@ -5,12 +5,12 @@ const GAME_DEFAULTS = {
 };
 
 const IMAGE_BANK = [
-    'imgBlocka/Loro.png', 
-    'imgBlocka/Panda.jpg', 
-    'imgBlocka/Pollo.png',
-    'imgBlocka/Tigre.png',
-    'imgBlocka/Zorro.png',
-    'imgBlocka/Puma.jpg',
+    'assets/img-Blocka/Loro.png', 
+    'assets/img-Blocka/Panda.jpg', 
+    'assets/img-Blocka/Pollo.png',
+    'assets/img-Blocka/Tigre.png',
+    'assets/img-Blocka/Zorro.png',
+    'assets/img-Blocka/Puma.jpg',
 ];
 
 export function ejecution() {
@@ -20,7 +20,7 @@ export function ejecution() {
         //gameContainer.innerHTML = '<h2>Cargando juego...</h2>'; //TODO:: Hacer una animacion.
         playButton.style.display = 'none';
         const gameConfig = await configureGame();
-        startGame(gameConfig);
+        prepareGame(gameConfig);
     })
 }
 
@@ -47,8 +47,8 @@ function configureGame() {
                     </div>
 
                     <div class="config-option">
-                        <label for="useHelp">Habilitar "Ayudita" (+5 segundos de penalización por uso).</label>
                         <input type="checkbox" id="useHelp" name="useHelp">
+                        <label for="useHelp">Habilitar "Ayudita" (+5 segundos de penalización por uso).</label>
                     </div>
                     
                     <div style="text-align: center; margin-top: 20px;">
@@ -82,39 +82,100 @@ function configureGame() {
     });
 }
 
-function prepareGame(pieces){
-    let piecesHTML = [];
-
-    for(let i = 0; i < pieces; i++){
-        piecesHTML.push(`<div id="piece img-${i+1}" class="blocka-pieza" data-posicion=""></div>`);
-    }
-    
-    const gameHTML = `        
-        <div id="blocka-game">
-            <h2>Nivel <span id="level">1</span></h2>
-            <div id="contain-pieces" class="grid-${pieces/2}x2">
-                ${piecesHTML.join('')}
-            </div>
-            <div id="status-message" class="hidden">¡Felicidades, Blocka Resuelta!</div>
-            <button id="btn-next" class="hidden">Siguiente Nivel</button>
-        </div>
+function prepareGame(selectedConfig){
+    const gameContainer = document.getElementById('gameContainer');
+    const randomImage = IMAGE_BANK[Math.floor(Math.random() * IMAGE_BANK.length)];
+    gameContainer.innerHTML = `
+        <canvas id="miCanvas"></canvas>
     `;
+    const pieces = selectedConfig.piecesCount;
 
-    loadImg(pieces);
-
-    return gameHTML;
+    playGame(pieces, randomImage)
 }
 
-function loadImg(pieces){
-    const imageUrl = IMAGE_BANK[Math.floor(Math.random() * IMAGE_BANK.length)];
-    let contains_pieces = document.querySelectorAll('#piece');
 
-    contains_pieces.forEach(piece =>{
-        piece.style.backgroundImage =`url('${imagenUrl}')`;
-        piece.setAttribute('data-posicion','');
-    })
-    
-}
+
+function playGame(pieces, imagenUrl){
+    // Esperamos a que todo el contenido de la página se cargue
+  //window.onload = function() {
+
+    // --- 1. CONFIGURACIÓN INICIAL ---
+    //const imagen = document.getElementById('imagenOriginal');
+    const canvas = document.getElementById('miCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Define en cuántas piezas quieres dividir la imagen
+    const COLUMNAS = pieces / 2;
+    const FILAS = 2;
+
+    // Cargamos la Imagen
+    const imagen = new Image();
+    imagen.src = imagenUrl;
+
+    // --- 2. DIVISIÓN DE LA IMAGEN ---
+    // Nos aseguramos de que la imagen se haya cargado completamente antes de usarla
+    imagen.onload = () => {
+        // Ajustamos el tamaño del canvas para que coincida con el de la imagen
+        canvas.width = imagen.width;
+        canvas.height = imagen.height;
+
+        // Calculamos el ancho y alto de cada pieza
+        const anchoPieza = imagen.width / COLUMNAS;
+        const altoPieza = imagen.height / FILAS;
+
+        // Recorremos cada fila y columna para dibujar las piezas
+        for (let fila = 0; fila < FILAS; fila++) {
+            for (let col = 0; col < COLUMNAS; col++) {
+                
+                // --- El truco está en esta función ---
+                // ctx.drawImage(imagen, sx, sy, sAncho, sAlto, dx, dy, dAncho, dAlto);
+                //
+                // * s = source (origen), se refiere al área a recortar de la imagen original.
+                // * d = destination (destino), se refiere a dónde dibujar en el canvas.
+
+                const sourceX = col * anchoPieza;      // Coordenada X del recorte en la imagen original
+                const sourceY = fila * altoPieza;      // Coordenada Y del recorte en la imagen original
+
+                // Dibujamos la pieza recortada en el canvas
+                ctx.drawImage(
+                    imagen,
+                    sourceX, sourceY,          // Inicio del recorte en la imagen original (sx, sy)
+                    anchoPieza, altoPieza,     // Tamaño del recorte (sAncho, sAlto)
+                    sourceX, sourceY,          // Posición donde dibujar en el canvas (dx, dy)
+                    anchoPieza, altoPieza      // Tamaño del dibujo en el canvas (dAncho, dAlto)
+                );
+
+                // EXTRA: Dibujamos un borde para ver la separación de las piezas
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(sourceX, sourceY, anchoPieza, altoPieza);
+            }
+        }
+    };
+
+    // --- 3. INTERACTIVIDAD: ¿Cómo editar una pieza? ---
+    canvas.addEventListener('click', (evento) => {
+        // Obtenemos las coordenadas del clic relativas al canvas
+        const rect = canvas.getBoundingClientRect();
+        const x = evento.clientX - rect.left;
+        const y = evento.clientY - rect.top;
+
+        // Calculamos a qué pieza (fila y columna) corresponden esas coordenadas
+        const anchoPieza = canvas.width / COLUMNAS;
+        const altoPieza = canvas.height / FILAS;
+
+        const columnaClickeada = Math.floor(x / anchoPieza);
+        const filaClickeada = Math.floor(y / altoPieza);
+
+        // Mostramos en la consola qué pieza fue presionada
+        console.log(`¡Clic en la pieza! Fila: ${filaClickeada}, Columna: ${columnaClickeada}`);
+
+        // ¡Aquí es donde pondrías tu lógica de edición!
+        // Por ejemplo, podrías aplicar un filtro de escala de grises solo a esa pieza.
+    });
+};
+
+
 
 
 
