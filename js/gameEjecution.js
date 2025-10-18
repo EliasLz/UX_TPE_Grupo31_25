@@ -23,12 +23,32 @@ export function ejecution() {
         playButton.style.display = 'none';
         const gameConfig = await configureGame();
         prepareGame(gameConfig);
+
+        let timeGame = gameConfig.maxTime;
+        const gameButtonbar = document.querySelector('.gameButtonbar');
+        
+        const firsChild = gameButtonbar.firstElementChild;
+        const timer = document.createElement('div')
+        timer.id = 'timerDisplay';
+        timer.textContent = '00:00'
+        firsChild.insertAdjacentElement('afterend', timer)
+
+        //Loop de juego mientras tenga tiempo o hasta que complete el puzzle
+        while(1 < timeGame || timeGame == 0){
+            setTimeout(() => {
+                timer.textContent = `${timeGame}`
+                console.log("estoy adentro")
+            }, 1000);
+            console.log("estoy afuera")
+            timeGame--;
+        }
+
     })
 }
 
 function configureGame() {
-    const gameContainer = document.getElementById('gameContainer');
-
+    const gameContainer = document.getElementById('gameScreen');
+    
     const menuHtml = `
             <div class="config-menu">
                 <h3>Configuración del Nivel</h3>
@@ -59,7 +79,9 @@ function configureGame() {
                 </form>
             </div>
     `;
-
+    const gameBar = document.querySelector('.gameButtonbar')
+    gameBar.style.display = 'none';
+    console.log(gameBar);
     gameContainer.innerHTML = menuHtml;
 
     return new Promise(resolve => {
@@ -85,11 +107,13 @@ function configureGame() {
 }
 
 function prepareGame(selectedConfig){
-    const gameContainer = document.getElementById('gameContainer');
+    const gameContainer = document.getElementById('gameScreen');
+    const gameBar = document.querySelector('.gameButtonbar')
     const randomImage = IMAGE_BANK[Math.floor(Math.random() * IMAGE_BANK.length)];
     gameContainer.innerHTML = `
-        <canvas id="miCanvas"></canvas>
+    <canvas id="miCanvas"></canvas>
     `;
+    gameBar.style.display = '';
     const pieces = selectedConfig.piecesCount;
 
     playGame(pieces, randomImage)
@@ -98,11 +122,7 @@ function prepareGame(selectedConfig){
 
 
 function playGame(pieces, imagenUrl){
-    // Esperamos a que todo el contenido de la página se cargue
-  //window.onload = function() {
 
-    // --- 1. CONFIGURACIÓN INICIAL ---
-    //const imagen = document.getElementById('imagenOriginal');
     const canvas = document.getElementById('miCanvas');
     const ctx = canvas.getContext('2d');
 
@@ -114,7 +134,6 @@ function playGame(pieces, imagenUrl){
     const imagen = new Image();
     imagen.src = imagenUrl;
 
-    // --- 2. DIVISIÓN DE LA IMAGEN ---
     // Nos aseguramos de que la imagen se haya cargado completamente antes de usarla
     imagen.onload = () => {
         // Ajustamos el tamaño del canvas para que coincida con el de la imagen
@@ -154,8 +173,6 @@ function playGame(pieces, imagenUrl){
         const columnaClickeada = Math.floor(x / anchoPieza);
         const filaClickeada = Math.floor(y / altoPieza);
 
-        console.log(`¡Clic en la pieza! Fila: ${filaClickeada}, Columna: ${columnaClickeada}`);
-
         const piezaIndex = puzzlePieces.findIndex(p => p.col === columnaClickeada && p.row === filaClickeada);
         if(piezaIndex !== -1){
             let rotation = 0;
@@ -168,17 +185,15 @@ function playGame(pieces, imagenUrl){
             if(rotation !== 0){
                 puzzlePieces[piezaIndex].rotation += rotation;
                 puzzlePieces[piezaIndex].rotation = (puzzlePieces[piezaIndex].rotation + 360 % 360 ) % 360;
-                drawPuzzle(ctx, imagen, anchoPieza, altoPieza, COLUMNAS, FILAS);
+                drawPuzzle(ctx, imagen, anchoPieza, altoPieza);
             }
         }
     });
 };
 
-function drawPuzzle(ctx, imagen, anchoPieza, altoPieza, COLUMNAS, FILAS) {
+function drawPuzzle(ctx, imagen, anchoPieza, altoPieza) {
 
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-
-    console.log(ctx)
 
     puzzlePieces.forEach(pieza => {
         const rotation = pieza.rotation;
