@@ -202,10 +202,12 @@ function drawPuzzle(ctx, imagen, anchoPieza, altoPieza, COLUMNAS, FILAS) {
             anchoPieza, altoPieza
         );
 
-        ctx.restore();
-
         ctx.strokeStyle = 'black';
         ctx.lineWidth = 2;
-        ctx.strokeRect(sourceX, sourceY, anchoPieza, altoPieza);
+        ctx.strokeRect(
+            -anchoPieza / 2, -altoPieza / 2,
+            anchoPieza, altoPieza);
+        
+        ctx.restore();
     });
 }
