@@ -14,6 +14,7 @@ const IMAGE_BANK = [
 ];
 
 let puzzlePieces = [];
+let gameTimerInterval = null; //--> Es para guardar el Id del intervalo
 
 export function ejecution() {
     const playButton = document.getElementById('playButton');
@@ -24,8 +25,8 @@ export function ejecution() {
         const gameConfig = await configureGame();
         const randomImageOrder = randomOrder(IMAGE_BANK);
         let currentImageIndex = 0;
+        let currentTime = 0;
 
-        let timeGame = gameConfig.maxTime;
         const gameButtonbar = document.querySelector('.gameButtonbar');
         
         const firsChild = gameButtonbar.firstElementChild;
@@ -33,12 +34,27 @@ export function ejecution() {
         timer.id = 'timerDisplay';
         timer.textContent = '00:00'
         firsChild.insertAdjacentElement('afterend', timer)
+
+        //Formateamos el tiempo para que se vea mejor. (MM:SS)
+        function formatTime(totalSeconds){
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
         
+        //Handler para el fin del juego por tiempo
+        function handlerGameOver(){
+            clearInterval(gameTimerInterval); //--> Aca se detiene el timer
+            const gameContainer = document.getElementById('gameScreen');
+            gameContainer.innerHTML = '<h2>¡Tiempo Agotado!</h2><p>No has completado el puzzle a tiempo.</p>'
+            gameButtonbar.style.display = 'none';
+        }
+
+
         function loadNextLevel() { // <-- NUEVO
             if (currentImageIndex < randomImageOrder.length) {
                 // Si aún quedan imágenes en nuestro arreglo aleatorio
                 const currentImage = randomImageOrder[currentImageIndex];
-                console.log(`Cargando Nivel ${currentImageIndex + 1}: ${currentImage}`);
                 
                 prepareGame(gameConfig, currentImage, loadNextLevel); //--> Importante este feature de pasarle un callback
                 
@@ -46,15 +62,50 @@ export function ejecution() {
             
             } else {
                 console.log("¡Juego completado!");
+                clearInterval(gameTimerInterval); //--> Aca tambien se detiene el timer
                 const gameContainer = document.getElementById('gameScreen');
-                gameContainer.innerHTML = '<h2>¡Felicidades!</h2><p>Has completado todos los puzzles.</p>';
+                let finalMessage = '<h2>¡Felicidades!</h2><p>Has completado todos los puzzles.</p>';
+
+                if (gameConfig.maxTime > 0) {
+                    // MODO CONTRARRELOJ
+                    const timeSpent = gameConfig.maxTime - currentTime;
+                    const finalTime = formatTime(timeSpent);
+                    finalMessage = `<h2>¡Victoria!</h2><p>Completaste todos los puzzles en modo Contrarreloj con **${finalTime}** de tiempo consumido. ¡Excelente!</p>`;
+                } else {
+                    // MODO CRONÓMETRO
+                    const finalTime = formatTime(currentTime);
+                    finalMessage = `<h2>¡Felicidades!</h2><p>Has completado todos los puzzles. Tu tiempo total fue de **${finalTime}**.</p>`;
+                }
+
+                gameContainer.innerHTML = finalMessage;
                 gameButtonbar.style.display = 'none';
-                //TODO:: Agregar el tiempo requerido para terminar el juego
             }
         }
 
         // Iniciar el primer nivel
         loadNextLevel();
+       
+        //Iniciamos el timer.
+        if(gameTimerInterval) clearInterval(gameTimerInterval); //--> Limpiamos el anterior tiempo (Se podria llegar a guardar para que se vea el mejor tiempo)
+
+        const isCountdown  = gameConfig.maxTime > 0;
+        currentTime = isCountdown ? gameConfig.maxTime : 0;
+        timer.textContent = formatTime(currentTime);
+
+        gameTimerInterval = setInterval(()=>{
+            if(isCountdown){
+                currentTime--;
+                if(currentTime <= 0){
+                    currentTime = 0;
+                    clearInterval(gameTimerInterval);
+                    handlerGameOver() //--> finalizamos el juego
+                }
+            } else {
+                currentTime++;
+            }
+            timer.textContent = formatTime(currentTime);
+        }, 1000); //--> se ejecutaria cada segundo para hacer el efecto del timer
+
     })
 }
 
@@ -84,12 +135,17 @@ function configureGame() {
                             <option value="4" selected>4 Piezas (2x2) - Fácil</option>
                             <option value="6">6 Piezas (3x2) - Medio</option> 
                             <option value="8">8 Piezas (4x2) - Difícil</option>
-                            </select>
+                        </select>
                     </div>
 
                     <div class="config-option">
-                        <label for="maxTime">Límite de Tiempo (en segundos):</label>
-                        <input type="number" id="maxTime" name="maxTime" min="0" value="0" placeholder="0 = Sin límite">
+                        <input type="checkbox" id="timeTrialCheck" name="timeTrialCheck">
+                        <label for="timeTrialCheck">Habilitar Modo Contrarreloj</label>
+                    </div>
+
+                    <div class="config-option">
+                        <label for="maxTime">Límite de Tiempo (min. 30 seg):</label>
+                        <input type="number" id="maxTime" name="maxTime" min="30" value="30" disabled>
                         <small>El juego termina si el tiempo se agota.</small>
                     </div>
 
@@ -100,24 +156,34 @@ function configureGame() {
                     
                     <div style="text-align: center; margin-top: 20px;">
                         <button type="submit" class="btn-game">Comenzar Juego</button>
-                        </div>
-                        </form>
-                        </div>
+                    </div>
+                </form>
+            </div>
     `;
     const gameBar = document.querySelector('.gameButtonbar')
     gameBar.style.display = 'none';
-    console.log(gameBar);
     gameScreen.innerHTML = menuHtml;
 
     return new Promise(resolve => {
         const configForm = document.getElementById('configForm');
         
+        const timeTrialCheck = document.getElementById('timeTrialCheck')
+        const maxTimeInput = document.getElementById('maxTime');
+
+        //Aca se desbilita o habilita el input del tiempo, para que no se rompa nada y anden los dos modos.
+        timeTrialCheck.addEventListener('change', () =>{
+                maxTimeInput.disabled = !timeTrialCheck.checked;
+        });
+
         configForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
+            const isTimeTrial = document.getElementById('timeTrialCheck').checked;
+            const timeValue = parseInt(document.getElementById('maxTime').value);
+
             const selectedConfig = {
                 piecesCount: parseInt(document.getElementById('piecesCount').value),
-                maxTime: parseInt(document.getElementById('maxTime').value),
+                maxTime: isTimeTrial ? Math.max(30, timeValue) : 0,
                 useHelp: document.getElementById('useHelp').checked
             };
 
