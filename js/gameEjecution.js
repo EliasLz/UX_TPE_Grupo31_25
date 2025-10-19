@@ -22,7 +22,8 @@ export function ejecution() {
         //gameContainer.innerHTML = '<h2>Cargando juego...</h2>'; //TODO:: Hacer una animacion.
         playButton.style.display = 'none';
         const gameConfig = await configureGame();
-        prepareGame(gameConfig);
+        const randomImageOrder = randomOrder(IMAGE_BANK);
+        let currentImageIndex = 0;
 
         let timeGame = gameConfig.maxTime;
         const gameButtonbar = document.querySelector('.gameButtonbar');
@@ -32,22 +33,46 @@ export function ejecution() {
         timer.id = 'timerDisplay';
         timer.textContent = '00:00'
         firsChild.insertAdjacentElement('afterend', timer)
-
-        //Loop de juego mientras tenga tiempo o hasta que complete el puzzle
-        while(1 < timeGame || timeGame == 0){
-            setTimeout(() => {
-                timer.textContent = `${timeGame}`
-                console.log("estoy adentro")
-            }, 1000);
-            console.log("estoy afuera")
-            timeGame--;
+        
+        function loadNextLevel() { // <-- NUEVO
+            if (currentImageIndex < randomImageOrder.length) {
+                // Si aún quedan imágenes en nuestro arreglo aleatorio
+                const currentImage = randomImageOrder[currentImageIndex];
+                console.log(`Cargando Nivel ${currentImageIndex + 1}: ${currentImage}`);
+                
+                prepareGame(gameConfig, currentImage, loadNextLevel); //--> Importante este feature de pasarle un callback
+                
+                currentImageIndex++;
+            
+            } else {
+                console.log("¡Juego completado!");
+                const gameContainer = document.getElementById('gameScreen');
+                gameContainer.innerHTML = '<h2>¡Felicidades!</h2><p>Has completado todos los puzzles.</p>';
+                gameButtonbar.style.display = 'none';
+                //TODO:: Agregar el tiempo requerido para terminar el juego
+            }
         }
 
+        // Iniciar el primer nivel
+        loadNextLevel();
     })
 }
 
+
+//Se implementa el metodo Fisher-Yates shuffle que es el mas eficiente para hacer esto.
+function randomOrder(arrImgs){
+    const rdmOrder = [...arrImgs];
+
+    for (let i = rdmOrder.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [rdmOrder[i], rdmOrder[j]] = [rdmOrder[j], rdmOrder[i]];
+    }
+
+    return rdmOrder;
+}
+
 function configureGame() {
-    const gameContainer = document.getElementById('gameScreen');
+    const gameScreen = document.getElementById('gameScreen');
     
     const menuHtml = `
             <div class="config-menu">
@@ -59,7 +84,7 @@ function configureGame() {
                             <option value="4" selected>4 Piezas (2x2) - Fácil</option>
                             <option value="6">6 Piezas (3x2) - Medio</option> 
                             <option value="8">8 Piezas (4x2) - Difícil</option>
-                        </select>
+                            </select>
                     </div>
 
                     <div class="config-option">
@@ -75,14 +100,14 @@ function configureGame() {
                     
                     <div style="text-align: center; margin-top: 20px;">
                         <button type="submit" class="btn-game">Comenzar Juego</button>
-                    </div>
-                </form>
-            </div>
+                        </div>
+                        </form>
+                        </div>
     `;
     const gameBar = document.querySelector('.gameButtonbar')
     gameBar.style.display = 'none';
     console.log(gameBar);
-    gameContainer.innerHTML = menuHtml;
+    gameScreen.innerHTML = menuHtml;
 
     return new Promise(resolve => {
         const configForm = document.getElementById('configForm');
@@ -106,22 +131,21 @@ function configureGame() {
     });
 }
 
-function prepareGame(selectedConfig){
+function prepareGame(selectedConfig, img, onLevelComplete){
     const gameContainer = document.getElementById('gameScreen');
     const gameBar = document.querySelector('.gameButtonbar')
-    const randomImage = IMAGE_BANK[Math.floor(Math.random() * IMAGE_BANK.length)];
     gameContainer.innerHTML = `
     <canvas id="miCanvas"></canvas>
     `;
     gameBar.style.display = '';
     const pieces = selectedConfig.piecesCount;
 
-    playGame(pieces, randomImage)
+    playGame(pieces, img, onLevelComplete)
 }
 
 
 
-function playGame(pieces, imagenUrl){
+function playGame(pieces, imagenUrl, onLevelComplete){
 
     const canvas = document.getElementById('miCanvas');
     const ctx = canvas.getContext('2d');
@@ -154,9 +178,10 @@ function playGame(pieces, imagenUrl){
                     rotation: Math.floor(Math.random() * 4) * 90 // Rotación inicial aleatoria (0, 90, 180, 270)
                 });
 
-                drawPuzzle(ctx, imagen, anchoPieza, altoPieza, COLUMNAS, FILAS);
             }
         }
+
+        drawPuzzle(ctx, imagen, anchoPieza, altoPieza, COLUMNAS, FILAS);
     };
 
     canvas.addEventListener('contextmenu', (e) => e.preventDefault());
@@ -184,12 +209,24 @@ function playGame(pieces, imagenUrl){
 
             if(rotation !== 0){
                 puzzlePieces[piezaIndex].rotation += rotation;
-                puzzlePieces[piezaIndex].rotation = (puzzlePieces[piezaIndex].rotation + 360 % 360 ) % 360;
+                puzzlePieces[piezaIndex].rotation = (puzzlePieces[piezaIndex].rotation + 360 ) % 360;
                 drawPuzzle(ctx, imagen, anchoPieza, altoPieza);
+
+                if(isCompleted()){
+                    console.log("nivel completado")
+                    setTimeout(()=>{
+                        onLevelComplete();
+                    }, 1000)
+                }
             }
         }
     });
 };
+
+function isCompleted(){
+     return puzzlePieces.every(piece => (piece.rotation % 360)===0);
+}
+
 
 function drawPuzzle(ctx, imagen, anchoPieza, altoPieza) {
 
