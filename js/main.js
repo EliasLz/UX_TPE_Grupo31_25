@@ -1,7 +1,7 @@
 import { fetchGames } from "./fetchApi.js";
 import {simulateProgress} from "./spiner.js";
 import { mainHamburguer } from "./menu.js";
-import { ejecution } from "./gameEjecution.js";
+import { ejecution } from "./blocka/blocka.js";
 
 // Función para cargar un componente dinámicamente.
 export function loadComponent(urlComponent, idDestination) {

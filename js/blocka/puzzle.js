@@ -1,0 +1,131 @@
+export let puzzlePieces = [];
+
+export function prepareGame(selectedConfig, img, onLevelComplete){
+    const gameContainer = document.getElementById('gameScreen');
+    const gameBar = document.querySelector('.gameButtonbar')
+    gameContainer.innerHTML = `
+    <canvas id="miCanvas"></canvas>
+    `;
+    gameBar.style.display = '';
+    const pieces = selectedConfig.piecesCount;
+
+    playGame(pieces, img, onLevelComplete)
+}
+
+function playGame(pieces, imagenUrl, onLevelComplete){
+
+    const canvas = document.getElementById('miCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Define en cuántas piezas quieres dividir la imagen
+    const COLUMNAS = pieces / 2;
+    const FILAS = 2;
+
+    // Cargamos la Imagen
+    const imagen = new Image();
+    imagen.src = imagenUrl;
+
+    // Nos aseguramos de que la imagen se haya cargado completamente antes de usarla
+    imagen.onload = () => {
+        // Ajustamos el tamaño del canvas para que coincida con el de la imagen
+        canvas.width = imagen.width;
+        canvas.height = imagen.height;
+
+        // Calculamos el ancho y alto de cada pieza
+        const anchoPieza = imagen.width / COLUMNAS;
+        const altoPieza = imagen.height / FILAS;
+
+        // Recorremos cada fila y columna para dibujar las piezas
+        puzzlePieces = [];
+        for (let fila = 0; fila < FILAS; fila++) {
+            for (let col = 0; col < COLUMNAS; col++) {
+                puzzlePieces.push({
+                    col: col,
+                    row: fila,
+                    rotation: Math.floor(Math.random() * 4) * 90 // Rotación inicial aleatoria (0, 90, 180, 270)
+                });
+
+            }
+        }
+
+        drawPuzzle(ctx, imagen, anchoPieza, altoPieza, COLUMNAS, FILAS);
+    };
+
+    canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+
+    canvas.addEventListener('mousedown', (evento) => {
+
+        const rect = canvas.getBoundingClientRect();
+        const x = evento.clientX - rect.left;
+        const y = evento.clientY - rect.top;
+
+        const anchoPieza = canvas.width / COLUMNAS;
+        const altoPieza = canvas.height / FILAS;
+
+        const columnaClickeada = Math.floor(x / anchoPieza);
+        const filaClickeada = Math.floor(y / altoPieza);
+
+        const piezaIndex = puzzlePieces.findIndex(p => p.col === columnaClickeada && p.row === filaClickeada);
+        if(piezaIndex !== -1){
+            let rotation = 0;
+            if(evento.button === 0){
+                rotation = 90;
+            }else if(evento.button === 2){
+            rotation = -90;
+            }
+
+            if(rotation !== 0){
+                puzzlePieces[piezaIndex].rotation += rotation;
+                puzzlePieces[piezaIndex].rotation = (puzzlePieces[piezaIndex].rotation + 360 ) % 360;
+                drawPuzzle(ctx, imagen, anchoPieza, altoPieza);
+
+                if(isCompleted()){
+                    console.log("nivel completado")
+                    setTimeout(()=>{
+                        onLevelComplete();
+                    }, 1000)
+                }
+            }
+        }
+    });
+};
+
+function drawPuzzle(ctx, imagen, anchoPieza, altoPieza) {
+
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+    puzzlePieces.forEach(pieza => {
+        const rotation = pieza.rotation;
+        const sourceX = pieza.col * anchoPieza;
+        const sourceY = pieza.row * altoPieza;
+
+        ctx.save();
+
+        const destinoX = sourceX + anchoPieza / 2;
+        const destinoY = sourceY + altoPieza / 2;
+        
+        ctx.translate(destinoX, destinoY);
+
+        ctx.rotate(rotation * Math.PI / 180);
+        
+        ctx.drawImage(
+            imagen,
+            sourceX, sourceY,
+            anchoPieza, altoPieza,
+            -anchoPieza / 2, -altoPieza / 2,
+            anchoPieza, altoPieza
+        );
+
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(
+            -anchoPieza / 2, -altoPieza / 2,
+            anchoPieza, altoPieza);
+        
+        ctx.restore();
+    });
+}
+
+function isCompleted(){
+    return puzzlePieces.every(piece => (piece.rotation % 360)===0);
+}
