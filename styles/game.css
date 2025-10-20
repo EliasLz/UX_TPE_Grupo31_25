@@ -317,18 +317,12 @@ button.playButton:active {
 }
 
 .proxCardPubli {
-    background-color: forestgreen;
+    background-color: var(--color-baseFondo-200);
     width: 440px;
     height: auto;
     border-radius: 30px;
 }
 
-.proxCardPubli2 {
-    background-color: forestgreen;
-    width: 440px;
-    height: auto;
-    border-radius: 30px;
-}
 
 /* -------------- */
 
@@ -425,3 +419,26 @@ button.playButton:active {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+
+/* Carruseles verticales*/
+.proxCardPubli{
+    background-color: var(--color-baseFondo-200);
+    width: 440px;
+    height: auto;
+    max-height: 1733px;
+    border-radius: 30px;
+    display: flex;
+    padding: 10px;
+    justify-content: space-evenly;
+}
+
+.carousel-track {
+    flex-direction: column;
+    margin-left: 0 !important; 
+}
+
+.carousel-section{
+    overflow: hidden;
+}
+
