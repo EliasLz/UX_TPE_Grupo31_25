@@ -21,6 +21,7 @@ export function ejecution() {
         if (!timerDisplay) { // Crear si no existe.
             timerDisplay = document.createElement('div')
             timerDisplay.id = 'timerDisplay';
+            timerDisplay.classList.add('timerDisplay');
             firsChild.insertAdjacentElement('afterend', timerDisplay)
         }
         timerDisplay.textContent = '00:00'

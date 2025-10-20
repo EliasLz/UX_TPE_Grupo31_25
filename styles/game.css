@@ -48,10 +48,14 @@ ul.breadcrumb li + li::before {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 960px;
+    max-width: 860px;
     margin: 0 auto;
     position: relative;
     min-height: 450px;
+    background-color: var(--color-texto-400);
+    border: 2px solid black;
+    border-radius: 30px;
+    overflow: hidden;
 }
 
 .gameScreen{
@@ -60,12 +64,24 @@ ul.breadcrumb li + li::before {
     justify-content: center;
     align-items: center;
     position: relative;
+    display: contents;
 }
 
 .gameCover {
     width: 100%;
     display: block;
     object-fit: cover;
+}
+
+.timerDisplay {
+    background-color: black;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    margin: 5px;
+    align-items: center;
+    display: flex;
+    font-size: xx-large;
 }
 
 /* ANIMACIÓN: Implementación */
@@ -353,8 +369,6 @@ button.playButton:active {
 
 .config-option {
     margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
 }
 
 .config-option label {
