@@ -1,6 +1,6 @@
 export let puzzlePieces = [];
 
-export function prepareGame(selectedConfig, img, onLevelComplete){
+export function prepareGame(selectedConfig, img, onLevelComplete, currentImageIndex){
     const gameContainer = document.getElementById('gameScreen');
     const gameBar = document.querySelector('.gameButtonbar')
     gameContainer.innerHTML = `
@@ -9,10 +9,10 @@ export function prepareGame(selectedConfig, img, onLevelComplete){
     gameBar.style.display = '';
     const pieces = selectedConfig.piecesCount;
 
-    playGame(pieces, img, onLevelComplete)
+    playGame(pieces, img, onLevelComplete, currentImageIndex);
 }
 
-function playGame(pieces, imagenUrl, onLevelComplete){
+function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
 
     const canvas = document.getElementById('miCanvas');
     const ctx = canvas.getContext('2d');
@@ -48,7 +48,7 @@ function playGame(pieces, imagenUrl, onLevelComplete){
             }
         }
 
-        drawPuzzle(ctx, imagen, anchoPieza, altoPieza, COLUMNAS, FILAS);
+        drawPuzzle(ctx, imagen, anchoPieza, altoPieza, currentImageIndex);
     };
 
     canvas.addEventListener('contextmenu', (e) => e.preventDefault());
@@ -77,7 +77,7 @@ function playGame(pieces, imagenUrl, onLevelComplete){
             if(rotation !== 0){
                 puzzlePieces[piezaIndex].rotation += rotation;
                 puzzlePieces[piezaIndex].rotation = (puzzlePieces[piezaIndex].rotation + 360 ) % 360;
-                drawPuzzle(ctx, imagen, anchoPieza, altoPieza);
+                drawPuzzle(ctx, imagen, anchoPieza, altoPieza, currentImageIndex);
 
                 if(isCompleted()){
                     console.log("nivel completado")
@@ -90,9 +90,23 @@ function playGame(pieces, imagenUrl, onLevelComplete){
     });
 };
 
-function drawPuzzle(ctx, imagen, anchoPieza, altoPieza) {
+function drawPuzzle(ctx, imagen, anchoPieza, altoPieza, currentImageIndex) {
 
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+    let filter = 'none';
+
+    if (currentImageIndex > 0){ //--> aplicamos los filtros a los niveles posteriores al 1.
+        const filters = [
+            'invert(100%)',  //negativo.
+            'brightness(30%)', //brillo del 30%.
+            'grayscale(100%)' //escala de grises.
+            //se podrian agregar mas aca.
+        ];
+        //al usar el % indicamos que si tiene mas niveles que filtros, estos se repiten ciclicamente.
+        //y la parte de (currentImageIndex - 1) es para que el nivel 2(currentImageIndex = 1) empiece con el 1er filtro.
+        filter = filters[(currentImageIndex - 1) % filters.length] 
+    }
 
     puzzlePieces.forEach(pieza => {
         const rotation = pieza.rotation;
@@ -108,6 +122,8 @@ function drawPuzzle(ctx, imagen, anchoPieza, altoPieza) {
 
         ctx.rotate(rotation * Math.PI / 180);
         
+        ctx.filter = filter;
+
         ctx.drawImage(
             imagen,
             sourceX, sourceY,
@@ -115,6 +131,8 @@ function drawPuzzle(ctx, imagen, anchoPieza, altoPieza) {
             -anchoPieza / 2, -altoPieza / 2,
             anchoPieza, altoPieza
         );
+
+        ctx.filter = 'none' //reset
 
         ctx.strokeStyle = 'black';
         ctx.lineWidth = 2;

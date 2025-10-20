@@ -30,7 +30,7 @@ export function ejecution() {
                 // Si aún quedan imágenes en nuestro arreglo aleatorio
                 const currentImage = randomImageOrder[currentImageIndex];
                 
-                prepareGame(gameConfig, currentImage, loadNextLevel); //--> Importante este feature de pasarle un callback
+                prepareGame(gameConfig, currentImage, loadNextLevel, currentImageIndex); //--> Importante este feature de pasarle un callback
                 
                 currentImageIndex++;
             
