@@ -18,7 +18,7 @@ export function configureGame() {
     
     const menuHtml = `
             <div class="config-menu">
-                <h1 style="font-weight: 900;" >Configuración del Nivel</h1>
+                <h1>MENU</h1>
                 <form id="configForm">
                     <div class="config-option">
                         <h3 for="piecesCount" style="padding:10px">DIFICULTAD</h3>
@@ -32,24 +32,27 @@ export function configureGame() {
                     <div>
                         
                         <div class="config-option">
-                            <h3 for="timeTrialCheck">Tiempo</h3>
+                            <h3 for="timeTrialCheck">TIEMPO</h3>
                             <h5 for="maxTime">Habilitar Modo Contrareloj</h5>
                             <div  style="display: flex; align-items: center; gap: 10px;">
-                                <input type="checkbox" id="timeTrialCheck" name="timeTrialCheck" style="margin-right: 10px;">
+                                <label class="toggle-container">
+                                    <input type="checkbox" id="timeTrialCheck" name="timeTrialCheck"/>
+                                    <span class="toggle-slider"></span>
+                                </label>
                                 <input type="number" id="maxTime" name="maxTime" min="30"  placeholder="Tiempo (min 30s)"  disabled>
                             </div>
-                            <small>El juego termina si el tiempo se agota.</small>
+                            <p>El juego termina si el tiempo se agota.</p>
                         </div>
                     </div>
 
                     <div class="config-option">
-                        <h3 for="useHelp" style="color:black" >Ayuda</h3>
+                        <h3 for="useHelp" style="color:black" >AYUDA</h3>
                         <div style="display: flex; align-items: center; gap: 10px;">
-                            <div for="useHelp" class="switch">
-                                <input type="checkbox" class="" id="useHelp" name="useHelp">
-                                <span class="slider round"></span>
-                            </div>
-                            <label>Habilitar "Ayudita" (+5 segundos de penalización por uso).</label>
+                            <label class="toggle-container">
+                                <input type="checkbox" id="useHelp" name="useHelp"/>
+                                <span class="toggle-slider"></span>
+                                <span class="toggle-label">Habilitar "Ayudita" (5 segundos de penalización por uso).</span>
+                            </label>
                         </div>
                     </div>
                     
