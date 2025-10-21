@@ -18,10 +18,10 @@ export function configureGame() {
     
     const menuHtml = `
             <div class="config-menu">
-                <h3>Configuración del Nivel</h3>
+                <h1 style="font-weight: 900;" >Configuración del Nivel</h1>
                 <form id="configForm">
                     <div class="config-option">
-                        <label for="piecesCount">Cantidad de piezas (Blocka):</label>
+                        <h3 for="piecesCount" style="padding:10px">DIFICULTAD</h3>
                         <select id="piecesCount" name="piecesCount">
                             <option value="4" selected>4 Piezas (2x2) - Fácil</option>
                             <option value="6">6 Piezas (3x2) - Medio</option> 
@@ -29,24 +29,32 @@ export function configureGame() {
                         </select>
                     </div>
 
-                    <div class="config-option">
-                        <input type="checkbox" id="timeTrialCheck" name="timeTrialCheck">
-                        <label for="timeTrialCheck">Habilitar Modo Contrarreloj</label>
+                    <div>
+                        
+                        <div class="config-option">
+                            <h3 for="timeTrialCheck">Tiempo</h3>
+                            <h5 for="maxTime">Habilitar Modo Contrareloj</h5>
+                            <div  style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" id="timeTrialCheck" name="timeTrialCheck" style="margin-right: 10px;">
+                                <input type="number" id="maxTime" name="maxTime" min="30"  placeholder="Tiempo (min 30s)"  disabled>
+                            </div>
+                            <small>El juego termina si el tiempo se agota.</small>
+                        </div>
                     </div>
 
                     <div class="config-option">
-                        <label for="maxTime">Límite de Tiempo (min. 30 seg):</label>
-                        <input type="number" id="maxTime" name="maxTime" min="30" value="30" disabled>
-                        <small>El juego termina si el tiempo se agota.</small>
-                    </div>
-
-                    <div class="config-option">
-                        <input type="checkbox" id="useHelp" name="useHelp">
-                        <label for="useHelp">Habilitar "Ayudita" (+5 segundos de penalización por uso).</label>
+                        <h3 for="useHelp" style="color:black" >Ayuda</h3>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div for="useHelp" class="switch">
+                                <input type="checkbox" class="" id="useHelp" name="useHelp">
+                                <span class="slider round"></span>
+                            </div>
+                            <label>Habilitar "Ayudita" (+5 segundos de penalización por uso).</label>
+                        </div>
                     </div>
                     
                     <div style="text-align: center; margin-top: 20px;">
-                        <button type="submit" class="btn-game">Comenzar Juego</button>
+                        <button type="submit" class="btn-game">COMENZAR JUEGO</button>
                     </div>
                 </form>
             </div>
