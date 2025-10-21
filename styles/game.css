@@ -26,6 +26,8 @@ button:focus-visible {
     display: flex;
     justify-content: center;
     gap: 3%;
+    height: 980px;
+    width: 980px;
 }
 
 /* El Breadcrumb */
@@ -52,7 +54,7 @@ ul.breadcrumb li + li::before {
     margin: 0 auto;
     position: relative;
     min-height: 450px;
-    background-color: var(--color-texto-400);
+    background-image: url('../assets/img-Blocka/FondoPantalla.png');
     border: 2px solid black;
     border-radius: 30px;
     overflow: hidden;
@@ -341,7 +343,7 @@ button.playButton:active {
 }
 
 .config-menu {
-    background-color: #fff;
+    background-color: #fde1a6;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -355,31 +357,99 @@ button.playButton:active {
     animation: fadeIn 0.3s ease-out;
 }
 
-.config-menu h3 {
-    text-align: center;
-    color: #007bff;
-    margin-bottom: 20px;
+.config-option h3 {
+    color: #000;
+}
+
+.config-option h5 {
+    color: #bd7421;
 }
 
 .config-option {
     margin-bottom: 15px;
+    background-color: #fef4c9;
+    border-radius: 10px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start;   
+    padding: 0px 30px 10px 10px;
 }
 
 .config-option label {
-    font-size: 12px;
-    font-weight: bold;
+    font-weight: 900;
     margin-bottom: 5px;
+}
+/* 1. Ocultar el checkbox por defecto */
+.switch input {
+  display: none;
+}
+
+/* 2. Estilo base del contenedor/riel (la pista del interruptor) */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px; /* Ancho total del interruptor */
+  height: 34px; /* Altura total del interruptor */
+}
+
+/* 3. Estilo del Slider (la perilla o botón que se mueve) */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc; /* Color cuando está apagado */
+  transition: 0.4s; /* Transición suave al cambiar de estado */
+}
+
+/* 4. Estilo de la perilla (el círculo o cuadrado interior) */
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 26px; /* Tamaño de la perilla */
+  width: 26px;
+  left: 4px; /* Posición inicial */
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+/* 5. ESTADO "ON" (Interruptor encendido/Checked) */
+/* Cuando el input está marcado, cambia el color de fondo del riel */
+input:checked + .slider {
+  background-color: #2196F3; /* Color cuando está encendido (azul) */
+}
+
+/* 6. Mover la perilla */
+/* Cuando el input está marcado, mueve la perilla a la derecha */
+input:checked + .slider:before {
+  transform: translateX(26px); /* Mueve la perilla */
+}
+
+/* 7. OPCIONAL: Hacer el interruptor redondo */
+.slider.round {
+  border-radius: 34px; /* Redondea el riel */
+}
+
+.slider.round:before {
+  border-radius: 50%; /* Hace la perilla completamente redonda */
 }
 
 .config-option select,
 .config-option input[type="number"] {
     width: 100%;
     padding: 10px 12px;
-    border: 1px solid var(--color-texto-100);
-    border-radius: 8px;
+    border:  2px solid #e5c37a;
+    box-shadow: 0px 2.5px 1px #e5c37a;
+    border-radius: 15px;
     box-sizing: border-box; 
     text-align: left;
-    color: var(--color-texto-500);
+    color: #673f11;
+    font-weight: 700;
 }
 
 .config-option input[type="checkbox"] {
@@ -401,16 +471,19 @@ button.playButton:active {
     gap: 8px;
     justify-content: center;
     align-items: center;
-    width: 200px;
-    height: 45px;
-    color: var(--color-texto-200); 
-    background-color: var(--color-primario-400);
+    PADDING: 10PX;
+
+    color: white; 
+    background-color: #fe8e10;
     padding: 5px 15px;
     border: none;
-    border-radius: 10px;
-    font-size: var(--tamano-titulo-sm);
+    border-radius: 15px;
+    font-size: x-large;
     cursor: pointer;
     transition: all 0.2s ease;
+    border: solid 3px #d35003;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    font-weight: 600;
 }
 
 
