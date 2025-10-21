@@ -49,6 +49,7 @@ ul.breadcrumb li + li::before {
 .game-container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     width: 100%;
     max-width: 860px;
     margin: 0 auto;
