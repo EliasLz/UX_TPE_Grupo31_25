@@ -20,8 +20,7 @@ button:focus-visible {
     border-radius: 4px;
 }
 
-/*Para separar contenido del main veticalmente:
-    Podría estar en global */
+/*Para separar contenido del main veticalmente */
 .widthContainer {
     display: flex;
     justify-content: center;
@@ -133,12 +132,12 @@ ul.breadcrumb li + li::before {
 }
 
 /* Estados del boton iniciar juego */
-button.playButton:hover {
+button.play-button:hover {
     transform: translateX(-50%);
     animation-play-state: paused;
 }
 
-button.playButton:active {
+button.play-button:active {
     transform: translateX(-50%);
     border-color: var(--color-secundarioDorado-200);
     box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);

@@ -12,7 +12,7 @@ export async function fetchGames() {
         }
 
         let data = await response.json();
-        data = data.concat(mockGame); //--> Introducimos al Peg Solitarie en el array de juegos.
+        data = data.concat(mockGame); //--> Introducimos a Peg Solitarie y BLOCKA en el array de juegos.
 
         return data;
     }catch(e){
