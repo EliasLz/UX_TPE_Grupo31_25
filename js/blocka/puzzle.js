@@ -72,8 +72,12 @@ function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
     canvas.addEventListener('mousedown', (evento) => {
 
         const rect = canvas.getBoundingClientRect();
-        const x = evento.clientX - rect.left;
-        const y = evento.clientY - rect.top;
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+
+        const x = (evento.clientX - rect.left) * scaleX;
+        const y = (evento.clientY - rect.top) * scaleY;
+
 
         const anchoPieza = canvas.width / COLUMNAS;
         const altoPieza = canvas.height / FILAS;
@@ -81,7 +85,8 @@ function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
         const columnaClickeada = Math.floor(x / anchoPieza);
         const filaClickeada = Math.floor(y / altoPieza);
 
-        const piezaIndex = puzzlePieces.findIndex(p => p.col === columnaClickeada && p.row === filaClickeada);
+        const piezaIndex = getClickedPiece(x, y, puzzlePieces, anchoPieza, altoPieza);
+
         if(piezaIndex !== -1){
             let rotation = 0;
             if(evento.button === 0){
@@ -273,4 +278,31 @@ export function accommodatePice(){
             currentLevelIndex
         );
     }
+}
+
+// Función para determinar qué pieza fue clickeada considerando la rotación
+function getClickedPiece(x, y, piezas, anchoPieza, altoPieza) {
+    for (let i = 0; i < piezas.length; i++) {
+        const pieza = piezas[i];
+        const centerX = pieza.col * anchoPieza + anchoPieza / 2;
+        const centerY = pieza.row * altoPieza + altoPieza / 2;
+
+        // Trasladamos el punto clickeado al sistema de coordenadas de la pieza
+        const dx = x - centerX;
+        const dy = y - centerY;
+
+        // Aplicamos rotación inversa
+        const angle = -pieza.rotation * Math.PI / 180;
+        const rotatedX = dx * Math.cos(angle) - dy * Math.sin(angle);
+        const rotatedY = dx * Math.sin(angle) + dy * Math.cos(angle);
+
+        // Verificamos si el punto transformado está dentro del rectángulo de la pieza
+        if (
+            rotatedX >= -anchoPieza / 2 && rotatedX <= anchoPieza / 2 &&
+            rotatedY >= -altoPieza / 2 && rotatedY <= altoPieza / 2
+        ) {
+            return i;
+        }
+    }
+    return -1;
 }
