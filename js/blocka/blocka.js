@@ -6,6 +6,12 @@ import { handlerGameOver, startTimer, gameTimerInterval } from './timer.js';
 let currentTime = 0;
 
 export function ejecution() {
+    const currentPage = window.location.pathname
+
+    if(currentPage != '/game2.html'){
+        return;
+    }
+
     const playButton = document.getElementById('playButton');
 
     playButton.addEventListener('click', async ()=>{

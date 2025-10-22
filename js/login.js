@@ -101,11 +101,11 @@ submitForm.addEventListener('submit', (e)=>{
 })
 
 
-// El usuario navega hacia el index.html
-document.getElementById('searchForm').addEventListener('submit', navIndex);
-document.getElementById('button-facebook').addEventListener('click', navIndex);
-document.getElementById('button-google').addEventListener('click', navIndex);
-//Redireccionamiento al index.html
+// El usuario navega hacia el home.html
+document.getElementById('searchForm').addEventListener('submit', navhome);
+document.getElementById('button-facebook').addEventListener('click', navhome);
+document.getElementById('button-google').addEventListener('click', navhome);
+//Redireccionamiento al home.html
 function initRedirection(){
     const countDownContainer = document.getElementById('countDown');
 
@@ -133,13 +133,13 @@ function initRedirection(){
         clearInterval(intervalId);
         countDownContainer.textContent = 'Redireccion completada. ¡Bienvenido!';
         setTimeout(() => {
-            window.location.href = '/index.html';
+            window.location.href = '/home.html';
         }, 1000);
     }, 4000)
 }
 
 
-function navIndex(e){
+function navhome(e){
     e.preventDefault();
-    window.location.href = "index.html"
+    window.location.href = "home.html"
 }

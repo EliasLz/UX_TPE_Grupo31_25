@@ -7,133 +7,98 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/globals.css">
-    <link rel="stylesheet" href="styles/spiner.css">
-    <link rel="stylesheet" href="styles/recommended.css">
-    <link rel="stylesheet" href="styles/ads.css">
-    <link rel="stylesheet" href="styles/carousel.css">
-    <link rel="stylesheet" href="styles/index-responsive.css">
-    <link rel="stylesheet" href="styles/footerStyle.css">
-    <link rel="stylesheet" href="styles/headerStyle.css">
-    <title>Games Toons</title>
+    <link rel="stylesheet" href="styles/loginStyle.css">
+    <title>Login</title>
 </head>
 <body>
-    <div id="loader-screen">
-        <div class="loader-content">
-            <div class="spinner"></div> 
-
-            <div class="progress-bar-container">
-                <div id="progress-bar-fill"></div>
-            </div>
-
-            <div id="progress-text">0%</div>
-        </div>
-    </div>
-
-    <div id="header"></div>
     
-    <main class="main-content">
-        <div class="recommended">
-            <h2>Recomendados</h2>
+    <section id="login" class="login card-naranja">
+        <img src="assets/Logo2.svg" alt="Logo">
+        <h1>Conectarse</h1>
 
-            <div class="card-container" id="recommendedContainer">
-                <!-- Tarjetas de juegos recomendados -->
-            </div>
+        <form class="card-interna-blanca" id="searchForm">
+            <input type="text" placeholder="Usuario" required>
+            <input type="password" placeholder="Clave" required>
+            <button type="submit" class="button-red">Iniciar Sesion</button>
+        </form>
+
+        <h4>Conectarse con</h4>
+        <div class="accounts">
+            <button id="button-facebook" class="button-red"><img src="assets/icons/facebook.svg" alt="Facebook">Facebook</button>
+            <button id="button-google" class="button-red"><img src="assets/icons/google.svg" alt="Google">Google</button>
         </div>
 
-        <section class="ads-section">
-            <div class="ads-card-container">
-                
-                <div class="ads-card">
-                    <div class="ads-card-image-wrapper">
-                        <img 
-                            src="assets/img/ads/Betano-768x442.jpg" 
-                            alt="Anuncio Placeholder 1" 
-                            class="ads-card-image"
-                        >
-                    </div>
-                    <div class="ads-card-info">
-                        <p>Ver mas</p>
-                    </div>
-                </div>
-                
-                <div class="ads-card">
-                    <div class="ads-card-image-wrapper">
-                        <img 
-                            src="assets/img/ads/black-friday-1200x675.jpg" 
-                            alt="Anuncio Placeholder 1" 
-                            class="ads-card-image"
-                        >
-                    </div>
-                    <div class="ads-card-info">
-                        <p>Ver mas</p>
-                    </div>
-                </div>
+        <div class="register-button cont-register">
+            <h4>No estas registrado?</h4>
+            <button id="button-register" class="button-red">Registrarse</button>
+        </div>
+    </section>
 
-                <div class="ads-card">
-                    <div class="ads-card-image-wrapper">
-                        <img 
-                            src="assets/img/ads/monitor240hz-700x700.jpg" 
-                            alt="Anuncio Placeholder 1" 
-                            class="ads-card-image"
-                        >
-                    </div>
-                    <div class="ads-card-info">
-                        <p>Ver mas</p>
-                    </div>
-                </div>
 
-                <div class="ads-card">
-                    <div class="ads-card-image-wrapper">
-                        <img 
-                            src="assets/img/ads/oferta-galicia-576x300.jpg" 
-                            alt="Anuncio Placeholder 1" 
-                            class="ads-card-image"
-                        >
-                    </div>
-                    <div class="ads-card-info">
-                        <p>Ver mas</p>
-                    </div>
-                </div>
-                
-                <div class="ads-card">
-                    <div class="ads-card-image-wrapper">
-                        <img 
-                            src="assets/img/ads/promo-840x560.jpeg" 
-                            alt="Anuncio Placeholder 1" 
-                            class="ads-card-image"
-                        >
-                    </div>
-                    <div class="ads-card-info">
-                        <p>Ver mas</p>
-                    </div>
-                </div>
+    <section id="register" class="register card-naranja hiden">
+        <img src="assets/Logo2.svg" alt="Logo">
+        <h2>Complete los campos</h2>
 
-                <div class="ads-card">
-                    <div class="ads-card-image-wrapper">
-                        <img 
-                            src="assets/img/ads/promo2-700x700.jpg" 
-                            alt="Anuncio Placeholder 1" 
-                            class="ads-card-image"
-                        >
-                    </div>
-                    <div class="ads-card-info">
-                        <p>Ver mas</p>
-                    </div>
-                </div>
+        <form class="form-register card-interna-blanca" id="form-register" action="" >
+            <label for="">Nombre</label>
+            <input type="text" id="name" placeholder="Juan" required>
+            
+            <label for="">Apellido</label>
+            <input type="text" id="last-name" placeholder="Contreras" required>
+            
+            <label for="">Edad</label>
+            <input type="number" id="age" placeholder="Edad" min="0" max="100" required>
+            
+            <label for="">Apodo <span class="optional-text">(Opcional)</span></label>
+            <input type="text" id="nickname" placeholder="Juancho">
+            
+            <label for="">Correo Electronico</label>
+            <input type="email" id="email" placeholder="juancontreras@gmail.com" required>
+            
+            <label for="">Clave</label>
+            <input type="password" id="password" class="input-password" required>
+            <span class="optional-text">Debe tener 8 digitos. Al menos una mayuscula, un numero y un caracter</span>
+            
+            <label for="">Repetir Clave</label>
+            <input type="password" id="repate-password" required>
+            
+            <label for="">Terminos de uso</label>
+            <div class="terms">
+                <input type="checkbox" id="check" required>
+                <p>Acepto los terminos y condiciones</p>
             </div>
-        </section>
 
-        <!--Cards a la derecha -->
-        <aside class="proxCardPubli categories-container" id="conteiner-games">
-        </aside>
 
-        <section class="categories-container" id="categoriesContainer">
-        </section>
-    </main>
-    <div id="footer"></div>
+            <label>Verificación de Seguridad</label>
+            <div class="captcha-question">
+                <p id="captcha-question">¿Cuánto es X + Y?</p> 
+            </div>
+            
+            <input type="number" id="captcha-answer" placeholder="Tu respuesta" required>
+            
+            <p id="captcha-message" class="message-hidden"></p>
 
-    <script type="module" src="js/main.js">
-        //Cargamos el script como un modulo
-    </script> 
+            <button type="submit" id="button-submit" class="button-red">Crear Cuenta</button>
+        </form>
+
+        <button id="button-back" class="boton-volver">Volver</button>
+    </section>
+
+    <section id="welcome" class="welcome card-naranja hiden">
+        <div class="image-gradient">
+            <img src="assets/Logo5.svg" class="image-party" alt="">
+        </div>
+        <img src="assets/Confetis.svg" class="image-down" alt="">
+        <h2>Tu cuenta ha sido creada</h2>
+
+        <div id="countDown"></div>
+
+        <p class="optional-text">Tu perfil es público y otros usuarios pueden enviar 
+            solicitudes de amistar. Puedes cambiar esto en tus preferencias de privacidad 
+        </p>
+
+    </section>
+
+    <script src="js/login.js"></script>
 </body>
 </html>
