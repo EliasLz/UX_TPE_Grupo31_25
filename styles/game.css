@@ -25,8 +25,6 @@ button:focus-visible {
     display: flex;
     justify-content: center;
     gap: 3%;
-    height: 980px;
-    width: 980px;
 }
 
 /* El Breadcrumb */
@@ -76,7 +74,6 @@ ul.breadcrumb li + li::before {
 }
 
 .timerDisplay {
-    background-color: black;
     border-radius: 10px;
     padding: 10px;
     color: white;
@@ -84,6 +81,11 @@ ul.breadcrumb li + li::before {
     align-items: center;
     display: flex;
     font-size: xx-large;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(255, 0, 0, 0.6);
+    z-index: 2;
 }
 
 /* ANIMACIÓN: Implementación */
@@ -356,6 +358,7 @@ button.play-button:active {
     max-width: 500px;
     animation: fadeIn 0.3s ease-out;
     border: 4px solid #fffbeb;
+    margin: 40px 200px;
 }
 
 .config-menu h1 {

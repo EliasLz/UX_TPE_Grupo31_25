@@ -21,9 +21,13 @@ export function ejecution() {
         const randomImageOrder = randomOrder(IMAGE_BANK);
         let currentImageIndex = 0;
 
-        const gameButtonbar = document.querySelector('.gameButtonbar');
+        const gameButtonbar = document.getElementById('gameScreen');
         const firsChild = gameButtonbar.firstElementChild;
         let timerDisplay = document.getElementById('timerDisplay');
+        console.log(gameButtonbar);
+        console.log(document);
+        console.log(timerDisplay);
+
         if (!timerDisplay) { // Crear si no existe.
             timerDisplay = document.createElement('div')
             timerDisplay.id = 'timerDisplay';
@@ -31,6 +35,7 @@ export function ejecution() {
             firsChild.insertAdjacentElement('afterend', timerDisplay)
         }
         timerDisplay.textContent = '00:00'
+
 
         function loadNextLevel() { // <-- NUEVO
             if (currentImageIndex < randomImageOrder.length) {
