@@ -25,12 +25,13 @@ export function startTimer(gameConfig, initialTime, timer, handlerGameOver){
     timer.textContent = formatTime(currentTime);
     
     hintButton.addEventListener('click', ()=>{
-        accommodatePice();
-
-        if(isCountdown){
-            currentTime += seconds;
-        }else {
-            currentTime -= seconds;
+        const canHelp = accommodatePice();
+        if(canHelp){  //Prevenimos que siga sumando segundos si se spamea el boton
+            if(isCountdown){
+                currentTime += seconds;
+            }else {
+                currentTime -= seconds;
+            }
         }
     })
     
