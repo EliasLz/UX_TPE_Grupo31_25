@@ -5,6 +5,7 @@ export function prepareGame(selectedConfig, img, onLevelComplete, currentImageIn
     const gameBar = document.querySelector('.gameButtonbar')
     gameContainer.innerHTML = `
     <canvas id="miCanvas"></canvas>
+    <div id="timerDisplay" class="timerDisplay"> 00:00 </div>
     `;
     gameBar.style.display = '';
     const pieces = selectedConfig.piecesCount;
