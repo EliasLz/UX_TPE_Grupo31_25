@@ -12,7 +12,7 @@ export function prepareGame(selectedConfig, img, onLevelComplete, currentImageIn
     const gameBar = document.querySelector('.gameButtonbar')
     gameContainer.innerHTML = `
     <canvas id="miCanvas"></canvas>
-    <div id="timerDisplay" class="timerDisplay"> 00:00 </div>
+    <div class="timerDisplay" id="timerDisplay"> 00:00 </div>
     <button id="hint" class="btnHelp"> <img src="assets/icons/ayuda.png" alt="Ayuda" > </button>
     `;
     gameBar.style.display = '';

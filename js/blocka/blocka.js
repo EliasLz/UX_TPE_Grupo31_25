@@ -22,16 +22,6 @@ export function ejecution() {
         let currentImageIndex = 0;
 
         const gameButtonbar = document.getElementById('gameScreen');
-        const firsChild = gameButtonbar.firstElementChild;
-        let timerDisplay = document.getElementById('timerDisplay');
-
-        if (!timerDisplay) { // Crear si no existe.
-            timerDisplay = document.createElement('div')
-            timerDisplay.id = 'timerDisplay';
-            timerDisplay.classList.add('timerDisplay');
-            firsChild.insertAdjacentElement('afterend', timerDisplay)
-        }
-        timerDisplay.textContent = '00:00'
 
         const initialTime = gameConfig.maxTime > 0 ? gameConfig.maxTime : 0;
 
@@ -41,7 +31,8 @@ export function ejecution() {
                 const currentImage = randomImageOrder[currentImageIndex];
                 
                 prepareGame(gameConfig, currentImage, loadNextLevel, currentImageIndex); //--> Importante este feature de pasarle un callback
-                
+                let timerDisplay = document.getElementById('timerDisplay');
+
                 const startTime = (currentImageIndex === 0) ? initialTime : currentTime;
                 currentTime = startTimer(gameConfig, startTime, timerDisplay, handlerGameOver);
 

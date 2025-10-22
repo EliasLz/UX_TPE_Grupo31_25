@@ -14,7 +14,7 @@ export function handlerGameOver(){
     if(gameButtonbar) gameButtonbar.style.display = 'none';
 }
 
-export function startTimer(gameConfig, initialTime, timer, handlerGameOver){
+export function startTimer(gameConfig, initialTime, timerDisplay, handlerGameOver){
     if(gameTimerInterval) clearInterval(gameTimerInterval); //--> Limpiamos el anterior tiempo (Se podria llegar a guardar para que se vea el mejor tiempo)
     const seconds = gameConfig.useHelp ? 5 : 0;
 
@@ -22,15 +22,15 @@ export function startTimer(gameConfig, initialTime, timer, handlerGameOver){
 
     const isCountdown  = gameConfig.maxTime > 0;
     let currentTime = initialTime;
-    timer.textContent = formatTime(currentTime);
+    timerDisplay.textContent = formatTime(currentTime);
     
     hintButton.addEventListener('click', ()=>{
         const canHelp = accommodatePice();
         if(canHelp){  //Prevenimos que siga sumando segundos si se spamea el boton
             if(isCountdown){
-                currentTime += seconds;
-            }else {
                 currentTime -= seconds;
+            }else {
+                currentTime += seconds;
             }
         }
     })
@@ -46,7 +46,7 @@ export function startTimer(gameConfig, initialTime, timer, handlerGameOver){
         } else {
             currentTime++;
         }
-        timer.textContent = formatTime(currentTime);
+        timerDisplay.textContent = formatTime(currentTime);
     }, 1000); 
 
     return currentTime;
