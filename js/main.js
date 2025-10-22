@@ -340,6 +340,9 @@ function attachCardClickHandlers(container) {
                 if (id === '1' || id === 1) {
                     window.location.href = 'game.html';
                 }
+                else if (id === '2' || id === 2) {
+                    window.location.href = 'game2.html';
+                }
                 return;
             }
             el = el.parentNode;
