@@ -1,9 +1,7 @@
 import { configureGame, IMAGE_BANK } from './config.js';
 import { randomOrder, formatTime } from './utils.js';
 import { prepareGame } from './puzzle.js';
-import { handlerGameOver, startTimer, gameTimerInterval } from './timer.js';
-
-let currentTime = 0;
+import { handlerGameOver, startTimer, gameTimerInterval, currentTime } from './timer.js';
 
 export function ejecution() {
     const currentPage = window.location.pathname
@@ -34,7 +32,7 @@ export function ejecution() {
                 let timerDisplay = document.getElementById('timerDisplay');
 
                 const startTime = (currentImageIndex === 0) ? initialTime : currentTime;
-                currentTime = startTimer(gameConfig, startTime, timerDisplay, handlerGameOver);
+                startTimer(gameConfig, startTime, timerDisplay, handlerGameOver);
 
                 currentImageIndex++;
             
@@ -45,8 +43,7 @@ export function ejecution() {
 
                 if (gameConfig.maxTime > 0) {
                     // MODO CONTRARRELOJ
-                    const timeSpent = gameConfig.maxTime - currentTime;
-                    const finalTime = formatTime(timeSpent);
+                    const finalTime = formatTime(currentTime);
                     finalMessage = `<h2>¡Victoria!</h2><p>Completaste todos los puzzles en modo Contrarreloj con ${finalTime} de tiempo consumido. ¡Excelente!</p>`;
                 } else {
                     // MODO CRONÓMETRO

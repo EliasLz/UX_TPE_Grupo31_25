@@ -261,7 +261,7 @@ export function accommodatePice(){
         }
     })
 
-    if (unordenerPieces.length === 0) return;
+    if (unordenerPieces.length === 0) return false;
     
     const randomIndex = Math.floor(Math.random() * unordenerPieces.length);
     const rdmPiece = unordenerPieces[randomIndex]
@@ -278,6 +278,8 @@ export function accommodatePice(){
             currentLevelIndex
         );
     }
+
+    return true;
 }
 
 // Función para determinar qué pieza fue clickeada considerando la rotación

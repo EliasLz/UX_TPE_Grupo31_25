@@ -3,6 +3,7 @@ import { accommodatePice } from './puzzle.js'
 
 
 export let gameTimerInterval = null; //--> Es para guardar el Id del intervalo
+export let currentTime = 0;
 
 //Handler para el fin del juego por tiempo
 export function handlerGameOver(){
@@ -17,11 +18,10 @@ export function handlerGameOver(){
 export function startTimer(gameConfig, initialTime, timerDisplay, handlerGameOver){
     if(gameTimerInterval) clearInterval(gameTimerInterval); //--> Limpiamos el anterior tiempo (Se podria llegar a guardar para que se vea el mejor tiempo)
     const seconds = gameConfig.useHelp ? 5 : 0;
-
+    let currentTime = initialTime;
     const hintButton = document.getElementById('hint');
 
     const isCountdown  = gameConfig.maxTime > 0;
-    let currentTime = initialTime;
     timerDisplay.textContent = formatTime(currentTime);
     
     hintButton.addEventListener('click', ()=>{
@@ -32,6 +32,7 @@ export function startTimer(gameConfig, initialTime, timerDisplay, handlerGameOve
             }else {
                 currentTime += seconds;
             }
+            timerDisplay.textContent = formatTime(currentTime);
         }
     })
     
@@ -47,7 +48,5 @@ export function startTimer(gameConfig, initialTime, timerDisplay, handlerGameOve
             currentTime++;
         }
         timerDisplay.textContent = formatTime(currentTime);
-    }, 1000); 
-
-    return currentTime;
+    }, 1000);
 }
