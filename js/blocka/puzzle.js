@@ -43,9 +43,8 @@ function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
                 puzzlePieces.push({
                     col: col,
                     row: fila,
-                    rotation: Math.floor(Math.random() * 4) * 90 // Rotación inicial aleatoria (0, 90, 180, 270)
+                    rotation: Math.floor(Math.random() * 3 + 1) * 90 // Rotación inicial aleatoria (0, 90, 180, 270)
                 });
-
             }
         }
 
@@ -74,11 +73,13 @@ function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
             }else if(evento.button === 2){
             rotation = -90;
             }
-
+            
             if(rotation !== 0){
                 puzzlePieces[piezaIndex].rotation += rotation;
                 puzzlePieces[piezaIndex].rotation = (puzzlePieces[piezaIndex].rotation + 360 ) % 360;
-                drawPuzzle(ctx, imagen, anchoPieza, altoPieza, currentImageIndex);
+                // redibujar solo la pieza modificada
+                const pieza = puzzlePieces[piezaIndex];
+                redrawPiece(ctx, imagen, pieza, anchoPieza, altoPieza, currentImageIndex);
 
                 if(isCompleted()){
                     console.log("nivel completado")
@@ -87,9 +88,89 @@ function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
                     }, 1000)
                 }
             }
+
+
         }
     });
 };
+
+// Dibuja una sola pieza del rompecabezas (usa la misma lógica que drawPuzzle pero para una sola pieza)
+function drawPiece(ctx, imagen, pieza, anchoPieza, altoPieza, currentImageIndex){
+    const rotation = pieza.rotation;
+    const sourceX = pieza.col * anchoPieza;
+    const sourceY = pieza.row * altoPieza;
+
+    ctx.save();
+
+    const destinoX = sourceX + anchoPieza / 2;
+    const destinoY = sourceY + altoPieza / 2;
+    ctx.translate(destinoX, destinoY);
+    ctx.rotate(rotation * Math.PI / 180);
+
+    let filter = 'none';
+    if (currentImageIndex > 0){
+        const filters = [
+            'invert(100%)',
+            'brightness(30%)',
+            'grayscale(100%)'
+        ];
+        filter = filters[(currentImageIndex - 1) % filters.length]
+    }
+
+    ctx.filter = filter;
+
+    ctx.drawImage(
+        imagen,
+        sourceX, sourceY,
+        anchoPieza, altoPieza,
+        -anchoPieza / 2, -altoPieza / 2,
+        anchoPieza, altoPieza
+    );
+
+    ctx.filter = 'none';
+
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(
+        -anchoPieza / 2, -altoPieza / 2,
+        anchoPieza, altoPieza);
+
+    ctx.restore();
+}
+
+// Redibuje una sola pieza usando un lienzo fuera de la pantalla para evitar afectar las piezas adyacentes
+function redrawPiece(ctx, imagen, pieza, anchoPieza, altoPieza, currentImageIndex){
+    // Crea un lienzo fuera de pantalla que coincida con el tamaño del lienzo completo
+    const offscreen = document.createElement('canvas');
+    offscreen.width = ctx.canvas.width;
+    offscreen.height = ctx.canvas.height;
+    const offscreenCtx = offscreen.getContext('2d');
+
+    // Copiar el estado actual del lienzo principal fuera de la pantalla
+    offscreenCtx.drawImage(ctx.canvas, 0, 0);
+
+    // Limpia solo el área de esta pieza (sin considerar rotación, límites exactos de la pieza)
+    const sourceX = pieza.col * anchoPieza;
+    const sourceY = pieza.row * altoPieza;
+    offscreenCtx.clearRect(sourceX, sourceY, anchoPieza, altoPieza);
+
+    // Dibuja solo esta pieza en el lienzo fuera de la pantalla.
+    drawPiece(offscreenCtx, imagen, pieza, anchoPieza, altoPieza, currentImageIndex);
+
+    // Copiar todo de nuevo al lienzo principal
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.drawImage(offscreen, 0, 0);
+
+    // Si la pieza está correctamente orientada, dibuje un borde de color lima (alineado con el eje)
+    if ((pieza.rotation % 360) === 0){
+        ctx.save();
+        ctx.filter = 'none';
+        ctx.strokeStyle = 'lime';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(pieza.col * anchoPieza, pieza.row * altoPieza, anchoPieza, altoPieza);
+        ctx.restore();
+    }
+}
 
 function drawPuzzle(ctx, imagen, anchoPieza, altoPieza, currentImageIndex) {
 
@@ -135,8 +216,8 @@ function drawPuzzle(ctx, imagen, anchoPieza, altoPieza, currentImageIndex) {
 
         ctx.filter = 'none' //reset
 
-        ctx.strokeStyle = 'black';
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 3;
         ctx.strokeRect(
             -anchoPieza / 2, -altoPieza / 2,
             anchoPieza, altoPieza);
