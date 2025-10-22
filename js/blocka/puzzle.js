@@ -1,12 +1,19 @@
 export let puzzlePieces = [];
 
+//Variables para mantener el 'contexto' de una forma global 
+let puzzleContext = null; 
+let puzzleImage = null;
+let puzzlePieceWidth = 0;
+let puzzlePieceHeight = 0;
+let currentLevelIndex = 0;
+
 export function prepareGame(selectedConfig, img, onLevelComplete, currentImageIndex){
     const gameContainer = document.getElementById('gameScreen');
     const gameBar = document.querySelector('.gameButtonbar')
     gameContainer.innerHTML = `
     <canvas id="miCanvas"></canvas>
     <div id="timerDisplay" class="timerDisplay"> 00:00 </div>
-    <button id="helpButton hint" class="btnHelp"> <img src="assets/icons/ayuda.png" alt="Ayuda" > </button>
+    <button id="hint" class="btnHelp"> <img src="assets/icons/ayuda.png" alt="Ayuda" > </button>
     `;
     gameBar.style.display = '';
     const pieces = selectedConfig.piecesCount;
@@ -36,6 +43,14 @@ function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
         // Calculamos el ancho y alto de cada pieza
         const anchoPieza = imagen.width / COLUMNAS;
         const altoPieza = imagen.height / FILAS;
+
+        //Guardamos en variables estos datos (para que )
+        puzzleContext = ctx;
+        puzzleImage = imagen;
+        puzzlePieceWidth = anchoPieza;
+        puzzlePieceHeight = altoPieza;
+        currentLevelIndex = currentImageIndex;
+
 
         // Recorremos cada fila y columna para dibujar las piezas
         puzzlePieces = [];
@@ -230,4 +245,32 @@ function drawPuzzle(ctx, imagen, anchoPieza, altoPieza, currentImageIndex) {
 
 function isCompleted(){
     return puzzlePieces.every(piece => (piece.rotation % 360)===0);
+}
+
+export function accommodatePice(){
+    const unordenerPieces = [];
+
+    puzzlePieces.map(piece => {
+        if(piece.rotation != 0){
+            unordenerPieces.push(piece);
+        }
+    })
+
+    if (unordenerPieces.length === 0) return;
+    
+    const randomIndex = Math.floor(Math.random() * unordenerPieces.length);
+    const rdmPiece = unordenerPieces[randomIndex]
+    
+    rdmPiece.rotation = 0;
+    
+    if (puzzleContext) {
+        redrawPiece(
+            puzzleContext, 
+            puzzleImage, 
+            rdmPiece, 
+            puzzlePieceWidth, 
+            puzzlePieceHeight,
+            currentLevelIndex
+        );
+    }
 }

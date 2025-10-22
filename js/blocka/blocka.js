@@ -24,9 +24,6 @@ export function ejecution() {
         const gameButtonbar = document.getElementById('gameScreen');
         const firsChild = gameButtonbar.firstElementChild;
         let timerDisplay = document.getElementById('timerDisplay');
-        console.log(gameButtonbar);
-        console.log(document);
-        console.log(timerDisplay);
 
         if (!timerDisplay) { // Crear si no existe.
             timerDisplay = document.createElement('div')
@@ -36,6 +33,7 @@ export function ejecution() {
         }
         timerDisplay.textContent = '00:00'
 
+        const initialTime = gameConfig.maxTime > 0 ? gameConfig.maxTime : 0;
 
         function loadNextLevel() { // <-- NUEVO
             if (currentImageIndex < randomImageOrder.length) {
@@ -44,6 +42,9 @@ export function ejecution() {
                 
                 prepareGame(gameConfig, currentImage, loadNextLevel, currentImageIndex); //--> Importante este feature de pasarle un callback
                 
+                const startTime = (currentImageIndex === 0) ? initialTime : currentTime;
+                currentTime = startTimer(gameConfig, startTime, timerDisplay, handlerGameOver);
+
                 currentImageIndex++;
             
             } else {
@@ -55,23 +56,17 @@ export function ejecution() {
                     // MODO CONTRARRELOJ
                     const timeSpent = gameConfig.maxTime - currentTime;
                     const finalTime = formatTime(timeSpent);
-                    finalMessage = `<h2>¡Victoria!</h2><p>Completaste todos los puzzles en modo Contrarreloj con **${finalTime}** de tiempo consumido. ¡Excelente!</p>`;
+                    finalMessage = `<h2>¡Victoria!</h2><p>Completaste todos los puzzles en modo Contrarreloj con ${finalTime} de tiempo consumido. ¡Excelente!</p>`;
                 } else {
                     // MODO CRONÓMETRO
                     const finalTime = formatTime(currentTime);
-                    finalMessage = `<h2>¡Felicidades!</h2><p>Has completado todos los puzzles. Tu tiempo total fue de **${finalTime}**.</p>`;
+                    finalMessage = `<h2>¡Felicidades!</h2><p>Has completado todos los puzzles. Tu tiempo total fue de ${finalTime}.</p>`;
                 }
 
                 gameContainer.innerHTML = finalMessage;
                 gameButtonbar.style.display = 'none';
             }
         }
-
-        const initialTime = gameConfig.maxTime > 0 ? gameConfig.maxTime : 0;
-        
-        //Guardamos el tiempo actual
-        currentTime = startTimer(gameConfig, initialTime, timerDisplay, handlerGameOver);
-        
         // Iniciar el primer nivel
         loadNextLevel();     
     })
