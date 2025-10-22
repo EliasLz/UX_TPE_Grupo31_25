@@ -83,6 +83,7 @@ function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
 
                 if(isCompleted()){
                     console.log("nivel completado")
+                    canvas.style.pointerEvents = 'none'; // Desabilitar interacciones
                     setTimeout(()=>{
                         onLevelComplete();
                     }, 1000)

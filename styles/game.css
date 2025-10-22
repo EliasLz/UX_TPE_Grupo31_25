@@ -124,6 +124,7 @@ ul.breadcrumb li + li::before {
     border: 1px solid var(--color-texto-500);
     border-radius: 10px;
     font-size: 13px;
+    cursor: pointer;
     /* Se invoca la animación */
     animation-name: pulseButton;
     /* Se define su duración */
@@ -305,6 +306,10 @@ button.play-button:active {
 .pageIndex li:first-child a {
     color: var(--color-secundarioDorado-400);
     text-decoration: underline;
+}
+
+.pagehome{
+    display: flex;
 }
 
 
