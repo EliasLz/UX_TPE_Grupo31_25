@@ -312,6 +312,20 @@ button.play-button:active {
     display: flex;
 }
 
+.btnHelp{
+    width: min-content;
+    border-radius: 100%;
+    background-color: initial;
+    position: absolute;    
+    top: 0;
+    cursor: pointer;
+}
+
+.btnHelp img{
+    width: 70px;
+    height: 70px;
+}
+
 
 /* --------------------------------------------------------------------------- */
 /* BORRADOR: cambiar por publis tipo carruseles y cards  */

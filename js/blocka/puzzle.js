@@ -6,6 +6,7 @@ export function prepareGame(selectedConfig, img, onLevelComplete, currentImageIn
     gameContainer.innerHTML = `
     <canvas id="miCanvas"></canvas>
     <div id="timerDisplay" class="timerDisplay"> 00:00 </div>
+    <button id="helpButton hint" class="btnHelp"> <img src="assets/icons/ayuda.png" alt="Ayuda" > </button>
     `;
     gameBar.style.display = '';
     const pieces = selectedConfig.piecesCount;
@@ -82,7 +83,7 @@ function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
                 redrawPiece(ctx, imagen, pieza, anchoPieza, altoPieza, currentImageIndex);
 
                 if(isCompleted()){
-                    console.log("nivel completado")
+                    console.log("nivel completado");
                     canvas.style.pointerEvents = 'none'; // Desabilitar interacciones
                     setTimeout(()=>{
                         onLevelComplete();
