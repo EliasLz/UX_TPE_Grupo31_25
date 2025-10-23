@@ -4,9 +4,9 @@ import { prepareGame } from './puzzle.js';
 import { handlerGameOver, startTimer, gameTimerInterval, currentTime } from './timer.js';
 
 export function ejecution() {
-    const currentPage = window.location.pathname
+    const currentPage = window.location.pathname.split('/').pop();
 
-    if(currentPage != '/game2.html'){
+    if(currentPage != 'game2.html'){
         return;
     }
 
