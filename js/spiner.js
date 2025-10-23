@@ -8,9 +8,9 @@ const totalSteps = DURATION / INTERVAL;
 let currentStep = 0;
 
 export function simulateProgress() {
-    const currentPage = window.location.pathname
+    const currentPage = window.location.pathname.split('/').pop();
 
-    if(currentPage != '/home.html'){
+    if(currentPage != 'home.html'){
         return;
     }
 
