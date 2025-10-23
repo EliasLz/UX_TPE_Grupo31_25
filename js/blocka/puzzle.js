@@ -144,13 +144,16 @@ function drawPiece(ctx, imagen, pieza, anchoPieza, altoPieza, currentImageIndex)
     ctx.rotate(rotation * Math.PI / 180);
 
     let filter = 'none';
-    if (currentImageIndex > 0){
+    // Si la pieza está alineada, no aplicar filtro ni líneas
+    if ((pieza.rotation % 360) === 0) {
+        filter = 'none';
+    } else if (currentImageIndex > 0) {
         const filters = [
             'invert(100%)',
             'brightness(30%)',
             'grayscale(100%)'
         ];
-        filter = filters[(currentImageIndex - 1) % filters.length]
+        filter = filters[(currentImageIndex - 1) % filters.length];
     }
 
     ctx.filter = filter;
@@ -165,47 +168,24 @@ function drawPiece(ctx, imagen, pieza, anchoPieza, altoPieza, currentImageIndex)
 
     ctx.filter = 'none';
 
-    ctx.strokeStyle = 'white';
-    ctx.lineWidth = 3;
-    ctx.strokeRect(
-        -anchoPieza / 2, -altoPieza / 2,
-        anchoPieza, altoPieza);
+    // Solo dibujar líneas si la pieza NO está alineada
+    if ((pieza.rotation % 360) !== 0) {
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(
+            -anchoPieza / 2, -altoPieza / 2,
+            anchoPieza, altoPieza);
+    }
 
     ctx.restore();
 }
 
 // Redibuje una sola pieza usando un lienzo fuera de la pantalla para evitar afectar las piezas adyacentes
 function redrawPiece(ctx, imagen, pieza, anchoPieza, altoPieza, currentImageIndex){
-    // Crea un lienzo fuera de pantalla que coincida con el tamaño del lienzo completo
-    const offscreen = document.createElement('canvas');
-    offscreen.width = ctx.canvas.width;
-    offscreen.height = ctx.canvas.height;
-    const offscreenCtx = offscreen.getContext('2d');
-
-    // Copiar el estado actual del lienzo principal fuera de la pantalla
-    offscreenCtx.drawImage(ctx.canvas, 0, 0);
-
-    // Limpia solo el área de esta pieza (sin considerar rotación, límites exactos de la pieza)
-    const sourceX = pieza.col * anchoPieza;
-    const sourceY = pieza.row * altoPieza;
-    offscreenCtx.clearRect(sourceX, sourceY, anchoPieza, altoPieza);
-
-    // Dibuja solo esta pieza en el lienzo fuera de la pantalla.
-    drawPiece(offscreenCtx, imagen, pieza, anchoPieza, altoPieza, currentImageIndex);
-
-    // Copiar todo de nuevo al lienzo principal
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.drawImage(offscreen, 0, 0);
-
-    // Si la pieza está correctamente orientada, dibuje un borde de color lima (alineado con el eje)
-    if ((pieza.rotation % 360) === 0){
-        ctx.save();
-        ctx.filter = 'none';
-        ctx.strokeStyle = 'lime';
-        ctx.lineWidth = 5;
-        ctx.strokeRect(pieza.col * anchoPieza, pieza.row * altoPieza, anchoPieza, altoPieza);
-        ctx.restore();
-    }
+    // Para evitar artefactos por bordes previamente dibujados en piezas adyacentes,
+    // redibujamos todo el puzzle con la nueva rotación. drawPuzzle ya omite
+    // líneas y filtros para piezas alineadas, por lo que el resultado quedará limpio.
+    drawPuzzle(ctx, imagen, anchoPieza, altoPieza, currentImageIndex);
 }
 
 function drawPuzzle(ctx, imagen, anchoPieza, altoPieza, currentImageIndex) {
@@ -225,6 +205,9 @@ function drawPuzzle(ctx, imagen, anchoPieza, altoPieza, currentImageIndex) {
         //y la parte de (currentImageIndex - 1) es para que el nivel 2(currentImageIndex = 1) empiece con el 1er filtro.
         filter = filters[(currentImageIndex - 1) % filters.length] 
     }
+    // Si todo el puzzle está completado, anulamos cualquier filtro a nivel de pieza
+    // para mostrar la imagen limpia.
+    const allAligned = isCompleted();
 
     puzzlePieces.forEach(pieza => {
         const rotation = pieza.rotation;
@@ -237,10 +220,13 @@ function drawPuzzle(ctx, imagen, anchoPieza, altoPieza, currentImageIndex) {
         const destinoY = sourceY + altoPieza / 2;
         
         ctx.translate(destinoX, destinoY);
-
         ctx.rotate(rotation * Math.PI / 180);
-        
-        ctx.filter = filter;
+
+        // Si todo está alineado, forzamos 'none' en todas las piezas.
+        // Si no, las piezas alineadas individuales también quedan sin filtro.
+        let pieceFilter = allAligned ? 'none' : filter;
+
+        ctx.filter = pieceFilter;
 
         ctx.drawImage(
             imagen,
@@ -250,14 +236,16 @@ function drawPuzzle(ctx, imagen, anchoPieza, altoPieza, currentImageIndex) {
             anchoPieza, altoPieza
         );
 
-        ctx.filter = 'none' //reset
 
-        ctx.strokeStyle = 'white';
-        ctx.lineWidth = 3;
-        ctx.strokeRect(
-            -anchoPieza / 2, -altoPieza / 2,
-            anchoPieza, altoPieza);
-        
+        // Solo dibujar líneas si la pieza NO está alineada
+        if ((rotation % 360) !== 0) {
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(
+                -anchoPieza / 2, -altoPieza / 2,
+                anchoPieza, altoPieza);
+        }
+
         ctx.restore();
     });
 }

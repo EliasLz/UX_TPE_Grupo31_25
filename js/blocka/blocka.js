@@ -38,7 +38,6 @@ export function ejecution() {
 
                 let boton = document.getElementById('hint');
                 if(!gameConfig.useHelp){
-                    console.log( boton);
                     boton.style.display = 'none';
                 } else {
                     boton.style.display = 'inline-block';
