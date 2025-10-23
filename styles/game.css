@@ -81,6 +81,25 @@ ul.breadcrumb li:last-child:hover {
     object-fit: cover;
 }
 
+@keyframes pulseGold {
+    0% {
+        transform: scale(1);
+        box-shadow: none;
+    }
+    50% {
+        transform: scale(1.3);
+        box-shadow: 0 0 0 3px gold;
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: none;
+    }
+}
+
+.time-registered {
+    animation: pulseGold 0.5s ease-in-out;
+}
+
 .timerDisplay {
     border-radius: 10px;
     padding: 10px;
@@ -109,8 +128,8 @@ ul.breadcrumb li:last-child:hover {
     }
 }
 
-/*Boton iniciar juego:
-    me obliga a repetir fuente y color*/
+/*Boton iniciar juego*/
+
 .play-button {
     /* Posición */
     display: flex;

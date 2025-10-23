@@ -256,7 +256,7 @@ export function accommodatePice(){
     const unordenerPieces = [];
 
     puzzlePieces.map(piece => {
-        if(piece.rotation != 0){
+        if(piece.rotation !== 0){
             unordenerPieces.push(piece);
         }
     })
