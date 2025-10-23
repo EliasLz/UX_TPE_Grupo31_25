@@ -42,6 +42,14 @@ ul.breadcrumb li + li::before {
     margin: 0 8px;
 }
 
+ul.breadcrumb li:last-child:hover {
+  background-color: transparent;
+  color: inherit;
+  border-radius: 0;
+  list-style: none;
+  cursor: default;
+}
+
 /* Contenedor de referencia: */
 .game-container {
     display: flex;
