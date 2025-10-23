@@ -1,4 +1,9 @@
+import { addTotalTime } from './timer.js';
+import { parseTime } from './utils.js';
+
 export let puzzlePieces = [];
+
+
 
 //Variables para mantener el 'contexto' de una forma global 
 let puzzleContext = null; 
@@ -117,7 +122,10 @@ function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
                 redrawPiece(ctx, imagen, pieza, anchoPieza, altoPieza, currentImageIndex);
 
                 if(isCompleted()){
-                    console.log("nivel completado");
+                    //cargamos el tiempo total del nivel
+                    let time = document.getElementById('timerDisplay').textContent;
+                    addTotalTime(parseTime(time));
+                    
                     canvas.style.pointerEvents = 'none'; // Desabilitar interacciones
                     setTimeout(()=>{
                         onLevelComplete();
@@ -130,55 +138,6 @@ function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
     });
 };
 
-// Dibuja una sola pieza del rompecabezas (usa la misma lógica que drawPuzzle pero para una sola pieza)
-function drawPiece(ctx, imagen, pieza, anchoPieza, altoPieza, currentImageIndex){
-    const rotation = pieza.rotation;
-    const sourceX = pieza.col * anchoPieza;
-    const sourceY = pieza.row * altoPieza;
-
-    ctx.save();
-
-    const destinoX = sourceX + anchoPieza / 2;
-    const destinoY = sourceY + altoPieza / 2;
-    ctx.translate(destinoX, destinoY);
-    ctx.rotate(rotation * Math.PI / 180);
-
-    let filter = 'none';
-    // Si la pieza está alineada, no aplicar filtro ni líneas
-    if ((pieza.rotation % 360) === 0) {
-        filter = 'none';
-    } else if (currentImageIndex > 0) {
-        const filters = [
-            'invert(100%)',
-            'brightness(30%)',
-            'grayscale(100%)'
-        ];
-        filter = filters[(currentImageIndex - 1) % filters.length];
-    }
-
-    ctx.filter = filter;
-
-    ctx.drawImage(
-        imagen,
-        sourceX, sourceY,
-        anchoPieza, altoPieza,
-        -anchoPieza / 2, -altoPieza / 2,
-        anchoPieza, altoPieza
-    );
-
-    ctx.filter = 'none';
-
-    // Solo dibujar líneas si la pieza NO está alineada
-    if ((pieza.rotation % 360) !== 0) {
-        ctx.strokeStyle = 'white';
-        ctx.lineWidth = 3;
-        ctx.strokeRect(
-            -anchoPieza / 2, -altoPieza / 2,
-            anchoPieza, altoPieza);
-    }
-
-    ctx.restore();
-}
 
 // Redibuje una sola pieza usando un lienzo fuera de la pantalla para evitar afectar las piezas adyacentes
 function redrawPiece(ctx, imagen, pieza, anchoPieza, altoPieza, currentImageIndex){
