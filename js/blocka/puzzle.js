@@ -99,11 +99,8 @@ function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
         const anchoPieza = canvas.width / COLUMNAS;
         const altoPieza = canvas.height / FILAS;
 
-        const columnaClickeada = Math.floor(x / anchoPieza);
-        const filaClickeada = Math.floor(y / altoPieza);
-
+        
         const piezaIndex = getClickedPiece(x, y, puzzlePieces, anchoPieza, altoPieza);
-
         if(piezaIndex !== -1){
             let rotation = 0;
             if(evento.button === 0){
@@ -205,7 +202,7 @@ function redrawPiece(ctx, imagen, pieza, anchoPieza, altoPieza, currentImageInde
         ctx.save();
         ctx.filter = 'none';
         ctx.strokeStyle = 'lime';
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 5;
         ctx.strokeRect(pieza.col * anchoPieza, pieza.row * altoPieza, anchoPieza, altoPieza);
         ctx.restore();
     }

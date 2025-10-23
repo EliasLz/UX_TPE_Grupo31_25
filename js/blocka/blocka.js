@@ -35,6 +35,14 @@ export function ejecution() {
                 startTimer(gameConfig, startTime, timerDisplay, handlerGameOver);
 
                 currentImageIndex++;
+
+                let boton = document.getElementById('hint');
+                if(!gameConfig.useHelp){
+                    console.log( boton);
+                    boton.style.display = 'none';
+                } else {
+                    boton.style.display = 'inline-block';
+                }
             
             } else {
                 if (gameTimerInterval) clearInterval(gameTimerInterval);
@@ -54,6 +62,7 @@ export function ejecution() {
                 gameContainer.innerHTML = finalMessage;
                 gameButtonbar.style.display = 'none';
             }
+
         }
         // Iniciar el primer nivel
         loadNextLevel();     
