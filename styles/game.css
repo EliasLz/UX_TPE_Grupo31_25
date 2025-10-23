@@ -56,10 +56,8 @@ ul.breadcrumb li:last-child:hover {
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    max-width: 860px;
     margin: 0 auto;
     position: relative;
-    min-height: 450px;
     background-image: url('../assets/img-Blocka/FondoPantalla.png');
     border: 2px solid black;
     border-radius: 30px;

@@ -36,13 +36,30 @@ function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
 
     // Nos aseguramos de que la imagen se haya cargado completamente antes de usarla
     imagen.onload = () => {
-        // Ajustamos el tamaño del canvas para que coincida con el de la imagen
-        canvas.width = imagen.width;
-        canvas.height = imagen.height;
+        // Calculamos el tamaño ideal del canvas para que las piezas sean lo más cuadradas posible
+        let targetWidth = imagen.width;
+        let targetHeight = imagen.height;
+        
+        // Calculamos la relación de aspecto deseada basada en el número de columnas y filas
+        const targetAspectRatio = (COLUMNAS / FILAS);
+        const currentAspectRatio = imagen.width / imagen.height;
+        
+        // Ajustamos el tamaño para mantener piezas más cuadradas
+        if (currentAspectRatio > targetAspectRatio) {
+            // La imagen es más ancha de lo necesario
+            targetWidth = imagen.height * targetAspectRatio;
+        } else {
+            // La imagen es más alta de lo necesario
+            targetHeight = imagen.width / targetAspectRatio;
+        }
+
+        // Ajustamos el tamaño del canvas
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
 
         // Calculamos el ancho y alto de cada pieza
-        const anchoPieza = imagen.width / COLUMNAS;
-        const altoPieza = imagen.height / FILAS;
+        const anchoPieza = targetWidth / COLUMNAS;
+        const altoPieza = targetHeight / FILAS;
 
         //Guardamos en variables estos datos (para que )
         puzzleContext = ctx;
@@ -261,7 +278,7 @@ export function accommodatePice(){
         }
     })
 
-    if (unordenerPieces.length === 0) return false;
+    if (unordenerPieces.length === 0) return;
     
     const randomIndex = Math.floor(Math.random() * unordenerPieces.length);
     const rdmPiece = unordenerPieces[randomIndex]
