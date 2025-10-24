@@ -20,13 +20,18 @@ button:focus-visible {
     border-radius: 4px;
 }
 
+.game {
+
+    flex-direction: column;
+    border: 3px solid black; 
+    border-radius: 30px;
+    overflow: hidden;
+}
 /*Para separar contenido del main veticalmente */
 .widthContainer {
     display: flex;
     justify-content: center;
     gap: 3%;
-    height: 980px;
-    width: 980px;
 }
 
 /* El Breadcrumb */
@@ -44,20 +49,25 @@ ul.breadcrumb li + li::before {
     margin: 0 8px;
 }
 
+ul.breadcrumb li:last-child:hover {
+  background-color: transparent;
+  color: inherit;
+  border-radius: 0;
+  list-style: none;
+  cursor: default;
+}
+
 /* Contenedor de referencia: */
 .game-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    max-width: 860px;
     margin: 0 auto;
     position: relative;
-    min-height: 450px;
     background-image: url('../assets/img-Blocka/FondoPantalla.png');
-    border: 2px solid black;
-    border-radius: 30px;
     overflow: hidden;
+    width: 900px;
 }
 
 .gameScreen{
@@ -75,8 +85,76 @@ ul.breadcrumb li + li::before {
     object-fit: cover;
 }
 
+.final-screen{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: orange;
+    margin: 15rem 10rem;
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 4px 1px #b39e71;
+    border: 4px solid #fffbeb;
+    color: white;
+    font-size: xx-large;
+}
+
+.partial-screen{    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: orange;
+    margin: 15rem 10rem;
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 4px 1px #b39e71;
+    border: 4px solid #fffbeb;
+    color: white;
+    font-size: xx-large;
+
+}
+
+.btn-Menu-game {
+    background-color: cornflowerblue;
+    top: 85%;
+    left: 35%;
+    border-radius:30px;
+    padding: 12px 25px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.nextLevelButton {
+
+    background-color: rgb(169, 211, 16);
+    top: 85%;
+    left: 65%;
+    border-radius:30px;
+    padding: 12px 25px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+@keyframes pulseGold {
+    0% {
+        transform: scale(1);
+        box-shadow: none;
+    }
+    50% {
+        transform: scale(1.3);
+        box-shadow: 0 0 0 3px gold;
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: none;
+    }
+}
+
+.time-registered {
+    animation: pulseGold 0.5s ease-in-out;
+}
+
 .timerDisplay {
-    background-color: black;
     border-radius: 10px;
     padding: 10px;
     color: white;
@@ -84,6 +162,11 @@ ul.breadcrumb li + li::before {
     align-items: center;
     display: flex;
     font-size: xx-large;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(255, 0, 0, 0.6);
+    z-index: 2;
 }
 
 /* ANIMACIÓN: Implementación */
@@ -99,8 +182,8 @@ ul.breadcrumb li + li::before {
     }
 }
 
-/*Boton iniciar juego:
-    me obliga a repetir fuente y color*/
+/*Boton iniciar juego*/
+
 .play-button {
     /* Posición */
     display: flex;
@@ -122,6 +205,7 @@ ul.breadcrumb li + li::before {
     border: 1px solid var(--color-texto-500);
     border-radius: 10px;
     font-size: 13px;
+    cursor: pointer;
     /* Se invoca la animación */
     animation-name: pulseButton;
     /* Se define su duración */
@@ -305,6 +389,24 @@ button.play-button:active {
     text-decoration: underline;
 }
 
+.pagehome{
+    display: flex;
+}
+
+.btnHelp{
+    width: min-content;
+    border-radius: 100%;
+    background-color: initial;
+    position: absolute;    
+    top: 0;
+    cursor: pointer;
+}
+
+.btnHelp img{
+    width: 70px;
+    height: 70px;
+}
+
 
 /* --------------------------------------------------------------------------- */
 /* BORRADOR: cambiar por publis tipo carruseles y cards  */
@@ -347,6 +449,7 @@ button.play-button:active {
     padding: 30px;
     border-radius: 25px;
     box-shadow: 0 4px 1px #b39e71;
+    border: 4px solid #fffbeb;
     width: 90%;
     height: auto;
     max-width: 500px;
@@ -355,7 +458,7 @@ button.play-button:active {
     width: 90%;
     max-width: 500px;
     animation: fadeIn 0.3s ease-out;
-    border: 4px solid #fffbeb;
+    margin: 40px 200px;
 }
 
 .config-menu h1 {

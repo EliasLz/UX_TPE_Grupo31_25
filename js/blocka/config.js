@@ -81,7 +81,12 @@ export function configureGame() {
             e.preventDefault();
 
             const isTimeTrial = document.getElementById('timeTrialCheck').checked;
-            const timeValue = parseInt(document.getElementById('maxTime').value);
+            let timeValue = parseInt(document.getElementById('maxTime').value);
+
+            // Si el usuario no ingresa un valor, por defecto es 30s
+            if (isTimeTrial && (isNaN(timeValue))) {
+                timeValue = 30; 
+            }
 
             const selectedConfig = {
                 piecesCount: parseInt(document.getElementById('piecesCount').value),
@@ -89,6 +94,7 @@ export function configureGame() {
                 useHelp: document.getElementById('useHelp').checked
             };
 
+            // por qué el elemento "configOverlay" no está en ninguna otra parte del codigo? que selecciona?
             const overlay = document.getElementById('configOverlay');
             if (overlay) {
                 overlay.remove();

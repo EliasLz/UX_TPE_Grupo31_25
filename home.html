@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/globals.css">
+    <link rel="stylesheet" href="styles/spiner.css">
+    <link rel="stylesheet" href="styles/recommended.css">
+    <link rel="stylesheet" href="styles/ads.css">
+    <link rel="stylesheet" href="styles/carousel.css">
+    <link rel="stylesheet" href="styles/index-responsive.css">
+    <link rel="stylesheet" href="styles/footerStyle.css">
+    <link rel="stylesheet" href="styles/headerStyle.css">
+    <title>Games Toons</title>
+</head>
+<body>
+    <div id="loader-screen">
+        <div class="loader-content">
+            <div class="spinner"></div> 
+
+            <div class="progress-bar-container">
+                <div id="progress-bar-fill"></div>
+            </div>
+
+            <div id="progress-text">0%</div>
+        </div>
+    </div>
+
+    <div id="header"></div>
+    
+    <main class="main-content">
+        <div class="recommended">
+            <h2>Recomendados</h2>
+
+            <div class="card-container" id="recommendedContainer">
+                <!-- Tarjetas de juegos recomendados -->
+            </div>
+        </div>
+
+        <section class="ads-section">
+            <div class="ads-card-container">
+                
+                <div class="ads-card">
+                    <div class="ads-card-image-wrapper">
+                        <img 
+                            src="assets/img/ads/Betano-768x442.jpg" 
+                            alt="Anuncio Placeholder 1" 
+                            class="ads-card-image"
+                        >
+                    </div>
+                    <div class="ads-card-info">
+                        <p>Ver mas</p>
+                    </div>
+                </div>
+                
+                <div class="ads-card">
+                    <div class="ads-card-image-wrapper">
+                        <img 
+                            src="assets/img/ads/black-friday-1200x675.jpg" 
+                            alt="Anuncio Placeholder 1" 
+                            class="ads-card-image"
+                        >
+                    </div>
+                    <div class="ads-card-info">
+                        <p>Ver mas</p>
+                    </div>
+                </div>
+
+                <div class="ads-card">
+                    <div class="ads-card-image-wrapper">
+                        <img 
+                            src="assets/img/ads/monitor240hz-700x700.jpg" 
+                            alt="Anuncio Placeholder 1" 
+                            class="ads-card-image"
+                        >
+                    </div>
+                    <div class="ads-card-info">
+                        <p>Ver mas</p>
+                    </div>
+                </div>
+
+                <div class="ads-card">
+                    <div class="ads-card-image-wrapper">
+                        <img 
+                            src="assets/img/ads/oferta-galicia-576x300.jpg" 
+                            alt="Anuncio Placeholder 1" 
+                            class="ads-card-image"
+                        >
+                    </div>
+                    <div class="ads-card-info">
+                        <p>Ver mas</p>
+                    </div>
+                </div>
+                
+                <div class="ads-card">
+                    <div class="ads-card-image-wrapper">
+                        <img 
+                            src="assets/img/ads/promo-840x560.jpeg" 
+                            alt="Anuncio Placeholder 1" 
+                            class="ads-card-image"
+                        >
+                    </div>
+                    <div class="ads-card-info">
+                        <p>Ver mas</p>
+                    </div>
+                </div>
+
+                <div class="ads-card">
+                    <div class="ads-card-image-wrapper">
+                        <img 
+                            src="assets/img/ads/promo2-700x700.jpg" 
+                            alt="Anuncio Placeholder 1" 
+                            class="ads-card-image"
+                        >
+                    </div>
+                    <div class="ads-card-info">
+                        <p>Ver mas</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--Cards a la derecha -->
+        <aside class="proxCardPubli categories-container" id="conteiner-games">
+        </aside>
+
+        <section class="categories-container" id="categoriesContainer">
+        </section>
+    </main>
+    <div id="footer"></div>
+
+    <script type="module" src="js/main.js">
+        //Cargamos el script como un modulo
+    </script> 
+</body>
+</html>
