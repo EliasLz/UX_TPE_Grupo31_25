@@ -20,15 +20,18 @@ button:focus-visible {
     border-radius: 4px;
 }
 
+.game {
+
+    flex-direction: column;
+    border: 3px solid black; 
+    border-radius: 30px;
+    overflow: hidden;
+}
 /*Para separar contenido del main veticalmente */
 .widthContainer {
     display: flex;
     justify-content: center;
     gap: 3%;
-    flex-direction: column;
-    border: 3px solid black; 
-    border-radius: 30px;
-    overflow: hidden;
 }
 
 /* El Breadcrumb */
@@ -94,6 +97,42 @@ ul.breadcrumb li:last-child:hover {
     border: 4px solid #fffbeb;
     color: white;
     font-size: xx-large;
+}
+
+.partial-screen{    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: orange;
+    margin: 15rem 10rem;
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 4px 1px #b39e71;
+    border: 4px solid #fffbeb;
+    color: white;
+    font-size: xx-large;
+
+}
+
+.btn-Menu-game {
+    background-color: cornflowerblue;
+    top: 85%;
+    left: 35%;
+    border-radius:30px;
+    padding: 12px 25px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.nextLevelButton {
+
+    background-color: rgb(169, 211, 16);
+    top: 85%;
+    left: 65%;
+    border-radius:30px;
+    padding: 12px 25px;
+    font-size: 15px;
+    cursor: pointer;
 }
 
 @keyframes pulseGold {

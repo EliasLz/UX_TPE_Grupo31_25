@@ -125,10 +125,33 @@ function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
                     //cargamos el tiempo total del nivel
                     let time = document.getElementById('timerDisplay').textContent;
                     addTotalTime(parseTime(time));
+                    canvas.style.pointerEvents = 'none';
                     
-                    canvas.style.pointerEvents = 'none'; // Desabilitar interacciones
+                    
                     setTimeout(()=>{
-                        onLevelComplete();
+                        canvas.style.display = 'none'; // Desabilito el canvas
+                        
+                        let container = document.createElement('div');
+                        container.id = 'game-option-Screen';
+                        container.classList.add('partial-screen');
+                        let finalMessage = '';
+            
+                        finalMessage = `
+                            <h2>¡Felicidades!</h2>
+                            <p>Tu tiempo fue de ${time}.</p>
+                            <div id="endGameButtons">
+                                <button id="menuButton" class="btn-Menu-game">Menu Principal</button>
+                                <button id="nextLevelButton" class="nextLevelButton">Proximo Nivel</button>
+                            </div>
+                            `;
+                        
+                        document.getElementById('timerDisplay').style.display = 'none';
+                        container.innerHTML = finalMessage;
+                        document.getElementById('gameScreen').appendChild(container);
+    
+                        document.getElementById('nextLevelButton').addEventListener('click', ()=>{
+                            onLevelComplete();
+                        })
                     }, 1000)
                 }
             }

@@ -68,6 +68,9 @@ async function initGame(){
         
         } else {
             if (gameTimerInterval) clearInterval(gameTimerInterval);
+            
+            document.getElementById('game-option-Screen').style.display = 'none';
+
             const gameContainer = document.getElementById('gameScreen');
             let container = document.createElement('div');
             container.id = 'finalScreen';
@@ -87,7 +90,6 @@ async function initGame(){
                     <p>Has completado todos los puzzles.</p>
                     <h4>Tu tiempo total fue de ${formatTime(totalTime)}. </h4>
                     `;
-
             }
             console.log('Tiempo total del juego en segundos: ' + totalTime);
             document.getElementById('timerDisplay').style.display = 'none';
@@ -97,7 +99,6 @@ async function initGame(){
             gameContainer.appendChild(container);
 
         }
-
     }
     // Reinicio el tiempo total al comenzar un nuevo juego
     resetTotalTime();
