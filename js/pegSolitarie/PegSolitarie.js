@@ -22,7 +22,7 @@ function drawBackground() {
 }
 
 imgFondo.onload = function(){
-    //init();
+    dashboard.reDraw();
 }
 
 //let timer = new Timer();

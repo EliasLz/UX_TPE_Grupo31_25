@@ -32,8 +32,7 @@ class Dashboard {
     //Dibuja el dashboard. (Estado inicial del tablero)
     draw(){
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-        drawBackground();
-
+        
         for(let row = 0; row < 7; row++){
             for(let col = 0; col < 7; col++){
                 let x = this.margin + col * this.cellWidth;
@@ -51,6 +50,7 @@ class Dashboard {
                 }
             }
         }
+        drawBackground();
     }
 
     reDraw(){
