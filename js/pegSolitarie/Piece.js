@@ -6,20 +6,29 @@ class Piece{
         this.highlighted = false;
 
         this.ctx = ctx;
+        this.image = new Image();
+        this.imageSize = 90; 
+        this.image.src = 'assets/img-Peg-Solitarie/Rosca.png';
     }
 
     //Dibuja la pieza.
     draw(){
-        this.ctx.beginPath();
-        this.ctx.arc(this.x, this.y , this.radius, 0, Math.PI * 2);
-
         if(this.highlighted === true){
-            this.ctx.fillStyle = "#ac0101ff";
+            this.ctx.beginPath();
+            this.imageSize = 100;
+            // Dibujamos un círculo un poco más grande que la pieza para que actúe como borde/sombra
+            this.ctx.arc(this.x, this.y , this.radius + 3, 0, Math.PI * 2); 
+            this.ctx.fillStyle = "#ffffff57"; // Color rojo para resaltar
             this.ctx.fill();
-        }else{
-            this.ctx.fillStyle = "#13e321ff";
-            this.ctx.fill();
+        } else {
+            this.imageSize = 90;
         }
+        const size = this.imageSize;
+        const offset = size / 2;
+        const topLeftX = this.x - offset; 
+        const topLeftY = this.y - offset;
+        
+        this.ctx.drawImage(this.image, topLeftX, topLeftY, size, size);
     }
     //Obtiene la posicion de la pieza.
     getPosition(){}
