@@ -1,5 +1,9 @@
 let canvas = document.getElementById('prueba');
 let ctx = canvas.getContext('2d');
+let imgFondo = new Image();
+imgFondo.src = './assets/img-Peg-Solitarie/FondoPantalla.png';
+
+
 let canvasWidth = canvas.width;
 let canvasHeight = canvas.height;
 
@@ -10,10 +14,23 @@ let validNeighbodrsCells = [];
 let validNeighbodrsOfNeighbodrsCells = [];
 
 let dashboard = new Dashboard(canvasWidth, canvasHeight, ctx);
+
+// Función para dibujar el fondo
+function drawBackground() {
+    // Dibujamos la imagen de fondo en todo el canvas
+    ctx.drawImage(imgFondo, 0, 0, canvas.width, canvas.height);
+}
+
+imgFondo.onload = function(){
+    //init();
+}
+
 //let timer = new Timer();
 
     //Prepara el juego (Armado del tablero, Colocar piezas, Canvas, etc)
     function init(){
+
+
         dashboard.draw();
         //timer.draw();
 
@@ -39,18 +56,13 @@ let dashboard = new Dashboard(canvasWidth, canvasHeight, ctx);
         isMouseDown = true;
 
         if(lastPieceClicked != null){
-            lastPieceClicked.setResaltada(false);
-            lastPieceClicked.draw();
-            if(validNeighbodrsOfNeighbodrsCells.length > 0){
-                validNeighbodrsOfNeighbodrsCells.forEach(cell => {
-                    cell.setResaltada(false);
-                    cell.draw();
-                })
-            }
+            resetLastPositions();
+            dashboard.reDraw();
         }
 
-        let clickedPiece = dashboard.findClickedPiece(e.layerX, e.layerY);
-        let clickedCell = dashboard.findClickedCell(e.layerX, e.layerY);
+        let mause = getMausePos(e);
+        let clickedPiece = dashboard.findClickedPiece(mause.x, mause.y);
+        let clickedCell = dashboard.findClickedCell(mause.x, mause.y);
 
         if(clickedPiece != null){
             clickedPiece.setResaltada(true);
@@ -72,46 +84,46 @@ let dashboard = new Dashboard(canvasWidth, canvasHeight, ctx);
     //Se suelta el click
     function onMouseUp(e){
         isMouseDown = false;
+
         
         if(lastPieceClicked != null){
-                let destineCell = dashboard.findClickedCell(e.layerX, e.layerY);
-                if(destineCell == null) {
-                    lastPieceClicked.setPosition(lastCellClicked.x + (dashboard.cellWidth/2), lastCellClicked.y + (dashboard.cellHeight/2));
-                    dashboard.reDraw();
-                    return;
-                }
-                
-                let validMove = dashboard.getValidMoves(lastPieceClicked.x, lastPieceClicked.y, destineCell.x, destineCell.y);
+            let mause = getMausePos(e);
+            let destineCell = dashboard.findClickedCell(mause.x, mause.y);
 
-                if(destineCell.isValid() && validMove){
-                    lastPieceClicked.setPosition(destineCell.x + (dashboard.cellWidth/2), destineCell.y + (dashboard.cellHeight/2));
-                    destineCell.setOccupied();
-                    lastCellClicked.setEmpty();
-                    lastPieceClicked.setResaltada(false);
-                    lastPieceClicked.draw();
-
-                    if(validNeighbodrsOfNeighbodrsCells.length > 0){
-                        validNeighbodrsOfNeighbodrsCells.forEach(cell => {
-                        cell.setResaltada(false);
-                        cell.draw();
-                    })}
-                    dashboard.deleteNeighbodrsPiece(validNeighbodrsCells, validNeighbodrsOfNeighbodrsCells, destineCell);
-
-                    lastPieceClicked = null;
-                    lastCellClicked = null;
-                } else {
-                    console.log("estoy aca")
-                    lastPieceClicked.setPosition(lastCellClicked.x + (dashboard.cellWidth/2), lastCellClicked.y + (dashboard.cellHeight/2));
-                }
-                
+            //no hacemos nada si destino es null o es la misma celda de origen
+            if(destineCell == null || (destineCell.x == lastCellClicked.x && destineCell.y == lastCellClicked.y)) {
+                lastPieceClicked.setPosition(lastCellClicked.x + (dashboard.cellWidth/2), lastCellClicked.y + (dashboard.cellHeight/2));
+                resetLastPositions();
+                dashboard.reDraw();
+                return;
             }
-            dashboard.reDraw();
+
+            //chequeo si el movimiento es valido
+            let validMove = validNeighbodrsOfNeighbodrsCells.some(cell => cell.x == destineCell.x && cell.y == destineCell.y);
+
+
+            if(destineCell.isValid() && validMove ){
+                lastPieceClicked.setPosition(destineCell.x + (dashboard.cellWidth/2), destineCell.y + (dashboard.cellHeight/2));
+                destineCell.setOccupied();
+                lastCellClicked.setEmpty();
+
+                dashboard.deleteNeighbodrsPiece(validNeighbodrsCells, validNeighbodrsOfNeighbodrsCells, destineCell);
+                resetLastPositions();
+                
+            } else {
+                lastPieceClicked.setPosition(lastCellClicked.x + (dashboard.cellWidth/2), lastCellClicked.y + (dashboard.cellHeight/2));
+                resetLastPositions();
+            }
+            
+        }
+        dashboard.reDraw();
     }
 
     //Se mantiene el click
     function onMouseMove(e){
         if(isMouseDown && lastPieceClicked != null){
-            lastPieceClicked.setPosition(e.layerX, e.layerY);
+            let mause = getMausePos(e);
+            lastPieceClicked.setPosition(mause.x, mause.y);
             dashboard.reDraw();
             if(validNeighbodrsOfNeighbodrsCells.length > 0){
                 validNeighbodrsOfNeighbodrsCells.forEach(cell => {
@@ -124,9 +136,34 @@ let dashboard = new Dashboard(canvasWidth, canvasHeight, ctx);
 
     }
 
+    //obtenemos la posicion del mouse
+    function getMausePos(event){
+        return {
+            x : Math.round(event.clientX - canvas.offsetLeft),
+            y : Math.round(event.clientY - canvas.offsetTop)
+        }
+    }
 
-    canvas.addEventListener('mousedown', onMouseDown, false)
-    canvas.addEventListener('mouseup', onMouseUp, false)
-    canvas.addEventListener('mousemove', onMouseMove, false)
 
-    document.addEventListener('DOMContentLoaded', init);
+    //borramos las ultimas posiciones resaltadas y el estado de las piezas
+    function resetLastPositions(){
+        lastPieceClicked.setResaltada(false);
+        lastPieceClicked.draw();
+        lastPieceClicked = null;
+        lastCellClicked = null;
+
+        validNeighbodrsOfNeighbodrsCells.forEach(cell => {
+            cell.setResaltada(false);
+            cell.draw();
+        });
+        validNeighbodrsCells = [];
+        validNeighbodrsOfNeighbodrsCells = [];
+    }
+
+
+
+canvas.addEventListener('mousedown', onMouseDown, false)
+canvas.addEventListener('mouseup', onMouseUp, false)
+canvas.addEventListener('mousemove', onMouseMove, false)
+
+document.addEventListener('DOMContentLoaded', init);

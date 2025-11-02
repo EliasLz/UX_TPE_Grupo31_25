@@ -13,8 +13,11 @@ class Cell{
     //Dibuja la celda.
     draw(){
         if(this.highlighted === false){
-            this.ctx.fillStyle = '#000000ff'; // Color de la celda
-            this.ctx.fillRect(this.x, this.y, this.width, this.height);
+            //this.ctx.fillStyle = '#000000ff'; // Color de la celda
+            this.ctx.strokeStyle = 'black';
+            this.ctx.linewidth = 2;
+            this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+            //this.ctx.fillRect(this.x, this.y, this.width, this.height);
         } else {
             this.animate();
         }
