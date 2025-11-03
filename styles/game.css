@@ -57,20 +57,41 @@ ul.breadcrumb li:last-child:hover {
   cursor: default;
 }
 
-/* Contenedor de referencia: */
-.game-container {
+.game1-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    width: 950px;
+    border: 3px solid black; 
+    border-radius: 30px;
+}
+
+.game2-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin: 0 auto;
     position: relative;
     background-image: url('../assets/img-Blocka/FondoPantalla.png');
     overflow: hidden;
-    width: 900px;
+    width: 950px;
+    border: 3px solid black; 
+    border-radius: 30px;
 }
 
-.gameScreen{
+.game1Screen{
+    width: 100%;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    display: contents;
+}
+
+.game2Screen{
     width: 100%;
     flex-grow: 1;
     justify-content: center;
@@ -81,8 +102,8 @@ ul.breadcrumb li:last-child:hover {
 
 .gameCover {
     width: 100%;
-    display: block;
-    object-fit: cover;
+    height: auto;
+   
 }
 
 .final-screen{
@@ -245,6 +266,7 @@ button.play-button:active {
     background-color: var(--color-texto-300);
     height: 38px;
     padding: 0 30px;
+    overflow: hidden;
 }
 
 /* Grupo botones izquierdos y derechos */
