@@ -115,7 +115,7 @@ ul.breadcrumb li:last-child:hover {
 }
 
 .btn-Menu-game {
-    background-color: cornflowerblue;
+    background-color: rgb(255, 115, 0);
     top: 85%;
     left: 35%;
     border-radius:30px;
@@ -614,4 +614,26 @@ button.play-button:active {
 
 .toggle-container input[type="checkbox"]:checked + .toggle-slider::before {
     transform: translateX(24px);
+}
+
+
+/* Estilos Peg Solitarie */
+.menuPegSolitarie{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* background-color: rgba(255, 255, 255, 0.9); */
+    background-color: #f1c524;
+    padding: 15%;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    width: 50%;
+    height: 50%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
 }

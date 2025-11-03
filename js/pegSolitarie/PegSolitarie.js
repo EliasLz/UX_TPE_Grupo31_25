@@ -25,6 +25,7 @@ export function ejecutionPeg() {
     // Función para dibujar el fondo
     //Prepara el juego (Armado del tablero, Colocar piezas, Canvas, etc)
 function init(){
+    //Creamos el canvas
     const canvasContainer = document.createElement('canvas');
     canvasContainer.id = 'canvasContainer'
     let containerGame = document.getElementById('gameScreen');
@@ -36,19 +37,37 @@ function init(){
     canvas.height = 750;
     
     let ctx = canvas.getContext('2d');
-    
+
+    let menu = document.createElement('div');
+    menu.id = 'menuPegSolitarie';
+    menu.className = 'menuPegSolitarie';
+    menu.innerHTML = `
+        <h2> Peg Solitarie </h2>
+        <button id="play" class="btn-Menu-game" > Jugar </button>
+    `;
+
+    containerGame.appendChild(menu);
+
     
     let canvasWidth = canvas.width;
     let canvasHeight = canvas.height;
     let dashboard = new Dashboard(canvasWidth, canvasHeight, ctx);
     
+    let playBtn = document.getElementById('play');
+    playBtn.addEventListener('click', playGame)
 
     dashboard.draw();
-
-    canvas.addEventListener('mousedown', onMouseDown, false)
-    canvas.addEventListener('mouseup', onMouseUp, false)
-    canvas.addEventListener('mousemove', onMouseMove, false)
     
+    function playGame(){
+        menu.style.display = 'none';
+        dashboard.drawPieces();
+    
+        canvas.addEventListener('mousedown', onMouseDown, false);
+        canvas.addEventListener('mouseup', onMouseUp, false);
+        canvas.addEventListener('mousemove', onMouseMove, false);
+        
+    }
+
 
     //Jugabilidad Drag & Drop
         //Se presiona el click
@@ -117,13 +136,18 @@ function init(){
                 
             }
     
-            if(dashboard.isGameOver()){
-                console.log("game over")
+             if(dashboard.isGameOver()){
+                deletElementos();
+                init(); //reinicimaos el juego
             }
     
             dashboard.reDraw();
         }
-    
+        
+        function deletElementos(){
+            dashboard.deleteElements();
+        }
+
         //Se mantiene el click
         function onMouseMove(e){
             if(isMouseDown && lastPieceClicked != null){

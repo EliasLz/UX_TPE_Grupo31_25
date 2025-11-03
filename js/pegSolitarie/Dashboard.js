@@ -35,7 +35,7 @@ export class Dashboard {
         return true;
     }
     
-    //Dibuja el dashboard. (Estado inicial del tablero)
+    //Dibuja el dashboard. (Estado inicial del tablero sin las piezas)
     draw(){
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
         
@@ -47,15 +47,28 @@ export class Dashboard {
                     let cell = new Cell(x, y, this.cellWidth, this.cellHeight, this.ctx);
                     cell.draw();
                     this.cells.push(cell);
-                    if(cell.isValid() && !(row == 3 && col == 3)){
-                        let piece = new Piece(x+(this.cellWidth/2), y+(this.cellHeight/2), this.ctx);
-                        piece.draw();
-                        this.pieces.push(piece);
-                        cell.setOccupied();
-                    }
+                    
                 }
             }
         }
+        this.timer.draw();
+        this.drawBackground();
+    }
+
+    // Dibujamos las piezas en el estado inicial
+    drawPieces(){
+        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        
+        this.cells.forEach(cell => {
+            if(!(cell.x === this.margin + 3 * this.cellWidth && cell.y === this.margin + 3 * this.cellHeight)){
+                let pieceX = cell.x + (this.cellWidth /2);
+                let pieceY = cell.y + (this.cellHeight /2);
+                let piece = new Piece(pieceX, pieceY, this.ctx);
+                piece.draw();
+                this.pieces.push(piece);
+                cell.setOccupied();
+            }
+        })
         this.timer.draw();
         this.drawBackground();
     }
@@ -209,5 +222,14 @@ export class Dashboard {
             }
         }
         return true;
+    }
+
+    deleteElements(){
+        this.pieces.forEach(piece =>{
+            piece=null;
+        })
+        this.cells.forEach(cell => {
+            cell=null;
+        })
     }
 }
