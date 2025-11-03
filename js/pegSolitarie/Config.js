@@ -1,5 +1,5 @@
 
-const PIECE_URL = [
+const PIECE_IMG = [
     'assets/img-Peg-Solitarie/Rosca.png',
     'assets/img-Peg-Solitarie/Duff.png'
 ]
@@ -9,14 +9,21 @@ export function showMenu(){
     const gameScreen = document.getElementById('gameScreen');
 
     const menuHtml = `
-        <div>
+        <div class="config-menu">
             <h2> Peg Solitarie </h2>
-            <form> 
-                <label> Seleccione una pieza </label>
-                <select id="piecesImage">
-                <options value="1"> <img url="${PIECE_URL[0]}"></options> 
-                <options value="2"> <img url="${PIECE_URL[1]}"></options> 
-                </select>
+            <form id="configForm"> 
+            <label> Seleccione una pieza </label>
+                <div class="config-option-img">
+                    <label class="picker">
+                        <input type="radio" name="pieza" value="1" required>
+                        <img src="assets/img-Peg-Solitarie/Rosca.png" alt="Rosca">
+                    </label>
+
+                    <label class="picker">
+                        <input type="radio" name="pieza" value="2">
+                        <img src="assets/img-Peg-Solitarie/Duff.png" alt="Duff">
+                    </label>
+                </div>
                 
                 <div class="config-option">
                     <h3 for="timeTrialCheck">TIEMPO</h3>
@@ -30,14 +37,48 @@ export function showMenu(){
                     </div>
                     <p>El juego termina si el tiempo se agota.</p>
                 </div>
+                <button id="play" class="btn-Menu-game" > Jugar </button>
             </form> 
-            <button id="play" class="btn-Menu-game" > Jugar </button>
         </div>
     `
 
-    gameScreen.innerHTML = menuHtml;
+    gameScreen.innerHTML += menuHtml;
+    
     return new Promise(resolve =>{
-        
+        const configForm = document.getElementById('configForm');
+
+        const timeTrialCheck = document.getElementById('timeTrialCheck');
+        const maxTime = document.getElementById('maxTime');
+
+        timeTrialCheck.addEventListener('change', () =>{
+            maxTime.disabled = !timeTrialCheck.checked;
+        });
+
+        configForm.addEventListener('submit', (e)=>{
+            e.preventDefault();
+
+            const isTimeTrial = document.getElementById('timeTrialCheck').checked;
+            let timeValue = parseInt(document.getElementById('maxTime').value)
+
+            let selectedPiece;
+
+            if(document.querySelector('input[name="pieza"]:checked').value == 1){
+                selectedPiece = PIECE_IMG[0];
+            } else {
+                selectedPiece = PIECE_IMG[1];
+            }
+
+            if (isTimeTrial && (isNaN(timeValue))) {
+                timeValue = 30; 
+            }
+
+            const selectedConfig = {
+                selectedPiece : selectedPiece,
+                maxTime : isTimeTrial ? timeValue : 0   
+            }
+
+            resolve (selectedConfig);
+        })
     });
 }
 
