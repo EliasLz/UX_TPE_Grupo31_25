@@ -1,55 +1,100 @@
-export class Cell{
-    constructor(x, y, width, height, ctx){
+export class Cell {
+    constructor(x, y, width, height, ctx) {
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        this.baseWidth = width;
+        this.baseHeight = height;
         this.ctx = ctx;
 
         this.isEmpty = true;
         this.highlighted = false;
+
+        // --- variables de la animación ---
+        this.pulseActive = false;   // está pulsando?
+        this.pulseScale = 0;        // 0 → sin escalar, 1 → tamaño máximo
+        this.pulseSpeed = 0.001;     // qué tan rápido crece/encoge (ajusta a gusto)
+        this.pulseMax = 0.12;       // % de crecimiento máximo (0.12 = 12 %)
     }
 
-    //Dibuja la celda.
-    draw(){
-        if(this.highlighted === false){
-            this.ctx.fillStyle = '#ff7b0077'; // Color de la celda
-            this.ctx.strokeStyle = 'white';
-            this.ctx.linewidth = 5;
-            this.ctx.strokeRect(this.x, this.y, this.width, this.height);
-            this.ctx.fillRect(this.x, this.y, this.width, this.height);
-        } else {
-            this.animate();
+    // empieza la animación
+    startPulse() {
+        this.pulseActive = true;
+        this.pulseScale = 0;
+    }
+
+    // para la animación  
+    stopPulse() {
+        this.pulseActive = false;
+        this.pulseScale = 0;
+    }
+
+    //  Se llama desde tu game-loop 
+    draw() {
+        this.updatePulse();// actualiza la animación
+        this.paint();      // dibuja la celda con el escalado actual
+    }
+
+    // Lógica del “respirar” 
+    updatePulse() {
+        if (!this.pulseActive) return;
+
+        this.pulseScale += this.pulseSpeed;
+        if (this.pulseScale >= 1) {
+        this.pulseScale = 1;
+        this.pulseSpeed *= -1;   // invertimos dirección (crecer → encoger)
+        } else if (this.pulseScale <= 0) {
+        this.pulseScale = 0;
+        this.pulseSpeed *= -1;   // invertimos dirección (encoger → crecer)
         }
-
-
     }
 
-    //La celda fue clickeada?
-    isPointInside(x,y){
-        return !(x < this.x || x > this.x + this.width || y < this.y || y > this.y + this.height);
+    // Dibujado 
+    paint() {
+        const scale = this.pulseActive ? this.pulseScale * this.pulseMax : 0;
+        const w = this.baseWidth * (1 + scale);
+        const h = this.baseHeight * (1 + scale);
+        const offsetX = (w - this.baseWidth) / 2;
+        const offsetY = (h - this.baseHeight) / 2;
+
+        // color según estado
+        this.ctx.fillStyle = this.highlighted || this.pulseActive
+        ? '#a42323ff'
+        : '#ff7b0077';
+
+        this.ctx.strokeStyle = 'white';
+        this.ctx.lineWidth = 5;
+
+        this.ctx.strokeRect(
+        this.x - offsetX,
+        this.y - offsetY,
+        w,
+        h
+        );
+        this.ctx.fillRect(
+        this.x - offsetX,
+        this.y - offsetY,
+        w,
+        h
+        );
     }
 
-    //Animacion de la celda.
-    animate(){
-        this.ctx.fillStyle = '#a42323ff'; // Color de la celda resaltada
-        this.ctx.fillRect(this.x, this.y, this.width, this.height);
+    isPointInside(x, y) {
+        return !(x < this.x || x > this.x + this.baseWidth || y < this.y || y > this.y + this.baseHeight);
     }
 
-    setResaltada(highlight){
-        this.highlighted = highlight;
+    setResaltada(highlighted) {
+        this.highlighted = highlighted; 
     }
 
-
-    //Validar si esta vacia o no.
-    isValid(){
-        return this.isEmpty;
+    isValid() {
+        return this.isEmpty; 
     }
 
-    setEmpty(){
-        this.isEmpty = true;
+    setEmpty() { 
+        this.isEmpty = true; 
     }
-    setOccupied(){
-        this.isEmpty = false;
+
+    setOccupied() { 
+        this.isEmpty = false; 
     }
 }

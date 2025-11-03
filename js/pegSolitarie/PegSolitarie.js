@@ -89,6 +89,13 @@ function init(){
                 validNeighbodrsOfNeighbodrsCells = dashboard.getValidMoves(clickedPiece.x, clickedPiece.y).at(1);
                 validNeighbodrsCells = dashboard.getValidMoves(clickedPiece.x, clickedPiece.y).at(0);
                 
+
+                validNeighbodrsOfNeighbodrsCells.forEach(cell =>{
+                    cell.setResaltada(true);
+                    cell.startPulse();   // empieza a “respirar”
+                    console.log('acaaa')
+                })
+
                 lastPieceClicked = clickedPiece;
                 lastCellClicked = clickedCell;
                 if(validNeighbodrsOfNeighbodrsCells.length > 0){
@@ -184,15 +191,16 @@ function init(){
     
         //borramos las ultimas posiciones resaltadas y el estado de las piezas
         function resetLastPositions(){
+            validNeighbodrsOfNeighbodrsCells.forEach(cell =>{
+                cell.setResaltada(false);
+                cell.stopPulse();   // empieza a “respirar”
+                console.log('acaaa')
+            })
             lastPieceClicked.setResaltada(false);
             lastPieceClicked.draw();
             lastPieceClicked = null;
             lastCellClicked = null;
-    
-            validNeighbodrsOfNeighbodrsCells.forEach(cell => {
-                cell.setResaltada(false);
-                cell.draw();
-            });
+
             validNeighbodrsCells = [];
             validNeighbodrsOfNeighbodrsCells = [];
         }
