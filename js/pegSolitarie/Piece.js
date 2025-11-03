@@ -8,7 +8,9 @@ export class Piece{
         this.ctx = ctx;
         this.image = new Image();
         this.imageSize = 90; 
-        this.image.src = 'assets/img-Peg-Solitarie/Rosca.png';
+        
+        this.rosca = 'assets/img-Peg-Solitarie/Rosca.png';
+        this.duff = 'assets/img-Peg-Solitarie/Duff.png';
     }
 
     //Dibuja la pieza.
@@ -18,12 +20,13 @@ export class Piece{
             this.imageSize = 100;
             // Dibujamos un círculo un poco más grande que la pieza para que actúe como borde/sombra
             this.ctx.arc(this.x, this.y , this.radius + 3, 0, Math.PI * 2); 
-            this.ctx.fillStyle = "#ffffff57"; // Color rojo para resaltar
+            this.ctx.fillStyle = "#0000004f"; // Color rojo para resaltar
             this.ctx.fill();
         } else {
             this.imageSize = 90;
         }
         const size = this.imageSize;
+        this.image.src = this.duff;
         const offset = size / 2;
         const topLeftX = this.x - offset; 
         const topLeftY = this.y - offset;
