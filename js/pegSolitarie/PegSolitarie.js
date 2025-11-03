@@ -118,7 +118,11 @@ function init(){
             }
     
             if(dashboard.isGameOver()){
-                console.log("game over")
+                if(dashboard.getPieces().length == 1){
+                    alert("Felicitaciones! has ganado el juego")
+                }else{
+                    alert("Juego terminado! No hay mas movimientos posibles. Piezas restantes: " + dashboard.getPieces().length)
+                }
             }
     
             dashboard.reDraw();

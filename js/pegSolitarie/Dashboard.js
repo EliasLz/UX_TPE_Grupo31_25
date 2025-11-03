@@ -16,6 +16,11 @@ export class Dashboard {
         this.timer = new Timer(ctx);
     }
 
+    getPieces(){
+        let piecesCopy = [...this.pieces];
+        return piecesCopy;
+    }
+
     setInvalidCells(){
         this.invalidCells = [
             [this.margin,this.margin],[this.margin+this.cellWidth, this.margin],[this.margin,this.margin+this.cellHeight],[this.margin+this.cellWidth,this.margin+this.cellHeight],
