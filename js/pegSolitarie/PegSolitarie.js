@@ -1,4 +1,5 @@
 import { Dashboard } from "./Dashboard.js";
+import { showEndMenu, showMenu } from "./Config.js";
 
 let isMouseDown = false;
 let lastPieceClicked = null;
@@ -24,7 +25,10 @@ export function ejecutionPeg() {
 
     // Función para dibujar el fondo
     //Prepara el juego (Armado del tablero, Colocar piezas, Canvas, etc)
-function init(){
+async function init(){
+    const config = await showMenu();
+
+
     //Creamos el canvas
     const canvasContainer = document.createElement('canvas');
     canvasContainer.id = 'canvasContainer'
@@ -37,16 +41,6 @@ function init(){
     canvas.height = 750;
     
     let ctx = canvas.getContext('2d');
-
-    let menu = document.createElement('div');
-    menu.id = 'menuPegSolitarie';
-    menu.className = 'menuPegSolitarie';
-    menu.innerHTML = `
-        <h2> Peg Solitarie </h2>
-        <button id="play" class="btn-Menu-game" > Jugar </button>
-    `;
-
-    containerGame.appendChild(menu);
 
     
     let canvasWidth = canvas.width;
@@ -93,7 +87,6 @@ function init(){
                 validNeighbodrsOfNeighbodrsCells.forEach(cell =>{
                     cell.setResaltada(true);
                     cell.startPulse();   // empieza a “respirar”
-                    console.log('acaaa')
                 })
 
                 lastPieceClicked = clickedPiece;
@@ -144,6 +137,14 @@ function init(){
             }
     
              if(dashboard.isGameOver()){
+                let p = document.createElement('p');
+                if(dashboard.getPieces().length == 1){
+                    p.innerHTML = 'Usted a ganado';
+                } else {
+                    p.innerHTML = 'Usted perdio'
+                }
+                message.appendChild(p);
+                console.log(message)
                 deletElementos();
                 init(); //reinicimaos el juego
             }
@@ -193,8 +194,7 @@ function init(){
         function resetLastPositions(){
             validNeighbodrsOfNeighbodrsCells.forEach(cell =>{
                 cell.setResaltada(false);
-                cell.stopPulse();   // empieza a “respirar”
-                console.log('acaaa')
+                cell.stopPulse(); 
             })
             lastPieceClicked.setResaltada(false);
             lastPieceClicked.draw();
@@ -209,6 +209,5 @@ function init(){
     
     
     
-    //document.addEventListener('DOMContentLoaded', init);
 
 
