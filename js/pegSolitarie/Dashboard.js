@@ -1,13 +1,19 @@
-class Dashboard {
+import { Cell } from "./Cell.js";
+import { Piece } from "./Piece.js";
+import { Timer } from "./Timer.js";
 
+export class Dashboard {
     constructor(canvasWidth, canvasHeight, ctx){
         this.cells = [];
         this.pieces = [];
         this.margin = 20;
+        this.canvasWidth = canvasWidth;
+        this.canvasHeight = canvasHeight;
         this.cellWidth = (canvasWidth - this.margin * 2) / 7;
         this.cellHeight = (canvasHeight - this.margin * 2) / 7;
         this.invalidCells = this.setInvalidCells();
         this.ctx = ctx;
+        this.timer = new Timer(ctx);
     }
 
     setInvalidCells(){
@@ -50,12 +56,13 @@ class Dashboard {
                 }
             }
         }
-        drawBackground();
+        this.timer.draw();
+        this.drawBackground();
     }
 
     reDraw(){
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-        drawBackground();
+        this.drawBackground();
         this.cells.forEach(cell => {
             cell.draw(this.ctx);
         })
@@ -162,6 +169,18 @@ class Dashboard {
         }
     }
 
+    drawBackground() {
+    // Dibujamos la imagen de fondo en todo el canvas
+    let imgFondo = new Image();
+    imgFondo.src = './assets/img-Peg-Solitarie/FondoPantalla.png';
+    
+    this.ctx.drawImage(imgFondo, 0, 0, this.canvasWidth, this.canvasHeight);
+
+    imgFondo.onload = () =>{
+        this.reDraw();
+    }
+}
+
     //Obtiene la celda clickeada.
     findClickedCell(x, y){
         for(let i = 0; i < this.cells.length; i++){
@@ -179,5 +198,16 @@ class Dashboard {
             }
         }
         return null;
+    }
+
+    //Fin del juego.
+    isGameOver(){
+        for(let i = 0; i < this.pieces.length; i++){
+            let validMoves = this.getValidMoves(this.pieces[i].x, this.pieces[i].y).at(1);
+            if(validMoves.length > 0){
+                return false;
+            }
+        }
+        return true;
     }
 }

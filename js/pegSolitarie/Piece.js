@@ -1,4 +1,4 @@
-class Piece{
+export class Piece{
     constructor(x, y, ctx){
         this.x = x;
         this.y = y;

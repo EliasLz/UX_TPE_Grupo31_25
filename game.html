@@ -36,14 +36,14 @@
         <!-- Ventana de ejecución del juego (Pantalla + Botonera) -->
         <section class="game-container">
             <!-- La Pantalla de juego -->
-            <div class="gameScreen">
+            <div class="gameScreen" id="gameScreen">
                 <img
                         src="assets/img/peg-solitarie.svg"
                         alt="Portada: Peg Solitaire Simpsons Edition"
                         class="gameCover"
                 >
                 <!-- Boton iniciar juego -->
-                <button class="play-button">
+                <button class="play-button" id="playButon">
                     <img src="assets/icons/Play.svg" alt="playIcon" class="playIcon">
                     Jugar ahora
                 </button>
@@ -384,6 +384,5 @@
 </script>
 <script type="module" src="js/game.js">
 </script>
-
 </body>
 </html>

@@ -1,4 +1,4 @@
-class Cell{
+export class Cell{
     constructor(x, y, width, height, ctx){
         this.x = x;
         this.y = y;
@@ -32,8 +32,8 @@ class Cell{
 
     //Animacion de la celda.
     animate(){
-        ctx.fillStyle = '#a42323ff'; // Color de la celda resaltada
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        this.ctx.fillStyle = '#a42323ff'; // Color de la celda resaltada
+        this.ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 
     setResaltada(highlight){

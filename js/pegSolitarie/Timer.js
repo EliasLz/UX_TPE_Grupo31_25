@@ -1,8 +1,28 @@
-class Timer{
-    constructor(){}
+export class Timer{
+    constructor(ctx){
+        this.ctx = ctx
+        this.startTime = 0;
+    }
 
-    draw(){}//Dibuja el timer.
-    start(){}//Inicia el timer.
-    stop(){}//Detiene el timer.
-    reset(){}//Resetea el timer.
+    //Dibuja el timer.
+    draw(){
+        this.ctx.font = "20px Arial";
+        this.ctx.fillStyle = "black";
+        this.ctx.fillText("Timer: ", 10, 20);
+    }
+
+    //Inicia el timer.
+    start(){
+
+    }
+
+    //Detiene el timer.
+    stop(){
+
+    }
+
+    //Resetea el timer.
+    reset(){
+
+    }
 }
