@@ -14,12 +14,13 @@ export function ejecutionPeg() {
     if(currentPage != 'game.html'){
         return;
     }
-    const playButton = document.getElementById('playButon');
+    const playButton = document.getElementById('playButton');
     
     playButton.addEventListener('click',  ()=>{
         init();
         playButton.style.display = 'none';
     });
+    //onsole.log('Peg Solitarie initialized');
 }
 
     // Función para dibujar el fondo
@@ -31,7 +32,6 @@ async function init(){
     const config = await showMenu();
     
     containerGame.innerHTML = '';
-
 
     //Creamos el canvas
     const canvasContainer = document.createElement('canvas');
@@ -47,19 +47,10 @@ async function init(){
     
     let canvasWidth = canvas.width;
     let canvasHeight = canvas.height;
+    let dashboard = new Dashboard(canvasWidth, canvasHeight, ctx);
+    dashboard.drawCells();
     
-    let imgFondo = new Image();
-    imgFondo.src = './assets/img-Peg-Solitarie/FondoPantalla.webp';
-    let dashboard;
-
-    imgFondo.onload = () =>{
-    
-        dashboard = new Dashboard(canvasWidth, canvasHeight, ctx, imgFondo);
-        
-        dashboard.draw();
-        
-        playGame();
-    }
+    playGame();
 
     function playGame(){
         dashboard.drawPieces();
@@ -72,8 +63,11 @@ async function init(){
 
 
     //Jugabilidad Drag & Drop
-        //Se presiona el click
+        //Si presiona el click
         function onMouseDown(e){
+
+            if(e.button !== 0) return;
+
             isMouseDown = true;
     
             if(lastPieceClicked != null){
@@ -92,13 +86,16 @@ async function init(){
                 validNeighbodrsCells = dashboard.getValidMoves(clickedPiece.x, clickedPiece.y).at(0);
                 
 
+                validNeighbodrsOfNeighbodrsCells.forEach(cell =>{
+                    cell.setResaltada(true);
+                    cell.startPulse();   // empieza a “respirar”
+                })
 
                 lastPieceClicked = clickedPiece;
                 lastCellClicked = clickedCell;
                 if(validNeighbodrsOfNeighbodrsCells.length > 0){
                     validNeighbodrsOfNeighbodrsCells.forEach(cell => {
                         cell.setResaltada(true);
-                        cell.startPulse();
                         cell.draw();
                     })
                 }
@@ -107,8 +104,10 @@ async function init(){
     
         //Se suelta el click
         function onMouseUp(e){
+
+            if(e.button !== 0) return;
+
             isMouseDown = false;
-    
             
             if(lastPieceClicked != null){
                 let mause = getMausePos(e);
@@ -148,8 +147,8 @@ async function init(){
                 } else {
                     p.innerHTML = 'Usted perdio'
                 }
-                // message.appendChild(p);
-                // console.log(message)
+                message.appendChild(p);
+                console.log(message)
                 deletElementos();
                 init(); //reinicimaos el juego
             }
@@ -210,9 +209,3 @@ async function init(){
             validNeighbodrsOfNeighbodrsCells = [];
         }
 }
-    
-    
-    
-    
-
-

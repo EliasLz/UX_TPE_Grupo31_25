@@ -468,7 +468,7 @@ button.play-button:active {
 }
 
 .config-menu {
-    background-color: #fde1a6;
+    background-color:rgba(253, 225, 166, 0.75);
     padding: 30px;
     border-radius: 25px;
     box-shadow: 0 4px 1px #b39e71;
@@ -486,7 +486,7 @@ button.play-button:active {
 
 .config-menu h1 {
     font-weight: 900;
-    color: #93510a;
+    color:  #93510a;
     text-align: center;
 }
 .config-option h3 {
@@ -499,7 +499,7 @@ button.play-button:active {
 
 .config-option {
     margin-bottom: 15px;
-    background-color: #fef4c9;
+    background-color: rgba(254, 244, 201, .55);
     border-radius: 10px;
     padding: 10px;
 
@@ -510,7 +510,7 @@ button.play-button:active {
 }
 .config-option-img{
     margin-bottom: 15px;
-    background-color: #fef4c9;
+    background-color: rgba(254, 244, 201, .55);
     border-radius: 10px;
     padding: 30px;
 
