@@ -21,12 +21,36 @@ button:focus-visible {
 }
 
 .game {
-
     flex-direction: column;
     border: 3px solid black; 
     border-radius: 30px;
     overflow: hidden;
 }
+
+#gameScreen{
+    position: relative;
+}
+
+#canvasContainer {
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+#menu-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
 
 /*Para separar contenido del main veticalmente */
 .widthContainer {
@@ -89,7 +113,7 @@ ul.breadcrumb li:last-child:hover {
     justify-content: center;
     align-items: center;
     position: relative;
-    display: contents;
+    display: block;
     width: 750px;
 }
 

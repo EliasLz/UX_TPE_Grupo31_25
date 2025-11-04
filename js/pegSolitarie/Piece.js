@@ -10,6 +10,17 @@ export class Piece{
         this.imageSize = 90; 
         
         this.pieceImg = pieceImg;
+        
+        this.image.src = pieceImg;
+
+        this.image.onload = () => {
+            // Prepara el tablero cuando se cargó la imagen
+            this.draw();
+        }
+
+        // Controlar el arrastre
+        this.isDragging = false;
+        
     }
 
     //Dibuja la pieza.
@@ -25,7 +36,6 @@ export class Piece{
             this.imageSize = 90;
         }
         const size = this.imageSize;
-        this.image.src = this.pieceImg;
         const offset = size / 2;
         const topLeftX = this.x - offset; 
         const topLeftY = this.y - offset;
@@ -41,12 +51,22 @@ export class Piece{
         this.y = y;
     }
     
-    //Elimina la pieza.
-    delete(){}
+    setImage(urlImg){
+        this.pieceImg = urlImg;
+    }
 
     //Resaltar pieza.
     setResaltada(highlight){
         this.highlighted = highlight;
+    }
+
+    //Marcar como arrastrando / dejar de arrastrar
+    setDragging(flag){
+        this.isDragging = !!flag;
+    }
+
+    getDragging(){
+        return this.isDragging;
     }
 
     //El click fue dentro de la pieza?

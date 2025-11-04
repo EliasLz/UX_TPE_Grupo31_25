@@ -3,11 +3,10 @@ import { Piece } from "./Piece.js";
 import { Timer } from "./Timer.js";
 
 export class Dashboard {
-    constructor(canvasWidth, canvasHeight, ctx, pieceImg) {
+    constructor(canvasWidth, canvasHeight, ctx) {
         this.cells = [];
         this.pieces = [];
         this.margin = 20;
-        this.pieceImg = pieceImg;
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.cellWidth = (canvasWidth - this.margin * 2) / 7;
@@ -18,7 +17,7 @@ export class Dashboard {
         this.imgFondo = new Image();
         this.imgFondo.src = './assets/img-Peg-Solitarie/FondoPantalla.png';
         this.imageOnload = false;
-
+        
         this.imgFondo.onload = () => {
             this.imageOnload = true;
             // Prepara el tablero cuando se cargó la imagen
@@ -30,6 +29,8 @@ export class Dashboard {
         let piecesCopy = [...this.pieces];
         return piecesCopy;
     }
+
+
 
     //Define las celdas invalidas del tablero.
     setInvalidCells() {
@@ -65,32 +66,36 @@ export class Dashboard {
             }
         }
 
+        this.drawBackground();
+        this.drawCells();
+    }
+
+    initPieces(img){
         this.cells.forEach(cell => {
             if (!(cell.x === this.margin + 3 * this.cellWidth && cell.y === this.margin + 3 * this.cellHeight)) {
                 let pieceX = cell.x + (this.cellWidth / 2);
                 let pieceY = cell.y + (this.cellHeight / 2);
-                let piece = new Piece(pieceX, pieceY, this.ctx, this.pieceImg);
+                let piece = new Piece(pieceX, pieceY, this.ctx, img);
                 this.pieces.push(piece);
                 cell.setOccupied();
             }
         });
-
-        this.reDraw();
+        this.drawPieces();
     }
 
     // Dibuja las celdas.
     drawCells() {
-
         this.cells.forEach(cell => {
-            cell.draw(this.ctx);
+            cell.draw();
         });
-
     }
 
     // Dibujamo las piezas
     drawPieces() {
         this.pieces.forEach(piece => {
-            piece.draw();
+            if (!piece.isDragging) {
+                piece.draw();
+            }
         });
     }
 
@@ -107,8 +112,6 @@ export class Dashboard {
         this.drawBackground();
         this.drawCells();
         this.drawPieces();
-        //this.timer.draw();
-
     }
 
 

@@ -7,8 +7,11 @@ const PIECE_IMG = [
 export function showMenu(){
 
     const gameScreen = document.getElementById('gameScreen');
+    const menuWrapper = document.createElement('div');
+    menuWrapper.id = 'menu-wrapper'
 
-    const menuHtml = `
+
+    menuWrapper.innerHTML = `
         <div class="config-menu">
             <h2> Peg Solitarie </h2>
             <form id="configForm"> 
@@ -42,14 +45,13 @@ export function showMenu(){
         </div>
     `
     
-    gameScreen.innerHTML += menuHtml;
+    gameScreen.appendChild(menuWrapper)
     gameScreen.className='game2Background';
     
     return new Promise(resolve =>{
-        const configForm = document.getElementById('configForm');
-
-        const timeTrialCheck = document.getElementById('timeTrialCheck');
-        const maxTime = document.getElementById('maxTime');
+        const configForm = menuWrapper.querySelector('#configForm');
+        const timeTrialCheck = menuWrapper.querySelector('#timeTrialCheck');
+        const maxTime = menuWrapper.querySelector('#maxTime');
 
         timeTrialCheck.addEventListener('change', () =>{
             maxTime.disabled = !timeTrialCheck.checked;
@@ -77,6 +79,8 @@ export function showMenu(){
                 selectedPiece : selectedPiece,
                 maxTime : isTimeTrial ? timeValue : 0   
             }
+
+            gameScreen.removeChild(menuWrapper);
 
             resolve (selectedConfig);
         })

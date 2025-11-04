@@ -26,12 +26,6 @@ export function ejecutionPeg() {
 //Prepara el juego (Armado del tablero, Colocar piezas, Canvas, etc)
 async function init(){
     let containerGame = document.getElementById('gameScreen');
-
-    containerGame.innerHTML = '';
-
-    const config = await showMenu();
-    const pieceImg = config.selectedPiece;
-
     containerGame.innerHTML = '';
 
     //Creamos el canvas
@@ -45,79 +39,94 @@ async function init(){
     let ctx = canvas.getContext('2d');
     let canvasWidth = canvas.width;
     let canvasHeight = canvas.height;
-    let dashboard = new Dashboard(canvasWidth, canvasHeight, ctx, pieceImg);
 
-    dashboard.drawCells();
+    let dashboard = new Dashboard(canvasWidth, canvasHeight, ctx);
+
+    //dashboard.initDashboard();
+    
+    const config = await showMenu();
+
+    
+    dashboard.initPieces(config.selectedPiece);
+
+
     playGame();
 
     function playGame(){
-        dashboard.reDraw();
 
         canvas.addEventListener('mousedown', onMouseDown, false);
         canvas.addEventListener('mouseup', onMouseUp, false);
         canvas.addEventListener('mousemove', onMouseMove, false);
         
-        gameLoop();
     }
-
+    
     function gameLoop(){
         dashboard.reDraw();
-
+        
         if(isMouseDown && lastPieceClicked != null){
             lastPieceClicked.draw();
         }
-
+        
         requestAnimationFrame(gameLoop);
     }
-
-
+    
+    
     //Jugabilidad Drag & Drop
-        //Si presiona el click izquierdo
-        function onMouseDown(e){
-
-            if(e.button !== 0) return;
-
+    //Si presiona el click izquierdo
+    function onMouseDown(e){
+        gameLoop();
+        
+        if(e.button !== 0) return;
+        
             isMouseDown = true;
     
             if(lastPieceClicked != null){
                 resetLastPositions();
             }
-    
+            
             let mause = getMausePos(e);
             let clickedPiece = dashboard.findClickedPiece(mause.x, mause.y);
             let clickedCell = dashboard.findClickedCell(mause.x, mause.y);
-    
+            
             if(clickedPiece != null){
                 clickedPiece.setResaltada(true);
-                clickedPiece.draw();
-                validNeighbodrsOfNeighbodrsCells = dashboard.getValidMoves(clickedPiece.x, clickedPiece.y).at(1);
-                validNeighbodrsCells = dashboard.getValidMoves(clickedPiece.x, clickedPiece.y).at(0);
+                // Marcar como arrastrando para que Dashboard no la dibuje en el array
+                if (clickedPiece.getDragging() === false) {
+                    clickedPiece.setDragging(true);
+                }
+                let neighbodrss = dashboard.getValidMoves(clickedPiece.x, clickedPiece.y);
+                validNeighbodrsOfNeighbodrsCells = neighbodrss.at(1);
+                validNeighbodrsCells = neighbodrss.at(0);
                 
-
+                
                 validNeighbodrsOfNeighbodrsCells.forEach(cell =>{
                     cell.setResaltada(true);
                     cell.startPulse();   // empieza a “respirar”
                 })
-
+                
                 lastPieceClicked = clickedPiece;
                 lastCellClicked = clickedCell;
             } 
         }
-    
+        
         //Se suelta el click izquierdo
         function onMouseUp(e){
-
+            
             if(e.button !== 0) return;
-
+            
             isMouseDown = false;
             
             if(lastPieceClicked != null){
                 let mause = getMausePos(e);
                 let destineCell = dashboard.findClickedCell(mause.x, mause.y);
-    
+                
                 //no hacemos nada si destino es null o es la misma celda de origen
                 if(destineCell == null || (destineCell.x == lastCellClicked.x && destineCell.y == lastCellClicked.y)) {
                     lastPieceClicked.setPosition(lastCellClicked.x + (dashboard.cellWidth/2), lastCellClicked.y + (dashboard.cellHeight/2));
+                    // quitar marca de arrastre
+                    if (lastPieceClicked.getDragging() === true) {
+                        lastPieceClicked.setDragging(false);
+                    }
                     resetLastPositions();
                     return;
                 }
@@ -132,10 +141,17 @@ async function init(){
                         lastCellClicked.setEmpty();
         
                         dashboard.deleteNeighbodrsPiece(validNeighbodrsCells, validNeighbodrsOfNeighbodrsCells, destineCell);
+                        // quitar marca de arrastre
+                        if (lastPieceClicked.getDragging() === true) {
+                            lastPieceClicked.setDragging(false);
+                        }
                         resetLastPositions();
                     
                 } else {
                     lastPieceClicked.setPosition(lastCellClicked.x + (dashboard.cellWidth/2), lastCellClicked.y + (dashboard.cellHeight/2));
+                    if (lastPieceClicked.getDragging() === true) {
+                        lastPieceClicked.setDragging(false);
+                    }
                     resetLastPositions();
                 }
                 
@@ -156,19 +172,20 @@ async function init(){
     
         }
         
-        function deletElementos(){
-            dashboard.deleteElements();
-        }
-
         //Se mantiene el click
         function onMouseMove(e){
             if(isMouseDown && lastPieceClicked != null){
                 let mause = getMausePos(e);
                 lastPieceClicked.setPosition(mause.x, mause.y);
-                dashboard.reDraw();
             }
+            //dashboard.reDraw();
     
         }
+
+        function deletElementos(){
+            dashboard.deleteElements();
+        }
+
     
         //obtenemos la posicion del mouse
         function getMausePos(event){     //TODO:: Chequear que ande con el re escalado en el canvas
@@ -193,8 +210,14 @@ async function init(){
                 cell.setResaltada(false);
                 cell.stopPulse(); 
             })
-            lastPieceClicked.setResaltada(false);
-
+            if (lastPieceClicked) {
+                // asegurar que ya no esté marcado como arrastrando
+                if (lastPieceClicked.getDragging() === true) {
+                    lastPieceClicked.setDragging(false);
+                }
+                lastPieceClicked.setResaltada(false);
+                lastPieceClicked.draw();
+            }
             lastPieceClicked = null;
             lastCellClicked = null;
 
