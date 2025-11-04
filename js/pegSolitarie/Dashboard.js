@@ -69,7 +69,6 @@ export class Dashboard {
                 let pieceX = cell.x + (this.cellWidth / 2);
                 let pieceY = cell.y + (this.cellHeight / 2);
                 let piece = new Piece(pieceX, pieceY, this.ctx);
-                piece.draw();
                 this.pieces.push(piece);
                 cell.setOccupied();
             }

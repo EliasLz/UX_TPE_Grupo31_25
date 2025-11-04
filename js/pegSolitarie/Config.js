@@ -41,8 +41,9 @@ export function showMenu(){
             </form> 
         </div>
     `
-
+    
     gameScreen.innerHTML += menuHtml;
+    gameScreen.className='game2Background';
     
     return new Promise(resolve =>{
         const configForm = document.getElementById('configForm');

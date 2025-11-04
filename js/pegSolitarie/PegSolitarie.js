@@ -7,7 +7,6 @@ let lastCellClicked = null;
 let validNeighbodrsCells = [];
 let validNeighbodrsOfNeighbodrsCells = [];
 
-
 export function ejecutionPeg() {
     const currentPage = window.location.pathname.split('/').pop();
     
@@ -20,15 +19,15 @@ export function ejecutionPeg() {
         init();
         playButton.style.display = 'none';
     });
-    //onsole.log('Peg Solitarie initialized');
 }
 
-    // Función para dibujar el fondo
-    //Prepara el juego (Armado del tablero, Colocar piezas, Canvas, etc)
+
+//Prepara el juego (Armado del tablero, Colocar piezas, Canvas, etc)
 async function init(){
     let containerGame = document.getElementById('gameScreen');
+
     containerGame.innerHTML = '';
-    
+
     const config = await showMenu();
     
     containerGame.innerHTML = '';
@@ -48,13 +47,11 @@ async function init(){
     let canvasWidth = canvas.width;
     let canvasHeight = canvas.height;
     let dashboard = new Dashboard(canvasWidth, canvasHeight, ctx);
-    dashboard.drawCells();
-    
+   
     playGame();
 
     function playGame(){
-        dashboard.drawPieces();
-    
+ 
         canvas.addEventListener('mousedown', onMouseDown, false);
         canvas.addEventListener('mouseup', onMouseUp, false);
         canvas.addEventListener('mousemove', onMouseMove, false);
@@ -63,7 +60,7 @@ async function init(){
 
 
     //Jugabilidad Drag & Drop
-        //Si presiona el click
+        //Si presiona el click izquierdo
         function onMouseDown(e){
 
             if(e.button !== 0) return;
@@ -102,7 +99,7 @@ async function init(){
             } 
         }
     
-        //Se suelta el click
+        //Se suelta el click izquierdo
         function onMouseUp(e){
 
             if(e.button !== 0) return;
@@ -200,8 +197,10 @@ async function init(){
                 cell.setResaltada(false);
                 cell.stopPulse(); 
             })
-            lastPieceClicked.setResaltada(false);
-            lastPieceClicked.draw();
+            if (lastPieceClicked) {
+                lastPieceClicked.setResaltada(false);
+                lastPieceClicked.draw();
+            }
             lastPieceClicked = null;
             lastCellClicked = null;
 
