@@ -8,7 +8,6 @@ let validNeighbodrsCells = [];
 let validNeighbodrsOfNeighbodrsCells = [];
 
 
-
 export function ejecutionPeg() {
     const currentPage = window.location.pathname.split('/').pop();
     
@@ -32,8 +31,6 @@ async function init(){
     //Creamos el canvas
     const canvasContainer = document.createElement('canvas');
     canvasContainer.id = 'canvasContainer'
-    let containerGame = document.getElementById('gameScreen');
-    containerGame.innerHTML = '';
     containerGame.appendChild(canvasContainer);
 
     let canvas = document.getElementById('canvasContainer');
