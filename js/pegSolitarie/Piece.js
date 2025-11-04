@@ -1,5 +1,5 @@
 export class Piece{
-    constructor(x, y, ctx){
+    constructor(x, y, ctx, pieceImg){
         this.x = x;
         this.y = y;
         this.radius = 30
@@ -9,8 +9,7 @@ export class Piece{
         this.image = new Image();
         this.imageSize = 90; 
         
-        this.rosca = 'assets/img-Peg-Solitarie/Rosca.png';
-        this.duff = 'assets/img-Peg-Solitarie/Duff.png';
+        this.pieceImg = pieceImg;
     }
 
     //Dibuja la pieza.
@@ -26,7 +25,7 @@ export class Piece{
             this.imageSize = 90;
         }
         const size = this.imageSize;
-        this.image.src = this.duff;
+        this.image.src = this.pieceImg;
         const offset = size / 2;
         const topLeftX = this.x - offset; 
         const topLeftY = this.y - offset;

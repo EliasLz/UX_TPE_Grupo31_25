@@ -3,10 +3,11 @@ import { Piece } from "./Piece.js";
 import { Timer } from "./Timer.js";
 
 export class Dashboard {
-    constructor(canvasWidth, canvasHeight, ctx) {
+    constructor(canvasWidth, canvasHeight, ctx, pieceImg) {
         this.cells = [];
         this.pieces = [];
         this.margin = 20;
+        this.pieceImg = pieceImg;
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.cellWidth = (canvasWidth - this.margin * 2) / 7;
@@ -68,7 +69,7 @@ export class Dashboard {
             if (!(cell.x === this.margin + 3 * this.cellWidth && cell.y === this.margin + 3 * this.cellHeight)) {
                 let pieceX = cell.x + (this.cellWidth / 2);
                 let pieceY = cell.y + (this.cellHeight / 2);
-                let piece = new Piece(pieceX, pieceY, this.ctx);
+                let piece = new Piece(pieceX, pieceY, this.ctx, this.pieceImg);
                 this.pieces.push(piece);
                 cell.setOccupied();
             }

@@ -1,7 +1,6 @@
 import { Dashboard } from "./Dashboard.js";
 import { showEndMenu, showMenu } from "./Config.js";
 
-let CounterValue = 0;
 let isMouseDown = false;
 let lastPieceClicked = null;
 let lastCellClicked = null;
@@ -31,7 +30,8 @@ async function init(){
     containerGame.innerHTML = '';
 
     const config = await showMenu();
-    
+    const pieceImg = config.selectedPiece;
+
     containerGame.innerHTML = '';
 
     //Creamos el canvas
@@ -45,16 +45,29 @@ async function init(){
     let ctx = canvas.getContext('2d');
     let canvasWidth = canvas.width;
     let canvasHeight = canvas.height;
-    let dashboard = new Dashboard(canvasWidth, canvasHeight, ctx);
+    let dashboard = new Dashboard(canvasWidth, canvasHeight, ctx, pieceImg);
 
+    dashboard.drawCells();
     playGame();
 
     function playGame(){
- 
+        dashboard.reDraw();
+
         canvas.addEventListener('mousedown', onMouseDown, false);
         canvas.addEventListener('mouseup', onMouseUp, false);
         canvas.addEventListener('mousemove', onMouseMove, false);
         
+        gameLoop();
+    }
+
+    function gameLoop(){
+        dashboard.reDraw();
+
+        if(isMouseDown && lastPieceClicked != null){
+            lastPieceClicked.draw();
+        }
+
+        requestAnimationFrame(gameLoop);
     }
 
 
@@ -68,7 +81,6 @@ async function init(){
     
             if(lastPieceClicked != null){
                 resetLastPositions();
-                dashboard.reDraw();
             }
     
             let mause = getMausePos(e);
@@ -89,12 +101,6 @@ async function init(){
 
                 lastPieceClicked = clickedPiece;
                 lastCellClicked = clickedCell;
-                if(validNeighbodrsOfNeighbodrsCells.length > 0){
-                    validNeighbodrsOfNeighbodrsCells.forEach(cell => {
-                        cell.setResaltada(true);
-                        cell.draw();
-                    })
-                }
             } 
         }
     
@@ -113,7 +119,6 @@ async function init(){
                 if(destineCell == null || (destineCell.x == lastCellClicked.x && destineCell.y == lastCellClicked.y)) {
                     lastPieceClicked.setPosition(lastCellClicked.x + (dashboard.cellWidth/2), lastCellClicked.y + (dashboard.cellHeight/2));
                     resetLastPositions();
-                    dashboard.reDraw();
                     return;
                 }
     
@@ -136,7 +141,7 @@ async function init(){
                 
             }
     
-             if(dashboard.isGameOver()){
+            if(dashboard.isGameOver()){
                 let p = document.createElement('p');
                 if(dashboard.getPieces().length == 1){
                     p.innerHTML = 'Usted a ganado';
@@ -149,7 +154,6 @@ async function init(){
                 init(); //reinicimaos el juego
             }
     
-            dashboard.reDraw();
         }
         
         function deletElementos(){
@@ -162,13 +166,6 @@ async function init(){
                 let mause = getMausePos(e);
                 lastPieceClicked.setPosition(mause.x, mause.y);
                 dashboard.reDraw();
-                if(validNeighbodrsOfNeighbodrsCells.length > 0){
-                    validNeighbodrsOfNeighbodrsCells.forEach(cell => {
-                        cell.setResaltada(true);
-                        cell.draw();
-                    })
-                }
-                lastPieceClicked.draw();
             }
     
         }
@@ -196,10 +193,8 @@ async function init(){
                 cell.setResaltada(false);
                 cell.stopPulse(); 
             })
-            if (lastPieceClicked) {
-                lastPieceClicked.setResaltada(false);
-                lastPieceClicked.draw();
-            }
+            lastPieceClicked.setResaltada(false);
+
             lastPieceClicked = null;
             lastCellClicked = null;
 
