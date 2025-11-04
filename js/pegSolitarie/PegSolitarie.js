@@ -26,7 +26,7 @@ export function ejecutionPeg() {
     // Función para dibujar el fondo
     //Prepara el juego (Armado del tablero, Colocar piezas, Canvas, etc)
 async function init(){
-    const config = await showMenu();
+    //const config = await showMenu();
 
 
     //Creamos el canvas
@@ -45,15 +45,21 @@ async function init(){
     
     let canvasWidth = canvas.width;
     let canvasHeight = canvas.height;
-    let dashboard = new Dashboard(canvasWidth, canvasHeight, ctx);
     
-    let playBtn = document.getElementById('play');
-    playBtn.addEventListener('click', playGame)
+    let imgFondo = new Image();
+    imgFondo.src = './assets/img-Peg-Solitarie/FondoPantalla.webp';
+    let dashboard;
 
-    dashboard.draw();
+    imgFondo.onload = () =>{
     
+        dashboard = new Dashboard(canvasWidth, canvasHeight, ctx, imgFondo);
+        
+        dashboard.draw();
+        
+        playGame();
+    }
+
     function playGame(){
-        menu.style.display = 'none';
         dashboard.drawPieces();
     
         canvas.addEventListener('mousedown', onMouseDown, false);
@@ -84,16 +90,13 @@ async function init(){
                 validNeighbodrsCells = dashboard.getValidMoves(clickedPiece.x, clickedPiece.y).at(0);
                 
 
-                validNeighbodrsOfNeighbodrsCells.forEach(cell =>{
-                    cell.setResaltada(true);
-                    cell.startPulse();   // empieza a “respirar”
-                })
 
                 lastPieceClicked = clickedPiece;
                 lastCellClicked = clickedCell;
                 if(validNeighbodrsOfNeighbodrsCells.length > 0){
                     validNeighbodrsOfNeighbodrsCells.forEach(cell => {
                         cell.setResaltada(true);
+                        cell.startPulse();
                         cell.draw();
                     })
                 }
@@ -143,8 +146,8 @@ async function init(){
                 } else {
                     p.innerHTML = 'Usted perdio'
                 }
-                message.appendChild(p);
-                console.log(message)
+                // message.appendChild(p);
+                // console.log(message)
                 deletElementos();
                 init(); //reinicimaos el juego
             }

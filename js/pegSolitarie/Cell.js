@@ -12,7 +12,7 @@ export class Cell {
         // --- variables de la animación ---
         this.pulseActive = false;   // está pulsando?
         this.pulseScale = 0;        // 0 → sin escalar, 1 → tamaño máximo
-        this.pulseSpeed = 0.001;     // qué tan rápido crece/encoge (ajusta a gusto)
+        this.pulseSpeed = 0.006;     // qué tan rápido crece/encoge (ajusta a gusto)
         this.pulseMax = 0.12;       // % de crecimiento máximo (0.12 = 12 %)
     }
 
@@ -20,6 +20,7 @@ export class Cell {
     startPulse() {
         this.pulseActive = true;
         this.pulseScale = 0;
+        
     }
 
     // para la animación  
@@ -30,6 +31,7 @@ export class Cell {
 
     //  Se llama desde tu game-loop 
     draw() {
+        console.log('dibuja celda')
         this.updatePulse();// actualiza la animación
         this.paint();      // dibuja la celda con el escalado actual
     }
@@ -57,25 +59,14 @@ export class Cell {
         const offsetY = (h - this.baseHeight) / 2;
 
         // color según estado
-        this.ctx.fillStyle = this.highlighted || this.pulseActive
-        ? '#a42323ff'
-        : '#ff7b0077';
+        this.ctx.fillStyle = this.highlighted || this.pulseActive ? '#a42323ff' : '#ff7b0077';
 
         this.ctx.strokeStyle = 'white';
         this.ctx.lineWidth = 5;
 
-        this.ctx.strokeRect(
-        this.x - offsetX,
-        this.y - offsetY,
-        w,
-        h
-        );
-        this.ctx.fillRect(
-        this.x - offsetX,
-        this.y - offsetY,
-        w,
-        h
-        );
+        this.ctx.strokeRect(this.x - offsetX, this.y - offsetY, w, h);
+        this.ctx.fillRect( this.x - offsetX, this.y - offsetY, w, h);
+
     }
 
     isPointInside(x, y) {

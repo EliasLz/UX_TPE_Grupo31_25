@@ -3,7 +3,7 @@ import { Piece } from "./Piece.js";
 import { Timer } from "./Timer.js";
 
 export class Dashboard {
-    constructor(canvasWidth, canvasHeight, ctx){
+    constructor(canvasWidth, canvasHeight, ctx, imgFondo){
         this.cells = [];
         this.pieces = [];
         this.margin = 20;
@@ -14,6 +14,7 @@ export class Dashboard {
         this.invalidCells = this.setInvalidCells();
         this.ctx = ctx;
         this.timer = new Timer(ctx);
+        this.imgFondo = imgFondo;
     }
 
     getPieces(){
@@ -42,7 +43,8 @@ export class Dashboard {
     
     //Dibuja el dashboard. (Estado inicial del tablero sin las piezas)
     draw(){
-        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        //this.ctx.clearRect( 0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        //this.ctx.drawImage(this.imgFondo, 0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
         
         for(let row = 0; row < 7; row++){
             for(let col = 0; col < 7; col++){
@@ -56,13 +58,15 @@ export class Dashboard {
                 }
             }
         }
+        
+        console.log('estoyt en draw')
         this.timer.draw();
-        this.drawBackground();
     }
 
     // Dibujamos las piezas en el estado inicial
     drawPieces(){
-        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        this.ctx.clearRect( 0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        this.ctx.drawImage(this.imgFondo, 0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
         
         this.cells.forEach(cell => {
             if(!(cell.x === this.margin + 3 * this.cellWidth && cell.y === this.margin + 3 * this.cellHeight)){
@@ -75,19 +79,22 @@ export class Dashboard {
             }
         })
         this.timer.draw();
-        this.drawBackground();
+        console.log('estoyt en draw pieces')
     }
-
+    
     reDraw(){
-        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-        this.drawBackground();
+        this.ctx.clearRect( 0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        this.ctx.drawImage(this.imgFondo, 0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        
         this.cells.forEach(cell => {
-            cell.draw(this.ctx);
+            cell.draw();
         })
         this.pieces.forEach(piece => {
             piece.draw();
         })
+        console.log('estoyt en redraw')
     }
+    
 
 
     //Obtiene los movimientos validos.
@@ -186,18 +193,6 @@ export class Dashboard {
             }
         }
     }
-
-    drawBackground() {
-    // Dibujamos la imagen de fondo en todo el canvas
-    let imgFondo = new Image();
-    imgFondo.src = './assets/img-Peg-Solitarie/FondoPantalla.png';
-    
-    this.ctx.drawImage(imgFondo, 0, 0, this.canvasWidth, this.canvasHeight);
-
-    imgFondo.onload = () =>{
-        this.reDraw();
-    }
-}
 
     //Obtiene la celda clickeada.
     findClickedCell(x, y){
