@@ -117,7 +117,7 @@ ul.breadcrumb li:last-child:hover {
   width: 10%;
   height: 5%;
   background: rgb(49, 47, 47); 
- /* z-index: 10;  */         /* Sobre el canvas */
+  z-index: 10;           /* Sobre el canvas */
   display: flex;
   justify-content: center;
   align-items: center;  

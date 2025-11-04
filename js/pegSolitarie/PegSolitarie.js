@@ -1,6 +1,5 @@
 import { Dashboard } from "./Dashboard.js";
 import { showEndMenu, showMenu } from "./Config.js";
-import { Counter } from "./Counter.js";
 
 let CounterValue = 0;
 let isMouseDown = false;
@@ -43,15 +42,10 @@ async function init(){
     let canvas = document.getElementById('canvasContainer');
     canvas.width = 750;
     canvas.height = 750;
-    
     let ctx = canvas.getContext('2d');
-
-    
     let canvasWidth = canvas.width;
     let canvasHeight = canvas.height;
     let dashboard = new Dashboard(canvasWidth, canvasHeight, ctx);
-    let counter = new Counter(ctx);
-   //counter.show();
 
     playGame();
 
@@ -134,8 +128,6 @@ async function init(){
         
                         dashboard.deleteNeighbodrsPiece(validNeighbodrsCells, validNeighbodrsOfNeighbodrsCells, destineCell);
                         resetLastPositions();
-                        counter.discount();
-
                     
                 } else {
                     lastPieceClicked.setPosition(lastCellClicked.x + (dashboard.cellWidth/2), lastCellClicked.y + (dashboard.cellHeight/2));
