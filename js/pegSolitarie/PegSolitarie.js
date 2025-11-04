@@ -8,7 +8,6 @@ let validNeighbodrsCells = [];
 let validNeighbodrsOfNeighbodrsCells = [];
 
 
-
 export function ejecutionPeg() {
     const currentPage = window.location.pathname.split('/').pop();
     
@@ -26,14 +25,16 @@ export function ejecutionPeg() {
     // Función para dibujar el fondo
     //Prepara el juego (Armado del tablero, Colocar piezas, Canvas, etc)
 async function init(){
+    let containerGame = document.getElementById('gameScreen');
+    containerGame.innerHTML = '';
+    
     const config = await showMenu();
-
+    
+    containerGame.innerHTML = '';
 
     //Creamos el canvas
     const canvasContainer = document.createElement('canvas');
     canvasContainer.id = 'canvasContainer'
-    let containerGame = document.getElementById('gameScreen');
-    containerGame.innerHTML = '';
     containerGame.appendChild(canvasContainer);
 
     let canvas = document.getElementById('canvasContainer');
@@ -47,13 +48,11 @@ async function init(){
     let canvasHeight = canvas.height;
     let dashboard = new Dashboard(canvasWidth, canvasHeight, ctx);
     
-    let playBtn = document.getElementById('play');
-    playBtn.addEventListener('click', playGame)
-
     dashboard.draw();
     
+    playGame();
+
     function playGame(){
-        menu.style.display = 'none';
         dashboard.drawPieces();
     
         canvas.addEventListener('mousedown', onMouseDown, false);
