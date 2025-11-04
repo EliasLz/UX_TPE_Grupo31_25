@@ -25,7 +25,12 @@ export function ejecutionPeg() {
     // Función para dibujar el fondo
     //Prepara el juego (Armado del tablero, Colocar piezas, Canvas, etc)
 async function init(){
-    //const config = await showMenu();
+    let containerGame = document.getElementById('gameScreen');
+    containerGame.innerHTML = '';
+    
+    const config = await showMenu();
+    
+    containerGame.innerHTML = '';
 
 
     //Creamos el canvas

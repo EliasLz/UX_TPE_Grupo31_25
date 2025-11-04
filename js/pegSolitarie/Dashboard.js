@@ -59,7 +59,6 @@ export class Dashboard {
             }
         }
         
-        console.log('estoyt en draw')
         this.timer.draw();
     }
 
@@ -79,7 +78,6 @@ export class Dashboard {
             }
         })
         this.timer.draw();
-        console.log('estoyt en draw pieces')
     }
     
     reDraw(){
@@ -92,7 +90,6 @@ export class Dashboard {
         this.pieces.forEach(piece => {
             piece.draw();
         })
-        console.log('estoyt en redraw')
     }
     
 

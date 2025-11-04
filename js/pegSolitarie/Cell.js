@@ -31,7 +31,6 @@ export class Cell {
 
     //  Se llama desde tu game-loop 
     draw() {
-        console.log('dibuja celda')
         this.updatePulse();// actualiza la animación
         this.paint();      // dibuja la celda con el escalado actual
     }
