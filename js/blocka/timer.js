@@ -14,6 +14,7 @@ export function handlerGameOver(){
     const gameButtonbar = document.querySelector('.gameButtonbar');
     // Reemplaza el contenido del juego por un mensaje
     gameContainer.innerHTML = '<h2>¡Tiempo Agotado!</h2><p>No has completado el puzzle a tiempo.</p>'
+    // Oculta la botonora (esta la cambiaría: Elías)
     if(gameButtonbar) gameButtonbar.style.display = 'none';
 }
 
@@ -84,4 +85,3 @@ export function startTimer(gameConfig, initialTime, timerDisplay, handlerGameOve
 
 
 }
-
