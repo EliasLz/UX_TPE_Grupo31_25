@@ -1,11 +1,14 @@
 import { Dashboard } from "./Dashboard.js";
 import { showEndMenu, showMenu } from "./Config.js";
+import { Counter } from "./Counter.js";
 
+let CounterValue = 0;
 let isMouseDown = false;
 let lastPieceClicked = null;
 let lastCellClicked = null;
 let validNeighbodrsCells = [];
 let validNeighbodrsOfNeighbodrsCells = [];
+
 
 export function ejecutionPeg() {
     const currentPage = window.location.pathname.split('/').pop();
@@ -47,7 +50,9 @@ async function init(){
     let canvasWidth = canvas.width;
     let canvasHeight = canvas.height;
     let dashboard = new Dashboard(canvasWidth, canvasHeight, ctx);
-   
+    let counter = new Counter(ctx);
+   //counter.show();
+
     playGame();
 
     function playGame(){
@@ -118,17 +123,19 @@ async function init(){
                     return;
                 }
     
-                //chequeo si el movimiento es valido
-                let validMove = validNeighbodrsOfNeighbodrsCells.some(cell => cell.x == destineCell.x && cell.y == destineCell.y);
-    
-    
-                if(destineCell.isValid() && validMove ){
-                    lastPieceClicked.setPosition(destineCell.x + (dashboard.cellWidth/2), destineCell.y + (dashboard.cellHeight/2));
-                    destineCell.setOccupied();
-                    lastCellClicked.setEmpty();
-    
-                    dashboard.deleteNeighbodrsPiece(validNeighbodrsCells, validNeighbodrsOfNeighbodrsCells, destineCell);
-                    resetLastPositions();
+                    //chequeo si el movimiento es valido
+                    let validMove = validNeighbodrsOfNeighbodrsCells.some(cell => cell.x == destineCell.x && cell.y == destineCell.y);
+        
+        
+                    if(destineCell.isValid() && validMove){
+                        lastPieceClicked.setPosition(destineCell.x + (dashboard.cellWidth/2), destineCell.y + (dashboard.cellHeight/2));
+                        destineCell.setOccupied();
+                        lastCellClicked.setEmpty();
+        
+                        dashboard.deleteNeighbodrsPiece(validNeighbodrsCells, validNeighbodrsOfNeighbodrsCells, destineCell);
+                        resetLastPositions();
+                        counter.discount();
+
                     
                 } else {
                     lastPieceClicked.setPosition(lastCellClicked.x + (dashboard.cellWidth/2), lastCellClicked.y + (dashboard.cellHeight/2));

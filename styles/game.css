@@ -103,11 +103,28 @@ ul.breadcrumb li:last-child:hover {
 }
 
 .game2Background{
-
   background-image: linear-gradient(to top right, #114357, #F29492);
   display: flex;
   justify-content: center; /* Centra horizontalmente */
   align-items: center;
+}
+
+.game2Counter{
+
+  position: absolute;
+  top: 5%;
+  left: 10%;
+  width: 10%;
+  height: 5%;
+  background: rgb(49, 47, 47); 
+ /* z-index: 10;  */         /* Sobre el canvas */
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  color: white;
+  font-size: 24px;
+  border: solid 2px rgb(185, 155, 34);
+  border-radius: 14px;
 }
 
 .gameCover {

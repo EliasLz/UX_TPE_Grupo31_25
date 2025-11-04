@@ -58,7 +58,7 @@ export class Cell {
         const offsetY = (h - this.baseHeight) / 2;
 
         // color según estado
-        this.ctx.fillStyle = this.highlighted || this.pulseActive ? '#a42323ff' : '#ff7b0077';
+        this.ctx.fillStyle = this.highlighted || this.pulseActive ? 'rgba(37, 164, 35, 0.5)' : '#ff7b0077';
 
         this.ctx.strokeStyle = 'white';
         this.ctx.lineWidth = 5;
