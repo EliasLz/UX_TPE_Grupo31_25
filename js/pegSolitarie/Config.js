@@ -1,3 +1,5 @@
+import { formatTime } from '../blocka/utils.js'
+import { init } from './PegSolitarie.js'
 
 const PIECE_IMG = [
     'assets/img-Peg-Solitarie/Rosca.png',
@@ -36,7 +38,7 @@ export function showMenu(){
                             <input type="checkbox" id="timeTrialCheck" name="timeTrialCheck"/>
                             <span class="toggle-slider"></span>
                         </label>
-                        <input type="number" id="maxTime" name="maxTime" min="30"  placeholder="Tiempo (min 30s)"  disabled>
+                        <input type="number" id="maxTime" name="maxTime" min="5"  placeholder="Tiempo (min 30s)"  disabled>
                     </div>
                     <p>El juego termina si el tiempo se agota.</p>
                 </div>
@@ -77,7 +79,8 @@ export function showMenu(){
 
             const selectedConfig = {
                 selectedPiece : selectedPiece,
-                maxTime : isTimeTrial ? timeValue : 0   
+                maxTime : isTimeTrial ? timeValue : 0,
+                isTimeTrial : isTimeTrial
             }
 
             gameScreen.removeChild(menuWrapper);
@@ -92,17 +95,21 @@ export function showEndMenu(gameOver, time){
     let res;
 
     if(gameOver){
-        res = 'Usted Gano';
+        res = 'Felicitacion, usted a ganado el juego';
     }else{
-        res = 'Usted Perdio';
+        res = 'Upss, has perdido';
     }
 
     const menuHtml = `
+    <div class="config-menu">
         <h2> Peg Solitarie </h2>
-        <p>${result}} </p>
-        <p> Tiempo: ${time}} </p>
+        <p>${res} </p>
+        <p> Tiempo: ${formatTime(time)} </p>
         <button id="restart" class="btn-Menu-game" > Reiniciar </button>
-    `
-    gameScreen.innerHTML = menuHtml;
+    </div>
+        `
+        gameScreen.innerHTML = menuHtml;
+
+        document.getElementById('restart').addEventListener('click',init)
 }
 

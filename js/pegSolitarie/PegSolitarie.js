@@ -1,7 +1,9 @@
 import { Dashboard } from "./Dashboard.js";
+import { Timer } from "./Timer.js";
 import { showEndMenu, showMenu } from "./Config.js";
 
 let isMouseDown = false;
+let idLoop;
 let lastPieceClicked = null;
 let lastCellClicked = null;
 let validNeighbodrsCells = [];
@@ -24,9 +26,12 @@ export function ejecutionPeg() {
 
 
 //Prepara el juego (Armado del tablero, Colocar piezas, Canvas, etc)
-async function init(){
+export async function init(){
     let containerGame = document.getElementById('gameScreen');
     containerGame.innerHTML = '';
+
+    const buttonBarContainer = document.getElementById('displayTimer');
+
 
     //Creamos el canvas
     const canvasContainer = document.createElement('canvas');
@@ -41,12 +46,10 @@ async function init(){
     let canvasHeight = canvas.height;
 
     let dashboard = new Dashboard(canvasWidth, canvasHeight, ctx);
-
-    //dashboard.initDashboard();
-    
     const config = await showMenu();
 
-    
+    let timer = new Timer(buttonBarContainer,config.maxTime)
+
     dashboard.initPieces(config.selectedPiece);
 
 
@@ -57,7 +60,9 @@ async function init(){
         canvas.addEventListener('mousedown', onMouseDown, false);
         canvas.addEventListener('mouseup', onMouseUp, false);
         canvas.addEventListener('mousemove', onMouseMove, false);
-        
+
+        timer.start();
+        gameLoop();
     }
     
     function gameLoop(){
@@ -67,14 +72,19 @@ async function init(){
             lastPieceClicked.draw();
         }
         
-        requestAnimationFrame(gameLoop);
+        if(config.isTimeTrial){
+            if(timer.getTime() == 0){
+                timer.stop();
+                showEndMenu(false, 0);
+                return;
+            }
+        }
+        idLoop = requestAnimationFrame(gameLoop);
     }
-    
     
     //Jugabilidad Drag & Drop
     //Si presiona el click izquierdo
     function onMouseDown(e){
-        gameLoop();
         
         if(e.button !== 0) return;
         
@@ -158,18 +168,16 @@ async function init(){
             }
     
             if(dashboard.isGameOver()){
-                let p = document.createElement('p');
+                timer.stop()
                 if(dashboard.getPieces().length == 1){
-                    p.innerHTML = 'Usted a ganado';
+                    showEndMenu(true, timer.getTime());
                 } else {
-                    p.innerHTML = 'Usted perdio'
+                    showEndMenu(false, timer.getTime());
                 }
-                message.appendChild(p);
-                console.log(message)
-                deletElementos();
-                init(); //reinicimaos el juego
+                dashboard.deleteElements();
+                cancelAnimationFrame(idLoop);
+                return;
             }
-    
         }
         
         //Se mantiene el click
@@ -178,14 +186,7 @@ async function init(){
                 let mause = getMausePos(e);
                 lastPieceClicked.setPosition(mause.x, mause.y);
             }
-            //dashboard.reDraw();
-    
         }
-
-        function deletElementos(){
-            dashboard.deleteElements();
-        }
-
     
         //obtenemos la posicion del mouse
         function getMausePos(event){     //TODO:: Chequear que ande con el re escalado en el canvas
@@ -193,7 +194,6 @@ async function init(){
 
             const scaleX = canvas.width / rect.width;
             const scaleY = canvas.height / rect.height;
-
     
             const clientX = event.clientX - rect.left;
             const clientY = event.clientY - rect.top;
@@ -202,7 +202,6 @@ async function init(){
                 y : Math.round(clientY * scaleY)
             }
         }
-    
     
         //borramos las ultimas posiciones resaltadas y el estado de las piezas
         function resetLastPositions(){
