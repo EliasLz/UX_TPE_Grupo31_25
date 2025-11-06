@@ -141,7 +141,7 @@ function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
                             <h2>¡Felicidades!</h2>
                             <p>Tu tiempo fue de ${time}.</p>
                             <div id="endGameButtons">
-                                <button id="menuButton" class="btn-Menu-game">Menu Principal</button>
+                                <button id="menusButton" class="btn-Menu-game">Menu Principal</button>
                                 <button id="nextLevelButton" class="nextLevelButton">Proximo Nivel</button>
                             </div>
                             `;
@@ -150,7 +150,7 @@ function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
                         container.innerHTML = finalMessage;
                         document.getElementById('gameScreen').appendChild(container);
                         
-                        let btnMenu = document.getElementById('menuButton');
+                        let btnMenu = document.getElementById('menusButton');
                         btnMenu.addEventListener('click', initGame);
 
                         document.getElementById('nextLevelButton').addEventListener('click', ()=>{

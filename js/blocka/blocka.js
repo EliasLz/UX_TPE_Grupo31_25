@@ -24,8 +24,6 @@ export function ejecution() {
 
 export async function initGame(){
 
-
-
     //gameContainer.innerHTML = '<h2>Cargando juego...</h2>'; //TODO:: Hacer una animacion.
 
     const gameConfig = await configureGame();
@@ -44,7 +42,7 @@ export async function initGame(){
             let timerDisplay = document.getElementById('timerDisplay');
 
 
-            const startTime = (currentImageIndex === 0) ? initialTime : currentTime;
+            const startTime =  initialTime ;
             startTimer(gameConfig, startTime, timerDisplay, handlerGameOver);
 
             currentImageIndex++;
@@ -81,13 +79,13 @@ export async function initGame(){
                     <h4>Tu tiempo total fue de ${formatTime(totalTime)}. </h4>
                     `;
             }
-            console.log('Tiempo total del juego en segundos: ' + totalTime);
             document.getElementById('timerDisplay').style.display = 'none';
             document.getElementById('miCanvas').style.display = 'none';
             container.innerHTML = finalMessage;
             container.innerHTML += `<button id="menuButton" class="btn-game">Menu Pricipal</button>`;
             gameContainer.appendChild(container);
 
+            document.getElementById('menuButton').addEventListener('click', initGame);
         }
     }
     // Reinicio el tiempo total al comenzar un nuevo juego
