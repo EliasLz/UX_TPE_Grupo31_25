@@ -1,5 +1,6 @@
 import { addTotalTime } from './timer.js';
 import { parseTime } from './utils.js';
+import { initGame } from './blocka.js';
 
 export let puzzlePieces = [];
 
@@ -148,7 +149,10 @@ function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
                         document.getElementById('timerDisplay').style.display = 'none';
                         container.innerHTML = finalMessage;
                         document.getElementById('gameScreen').appendChild(container);
-    
+                        
+                        let btnMenu = document.getElementById('menuButton');
+                        btnMenu.addEventListener('click', initGame);
+
                         document.getElementById('nextLevelButton').addEventListener('click', ()=>{
                             onLevelComplete();
                         })

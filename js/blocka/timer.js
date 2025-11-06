@@ -4,7 +4,6 @@ import { accommodatePice } from './puzzle.js'
 
 export let gameTimerInterval = null; //--> Es para guardar el Id del intervalo
 export let currentTime = 0;
-export let levelTimes = [];
 export let totalTime = 0;
 
 //Handler para el fin del juego por tiempo
@@ -18,19 +17,6 @@ export function handlerGameOver(){
     if(gameButtonbar) gameButtonbar.style.display = 'none';
 }
 
-
- // Guarda el tiempo del nivel y reinicia el contador
-  export function saveLevelTimeAndReset() {
-    // Guarda el tiempo del nivel anterior
-    levelTimes.push(currentTime);
-    // Reinicia el contador
-    currentTime = 0;
-
-    // reinicia visualmente el display
-    const timerDisplay = document.getElementById('timerDisplay');
-    timerDisplay.classList.add('time-registered');
-    if (timerDisplay) timerDisplay.textContent = formatTime(currentTime);
-}
 
 // Reset al tiempo total
 export function resetTotalTime(){

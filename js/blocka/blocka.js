@@ -22,18 +22,8 @@ export function ejecution() {
 
 
 
-async function initGame(){
-    
-    //agregamos un evento de escucha al boton de ir al menu principal, al ser dinamico el boton tenemos que poner un observer
-    const observer = new MutationObserver((mutations) => {
-        const elemento = document.getElementById('menuButton');
-        if (elemento) {
-            elemento.addEventListener('click', initGame);
-            observer.disconnect(); // Ya no hace falta seguir observando
-        }
-    });
-    
-    observer.observe(document.body, { childList: true, subtree: true });    
+export async function initGame(){
+
 
 
     //gameContainer.innerHTML = '<h2>Cargando juego...</h2>'; //TODO:: Hacer una animacion.
