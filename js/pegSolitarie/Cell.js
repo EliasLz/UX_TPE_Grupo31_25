@@ -12,7 +12,7 @@ export class Cell {
         // --- variables de la animación ---
         this.pulseActive = false;   // está pulsando?
         this.pulseScale = 0;        // 0 → sin escalar, 1 → tamaño máximo
-        this.pulseSpeed = 0.006;     // qué tan rápido crece/encoge (ajusta a gusto)
+        this.pulseSpeed = -0.006;     // qué tan rápido crece/encoge (ajusta a gusto)
         this.pulseMax = 0.12;       // % de crecimiento máximo (0.12 = 12 %)
     }
 
@@ -41,11 +41,11 @@ export class Cell {
 
         this.pulseScale += this.pulseSpeed;
         if (this.pulseScale >= 1) {
-        this.pulseScale = 1;
-        this.pulseSpeed *= -1;   // invertimos dirección (crecer → encoger)
+            this.pulseScale = 1;
+            this.pulseSpeed *= -1;   // invertimos dirección (crecer → encoger)
         } else if (this.pulseScale <= 0) {
-        this.pulseScale = 0;
-        this.pulseSpeed *= -1;   // invertimos dirección (encoger → crecer)
+            this.pulseScale = 0;
+            this.pulseSpeed *= -1;   // invertimos dirección (encoger → crecer)
         }
     }
 

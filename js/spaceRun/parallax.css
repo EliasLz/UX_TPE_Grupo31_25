@@ -1,0 +1,35 @@
+@keyframes scroll {
+    0% {background-position-x: 0px;}
+    100% {background-position-x: -1920px;}
+}
+
+.layer{
+    min-height: 500px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-repeat: repeat-x;
+}
+
+.layer-10{
+    background-image: url(/assets/spaceRun/layer/space.png);   
+    animation: scroll 65s infinite linear;   
+}
+.layer-9{
+    background-image: url(/assets/spaceRun/layer/starts.png);   
+    animation: scroll 50s infinite linear;   
+} 
+.layer-8{
+    background-image: url(/assets/spaceRun/layer/planets.png);   
+    animation: scroll 35s infinite linear;   
+}
+.layer-7{
+    background-image: url(/assets/spaceRun/layer/ring-planet.png);   
+    animation: scroll 20s infinite linear;
+} 
+.layer-6{
+    background-image: url(/assets/spaceRun/layer/big-planet.png);   
+    animation: scroll 15s infinite linear;
+} 

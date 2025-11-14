@@ -221,6 +221,7 @@ export class Dashboard {
         }
         return null;
     }
+    
     //Obtiene la pieza del dashboard.
     findClickedPiece(x, y) {
         for (let i = 0; i < this.pieces.length; i++) {
