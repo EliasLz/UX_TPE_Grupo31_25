@@ -14,22 +14,33 @@
 }
 
 .layer-10{
-    background-image: url(/assets/spaceRun/layer/space.png);   
-    animation: scroll 65s infinite linear;   
+    background-image: url(/assets/spaceRun/layer/space.png);    
 }
 .layer-9{
-    background-image: url(/assets/spaceRun/layer/starts.png);   
-    animation: scroll 50s infinite linear;   
+    background-image: url(/assets/spaceRun/layer/stars.png);   
+    animation: scroll 500s infinite linear;   
 } 
 .layer-8{
-    background-image: url(/assets/spaceRun/layer/planets.png);   
-    animation: scroll 35s infinite linear;   
-}
-.layer-7{
-    background-image: url(/assets/spaceRun/layer/ring-planet.png);   
-    animation: scroll 20s infinite linear;
+    background-image: url(/assets/spaceRun/layer/stars2.png);   
+    animation: scroll 200s infinite linear;   
 } 
+.layer-7{
+    background-image: url(/assets/spaceRun/layer/planets.png);   
+    animation: scroll 100s infinite linear;   
+}
 .layer-6{
+    background-image: url(/assets/spaceRun/layer/far-planets1.png);   
+    animation: scroll 80s infinite linear;
+}
+.layer-5{
+    background-image: url(/assets/spaceRun/layer/far-planets2.png);   
+    animation: scroll 70s infinite linear;
+} 
+.layer-4{
+    background-image: url(/assets/spaceRun/layer/ring-planet.png);   
+    animation: scroll 60s infinite linear;
+} 
+.layer-3{
     background-image: url(/assets/spaceRun/layer/big-planet.png);   
-    animation: scroll 15s infinite linear;
+    animation: scroll 50s infinite linear;
 } 
