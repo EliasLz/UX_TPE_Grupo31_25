@@ -3,22 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/js/spaceRun/parallax.css">
+    <link rel="stylesheet" href="js/spaceRun/parallax/parallax.css">
+    <link rel="stylesheet" href="styles/test.css">
     <title>Document</title>
 </head>
 <body>
-    
-    <div class="layer layer-10"></div>     
-    <div class="layer layer-9"></div>
-    <div class="layer layer-8"></div>
-    <div class="layer layer-7"></div>
-    <div class="layer layer-6"></div>
-    <div class="layer layer-5"></div>
-    <div class="layer layer-4"></div>
-    <div class="layer layer-3"></div>
-    <div class="layer layer-2"></div>
-    <div class="layer layer-1"></div>
+    <div class="parallax">
+        <div class="layer layer-10"></div>     
+        <div class="layer layer-9"></div>
+        <div class="layer layer-8"></div>
+        <div class="layer layer-7"></div>
+        <div class="layer layer-6"></div>
+        <div class="layer layer-5"></div>
+        <div class="layer layer-4"></div>
+        <div class="layer layer-3"></div>
+        <div class="layer layer-2"></div>
+        <div class="layer layer-1"></div>
+    </div>
+    <div class="game" id="gameContainer">
+        <div class="player" id="player"></div>
+    </div>
 
+    <script type="module" src="./js/spaceRun/main.js"></script>
 
 </body>
 </html>
