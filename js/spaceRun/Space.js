@@ -1,6 +1,7 @@
 import { Asteroid } from './Asteroid.js';
 import { Life } from './Bonus/Life.js';
 import { Weapon } from './Bonus/Weapon.js';
+import { Spaceship } from './Spaceship.js';
 
 export class Space {
     constructor(gameContainer){
@@ -9,6 +10,9 @@ export class Space {
 
         this.arrAsteroids = [];
         this.arrBonus = [];
+
+        //Instanciamos la nave
+        this.spaceship = new Spaceship(this.gameArea);
 
         //Temporizador para la creacion de objetos.
         this.astSpawnTimer = 0;
@@ -60,8 +64,8 @@ export class Space {
     }
 
     // Hay/Existe una colision
-    checkCollisions(spaceship){
-        const spaceshipRec = spaceship.getboundingClientRect();
+    checkCollisions(){
+        const spaceshipRec = this.spaceship.getboundingClientRect();
 
         this.arrAsteroids.forEach(ast => {
             const astRect = ast.element.getBoundingClientRect();
@@ -77,13 +81,13 @@ export class Space {
         });
 
         this.arrBonus.forEach(ast => {
-            const astRect = ast.element.getBoundingClientRect();
+            const bonRect = ast.element.getBoundingClientRect();
 
             if(
-                spaceshipRec.left < astRect.right &&
-                spaceshipRec.right > astRect.left &&
-                spaceshipRec.top < astRect.bottom &&
-                spaceshipRec.bottom > astRect.top
+                spaceshipRec.left < bonRect.right &&
+                spaceshipRec.right > bonRect.left &&
+                spaceshipRec.top < bonRect.bottom &&
+                spaceshipRec.bottom > bonRect.top
             ){
                 return -1;
             }
@@ -109,6 +113,16 @@ export class Space {
         }
     }
 
-
-
+    //Movimientos de la nave.
+    spaceshipMoveUp(){
+        this.spaceship.upMove();
+    }
+    spaceshipMoveDown(){
+        this.spaceship.downMove();
+    }
+    
+    //Disparo de la nave.
+    spaceshipShoot(){
+        this.spaceship.shooting();
+    }
 }

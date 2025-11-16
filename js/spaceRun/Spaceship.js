@@ -1,29 +1,54 @@
 import { Collision } from "./Collision.js";
 
 export class Spaceship extends Collision{
-    constructor(x,y,spritesheet,hp){
-        super(x,y,spritesheet)
+    constructor(gameArea){
+        super()
+        this.gameArea = gameArea;
 
-        this.hp = hp;
+        this.width = 30;
+        this.height = 30;
+
+        this.x = 50
+        this.y = this.gameArea.clientHeight / 2 - (this.height / 2);
+
+        //Generamos el HTML de la nave 
+        this.element = document.createElement('div');
+        this.element.className = 'spaceship';
+        this.element.style.left = this.x + 'px';
+        this.element.style.top = this.y + 'px';
+        this.element.style.width = this.width + 'px';
+        this.element.style.height = this.height + 'px';
+
+        this.gameArea.appendChild(this.element);
+
+        //Estadisticas default de la nave.
+        this.hp = 3;
         this.isEnabled = false;
         this.ammunition = 0;
     }
 
-    //Movimiento de la nave.
-    movement(direction){
-        if(direction>0){
-            this.upMove(direction);
-        } else {
-            this.downMove(direction);
-        }
+    setPosition(x, y){
+    if (y < 0) { //--> Evitamos que se vaya para arriba.
+        y = 0;
     }
+    if (y > this.gameArea.clientHeight - this.height) { //--> Evitamos que se vaya para abajo.
+        y = this.gameArea.clientHeight - this.height;
+    }
+    
+    this.x = x;
+    this.y = y;
+
+    // 3. Actualizar el estilo CSS del elemento HTML
+    this.element.style.left = this.x + 'px';
+    this.element.style.top = this.y + 'px';
+}
 
     //Auxiliares de movimiento.
-    upMove(direction){
-        this.setPosition(this.x, this.y + direction);
+    upMove(){
+        this.setPosition(this.x, this.y - 2);
     }
-    downMove(direction){
-        this.setPosition(this.x, this.y - direction);
+    downMove(){
+        this.setPosition(this.x, this.y + 2);
     }
 
     //Sumar o restar vida.

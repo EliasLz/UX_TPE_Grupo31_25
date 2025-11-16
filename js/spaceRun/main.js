@@ -1,11 +1,15 @@
 //import { Collision } from './Collision.js';
 import { Space } from './Space.js';
-import { Spaceship } from './Spaceship.js';
 
-let points = 0;
-let gameSpeed = 5;
-//let spaceship = null;
-//let space = null;
+const keysPressed = {
+    w: false,
+    s: false,
+    ' ': false // Barra espaciadora.
+};
+
+const gameContainer = document.getElementById('gameContainer');
+const space = new Space(gameContainer);
+
 
 export function init(){
     const playButton = '';
@@ -16,19 +20,55 @@ export function init(){
 }
 
 export function playGame(){
-    const gameContainer = document.getElementById('gameContainer')
-    const spaceship = document.getElementById('player')
+
+    document.addEventListener('keydown', keyDown);
+    document.addEventListener('keyup', keyUp);
     
-    const space = new Space(gameContainer);
-    console.log(space)
+    startGame();
+}
+
+function startGame(){
+
+    if(keysPressed.w){
+        space.spaceshipMoveUp();
+    }
+    if(keysPressed.s){
+        space.spaceshipMoveDown();
+    }
     
-    function elementMove(){
-        space.update();
+    space.update();
     
-        requestAnimationFrame(elementMove);
+    requestAnimationFrame(startGame);
+}
+
+function keyDown(e){
+    const key = e.key.toLowerCase();
+    
+    if(key === 'w' || key === 's'){
+        console.log("toque el boton: ",key)
+        keysPressed[key] = true;
+        e.preventDefault();
+    }
+    
+    if(key === ' ' && !keysPressed[' ']){
+        space.spaceshipShoot();
+        keysPressed[' '] = true;
+        e.preventDefault();
+        console.log("disparo")
+    }
+}
+
+function keyUp(e){
+    const key = e.key.toLowerCase();
+
+    if(key === 'w' || key === 's'){
+        keysPressed[key] = false;
     }
 
-    elementMove();
+    if(key === ' '){
+        keysPressed[' '] = false;
+    }
 }
+
 
 init()
