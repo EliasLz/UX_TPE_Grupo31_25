@@ -1,6 +1,33 @@
+
 @keyframes scroll {
     0% {background-position-x: 0px;}
     100% {background-position-x: -1920px;}
+}
+
+@keyframes scroll-3840 {
+    0% {background-position-x: 0px;}
+    100% {background-position-x: -3840px;}
+}
+
+@keyframes scroll-5760 {
+    0% {background-position-x: 0px;}
+    100% {background-position-x: -5760px;}
+}
+@keyframes scroll-5760-threeSteps{
+
+    0% {background-position-x: 0px;}
+    13.33% {background-position-x: -600px;}
+    
+    33% {background-position-x: -600px;}
+    46.66% {background-position-x: -2950px;
+    opacity: 1;}
+    
+    66.66% {background-position-x: -2950px;
+    opacity: 0.50;}
+    100% {background-position-x: -5760px;
+    opacity: 0.50;}
+
+
 }
 
 .layer{
@@ -10,37 +37,50 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-repeat: repeat-x;
+    background-repeat: repeat-x;    
 }
 
 .layer-10{
-    background-image: url(/assets/spaceRun/layer/space.png);    
+    background-image: url(/assets/spaceRun/layer/space.png);
+    animation: scroll 1500s infinite linear;
 }
 .layer-9{
     background-image: url(/assets/spaceRun/layer/stars.png);   
-    animation: scroll 500s infinite linear;   
+    animation: scroll-3840 500s infinite linear;   
 } 
 .layer-8{
-    background-image: url(/assets/spaceRun/layer/stars2.png);   
-    animation: scroll 200s infinite linear;   
+    background-image: url(/assets/spaceRun/layer/space-dust.jpg);
+    animation: scroll-5760 250s infinite linear 10s;
+    opacity: 0.20;
 } 
 .layer-7{
-    background-image: url(/assets/spaceRun/layer/planets.png);   
-    animation: scroll 100s infinite linear;   
+    background-image: url(/assets/spaceRun/layer/far-planets.png);   
+    animation: scroll-3840 125s infinite linear;   
 }
 .layer-6{
-    background-image: url(/assets/spaceRun/layer/far-planets1.png);   
-    animation: scroll 80s infinite linear;
+    background-image: url(/assets/spaceRun/layer/planets.png);   
+    animation: scroll-3840 90s infinite linear;
 }
 .layer-5{
-    background-image: url(/assets/spaceRun/layer/far-planets2.png);   
-    animation: scroll 70s infinite linear;
+
+    background-image: url(/assets/spaceRun/layer/near-planets.png);
+    background-repeat: no-repeat;
+    animation: scroll-5760-threeSteps 150s linear forwards;
+
 } 
+
+/*
 .layer-4{
-    background-image: url(/assets/spaceRun/layer/ring-planet.png);   
-    animation: scroll 60s infinite linear;
+
 } 
 .layer-3{
-    background-image: url(/assets/spaceRun/layer/big-planet.png);   
-    animation: scroll 50s infinite linear;
+
 } 
+.layer-2{
+
+} 
+
+.layer-1{
+
+} 
+*/
