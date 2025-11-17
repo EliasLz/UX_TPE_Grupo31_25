@@ -1,8 +1,8 @@
 import { Bonus } from "../Bonus/Bonus.js";
 
 export class Weapon extends Bonus{
-    constructor(bonus){
-        super(bonus)
+    constructor(gameArea, bonus){
+        super(gameArea, bonus)
 
         this.element.className += ' weapon';
     }

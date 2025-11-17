@@ -60,7 +60,6 @@ function keyDown(e){
         space.spaceshipShoot();
         keysPressed[' '] = true;
         e.preventDefault();
-        console.log("disparo")
     }
 }
 

@@ -1,8 +1,8 @@
 import { Bonus } from './Bonus.js'
 
 export class Life extends Bonus{
-    constructor(bonus){
-        super(bonus)
+    constructor(gameArea, bonus){
+        super(gameArea, bonus)
 
         this.element.className += ' life';
     }

@@ -23,8 +23,8 @@ export class Spaceship extends Collision{
 
         //Estadisticas default de la nave.
         this.hp = 3;
-        this.isEnabled = false;
-        this.ammunition = 0;
+        this.isEnabled = true;
+        this.ammunition = 200;
     }
 
     setPosition(x, y){

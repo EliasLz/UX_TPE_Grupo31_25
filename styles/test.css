@@ -27,6 +27,11 @@
     background-color: red;
 }
 
+.bullet{
+    position: absolute;
+    background-color: white;
+}
+
 .spaceship{
     width: 40px;
     height: 30px;

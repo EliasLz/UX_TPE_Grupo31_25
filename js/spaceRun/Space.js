@@ -1,4 +1,5 @@
 import { Asteroid } from './Asteroid.js';
+import { Bullet } from './Bullet.js';
 import { Life } from './Bonus/Life.js';
 import { Weapon } from './Bonus/Weapon.js';
 import { Spaceship } from './Spaceship.js';
@@ -10,6 +11,7 @@ export class Space {
 
         this.arrAsteroids = [];
         this.arrBonus = [];
+        this.arrBullets = [];
 
         //Instanciamos la nave
         this.spaceship = new Spaceship(this.gameArea);
@@ -40,6 +42,16 @@ export class Space {
             if(bon.isOffScreen()){
                 bon.remove();
                 this.arrBonus.splice(i,1)
+            }
+        }
+
+        for (let i = this.arrBullets.length - 1; i >= 0; i--){ //TODO:: Ver q pasa si esta al revez
+            let bull = this.arrBullets[i];
+            bull.move(this.gameSpeed);
+
+            if(bull.isOffScreen()){
+                bull.remove();
+                this.arrBullets.splice(i,1)
             }
         }
 
@@ -77,6 +89,32 @@ export class Space {
                 this.arrAsteroids.splice(i,1);
                 return;
             }
+
+        }
+        
+        for (let j = this.arrBullets.length - 1; j >= 0; j--) {
+            const bull = this.arrBullets[j];
+            const bullRect = bull.element.getBoundingClientRect();
+
+            // Ahora iteramos sobre los asteroides usando 'i'
+            for (let i = this.arrAsteroids.length - 1; i >= 0; i--) {
+                const ast = this.arrAsteroids[i];
+                const astRect = ast.element.getBoundingClientRect();
+
+                if (this.isColliding(astRect, bullRect)) {
+                    if(ast.hp > 1){
+                        ast.lossHp();
+                        bull.remove();
+                        this.arrBullets.splice(j, 1);
+                    }else{
+                        bull.remove();
+                        this.arrBullets.splice(j, 1);
+                        ast.remove();
+                        this.arrAsteroids.splice(i, 1);
+                    }
+                    break; 
+                }
+            }
         }
 
         for(let i = this.arrBonus.length - 1; i>=0; i--){
@@ -88,7 +126,7 @@ export class Space {
                     this.spaceship.addHp();
                 }else{
                     this.spaceship.enableShooting();
-                    this.spaceship.addAmmunition();
+                    this.spaceship.addAmmunition(bon.getBonus());
                 }
                 bon.remove();
                 this.arrBonus.splice(i,1);
@@ -113,15 +151,24 @@ export class Space {
         const asteroid = new Asteroid(this.gameArea);
         this.arrAsteroids.push(asteroid);
     }
+
+    //Agregamos la bala al juego.
+    addBullet(){
+        const x = this.spaceship.x + this.spaceship.width; 
+        const y = this.spaceship.y + (this.spaceship.height / 2) - 2.5;
+
+        const bullet = new Bullet(x,y,this.gameArea);
+        this.arrBullets.push(bullet);
+    }
     
     //Agregamos Bonus al juego.
     addBonus(){
         let rndSpawn = Math.floor(Math.random() * 10);
         if(rndSpawn > 3){
-            const bonus = new Weapon(this.gameArea);
+            const bonus = new Weapon(this.gameArea, 5);
             this.arrBonus.push(bonus);
         }else{
-            const bonus = new Life(this.gameArea);
+            const bonus = new Life(this.gameArea, 1);
             this.arrBonus.push(bonus);
         }
     }
@@ -136,6 +183,11 @@ export class Space {
     
     //Disparo de la nave.
     spaceshipShoot(){
-        this.spaceship.shooting();
+        if(this.spaceship.isEnabled && this.spaceship.ammunition > 0){
+            console.log("entre")
+            this.addBullet()
+            this.spaceship.shooting();
+        }
+        
     }
 }
