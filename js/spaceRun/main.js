@@ -36,6 +36,12 @@ function startGame(){
         space.spaceshipMoveDown();
     }
     
+    space.checkCollisions();
+    if (space.spaceship.hp <= 0) {
+        alert("Perdiste!!");
+        return;
+    }
+
     space.update();
     
     requestAnimationFrame(startGame);

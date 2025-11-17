@@ -65,35 +65,48 @@ export class Space {
 
     // Hay/Existe una colision
     checkCollisions(){
-        const spaceshipRec = this.spaceship.getboundingClientRect();
+        const spaceshipRec = this.spaceship.element.getBoundingClientRect();
 
-        this.arrAsteroids.forEach(ast => {
+        for (let i = this.arrAsteroids.length - 1; i>=0; i--){
+            const ast = this.arrAsteroids[i];
             const astRect = ast.element.getBoundingClientRect();
 
-            if(
-                spaceshipRec.left < astRect.right &&
-                spaceshipRec.right > astRect.left &&
-                spaceshipRec.top < astRect.bottom &&
-                spaceshipRec.bottom > astRect.top
-            ){
-                return 1;
+            if(this.isColliding(spaceshipRec,astRect)){
+                this.spaceship.lossHp();
+                ast.remove();
+                this.arrAsteroids.splice(i,1);
+                return;
             }
-        });
+        }
 
-        this.arrBonus.forEach(ast => {
-            const bonRect = ast.element.getBoundingClientRect();
+        for(let i = this.arrBonus.length - 1; i>=0; i--){
+            const bon = this.arrBonus[i];
+            const bonRect = bon.element.getBoundingClientRect();
 
-            if(
-                spaceshipRec.left < bonRect.right &&
-                spaceshipRec.right > bonRect.left &&
-                spaceshipRec.top < bonRect.bottom &&
-                spaceshipRec.bottom > bonRect.top
-            ){
-                return -1;
+            if(this.isColliding(spaceshipRec,bonRect)){
+                if(bon instanceof Life){
+                    this.spaceship.addHp();
+                }else{
+                    this.spaceship.enableShooting();
+                    this.spaceship.addAmmunition();
+                }
+                bon.remove();
+                this.arrBonus.splice(i,1);
+                return;
             }
-        });
-        return 0;
+        }
+        return;
     }
+
+    //Funcion auxiliar de checkCollisions.
+    isColliding(rect1, rect2) {
+    return (
+        rect1.left < rect2.right &&
+        rect1.right > rect2.left &&
+        rect1.top < rect2.bottom &&
+        rect1.bottom > rect2.top
+    );
+}
 
     //Agregamos Asteroides al juego.
     addAsteroid(){
