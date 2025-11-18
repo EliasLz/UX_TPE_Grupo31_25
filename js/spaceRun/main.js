@@ -1,5 +1,6 @@
 //import { Collision } from './Collision.js';
 import { Space } from './Space.js';
+import { showMenu, hiddenMenu } from './menu.js';
 
 const keysPressed = {
     w: false,
@@ -8,26 +9,34 @@ const keysPressed = {
 };
 
 const gameContainer = document.getElementById('gameContainer');
-const space = new Space(gameContainer);
+let space = null;
 
 
 export function init(){
-    const playButton = '';
-
-    //playButton.addEventListener('click', ()=>{
+    let playButton = '';
+    showMenu();
+    
+    playButton = document.getElementById('startGameBtn');
+    playButton.addEventListener('click', ()=>{
+        console.log("inicia juyego")
+        hiddenMenu();
         playGame();
-    //})
+    });
+    
 }
 
 export function playGame(){
-
+    
     document.addEventListener('keydown', keyDown);
     document.addEventListener('keyup', keyUp);
     
+    console.log("acaa")
+    space= new Space(gameContainer);
     startGame();
 }
 
 function startGame(){
+    console.log("startGame")
 
     if(keysPressed.w){
         space.spaceshipMoveUp();
@@ -35,14 +44,15 @@ function startGame(){
     if(keysPressed.s){
         space.spaceshipMoveDown();
     }
+    space.update();
     
     space.checkCollisions();
     if (space.spaceship.hp <= 0) {
         alert("Perdiste!!");
+        //hay que destruir todos los div creados y reiniciar el juego
         return;
     }
 
-    space.update();
     
     requestAnimationFrame(startGame);
 }
@@ -51,7 +61,6 @@ function keyDown(e){
     const key = e.key.toLowerCase();
     
     if(key === 'w' || key === 's'){
-        console.log("toque el boton: ",key)
         keysPressed[key] = true;
         e.preventDefault();
     }

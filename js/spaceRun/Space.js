@@ -7,7 +7,7 @@ import { Spaceship } from './Spaceship.js';
 export class Space {
     constructor(gameContainer){
         this.gameArea = gameContainer;
-        this.gameSpeed = 2; //--> Velocidad del scroll.
+        this.gameSpeed = 1; //--> Velocidad del scroll.
 
         this.arrAsteroids = [];
         this.arrBonus = [];
@@ -148,7 +148,12 @@ export class Space {
 
     //Agregamos Asteroides al juego.
     addAsteroid(){
-        const asteroid = new Asteroid(this.gameArea);
+        const size  =  Math.random() * (100 - 30) + 30; //tamaño entre 30 y 70
+        
+        // Esta fórmula mapea el rango [30, 100] a el rango [1, 7]
+        const life = Math.floor(1 + ((size - 30) / 70) * 6);
+        
+        const asteroid = new Asteroid(this.gameArea, size, life);
         this.arrAsteroids.push(asteroid);
     }
 
@@ -164,6 +169,7 @@ export class Space {
     //Agregamos Bonus al juego.
     addBonus(){
         let rndSpawn = Math.floor(Math.random() * 10);
+
         if(rndSpawn > 3){
             const bonus = new Weapon(this.gameArea, 5);
             this.arrBonus.push(bonus);
@@ -184,10 +190,11 @@ export class Space {
     //Disparo de la nave.
     spaceshipShoot(){
         if(this.spaceship.isEnabled && this.spaceship.ammunition > 0){
-            console.log("entre")
             this.addBullet()
             this.spaceship.shooting();
         }
         
     }
+
+
 }

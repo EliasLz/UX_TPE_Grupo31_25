@@ -19,7 +19,6 @@ export class Bullet extends Collision{
         this.element.style.width = this.width + 'px';
         this.element.style.height = this.height + 'px';
 
-        console.log("Bullet created at:", this.x, this.y, "in area:", this.gameArea.id);
         this.gameArea.appendChild(this.element);
     }
 

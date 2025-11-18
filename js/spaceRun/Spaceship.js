@@ -8,7 +8,7 @@ export class Spaceship extends Collision{
         this.width = 30;
         this.height = 30;
 
-        this.x = 50
+        this.x = 200
         this.y = this.gameArea.clientHeight / 2 - (this.height / 2);
 
         //Generamos el HTML de la nave 
