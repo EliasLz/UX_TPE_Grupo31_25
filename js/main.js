@@ -83,9 +83,13 @@ function selectRecommendedGames(games) {
     let recommendedList = [];
     
     const pegSolitarie = games.find(game => game.id === 1); //--> Aseguramos que el Peg Solitarie este siempre.
-    
+    const spaceRun = games.find(game => game.id === 3); 
+
     if (pegSolitarie) {
         recommendedList.push(pegSolitarie);
+    }
+    if (spaceRun) {
+        recommendedList.push(spaceRun);
     }
 
     const candidates = games.filter(game => 
@@ -344,6 +348,9 @@ function attachCardClickHandlers(container) {
                 }
                 else if (id === '2' || id === 2) {
                     window.location.href = 'game2.html';
+                }
+                else if (id === '3' || id === 3) {
+                    window.location.href = 'game3.html';
                 }
                 return;
             }
