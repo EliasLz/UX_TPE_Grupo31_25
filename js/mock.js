@@ -39,8 +39,28 @@ export const mockGame = [
         ],
         "genres": [
         {
-            "id": 2,
+            "id": 7,
             "name": "Puzzle"
+        }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Space Run",
+        "released": "2025-08-01",
+        "background_image_low_res": "assets/img/spaceRun.png",
+        "rating": 5,
+        "description": "¡Prepárate para una aventura intergaláctica de alto octanaje en Space Run! Pilota tu nave espacial a través de campos de asteroides traicioneros",
+        "platforms": [
+        {
+            "id": 1,
+            "name": "PC"
+        }
+        ],
+        "genres": [
+        {
+            "id": 2,
+            "name": "Shooter"
         }
         ]
     }

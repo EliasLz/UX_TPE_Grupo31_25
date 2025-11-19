@@ -1,5 +1,5 @@
 
-const gameScreen = document.getElementById('gameContainer');
+const gameScreen = document.getElementById('gameScreen');
 
 export function showMenu(){
 

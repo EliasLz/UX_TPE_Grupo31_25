@@ -3,6 +3,7 @@ import {simulateProgress} from "./spiner.js";
 import { mainHamburguer } from "./menu.js";
 import { ejecution } from "./blocka/blocka.js";
 import { ejecutionPeg } from "./pegSolitarie/PegSolitarie.js";
+import { ejecutionSpaceRun } from "./spaceRun/main.js";
 
 // Función para cargar un componente dinámicamente.
 export function loadComponent(urlComponent, idDestination) {
@@ -480,4 +481,5 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     mainHamburguer();
     ejecution();
     ejecutionPeg();
+    ejecutionSpaceRun();
 })

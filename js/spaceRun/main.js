@@ -1,6 +1,7 @@
 //import { Collision } from './Collision.js';
 import { Space } from './Space.js';
 import { showMenu, hiddenMenu } from './menu.js';
+import { insertParallax } from './parallax/parallax.js';
 
 const keysPressed = {
     w: false,
@@ -8,15 +9,30 @@ const keysPressed = {
     ' ': false // Barra espaciadora.
 };
 
-const gameContainer = document.getElementById('gameContainer');
+const gameContainer = document.getElementById('gameScreen');
 let space = null;
 
+export function ejecutionSpaceRun() {
+    const currentPage = window.location.pathname.split('/').pop();
+    
+    if(currentPage != 'game3.html'){
+        return;
+    }
+    const playButton = document.getElementById('playButton');
+    
+    playButton.addEventListener('click',  ()=>{
+        gameContainer.innerHTML = " ";
+        insertParallax(gameContainer);
+        
+        init();
+        playButton.style.display = 'none';
+    });
+}
 
 export function init(){
-    let playButton = '';
     showMenu();
     
-    playButton = document.getElementById('startGameBtn');
+    let playButton = document.getElementById('startGameBtn');
     playButton.addEventListener('click', ()=>{
         console.log("inicia juyego")
         hiddenMenu();
@@ -84,5 +100,3 @@ function keyUp(e){
     }
 }
 
-
-init()
