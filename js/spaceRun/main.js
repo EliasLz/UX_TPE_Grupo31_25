@@ -30,13 +30,11 @@ export function playGame(){
     document.addEventListener('keydown', keyDown);
     document.addEventListener('keyup', keyUp);
     
-    console.log("acaa")
     space= new Space(gameContainer);
     startGame();
 }
 
 function startGame(){
-    console.log("startGame")
 
     if(keysPressed.w){
         space.spaceshipMoveUp();
@@ -48,8 +46,10 @@ function startGame(){
     
     space.checkCollisions();
     if (space.spaceship.hp <= 0) {
-        alert("Perdiste!!");
+
         //hay que destruir todos los div creados y reiniciar el juego
+        space.destroy();
+        init();
         return;
     }
 

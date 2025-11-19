@@ -16,7 +16,6 @@ export function showMenu(){
 
 export function hiddenMenu(){
     const menuWrapper = gameScreen.querySelector('.menu-wrapper');
-    console.log("remueve menu")
 
     gameScreen.removeChild(menuWrapper);
 }

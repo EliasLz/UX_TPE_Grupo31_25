@@ -153,7 +153,13 @@ export class Space {
         // Esta fórmula mapea el rango [30, 100] a el rango [1, 7]
         const life = Math.floor(1 + ((size - 30) / 70) * 6);
         
-        const asteroid = new Asteroid(this.gameArea, size, life);
+        let asteroid = new Asteroid(this.gameArea, size, life);
+        //aseguramos que no colisione al crearlo
+        if(this.arrAsteroids.length > 0){
+            while(this.isColliding(this.arrAsteroids.at(-1).element.getBoundingClientRect(), asteroid.element.getBoundingClientRect())){
+                asteroid = new Asteroid(this.gameArea, size, life);
+            }
+        }
         this.arrAsteroids.push(asteroid);
     }
 
@@ -171,10 +177,18 @@ export class Space {
         let rndSpawn = Math.floor(Math.random() * 10);
 
         if(rndSpawn > 3){
-            const bonus = new Weapon(this.gameArea, 5);
+            let bonus = new Weapon(this.gameArea, 5);
+            //aseguramos que no colisione al crearlo
+            while (this.isColliding(this.arrAsteroids.at(-1).element.getBoundingClientRect(), bonus.element.getBoundingClientRect())){
+                bonus = new Weapon(this.gameArea, 5);
+            }
             this.arrBonus.push(bonus);
         }else{
-            const bonus = new Life(this.gameArea, 1);
+            let bonus = new Life(this.gameArea, 1);
+            //aseguramos que no colisione al crearlo
+            while (this.isColliding(this.arrAsteroids.at(-1).element.getBoundingClientRect(), bonus.element.getBoundingClientRect())){
+                bonus = new Weapon(this.gameArea, 5);
+            }
             this.arrBonus.push(bonus);
         }
     }
@@ -192,9 +206,15 @@ export class Space {
         if(this.spaceship.isEnabled && this.spaceship.ammunition > 0){
             this.addBullet()
             this.spaceship.shooting();
-        }
-        
+        } 
     }
 
+    //eliminar todos los elementos del juego
+    destroy(){
+        this.spaceship.remove();
+        this.arrAsteroids.forEach(ast => ast.remove());
+        this.arrBonus.forEach(bon => bon.remove());
+        this.arrBullets.forEach(bull => bull.remove());
+    }
 
 }

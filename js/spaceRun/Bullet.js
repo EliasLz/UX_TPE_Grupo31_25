@@ -37,4 +37,8 @@ export class Bullet extends Collision{
 
     //Animar la bala.
     collision(){};
+
+    remove(){
+        this.gameArea.removeChild(this.element);
+    }
 }

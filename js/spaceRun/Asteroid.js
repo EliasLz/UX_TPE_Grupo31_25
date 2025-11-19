@@ -47,4 +47,8 @@ export class Asteroid extends Collision{
     collision() {
         console.log('hola')
     }
+
+    remove(){
+        this.gameArea.removeChild(this.element);
+    }
 }

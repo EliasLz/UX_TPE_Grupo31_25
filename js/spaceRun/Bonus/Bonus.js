@@ -39,4 +39,8 @@ export class Bonus extends Collision{
     getBonus(){
         return this.bonus;
     }
+
+    remove(){
+        this.gameArea.removeChild(this.element);
+    }
 }

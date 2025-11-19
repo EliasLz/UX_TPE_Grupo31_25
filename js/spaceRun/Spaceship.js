@@ -82,4 +82,8 @@ export class Spaceship extends Collision{
     collision(){
 
     }
+
+    remove(){
+        this.gameArea.removeChild(this.element);
+    }
 }
