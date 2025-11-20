@@ -14,20 +14,8 @@
     100% {background-position-x: -5760px;}
 }
 @keyframes scroll-5760-threeSteps{
-
     0% {background-position-x: 0px;}
-    13.33% {background-position-x: -600px;}
-    
-    33% {background-position-x: -600px;}
-    46.66% {background-position-x: -2950px;
-    opacity: 1;}
-    
-    66.66% {background-position-x: -2950px;
-    opacity: 0.50;}
-    100% {background-position-x: -5760px;
-    opacity: 0.50;}
-
-
+    100% {background-position-x: -9521px;}
 }
 
 .layer{
@@ -68,11 +56,9 @@
 
 } 
 
-/*
-.layer-4{
 
-} 
-.layer-3{
+
+/*.layer-3{
 
 } 
 .layer-2{

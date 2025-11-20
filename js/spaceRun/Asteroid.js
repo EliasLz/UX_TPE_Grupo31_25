@@ -1,23 +1,27 @@
 import { Collision } from "./Collision.js";
 
 export class Asteroid extends Collision{
-    constructor(gameArea, size, life){
+    constructor(gameArea, sizeAsteroid, life){
         super();
         this.gameArea = gameArea;
-        this.width = size;
-        this.height = size;
         this.hp = life;
 
         this.x = this.gameArea.clientWidth;
-        this.y = Math.random() * (this.gameArea.clientHeight - this.height);
+        this.y = Math.random() * (this.gameArea.clientHeight);
 
         //Generamos el HTML 
         this.element = document.createElement('div');
         this.element.className = 'asteroid';
         this.element.style.left = this.x + 'px';
         this.element.style.top = this.y + 'px';
-        this.element.style.width = this.width + 'px';
-        this.element.style.height = this.height + 'px';
+
+        if(sizeAsteroid == 1){
+            this.element.className += ' small-asteroid';
+        } else if (sizeAsteroid == 2){
+            this.element.className += ' medium-asteroid';
+        } else if (sizeAsteroid == 3){
+            this.element.className += ' large-asteroid';
+        }
 
         //Lo añadimos al juego
         this.gameArea.appendChild(this.element);

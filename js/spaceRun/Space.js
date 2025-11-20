@@ -149,10 +149,10 @@ export class Space {
 
     //Agregamos Asteroides al juego.
     addAsteroid(){
-        const size  =  Math.random() * (100 - 30) + 30; //tamaño entre 30 y 70
+        const size  =  Math.floor(Math.random() * 3 ) + 1;
         
         // Esta fórmula mapea el rango [30, 100] a el rango [1, 7]
-        const life = Math.floor(1 + ((size - 30) / 70) * 6);
+        const life = size * 3;
         
         let asteroid = new Asteroid(this.gameArea, size, life);
         //aseguramos que no colisione al crearlo

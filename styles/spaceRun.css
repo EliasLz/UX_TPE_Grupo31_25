@@ -84,11 +84,27 @@ body{
 
 .asteroid{
     position: absolute;
+}
+
+.small-asteroid{
     width: 50px;
     height: 50px;
-    border-radius: 100%;
-    background-color: rgb(113, 63, 9);
+    background: url('../../assets/spaceRun/spritesheet/small-asteroid.png') repeat-x;
+    animation: small-rotateAsteroid 2s steps(100) infinite;
 }
+.medium-asteroid{
+    width: 100px;
+    height: 100px;
+    background: url('../../assets/spaceRun/spritesheet/medium-Asteroid.png') repeat-x;
+    animation: medium-rotateAsteroid 2s steps(100) infinite;
+}
+.large-asteroid{
+    width: 150px;
+    height: 150px;
+    background: url('../../assets/spaceRun/spritesheet/large-Asteroid.png') repeat-x;
+    animation: large-rotateAsteroid 2s steps(100) infinite;
+}
+
 .bonus{
     position: absolute;
     width: 25px;
@@ -117,4 +133,20 @@ body{
     position: absolute;
     left: 50px;
     top: 200px;
+}
+
+
+/* ANIMACIONES */
+
+@keyframes small-rotateAsteroid{
+    0% { background-position: 0px; }
+    100% { background-position: -5000px; }
+}
+@keyframes medium-rotateAsteroid{
+    0% { background-position: 0px; }
+    100% { background-position: -10000px; }
+}
+@keyframes large-rotateAsteroid{
+    0% { background-position: 0px; }
+    100% { background-position: -15000px; }
 }
