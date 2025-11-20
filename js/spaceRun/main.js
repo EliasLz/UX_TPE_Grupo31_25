@@ -54,10 +54,10 @@ function startGame(){
 
     if(keysPressed.w){
         space.spaceshipMoveUp();
-    }
-    if(keysPressed.s){
+    } else {
         space.spaceshipMoveDown();
     }
+
     space.update();
     
     space.checkCollisions();

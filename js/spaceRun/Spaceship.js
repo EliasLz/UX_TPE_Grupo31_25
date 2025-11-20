@@ -48,7 +48,7 @@ export class Spaceship extends Collision{
         this.setPosition(this.x, this.y - 2);
     }
     downMove(){
-        this.setPosition(this.x, this.y + 2);
+        this.setPosition(this.x, this.y + 1);
     }
 
     //Sumar o restar vida.
