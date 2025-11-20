@@ -47,7 +47,7 @@ export class Space {
 
         for (let i = this.arrBullets.length - 1; i >= 0; i--){ //TODO:: Ver q pasa si esta al revez
             let bull = this.arrBullets[i];
-            bull.move(this.gameSpeed);
+            bull.move(2);
 
             if(bull.isOffScreen()){
                 bull.remove();
@@ -60,7 +60,7 @@ export class Space {
 
         if(this.astSpawnTimer >= this.astSpawnInterval){
             this.addAsteroid()
-            if (this.astSpawnInterval > 50) { //-->Aparecen ams rapido con el tiempo.
+            if (this.astSpawnInterval > 10) { //-->Aparecen ams rapido con el tiempo.
                 this.astSpawnInterval -= 0.5;
             }
         this.astSpawnTimer = 0;
@@ -73,6 +73,7 @@ export class Space {
             }
         this.bonSpawnTimer = 0;
         }
+        this.gameSpeed += 0.0003;
     }
 
     // Hay/Existe una colision
