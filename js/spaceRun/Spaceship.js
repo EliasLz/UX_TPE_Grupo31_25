@@ -5,19 +5,17 @@ export class Spaceship extends Collision{
         super()
         this.gameArea = gameArea;
 
-        this.width = 30;
-        this.height = 30;
+        this.width = 58;
+        this.height = 36;
 
         this.x = 200
-        this.y = this.gameArea.clientHeight / 2 - (this.height / 2);
+        this.y = this.gameArea.clientHeight / 2 ;
 
         //Generamos el HTML de la nave 
         this.element = document.createElement('div');
-        this.element.className = 'spaceship';
+        this.element.className = 'spaceship spaceship-down';
         this.element.style.left = this.x + 'px';
         this.element.style.top = this.y + 'px';
-        this.element.style.width = this.width + 'px';
-        this.element.style.height = this.height + 'px';
 
         this.gameArea.appendChild(this.element);
 
@@ -28,26 +26,28 @@ export class Spaceship extends Collision{
     }
 
     setPosition(x, y){
-    if (y < 0) { //--> Evitamos que se vaya para arriba.
-        y = 0;
-    }
-    if (y > this.gameArea.clientHeight - this.height) { //--> Evitamos que se vaya para abajo.
-        y = this.gameArea.clientHeight - this.height;
-    }
-    
-    this.x = x;
-    this.y = y;
+        if (y < 0) { //--> Evitamos que se vaya para arriba.
+            y = 0;
+        }
+        if (y > this.gameArea.clientHeight - this.height) { //--> Evitamos que se vaya para abajo.
+            y = this.gameArea.clientHeight - this.height;
+        }
+        
+        this.x = x;
+        this.y = y;
 
-    // 3. Actualizar el estilo CSS del elemento HTML
-    this.element.style.left = this.x + 'px';
-    this.element.style.top = this.y + 'px';
-}
+        // 3. Actualizar el estilo CSS del elemento HTML
+        this.element.style.left = this.x + 'px';
+        this.element.style.top = this.y + 'px';
+    }
 
     //Auxiliares de movimiento.
     upMove(){
-        this.setPosition(this.x, this.y - 2);
+        this.element.className = 'spaceship spaceship-up';
+        this.setPosition(this.x, this.y - 1);
     }
     downMove(){
+        this.element.className = 'spaceship spaceship-down';
         this.setPosition(this.x, this.y + 1);
     }
 
@@ -80,7 +80,20 @@ export class Spaceship extends Collision{
     
     //Efecto de colision
     collision(){
-
+        let animation = document.createElement('div');
+        if(this.hp > 0 ){
+            animation.className = 'spaceship-sparks';
+            this.element.appendChild(animation);
+            animation.addEventListener('animationend' , ()=>{
+                animation.remove();
+            })
+        } else {
+            animation.className = 'spaceship-explode';
+            this.element.appendChild(animation);
+            animation.addEventListener('animationend', ()=>{
+                this.remove();
+            })
+        }
     }
 
     remove(){

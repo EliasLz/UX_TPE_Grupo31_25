@@ -13,11 +13,9 @@ export class Bullet extends Collision{
 
         //Generamos el HTML de la nave 
         this.element = document.createElement('div');
-        this.element.className = 'bullet';
+        this.element.className = 'bullet bullet-move';
         this.element.style.left = this.x + 'px';
         this.element.style.top = this.y + 'px';
-        this.element.style.width = this.width + 'px';
-        this.element.style.height = this.height + 'px';
 
         this.gameArea.appendChild(this.element);
     }
@@ -36,7 +34,12 @@ export class Bullet extends Collision{
     }
 
     //Animar la bala.
-    collision(){};
+    collision(){
+        this.element.className = 'bullet bullet-explode';    
+        this.element.addEventListener('animationend' , ()=>{
+            this.remove();
+        })
+    };
 
     remove(){
         this.gameArea.removeChild(this.element);

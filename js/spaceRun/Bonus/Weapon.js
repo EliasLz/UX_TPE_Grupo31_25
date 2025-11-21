@@ -5,6 +5,7 @@ export class Weapon extends Bonus{
         super(gameArea, bonus)
 
         this.element.className += ' weapon';
+        this.element.style.backgroundColor = 'blue';
     }
 
     //Efecto cuando colisiona

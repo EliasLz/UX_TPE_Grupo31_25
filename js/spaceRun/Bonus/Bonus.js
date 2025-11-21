@@ -17,8 +17,6 @@ export class Bonus extends Collision{
         this.element.className = 'bonus';
         this.element.style.left = this.x + 'px';
         this.element.style.top = this.y + 'px';
-        this.element.style.width = this.width + 'px';
-        this.element.style.height = this.height + 'px';
 
         this.gameArea.appendChild(this.element);
     }

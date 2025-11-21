@@ -4,7 +4,7 @@ export class Life extends Bonus{
     constructor(gameArea, bonus){
         super(gameArea, bonus)
 
-        this.element.className += ' life';
+        this.element.className += ' life bonus-life';
     }
 
     //Efecto al colisionar

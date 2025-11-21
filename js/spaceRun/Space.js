@@ -22,10 +22,12 @@ export class Space {
 
         this.bonSpawnTimer = 0;
         this.bonSpawnInterval = 500;
+
+        
     }
 
     update(){
-        for (let i = this.arrAsteroids.length - 1; i >= 0; i--){ //TODO:: Ver q pasa si esta al revez
+        for (let i = this.arrAsteroids.length - 1; i >= 0; i--){ 
             let ast = this.arrAsteroids[i];
             ast.move(this.gameSpeed);
 
@@ -35,7 +37,7 @@ export class Space {
             }
         }
 
-        for (let i = this.arrBonus.length - 1; i >= 0; i--){ //TODO:: Ver q pasa si esta al revez
+        for (let i = this.arrBonus.length - 1; i >= 0; i--){ 
             let bon = this.arrBonus[i];
             bon.move(this.gameSpeed);
 
@@ -45,7 +47,7 @@ export class Space {
             }
         }
 
-        for (let i = this.arrBullets.length - 1; i >= 0; i--){ //TODO:: Ver q pasa si esta al revez
+        for (let i = this.arrBullets.length - 1; i >= 0; i--){ 
             let bull = this.arrBullets[i];
             bull.move(2);
 
@@ -74,21 +76,29 @@ export class Space {
         this.bonSpawnTimer = 0;
         }
         this.gameSpeed += 0.0003;
+
+        //Chequeo si la nave toco fondo
+        if(this.spaceship.y >= this.gameArea.clientHeight - this.spaceship.height){
+            this.spaceship.hp = 0;
+            this.spaceship.collision();
+            return true;
+        }
+
     }
 
     // Hay/Existe una colision
     checkCollisions(){
         const spaceshipRec = this.spaceship.element.getBoundingClientRect();
-
+        
         for (let i = this.arrAsteroids.length - 1; i>=0; i--){
             const ast = this.arrAsteroids[i];
-            const astRect = ast.element.getBoundingClientRect();
-
+            const astRect = ast.hitbox.getBoundingClientRect();
+            
             if(this.isColliding(spaceshipRec,astRect)){
                 this.spaceship.lossHp();
+                this.spaceship.collision();
                 ast.remove();
                 this.arrAsteroids.splice(i,1);
-                return;
             }
 
         }
@@ -100,20 +110,18 @@ export class Space {
             // Ahora iteramos sobre los asteroides usando 'i'
             for (let i = this.arrAsteroids.length - 1; i >= 0; i--) {
                 const ast = this.arrAsteroids[i];
-                const astRect = ast.element.getBoundingClientRect();
-
+                const astRect = ast.hitbox.getBoundingClientRect();
+                
                 if (this.isColliding(astRect, bullRect)) {
+                    
                     if(ast.hp > 1){
                         ast.lossHp();
-                        bull.remove();
-                        this.arrBullets.splice(j, 1);
                     }else{
-                        bull.remove();
-                        this.arrBullets.splice(j, 1);
                         ast.remove();
                         this.arrAsteroids.splice(i, 1);
                     }
-                    break; 
+                    bull.collision();
+                    this.arrBullets.splice(j, 1);
                 }
             }
         }
@@ -131,9 +139,11 @@ export class Space {
                 }
                 bon.remove();
                 this.arrBonus.splice(i,1);
-                return;
             }
         }
+
+
+
         return;
     }
 
@@ -212,7 +222,6 @@ export class Space {
 
     //eliminar todos los elementos del juego
     destroy(){
-        this.spaceship.remove();
         this.arrAsteroids.forEach(ast => ast.remove());
         this.arrBonus.forEach(bon => bon.remove());
         this.arrBullets.forEach(bull => bull.remove());

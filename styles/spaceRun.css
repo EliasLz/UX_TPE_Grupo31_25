@@ -84,7 +84,42 @@ body{
 
 .asteroid{
     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+
+
+.bonus{
+    position: absolute;
+}
+
+.weapon{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+}
+
+
+.bullet{
+    position: absolute;
+    background-color: white;
+}
+
+.spaceship{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+/* ANIMACIONES */
+
+/* --------------Asteroides-----------------*/
 
 .small-asteroid{
     width: 50px;
@@ -105,39 +140,6 @@ body{
     animation: large-rotateAsteroid 2s steps(100) infinite;
 }
 
-.bonus{
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    border-radius: 100%;
-}
-
-.weapon{
-    background-color: blue;
-}
-
-.life{
-    background-color: red;
-}
-
-.bullet{
-    position: absolute;
-    background-color: white;
-}
-
-.spaceship{
-    width: 40px;
-    height: 30px;
-    background-color: yellow;
-    border: 1px solid #333;
-    position: absolute;
-    left: 50px;
-    top: 200px;
-}
-
-
-/* ANIMACIONES */
-
 @keyframes small-rotateAsteroid{
     0% { background-position: 0px; }
     100% { background-position: -5000px; }
@@ -149,4 +151,85 @@ body{
 @keyframes large-rotateAsteroid{
     0% { background-position: 0px; }
     100% { background-position: -15000px; }
+}
+
+
+/* --------------Spaceship-----------------*/
+
+.spaceship-down{
+    width: 58px;
+    height: 36px;
+    background: url('../assets/spaceRun/objets/ovni-spritesheet.png');
+    animation: spaceship-move 0.5s steps(4) infinite;
+}
+
+.spaceship-up{
+    width: 58px;
+    height: 48px;
+    background: url('../assets/spaceRun/objets/ovniUp-spritesheet.png');
+    animation: spaceship-move 0.5s steps(4) infinite;
+}
+
+.spaceship-explode{
+    position: absolute;
+    width: 128px;
+    height: 128px;
+    background: url('../assets/spaceRun/objets/ovni-explode1.png');
+    animation: spaceship-explode 0.5s steps(5) ;
+}
+.spaceship-sparks{
+    width: 65px;
+    height: 60px;
+    background: url('../assets/spaceRun/objets/sparks.png');
+    animation: spaceship-sparks 0.3s steps(6) ;
+}
+
+@keyframes spaceship-move {
+    0% { background-position: 0px; }
+    100% { background-position: -233px; }
+}
+
+@keyframes spaceship-explode {
+    0% { background-position: 0px; }
+    100% { background-position: -640px; }
+}
+
+@keyframes spaceship-sparks {
+    0% { background-position: 0px; }
+    100% { background-position: -390px; }
+}
+
+/* --------------Bullet-----------------*/
+
+.bullet-move{
+    width: 50px;
+    height: 50px;
+    background: url('../assets/spaceRun/objets/bullet.png');
+    animation: bullet 1s steps(5) infinite;
+}
+.bullet-explode{
+    width: 50px;
+    height: 50px;
+    background: url('../assets/spaceRun/objets/bullet-explode.png');
+    animation: bullet 0.5s steps(5);
+}
+
+@keyframes bullet {
+    0% { background-position: 0px; }
+    100% { background-position: -250px; }
+}
+
+
+/* --------------Bonus-----------------*/
+
+.bonus-life{
+    width: 33px;
+    height: 30px;
+    background: url('../assets/spaceRun/objets/life.png');
+    animation: life-move 1s steps(10) infinite;
+}
+
+@keyframes life-move {
+    0% { background-position: 0px; }
+    100% { background-position: -335px; }
 }

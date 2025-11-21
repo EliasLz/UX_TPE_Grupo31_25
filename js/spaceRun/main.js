@@ -5,7 +5,6 @@ import { insertParallax } from './parallax/parallax.js';
 
 const keysPressed = {
     w: false,
-    s: false,
     ' ': false // Barra espaciadora.
 };
 
@@ -58,14 +57,13 @@ function startGame(){
         space.spaceshipMoveDown();
     }
 
-    space.update();
-    
     space.checkCollisions();
-    if (space.spaceship.hp <= 0) {
 
-        //hay que destruir todos los div creados y reiniciar el juego
-        space.destroy();
-        init();
+    if (space.update() || space.spaceship.hp <= 0) {
+        setTimeout( ()=>{
+            space.destroy();
+            init();
+        } , 1000);
         return;
     }
 
@@ -76,7 +74,7 @@ function startGame(){
 function keyDown(e){
     const key = e.key.toLowerCase();
     
-    if(key === 'w' || key === 's'){
+    if(key === 'w'){
         keysPressed[key] = true;
         e.preventDefault();
     }
@@ -91,7 +89,7 @@ function keyDown(e){
 function keyUp(e){
     const key = e.key.toLowerCase();
 
-    if(key === 'w' || key === 's'){
+    if(key === 'w'){
         keysPressed[key] = false;
     }
 
