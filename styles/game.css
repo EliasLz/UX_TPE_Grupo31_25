@@ -1,7 +1,5 @@
 main {
     margin: 0 30px;
-    display: flex;
-    flex-direction: column;
     align-items: center;
 }
 
@@ -20,15 +18,22 @@ button:focus-visible {
     border-radius: 4px;
 }
 
-.game {
-    flex-direction: column;
-    border: 3px solid black; 
-    border-radius: 30px;
-    overflow: hidden;
-}
-
 #gameScreen{
     position: relative;
+    width: 100%;            /* ancho según contenido */
+    height: 525px;         /* alto según contenido */
+    
+    /*
+    width: auto;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    */
+
+
+    /*
+    position: relative;
+    overflow: hidden;*/
 }
 
 #canvasContainer {
@@ -103,6 +108,15 @@ ul.breadcrumb li:last-child:hover {
     background-image: url('../assets/img-Blocka/FondoPantalla.png');
     overflow: hidden;
     width: 950px;
+    border: 3px solid black; 
+    border-radius: 30px;
+}
+
+.game3-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
     border: 3px solid black; 
     border-radius: 30px;
 }
@@ -317,6 +331,7 @@ button.play-button:active {
     background-color: var(--color-texto-300);
     height: 38px;
     padding: 0 30px;
+    border-top: 3px solid black;
     overflow: hidden;
 }
 
