@@ -35,13 +35,9 @@ export class Bullet extends Collision{
 
     //Animar la bala.
     collision(){
-        this.element.className = 'bullet bullet-explode';    
+        this.element.className = 'bullet bullet-explode';
         this.element.addEventListener('animationend' , ()=>{
             this.remove();
         })
-    };
-
-    remove(){
-        this.gameArea.removeChild(this.element);
     }
 }

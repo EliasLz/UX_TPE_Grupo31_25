@@ -22,8 +22,6 @@ export class Space {
 
         this.bonSpawnTimer = 0;
         this.bonSpawnInterval = 500;
-
-        
     }
 
     update(){
@@ -83,7 +81,6 @@ export class Space {
             this.spaceship.collision();
             return true;
         }
-
     }
 
     // Hay/Existe una colision
@@ -100,7 +97,6 @@ export class Space {
                 ast.remove();
                 this.arrAsteroids.splice(i,1);
             }
-
         }
         
         for (let j = this.arrBullets.length - 1; j >= 0; j--) {
@@ -141,9 +137,6 @@ export class Space {
                 this.arrBonus.splice(i,1);
             }
         }
-
-
-
         return;
     }
 

@@ -68,8 +68,4 @@ export class Asteroid extends Collision{
     //Efecto de colision.
     collision() {
     }
-
-    remove(){
-        this.gameArea.removeChild(this.element);
-    }
 }
