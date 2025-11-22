@@ -20,9 +20,9 @@ export class Spaceship extends Collision{
         this.gameArea.appendChild(this.element);
 
         //Estadisticas default de la nave.
-        this.hp = 3;
+        this.hp = 8;
         this.isEnabled = true;
-        this.ammunition = 200;
+        this.ammunition = 12;
     }
 
     setPosition(x, y){
@@ -75,13 +75,18 @@ export class Spaceship extends Collision{
     }
     //Agregar municion.
     addAmmunition(ammo){
+        if(this.ammunition + ammo > 12){
+            this.ammunition = 12;
+            return
+        }
+
         this.ammunition += ammo;
     }
     
     //Efecto de colision
     collision(){
         let animation = document.createElement('div');
-        if(this.hp > 0 ){
+        if(this.hp > 1 ){
             animation.className = 'spaceship-sparks';
             this.element.appendChild(animation);
             animation.addEventListener('animationend' , ()=>{

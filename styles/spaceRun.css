@@ -86,9 +86,6 @@ body{
 
 .weapon{
     position: absolute;
-    width: 50px;
-    height: 50px;
-    background-color: blue;
 }
 
 .bullet{
@@ -213,13 +210,41 @@ body{
 /* --------------Bonus-----------------*/
 
 .bonus-life{
-    width: 33px;
-    height: 30px;
-    background: url('../assets/spaceRun/objets/life.png');
-    animation: life-move 1s steps(10) infinite;
+    width: 40px;
+    height: 40px;
+    background: url('../assets/spaceRun/objets/item-life.png');
+    animation: bonus 1s steps(15) infinite;
+}
+.bonus-bullet{
+    width: 40px;
+    height: 40px;
+    background: url('../assets/spaceRun/objets/item-bullet.png');
+    animation: bonus 1s steps(15) infinite;
 }
 
-@keyframes life-move {
+@keyframes bonus {
     0% { background-position: 0px; }
-    100% { background-position: -335px; }
+    100% { background-position: -600px; }
+}
+
+
+/* --------------Hud-----------------*/
+
+.hud-life{
+    position: absolute;
+    width: 106px;
+    height: 40px;
+    background: url('../assets/spaceRun/objets/life-Hud.png');
+    background-repeat: no-repeat;
+
+    background-position: 0px 0px;
+}
+.hud-ammunition{
+    position: absolute;
+    width: 87px;
+    height: 30px;
+    background: url('../assets/spaceRun/objets/ammunition-hud.png');
+    background-repeat: no-repeat;
+
+    background-position: 0px 0px;
 }

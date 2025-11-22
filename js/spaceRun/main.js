@@ -59,7 +59,7 @@ function startGame(){
 
     space.checkCollisions();
 
-    if (space.update() || space.spaceship.hp <= 0) {
+    if (space.update() || space.spaceship.hp <= 1) {
         setTimeout( ()=>{
             space.destroy();
             init();

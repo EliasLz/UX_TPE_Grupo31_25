@@ -22,6 +22,28 @@ export class Space {
 
         this.bonSpawnTimer = 0;
         this.bonSpawnInterval = 500;
+
+        // Hud Elements
+        this.hudLife = document.createElement('div');
+        this.hudLife.className = 'hud-life';
+        this.framesLife = 8;
+        this.widthLifeFrame = 106;
+
+
+        this.hudAmmunition = document.createElement('div');
+        this.hudAmmunition.className = 'hud-ammunition';
+        this.hudAmmunition.style.top =  '50px';
+        
+        this.hudAmmunition2 = document.createElement('div');
+        this.hudAmmunition2.className = 'hud-ammunition';
+        this.hudAmmunition2.style.top = '80px';
+
+        this.framesBullet = 7;
+        this.widthBulletFrame = 87;
+
+        this.gameArea.appendChild(this.hudLife);
+        this.gameArea.appendChild(this.hudAmmunition);
+        this.gameArea.appendChild(this.hudAmmunition2);
     }
 
     update(){
@@ -77,7 +99,8 @@ export class Space {
 
         //Chequeo si la nave toco fondo
         if(this.spaceship.y >= this.gameArea.clientHeight - this.spaceship.height){
-            this.spaceship.hp = 0;
+            this.spaceship.hp = 1;
+            this.lifeHud();
             this.spaceship.collision();
             return true;
         }
@@ -93,6 +116,7 @@ export class Space {
             
             if(this.isColliding(spaceshipRec,astRect)){
                 this.spaceship.lossHp();
+                this.lifeHud();
                 this.spaceship.collision();
                 ast.remove();
                 this.arrAsteroids.splice(i,1);
@@ -128,10 +152,16 @@ export class Space {
 
             if(this.isColliding(spaceshipRec,bonRect)){
                 if(bon instanceof Life){
-                    this.spaceship.addHp();
+                    if(this.spaceship.hp < 8){
+                        this.spaceship.addHp();
+                        this.lifeHud();
+                    }
                 }else{
-                    this.spaceship.enableShooting();
-                    this.spaceship.addAmmunition(bon.getBonus());
+                    if(this.spaceship.ammunition < 12){
+                        this.spaceship.enableShooting();
+                        this.spaceship.addAmmunition(bon.getBonus());
+                        this.ammunitiontHud();
+                    }
                 }
                 bon.remove();
                 this.arrBonus.splice(i,1);
@@ -191,7 +221,7 @@ export class Space {
             let bonus = new Life(this.gameArea, 1);
             //aseguramos que no colisione al crearlo
             while (this.isColliding(this.arrAsteroids.at(-1).element.getBoundingClientRect(), bonus.element.getBoundingClientRect())){
-                bonus = new Weapon(this.gameArea, 5);
+                bonus = new Life(this.gameArea, 1);
             }
             this.arrBonus.push(bonus);
         }
@@ -210,7 +240,24 @@ export class Space {
         if(this.spaceship.isEnabled && this.spaceship.ammunition > 0){
             this.addBullet()
             this.spaceship.shooting();
+            this.ammunitiontHud();
         } 
+    }
+
+    lifeHud(){
+        let positionX = -( this.widthLifeFrame * (this.framesLife - this.spaceship.hp));
+        this.hudLife.style.backgroundPosition = `${positionX}px 0px`;
+    }
+
+    ammunitiontHud(){
+        if(this.spaceship.ammunition <= 5){
+            let positionX = -( this.widthBulletFrame * ((this.framesBullet-1) - this.spaceship.ammunition));
+            this.hudAmmunition.style.backgroundPosition = `${positionX}px 0px`;
+        } else {
+            this.hudAmmunition.style.backgroundPosition = `0px 0px`;
+            let positionX = -( this.widthBulletFrame * (((this.framesBullet-1) * 2) - this.spaceship.ammunition));
+            this.hudAmmunition2.style.backgroundPosition = `${positionX}px 0px`;
+        }
     }
 
     //eliminar todos los elementos del juego
