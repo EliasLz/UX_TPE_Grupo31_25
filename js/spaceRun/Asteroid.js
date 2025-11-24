@@ -4,7 +4,7 @@ export class Asteroid extends Collision{
     constructor(gameArea, sizeAsteroid, life){
         super();
         this.gameArea = gameArea;
-        this.hp = life;
+        this.hp = 1;
 
 
         this.x = this.gameArea.clientWidth;

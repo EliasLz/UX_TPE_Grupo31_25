@@ -1,57 +1,59 @@
 //import { Collision } from './Collision.js';
 import { Space } from './Space.js';
-import { showMenu, hiddenMenu } from './menu.js';
+import { showMenu, showCurrentRecord, hiddenMenu } from './menu.js';
 import { insertParallax } from './parallax/parallax.js';
 
 const keysPressed = {
     w: false,
-    ' ': false // Barra espaciadora.
+    'shift': false // Barra espaciadora.
 };
 
 const gameContainer = document.getElementById('gameScreen');
 let space = null;
+let currentScoreRecord = 0;
 
 export function ejecutionSpaceRun() {
     const currentPage = window.location.pathname.split('/').pop();
-    
-    if(currentPage != 'game3.html'){
+
+    if (currentPage != 'game3.html') {
         return;
     }
     const playButton = document.getElementById('playButton');
-    
-    playButton.addEventListener('click',  ()=>{
+
+    playButton.addEventListener('click', () => {
         gameContainer.innerHTML = " ";
         insertParallax(gameContainer);
-        
+
         init();
         playButton.style.display = 'none';
     });
 }
 
-export function init(){
+export function init() {
     showMenu();
-    
+
+    if (currentScoreRecord > 0) {
+        showCurrentRecord(currentScoreRecord);
+    }
     let playButton = document.getElementById('startGameBtn');
-    playButton.addEventListener('click', ()=>{
-        console.log("inicia juyego")
+    playButton.addEventListener('click', () => {
         hiddenMenu();
         playGame();
     });
-    
+
 }
 
-export function playGame(){
-    
+export function playGame() {
+
     document.addEventListener('keydown', keyDown);
     document.addEventListener('keyup', keyUp);
-    
-    space= new Space(gameContainer);
+    space = new Space(gameContainer);
     startGame();
 }
 
-function startGame(){
+function startGame() {
 
-    if(keysPressed.w){
+    if (keysPressed.w) {
         space.spaceshipMoveUp();
     } else {
         space.spaceshipMoveDown();
@@ -60,41 +62,43 @@ function startGame(){
     space.checkCollisions();
 
     if (space.update() || space.spaceship.hp <= 1) {
-        setTimeout( ()=>{
+        setTimeout(() => {
+            if (currentScoreRecord < space.currentScore) {
+                currentScoreRecord = space.currentScore;
+            }
             space.destroy();
             init();
-        } , 1000);
+        }, 1000);
         return;
     }
 
-    
     requestAnimationFrame(startGame);
 }
 
-function keyDown(e){
+function keyDown(e) {
     const key = e.key.toLowerCase();
-    
-    if(key === 'w'){
+
+    if (key === 'w') {
         keysPressed[key] = true;
         e.preventDefault();
     }
-    
-    if(key === ' ' && !keysPressed[' ']){
+
+    if (key === 'shift' && !keysPressed[' ']) {
         space.spaceshipShoot();
-        keysPressed[' '] = true;
+        keysPressed['shift'] = true;
         e.preventDefault();
     }
 }
 
-function keyUp(e){
+function keyUp(e) {
     const key = e.key.toLowerCase();
 
-    if(key === 'w'){
+    if (key === 'w') {
         keysPressed[key] = false;
     }
 
-    if(key === ' '){
-        keysPressed[' '] = false;
+    if (key === 'shift') {
+        keysPressed['shift'] = false;
     }
 }
 
