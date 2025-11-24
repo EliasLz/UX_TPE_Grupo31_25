@@ -58,6 +58,7 @@ export class Space {
     }
 
     update() {
+        // Movemos los elementos del nivel
         for (let i = this.arrAsteroids.length - 1; i >= 0; i--) {
             let ast = this.arrAsteroids[i];
             ast.move(this.gameSpeed);
@@ -88,9 +89,12 @@ export class Space {
             }
         }
 
+        // Aceleracion del movimiento de los elementos 
+        this.gameSpeed += 0.0003;
+
+        // Logica la aparicion de nuevos elementos del nivel
         this.astSpawnTimer++;
         this.bonSpawnTimer++;
-        this.scoreFrameCounter++;
 
         if (this.astSpawnTimer >= this.astSpawnInterval) {
             this.addAsteroid()
@@ -108,14 +112,15 @@ export class Space {
             this.bonSpawnTimer = 0;
         }
 
+        // Logica contador de puntaje del jugador
+        this.scoreFrameCounter++;
+
         if (this.scoreFrameCounter >= 24) {
             this.upDateScoreHud(1);
             this.scoreFrameCounter = 0;
         }
 
-        this.gameSpeed += 0.0003;
-
-        //Chequeo si la nave toco fondo
+        //Chequeamos si la nave toco fondo
         if (this.spaceship.y >= this.gameArea.clientHeight - this.spaceship.height) {
             this.spaceship.hp = 1;
             this.lifeHud();
@@ -156,6 +161,7 @@ export class Space {
                         ast.lossHp();
                     } else {
                         this.upDateScoreHud(150);
+                        // aca le digo que se divida en 2 o 4 si es grande, 2 si es medio y nada si es chico
                         ast.remove();
                         this.arrAsteroids.splice(i, 1);
                     }
@@ -203,18 +209,21 @@ export class Space {
 
     //Agregamos Asteroides al juego.
     addAsteroid() {
+        // Definimos su tamaño
         const size = Math.floor(Math.random() * 3) + 1;
 
-        // Esta fórmula mapea el rango [30, 100] a el rango [1, 7]
+        // Definimos sus puntos de vida
         const life = Math.floor(size * 1.5);
 
+        // Lo craemos
         let asteroid = new Asteroid(this.gameArea, size, life);
-        //aseguramos que no colisione al crearlo
+        // Aseguramos que no colisione/superponga con otro asteroide al crearlo
         if (this.arrAsteroids.length > 0) {
             while (this.isColliding(this.arrAsteroids.at(-1).element.getBoundingClientRect(), asteroid.element.getBoundingClientRect())) {
                 asteroid = new Asteroid(this.gameArea, size, life);
             }
         }
+        // Lo agregamos al arreglo de asteroides del nivel
         this.arrAsteroids.push(asteroid);
     }
 
@@ -246,6 +255,62 @@ export class Space {
             }
             this.arrBonus.push(bonus);
         }
+    }
+
+    addBrokenAst(referenceAst) {
+
+        const referenceRec = referenceAst.element.getBoundingClientRect();
+        // Obtenemos su segunda clase
+        const typeAst = referenceAst.classList[1];
+
+
+        switch (typeAst) {
+            
+            case 'small-asteroid':
+                this.element.className += 'small-asteroid';
+                this.width = 50;
+                this.height = 50;
+                break;
+            case 'medium-asteroid':
+                this.element.className += ' medium-asteroid';
+                this.width = 100;
+                this.height = 100;
+                break;
+            case 'large-asteroid':
+                this.element.className += ' large-asteroid';
+                this.width = 150;
+                this.height = 150;
+                break;
+        }
+
+
+
+        const x = this.spaceship.x + this.spaceship.width;
+        const y = this.spaceship.y + (this.spaceship.height / 2) - 2.5;
+
+        const bullet = new Bullet(x, y, this.gameArea);
+        this.arrBullets.push(bullet);
+
+
+
+        if (sizeAsteroid == 1) {
+            this.element.className += ' small-asteroid';
+            this.width = 50;
+            this.height = 50;
+        } else if (sizeAsteroid == 2) {
+            this.element.className += ' medium-asteroid';
+            this.width = 100;
+            this.height = 100;
+        } else if (sizeAsteroid == 3) {
+            this.element.className += ' large-asteroid';
+            this.width = 150;
+            this.height = 150;
+        }
+
+
+
+
+
     }
 
     //Movimientos de la nave.
@@ -281,6 +346,7 @@ export class Space {
         }
     }
 
+    // Actualiza el contador de puntaje del jugador
     upDateScoreHud(suma) {
         this.currentScore += suma;
         this.scoreText.textContent = `Puntaje: ${this.currentScore}`;

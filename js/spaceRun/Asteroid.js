@@ -8,7 +8,7 @@ export class Asteroid extends Collision{
 
 
         this.x = this.gameArea.clientWidth;
-        this.y = Math.random() * (this.gameArea.clientHeight);
+        this.y = Math.random() * ((this.gameArea.clientHeight)-150);
 
         //Generamos el HTML 
         this.element = document.createElement('div');
