@@ -4,7 +4,7 @@ export class Asteroid extends Collision{
     constructor(gameArea, sizeAsteroid, life){
         super();
         this.gameArea = gameArea;
-        this.hp = 1;
+        this.hp = life;
 
 
         this.x = this.gameArea.clientWidth;
@@ -47,7 +47,7 @@ export class Asteroid extends Collision{
 
     //Restar vida.
     lossHp() {
-        this.hp--;
+        this.hp-=2;
     }
 
     //Avance del asteroide.

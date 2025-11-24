@@ -206,7 +206,7 @@ export class Space {
         const size = Math.floor(Math.random() * 3) + 1;
 
         // Esta fórmula mapea el rango [30, 100] a el rango [1, 7]
-        const life = size * 3;
+        const life = Math.floor(size * 1.5);
 
         let asteroid = new Asteroid(this.gameArea, size, life);
         //aseguramos que no colisione al crearlo
