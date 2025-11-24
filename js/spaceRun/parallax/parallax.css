@@ -1,104 +1,170 @@
 @keyframes scroll {
-    0% {background-position-x: 0px;}
-    100% {background-position-x: -1920px;}
+    0% {
+        background-position-x: 0px;
+    }
+
+    100% {
+        background-position-x: -1920px;
+    }
 }
 
 @keyframes scroll-3840 {
-    0% {background-position-x: 0px;}
-    100% {background-position-x: -3840px;}
+    0% {
+        background-position-x: 0px;
+    }
+
+    100% {
+        background-position-x: -3840px;
+    }
 }
 
 @keyframes scroll-5760 {
-    0% {background-position-x: 0px;}
-    100% {background-position-x: -5760px;}
+    0% {
+        background-position-x: 0px;
+    }
+
+    100% {
+        background-position-x: -5760px;
+    }
 }
 
 @keyframes scroll-9600 {
-    0% {background-position-x: 0px;}
-    100% {background-position-x: -9600px;}
+    0% {
+        background-position-x: 0px;
+    }
+
+    100% {
+        background-position-x: -9600px;
+    }
 }
 
-@keyframes spritesheet-2000 { 
-	0% { background-position: 0px; }
-    100% { background-position: -2000px; }
- } 
+@keyframes spritesheet-2000 {
+    0% {
+        background-position: 0px;
+    }
 
-@keyframes spritesheet-1000 { 
-	0% { background-position: 0px; }
-    100% { background-position: -1000px; }
- } 
+    100% {
+        background-position: -2000px;
+    }
+}
 
-@keyframes left-scroll { 
-    0% { transform: translateX(1215px); }
-    100% { transform: translateX(-1665px); }
- } 
+@keyframes spritesheet-1000 {
+    0% {
+        background-position: 0px;
+    }
 
-.layer{
+    100% {
+        background-position: -1000px;
+    }
+}
+
+@keyframes left-scroll {
+    0% {
+        transform: translateX(1215px);
+    }
+
+    100% {
+        transform: translateX(-1665px);
+    }
+}
+
+.layer {
     width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
-    background-repeat: repeat-x;    
+    background-repeat: repeat-x;
 }
 
-.layer-10{
+.startAnimations {
+    animation-play-state: running !important;
+}
+
+.resetPositions {
+    animation: none !important;
+}
+
+.layer-10 {
     background-image: url(/assets/spaceRun/layer/space.png);
     animation: scroll 1500s infinite linear;
+    animation-play-state: paused;
+
 }
 
-.layer-9{ 
+.layer-9 {
     left: 1455px;
     top: 375px;
-    width: 125px; 
-    height: 125px; 
+    width: 125px;
+    height: 125px;
     background: url(/assets/spaceRun/layer/galaxy-spritesheet.png) left center;
     background-repeat: no-repeat;
     animation: spritesheet-1000 1s steps(8) infinite,
-                left-scroll 250s infinite linear forwards;
-} 
+        left-scroll 250s infinite linear forwards;
+    animation-play-state: paused;
 
-.layer-8{
-    background-image: url(/assets/spaceRun/layer/stars.png);   
-    animation: scroll-3840 500s infinite linear;   
-} 
+}
 
-.layer-7{
+.layer-8 {
+    background-image: url(/assets/spaceRun/layer/stars.png);
+    animation: scroll-3840 500s infinite linear;
+    animation-play-state: paused;
+
+}
+
+.layer-7 {
     background-image: url(/assets/spaceRun/layer/space-dust.jpg);
     animation: scroll-5760 300s infinite 10s linear;
     opacity: 0.20;
-} 
+    animation-play-state: paused;
 
-.layer-6{
-left: 1415px;
-width: 250px; 
-height: 250px; 
-background: url(/assets/spaceRun/layer/neutronStar-spritesheet.png) left center;
-background-repeat: no-repeat;
-animation: spritesheet-2000 1s steps(8) infinite,
-             left-scroll 75s linear;       
 }
 
-.layer-5{  /* 62 */
-    background-image: url(/assets/spaceRun/layer/far-planets.png);   
-    animation: scroll-3840 125s infinite linear;   
+.layer-6 {
+    left: 1415px;
+    width: 250px;
+    height: 250px;
+    background: url(/assets/spaceRun/layer/neutronStar-spritesheet.png) left center;
+    background-repeat: no-repeat;
+    animation: spritesheet-2000 1s steps(8) infinite,
+    left-scroll 75s linear;
+    animation-play-state: paused;
+
 }
-.layer-4{  /* 45 */
-    background-image: url(/assets/spaceRun/layer/planets.png);   
+
+.layer-5 {
+    background-image: url(/assets/spaceRun/layer/far-planets.png);
+    animation: scroll-3840 125s infinite linear;
+    animation-play-state: paused;
+
+}
+
+.layer-4 {
+    background-image: url(/assets/spaceRun/layer/planets.png);
     animation: scroll-5760 90s infinite linear;
+    animation-play-state: paused;
+
 }
-.layer-3{  /* 30 */
+
+.layer-3 {
     background-image: url(/assets/spaceRun/layer/near-planets.png);
     animation: scroll-9600 90s infinite 10s linear;
-} 
+    animation-play-state: paused;
 
-.layer-2{
+}
+
+.layer-2 {
     background-image: url(/assets/spaceRun/layer/init-planet.png);
     background-repeat: no-repeat;
     animation: scroll 20s linear forwards;
-} 
+    animation-play-state: paused;
 
-.layer-1{    
+
+}
+
+.layer-1 {
     background-image: url(/assets/spaceRun/layer/init-MoonPlanet.png);
     background-repeat: no-repeat;
     animation: scroll 10s linear forwards;
+    animation-play-state: paused;
+
 }

@@ -14,12 +14,12 @@ export function showMenu() {
     gameScreen.appendChild(menuWrapper);
 }
 
-export function showCurrentRecord(valor) {
+export function showCurrentRecord(score) {
 
     const currentRecord = document.createElement('div');
     currentRecord.className = 'current-record';
     const scoreText = document.createElement('h3');
-    scoreText.textContent = `RECORD: ${valor}`;
+    scoreText.textContent = `TU RECORD: ${score}`;
     currentRecord.appendChild(scoreText);
     const menuWrapper = gameScreen.querySelector('.menu-wrapper');
     menuWrapper.prepend(currentRecord);

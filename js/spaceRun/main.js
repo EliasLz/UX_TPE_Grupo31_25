@@ -1,7 +1,7 @@
 //import { Collision } from './Collision.js';
 import { Space } from './Space.js';
 import { showMenu, showCurrentRecord, hiddenMenu } from './menu.js';
-import { insertParallax } from './parallax/parallax.js';
+import { insertParallax, startMoveParallax, resetParallax } from './parallax/parallax.js';
 
 const keysPressed = {
     w: false,
@@ -23,7 +23,6 @@ export function ejecutionSpaceRun() {
     playButton.addEventListener('click', () => {
         gameContainer.innerHTML = " ";
         insertParallax(gameContainer);
-
         init();
         playButton.style.display = 'none';
     });
@@ -44,7 +43,11 @@ export function init() {
 }
 
 export function playGame() {
-
+    if (currentScoreRecord == 0) {
+        startMoveParallax();
+    } else {
+        resetParallax();
+    }
     document.addEventListener('keydown', keyDown);
     document.addEventListener('keyup', keyUp);
     space = new Space(gameContainer);
@@ -62,6 +65,7 @@ function startGame() {
     space.checkCollisions();
 
     if (space.update() || space.spaceship.hp <= 1) {
+        startMoveParallax();
         setTimeout(() => {
             if (currentScoreRecord < space.currentScore) {
                 currentScoreRecord = space.currentScore;
@@ -80,13 +84,11 @@ function keyDown(e) {
 
     if (key === 'w') {
         keysPressed[key] = true;
-        e.preventDefault();
     }
 
     if (key === 'shift' && !keysPressed[' ']) {
         space.spaceshipShoot();
         keysPressed['shift'] = true;
-        e.preventDefault();
     }
 }
 
