@@ -61,7 +61,23 @@ export class Space {
         // Movemos los elementos del nivel
         for (let i = this.arrAsteroids.length - 1; i >= 0; i--) {
             let ast = this.arrAsteroids[i];
-            ast.move(this.gameSpeed, 0);
+
+            switch (ast.direction) {
+                case 'right':
+                    ast.move(this.gameSpeed, 0);
+                    break;
+                case 'diagonalUp':
+                    ast.move(this.gameSpeed, (this.gameSpeed * 0.25));
+                    break;
+                case 'diagonalDown':
+                    ast.move(this.gameSpeed, (this.gameSpeed * -0.25));
+                    break;
+                case 'slowed':
+                    ast.move(this.gameSpeed * 0.65, 0);
+                    break;
+                case 'static':
+                    break;
+            }
 
             if (ast.isOffScreen()) {
                 ast.remove();
@@ -81,7 +97,7 @@ export class Space {
 
         for (let i = this.arrBullets.length - 1; i >= 0; i--) {
             let bull = this.arrBullets[i];
-            bull.move(2);
+            bull.move(3);
 
             if (bull.isOffScreen()) {
                 bull.remove();
@@ -90,7 +106,7 @@ export class Space {
         }
 
         // Aceleracion del movimiento de los elementos 
-        this.gameSpeed += 0.0003;
+        this.gameSpeed += 0.0008;
 
         // Logica la aparicion de nuevos elementos del nivel
         this.astSpawnTimer++;
@@ -133,6 +149,7 @@ export class Space {
     checkCollisions() {
         const spaceshipRec = this.spaceship.element.getBoundingClientRect();
 
+        // Chequeamos colision nave con asteroides
         for (let i = this.arrAsteroids.length - 1; i >= 0; i--) {
             const ast = this.arrAsteroids[i];
             const astRect = ast.hitbox.getBoundingClientRect();
@@ -150,9 +167,11 @@ export class Space {
                 }
                 // Eliminamos del arreglo al asteroide original
                 this.arrAsteroids.splice(i, 1);
+                break;
             }
         }
 
+        // Chequeamos colision asteriodes con balas
         for (let j = this.arrBullets.length - 1; j >= 0; j--) {
             const bull = this.arrBullets[j];
             const bullRect = bull.element.getBoundingClientRect();
@@ -176,10 +195,12 @@ export class Space {
                     this.arrAsteroids.splice(i, 1);
                     bull.collision();
                     this.arrBullets.splice(j, 1);
+                    break;
                 }
             }
         }
 
+        // Chequeamos colision nave con items bonus
         for (let i = this.arrBonus.length - 1; i >= 0; i--) {
             const bon = this.arrBonus[i];
             const bonRect = bon.element.getBoundingClientRect();
@@ -200,7 +221,55 @@ export class Space {
                 }
                 bon.remove();
                 this.arrBonus.splice(i, 1);
+                break;
             }
+        }
+
+        // Chequeamos colisiones de asteroidoes con asteroides
+        let astsToRemove = [];
+        for (let j = this.arrAsteroids.length - 1; j >= 0; j--) {
+            const astJ = this.arrAsteroids[j];
+            const astJRect = astJ.element.getBoundingClientRect();
+
+            for (let i = this.arrAsteroids.length - 1; i >= 0; i--) {
+                const astI = this.arrAsteroids[i];
+                const astIRect = astI.hitbox.getBoundingClientRect();
+
+                if (i === j) {
+                    console.log('ffafa');
+                    continue;
+                }
+                if (this.isColliding(astJRect, astIRect)) {
+
+                    let asteroidJFragments;
+                    if ((asteroidJFragments = astJ.collision())) {
+                        asteroidJFragments.forEach(asteroidJFragment => {
+                            this.arrAsteroids.push(asteroidJFragment);
+                        });
+                    }
+                    let asteroidIFragments;
+                    if ((asteroidIFragments = astI.collision())) {
+                        asteroidIFragments.forEach(asteroidIFragment => {
+                            this.arrAsteroids.push(asteroidIFragment);
+                        });
+                    }
+                    // Agregamos el index de los asteroides a eliminar luego de finalizar las iteraciones
+                    astsToRemove.push(j);
+                    astsToRemove.push(i);
+                    break;
+                }
+            }
+        }
+        // Finilizada las detecciones entre asteroides eliminamos todos los que están en colision
+        if (astsToRemove.length > 0) {
+            // Ordenamos los indices de mayor a menor
+            astsToRemove.sort((a, b) => b - a);
+            // Eliminamos indices repetidos
+            astsToRemove = new Set(astsToRemove);
+            // Eliminamos del arreglo segun los indices de la coleccion
+            astsToRemove.forEach(index => {
+                this.arrAsteroids.splice(index, 1);
+            });
         }
 
         return;

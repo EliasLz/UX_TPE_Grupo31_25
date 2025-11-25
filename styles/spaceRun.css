@@ -111,6 +111,13 @@ body {
     animation: small-rotateAsteroid 2s steps(100) infinite;
 }
 
+.small-asteroid-destroy {
+    width: 50px;
+    height: 50px;
+    background: url('../assets/spaceRun/spritesheet/asteroid-destroy-50.png');
+    animation: small-asteroid-destruction 1s steps(9);
+}
+
 .medium-asteroid {
     width: 100px;
     height: 100px;
@@ -138,6 +145,16 @@ body {
     height: 150px;
     background: url('../assets/spaceRun/spritesheet/asteroid-destroy.png');
     animation: large-asteroid-destruction 1s steps(9);
+}
+
+@keyframes small-asteroid-destruction {
+    from {
+        background-position: 0;
+    }
+
+    to {
+        background-position: -450px;
+    }
 }
 
 @keyframes medium-asteroid-destruction {

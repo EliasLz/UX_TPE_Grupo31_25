@@ -7,6 +7,8 @@ export class Asteroid extends Collision {
         this.hp = sizeAsteroid;
         this.x = this.gameArea.clientWidth;
         this.y = Math.floor(Math.random() * ((this.gameArea.clientHeight) - 150));
+        this.direction = 'right';
+
 
         //Generamos el HTML 
         this.element = document.createElement('div');
@@ -52,7 +54,10 @@ export class Asteroid extends Collision {
 
             case 0:
                 // Eliminammos el asteroide pequeño, no devuelve fragmentos
-                this.remove();
+                this.element.className = 'asteroid small-asteroid-destroy';
+                this.element.addEventListener('animationend', () => {
+                    this.remove();
+                })
                 return null;
 
             case 1:
@@ -61,6 +66,8 @@ export class Asteroid extends Collision {
                 // Reasignamos su posicion
                 fragmentedAsteroid.setX(this.x);
                 fragmentedAsteroid.setY(this.y);
+                // Modificamos su direccion
+                fragmentedAsteroid.setDirection('slowed');
                 // Eliminamos asteroide origen con animacion
                 this.element.className = 'asteroid medium-asteroid-destroy';
                 this.element.addEventListener('animationend', () => {
@@ -74,18 +81,26 @@ export class Asteroid extends Collision {
                 // Creamos fragmentos asteroides
                 const fragmentedAsteroid1 = new Asteroid(this.gameArea, 2);
                 const fragmentedAsteroid2 = new Asteroid(this.gameArea, 2);
+                const fragmentedAsteroid3 = new Asteroid(this.gameArea, 1);
+
                 // Reasignamos sus posiciones
-                fragmentedAsteroid1.setX(this.x - 100);
+                fragmentedAsteroid1.setX(this.x - 50);
                 fragmentedAsteroid1.setY(this.y - 35);
-                fragmentedAsteroid2.setX(this.x - 100);
+                fragmentedAsteroid2.setX(this.x - 50);
                 fragmentedAsteroid2.setY(this.y + 85);
+                fragmentedAsteroid3.setX(this.x + 50);
+
+                // Modificamos sus direcciones
+                fragmentedAsteroid1.setDirection('diagonalUp');
+                fragmentedAsteroid2.setDirection('diagonalDown');
+                fragmentedAsteroid3.setDirection('slowed');
                 // Eliminamos asteroide origen con animacion
                 this.element.className = 'asteroid large-asteroid-destroy';
                 this.element.addEventListener('animationend', () => {
                     this.remove();
                 })
                 // Retornamos los nuevos asteroides para que Space los agregue a su arreglo de asteroides
-                const fragments = [fragmentedAsteroid1, fragmentedAsteroid2];
+                const fragments = [fragmentedAsteroid1, fragmentedAsteroid2, fragmentedAsteroid3];
                 return fragments;
         }
     }
@@ -99,7 +114,9 @@ export class Asteroid extends Collision {
     }
 
     isOffScreen() {
-        return this.x + this.width < 0;
+        return this.x + this.width < 0 ||
+            this.y + this.height < 0 ||
+            this.y > this.gameArea.clientHeight;
     }
 
     // Método para eliminar el elemento del DOM
@@ -116,5 +133,12 @@ export class Asteroid extends Collision {
         this.y = valorY;
         this.element.style.top = this.y + 'px';
 
+    }
+
+    setDirection(direction) {
+        const validDirections = ['right', 'diagonalUp', 'diagonalDown', 'slowed', 'static'];
+        if (validDirections.includes(direction)) {
+            this.direction = direction;
+        }
     }
 }
