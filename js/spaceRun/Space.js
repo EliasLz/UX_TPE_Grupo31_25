@@ -3,6 +3,9 @@ import { Bullet } from './Bullet.js';
 import { Life } from './Bonus/Life.js';
 import { Weapon } from './Bonus/Weapon.js';
 import { Spaceship } from './Spaceship.js';
+import { EnemyShip } from './EnemyShip.js';
+import { EnemyBullet } from './EnemyBullet.js';
+
 
 export class Space {
     constructor(gameContainer) {
@@ -12,23 +15,35 @@ export class Space {
         this.arrAsteroids = [];
         this.arrBonus = [];
         this.arrBullets = [];
+        this.arrEnemyBullets = [];
+        this.enemyShip = null;
 
         //Instanciamos la nave
         this.spaceship = new Spaceship(this.gameArea);
 
-        //Temporizador para la creacion de objetos.
+        //Temporizador para la creacion de asteroides
         this.astSpawnTimer = 0;
         this.astSpawnInterval = 100;
 
+        //Temporizador para la creacion de items bonificadores
         this.bonSpawnTimer = 0;
         this.bonSpawnInterval = 500;
+
+        //Temporizador para la creacion de nave enemiga y su disparo
+        this.enemyShipSpawnTimer = 0;
+        this.enemyShipSpawnInterval = 1000;
+        this.enemyShootingTimer = 0;
+        this.enemyShootingInterval = 170;
+
+        //Temporizador puntos por supervivencia
+        this.scoreTimer = 0;
+        this.scorePointInterval = 24;
 
         // Hud Elements
         this.hudLife = document.createElement('div');
         this.hudLife.className = 'hud-life';
         this.framesLife = 8;
         this.widthLifeFrame = 106;
-
 
         this.hudAmmunition = document.createElement('div');
         this.hudAmmunition.className = 'hud-ammunition';
@@ -53,12 +68,12 @@ export class Space {
         this.gameArea.appendChild(this.hudAmmunition);
         this.gameArea.appendChild(this.hudAmmunition2);
         this.gameArea.appendChild(this.hudScore);
-
-        this.scoreFrameCounter = 0;
     }
 
     update() {
-        // Movemos los elementos del nivel
+        /* ---- Movemos los elementos del nivel y los eliminamos cuando salen de pantalla  ----*/
+
+        // Asteroides    
         for (let i = this.arrAsteroids.length - 1; i >= 0; i--) {
             let ast = this.arrAsteroids[i];
 
@@ -85,6 +100,7 @@ export class Space {
             }
         }
 
+        // Items bonificadores    
         for (let i = this.arrBonus.length - 1; i >= 0; i--) {
             let bon = this.arrBonus[i];
             bon.move(this.gameSpeed);
@@ -95,9 +111,10 @@ export class Space {
             }
         }
 
+        // Balas player
         for (let i = this.arrBullets.length - 1; i >= 0; i--) {
             let bull = this.arrBullets[i];
-            bull.move(3);
+            bull.move(6);
 
             if (bull.isOffScreen()) {
                 bull.remove();
@@ -105,16 +122,46 @@ export class Space {
             }
         }
 
+        // Nave enemiga: Movimiento - disparo - elimina si se sale de pantalla
+        this.enemyShootingTimer++;
+        if (this.enemyShip != null) {
+            this.enemyShip.moveShip(this.gameSpeed, (Math.floor(this.gameSpeed * -0.25)));
+
+            if (this.enemyShootingTimer >= this.enemyShootingInterval) {
+                this.addEnemyBullet();
+                this.enemyShootingTimer = 0;
+            }
+
+            if (this.enemyShip.isOffScreen()) {
+                this.enemyShip.removeEnemyShip();
+                this.enemyShip = null;
+            }
+        }
+
+        // Balas nave enemiga
+        if (this.arrEnemyBullets.length > 0) {
+            for (let i = this.arrEnemyBullets.length - 1; i >= 0; i--) {
+                let enemyBull = this.arrEnemyBullets[i];
+                enemyBull.moveBullet(3);
+
+                if (enemyBull.isOffScreen()) {
+                    enemyBull.remove();
+                    this.arrEnemyBullets.splice(i, 1)
+                }
+            }
+        }
         // Aceleracion del movimiento de los elementos 
         this.gameSpeed += 0.0008;
 
-        // Logica la aparicion de nuevos elementos del nivel
+        /* --- Aparicion de nuevos elementos del nivel ---*/
+
         this.astSpawnTimer++;
         this.bonSpawnTimer++;
+        this.enemyShipSpawnTimer++;
 
         if (this.astSpawnTimer >= this.astSpawnInterval) {
             this.addAsteroid()
-            if (this.astSpawnInterval > 10) { //-->Aparecen ams rapido con el tiempo.
+            if (this.astSpawnInterval > 20) { //-->Aparecen mas rapido con el tiempo.
                 this.astSpawnInterval -= 0.5;
             }
             this.astSpawnTimer = 0;
@@ -122,18 +169,26 @@ export class Space {
 
         if (this.bonSpawnTimer >= this.bonSpawnInterval) {
             this.addBonus()
-            if (this.bonSpawnInterval < 5000) { //-->Aparecen ams rapido con el tiempo.
-                this.bonSpawnInterval += 0.5;
+            if (this.bonSpawnInterval < 2000) { //-->Aparecen mas lento con el tiempo.
+                this.bonSpawnInterval += 1;
             }
             this.bonSpawnTimer = 0;
         }
 
-        // Logica contador de puntaje del jugador
-        this.scoreFrameCounter++;
+        if (!this.enemyShip && this.enemyShipSpawnTimer >= this.enemyShipSpawnInterval) {
+            this.enemyShip = new EnemyShip(this.gameArea);
+            if (this.enemyShipSpawnInterval > 600) { //-->Aparecen mas rapido con el tiempo.
+                this.enemyShipSpawnInterval -= 100;
+            }
+            this.enemyShipSpawnTimer = 0;
+        }
 
-        if (this.scoreFrameCounter >= 24) {
+        // Aumentos el puntaje del jugador: +1 punto cada 24 frames
+        this.scoreTimer++;
+
+        if (this.scoreTimer >= this.scorePointInterval) {
             this.upDateScoreHud(1);
-            this.scoreFrameCounter = 0;
+            this.scoreTimer = 0;
         }
 
         //Chequeamos si la nave toco fondo
@@ -145,7 +200,7 @@ export class Space {
         }
     }
 
-    // Hay/Existe una colision
+    /*--- Hay/Existe una colision ---*/
     checkCollisions() {
         const spaceshipRec = this.spaceship.element.getBoundingClientRect();
 
@@ -200,6 +255,23 @@ export class Space {
             }
         }
 
+        // Chequeamos colision balas con nave enemiga
+        if (this.arrBullets.length > 0 && this.enemyShip != null) {
+            for (let i = this.arrBullets.length - 1; i >= 0; i--) {
+                const bull = this.arrBullets[i];
+                const bullRect = bull.element.getBoundingClientRect();
+                const enemyShipRect = this.enemyShip.element.getBoundingClientRect();
+                if (this.isColliding(bullRect, enemyShipRect)) {
+                    this.enemyShip.kill();
+                    this.upDateScoreHud(500);
+                    this.enemyShip = null;
+                    bull.collision();
+                    this.arrBullets.splice(i, 1);
+                    break;
+                }
+            }
+        }
+
         // Chequeamos colision nave con items bonus
         for (let i = this.arrBonus.length - 1; i >= 0; i--) {
             const bon = this.arrBonus[i];
@@ -234,9 +306,7 @@ export class Space {
             for (let i = this.arrAsteroids.length - 1; i >= 0; i--) {
                 const astI = this.arrAsteroids[i];
                 const astIRect = astI.hitbox.getBoundingClientRect();
-
                 if (i === j) {
-                    console.log('ffafa');
                     continue;
                 }
                 if (this.isColliding(astJRect, astIRect)) {
@@ -272,6 +342,23 @@ export class Space {
             });
         }
 
+        // Colision de balas enemigas con nave player
+        if (this.arrEnemyBullets.length > 0) {
+            for (let i = this.arrEnemyBullets.length - 1; i >= 0; i--) {
+                const enemyBullet = this.arrEnemyBullets[i];
+                const enemyBulletRect = enemyBullet.element.getBoundingClientRect();
+
+                if (this.isColliding(spaceshipRec, enemyBulletRect)) {
+                    this.spaceship.lossHpAmount(4);
+                    this.lifeHud();
+                    this.spaceship.collision();
+                    enemyBullet.collision();
+                    // Eliminamos la bala enemiga del arreglo
+                    this.arrEnemyBullets.splice(i, 1);
+                    break;
+                }
+            }
+        }
         return;
     }
 
@@ -309,6 +396,14 @@ export class Space {
 
         const bullet = new Bullet(x, y, this.gameArea);
         this.arrBullets.push(bullet);
+    }
+
+    //Enemigo dispara, gregamos la bala enemiga al juego
+    addEnemyBullet() {
+        const x = this.enemyShip.x;
+        const y = this.enemyShip.y + (this.enemyShip.height * 0.5);
+        const enemyBullet = new EnemyBullet(x, y, this.gameArea);
+        this.arrEnemyBullets.push(enemyBullet);
     }
 
     //Agregamos Bonus al juego.
@@ -376,6 +471,8 @@ export class Space {
         this.arrAsteroids.forEach(ast => ast.remove());
         this.arrBonus.forEach(bon => bon.remove());
         this.arrBullets.forEach(bull => bull.remove());
+        this.arrEnemyBullets.forEach(enemyBull => enemyBull.remove());
+        this.enemyShip.removeEnemyShip();
         this.hudLife.remove();
         this.hudAmmunition.remove();
         this.hudAmmunition2.remove();

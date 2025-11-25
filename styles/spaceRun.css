@@ -208,7 +208,7 @@ body {
 }
 
 
-/* --------------Spaceship-----------------*/
+/* --------------Spaceship and EnemyShip-----------------*/
 
 .spaceship-down {
     width: 58px;
@@ -237,6 +237,13 @@ body {
     height: 60px;
     background: url('../assets/spaceRun/objets/sparks.png');
     animation: spaceship-sparks 0.3s steps(6);
+}
+
+.enemyShip-down {
+    width: 58px;
+    height: 36px;
+    background: url('../assets/spaceRun/objets/enemyShip-spritesheet.png');
+    animation: spaceship-move 0.5s steps(4) infinite;
 }
 
 @keyframes spaceship-move {
@@ -275,7 +282,7 @@ body {
     width: 50px;
     height: 50px;
     background: url('../assets/spaceRun/objets/bullet.png');
-    animation: bullet-move 1s steps(5) infinite;
+    animation: bullet-move 0.7s steps(5) infinite;
 }
 
 .bullet-explode {
@@ -284,6 +291,24 @@ body {
     background: url('../assets/spaceRun/objets/bullet-explode.png');
     animation: bullet-explosion 0.5s steps(5);
 }
+
+.enemy-bullet-move {
+    width: 111px;
+    height: 80px;
+    background: url('../assets/spaceRun/objets/enemyShip-bullet.png');
+    animation: enemy-bullet-move 0.7s steps(6) infinite;
+}
+
+@keyframes enemy-bullet-move {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -666px;
+    }
+}
+
 
 @keyframes bullet-move {
     0% {

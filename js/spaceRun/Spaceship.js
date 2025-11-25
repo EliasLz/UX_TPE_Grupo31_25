@@ -9,7 +9,7 @@ export class Spaceship extends Collision{
         this.height = 36;
 
         this.x = 200
-        this.y = this.gameArea.clientHeight / 2 ;
+        this.y = Math.floor(this.gameArea.clientHeight / 2) ;
 
         //Generamos el HTML de la nave 
         this.element = document.createElement('div');
@@ -57,6 +57,10 @@ export class Spaceship extends Collision{
     }
     lossHp() {
         this.hp--;
+    }
+
+    lossHpAmount(){
+        this.hp -= 4;
     }
     
     //Disparar.

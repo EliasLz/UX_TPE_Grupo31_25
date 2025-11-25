@@ -1,41 +1,33 @@
-import { Collision } from "./Collision.js";
-
-export class Bullet extends Collision{
-    constructor(x,y,gameArea){
-        super();
+export class EnemyBullet {
+    constructor(x, y, gameArea) {
         this.gameArea = gameArea;
-
-        this.width = 5;
-        this.height = 5;
-
+        this.width = 80;
+        this.height = 80;
         this.x = x;
         this.y = y;
-
-        //Generamos el HTML de la nave 
         this.element = document.createElement('div');
-        this.element.className = 'bullet bullet-move';
+        this.element.className = 'bullet enemy-bullet-move';
         this.element.style.left = this.x + 'px';
         this.element.style.top = this.y + 'px';
-
         this.gameArea.appendChild(this.element);
     }
 
-    remove(){
+    remove() {
         this.element.remove();
     }
 
-    move(speed){
-        this.x += speed;
+    moveBullet(speed) {
+        this.x -= speed;
         this.element.style.left = this.x + 'px';
     }
 
     isOffScreen() {
-        return this.x > this.gameArea.clientWidth;
+        return this.x < -this.width;
     }
 
-    collision(){
+    collision() {
         this.element.className = 'bullet bullet-explode';
-        this.element.addEventListener('animationend' , ()=>{
+        this.element.addEventListener('animationend', () => {
             this.remove();
         })
     }

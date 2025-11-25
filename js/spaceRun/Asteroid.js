@@ -9,14 +9,11 @@ export class Asteroid extends Collision {
         this.y = Math.floor(Math.random() * ((this.gameArea.clientHeight) - 150));
         this.direction = 'right';
 
-
         //Generamos el HTML 
         this.element = document.createElement('div');
         this.element.className = 'asteroid';
         this.element.style.left = this.x + 'px';
         this.element.style.top = this.y + 'px';
-
-
 
         if (sizeAsteroid == 1) {
             this.element.className += ' small-asteroid';
@@ -39,14 +36,13 @@ export class Asteroid extends Collision {
         this.hitbox.style.height = (this.height - 30) + 'px';
         this.hitbox.style.right = '10px';
         this.hitbox.style.bottom = '10px';
-        //this.hitbox.style.backgroundColor = 'green';
         this.element.appendChild(this.hitbox);
 
         //Lo añadimos al juego
         this.gameArea.appendChild(this.element);
     }
 
-    //Resa vida y los elimina y reemplaza por 2 o 1 elementos con siguiente menor escala de tamaño, o solo lo elimina
+    //Resta vida, los elimina y reemplaza por 2 o 1 elementos con siguiente menor escala de tamaño, o solo lo elimina
     collision() {
         this.hp -= 1;
 
