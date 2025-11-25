@@ -1,14 +1,12 @@
 import { Collision } from "./Collision.js";
 
-export class Asteroid extends Collision{
-    constructor(gameArea, sizeAsteroid, life){
+export class Asteroid extends Collision {
+    constructor(gameArea, sizeAsteroid) {
         super();
         this.gameArea = gameArea;
-        this.hp = life;
-
-
+        this.hp = sizeAsteroid;
         this.x = this.gameArea.clientWidth;
-        this.y = Math.random() * ((this.gameArea.clientHeight)-150);
+        this.y = Math.floor(Math.random() * ((this.gameArea.clientHeight) - 150));
 
         //Generamos el HTML 
         this.element = document.createElement('div');
@@ -17,43 +15,87 @@ export class Asteroid extends Collision{
         this.element.style.top = this.y + 'px';
 
 
-        
-        if(sizeAsteroid == 1){
+
+        if (sizeAsteroid == 1) {
             this.element.className += ' small-asteroid';
             this.width = 50;
             this.height = 50;
-        } else if (sizeAsteroid == 2){
+        } else if (sizeAsteroid == 2) {
             this.element.className += ' medium-asteroid';
             this.width = 100;
             this.height = 100;
-        } else if (sizeAsteroid == 3){
+        } else if (sizeAsteroid == 3) {
             this.element.className += ' large-asteroid';
             this.width = 150;
             this.height = 150;
         }
-        
+
         // hitbox ajustado
         this.hitbox = document.createElement('div');
         this.hitbox.id = 'hitbox';
         this.hitbox.style.width = (this.width - 30) + 'px';
-        this.hitbox.style.height = (this.height -30 ) + 'px';
+        this.hitbox.style.height = (this.height - 30) + 'px';
         this.hitbox.style.right = '10px';
         this.hitbox.style.bottom = '10px';
+        //this.hitbox.style.backgroundColor = 'green';
         this.element.appendChild(this.hitbox);
 
         //Lo añadimos al juego
         this.gameArea.appendChild(this.element);
     }
 
-    //Restar vida.
-    lossHp() {
-        this.hp-=2;
+    //Resa vida y los elimina y reemplaza por 2 o 1 elementos con siguiente menor escala de tamaño, o solo lo elimina
+    collision() {
+        this.hp -= 1;
+
+        switch (this.hp) {
+
+            case 0:
+                // Eliminammos el asteroide pequeño, no devuelve fragmentos
+                this.remove();
+                return null;
+
+            case 1:
+                // Creamos fragmentos asteroides
+                const fragmentedAsteroid = new Asteroid(this.gameArea, 1);
+                // Reasignamos su posicion
+                fragmentedAsteroid.setX(this.x);
+                fragmentedAsteroid.setY(this.y);
+                // Eliminamos asteroide origen con animacion
+                this.element.className = 'asteroid medium-asteroid-destroy';
+                this.element.addEventListener('animationend', () => {
+                    this.remove();
+                })
+                // Retornamos el nuevo asteroide para que Space lo agregue a su arreglo de asteroides
+                const fragment = [fragmentedAsteroid];
+                return fragment;
+
+            case 2:
+                // Creamos fragmentos asteroides
+                const fragmentedAsteroid1 = new Asteroid(this.gameArea, 2);
+                const fragmentedAsteroid2 = new Asteroid(this.gameArea, 2);
+                // Reasignamos sus posiciones
+                fragmentedAsteroid1.setX(this.x - 100);
+                fragmentedAsteroid1.setY(this.y - 35);
+                fragmentedAsteroid2.setX(this.x - 100);
+                fragmentedAsteroid2.setY(this.y + 85);
+                // Eliminamos asteroide origen con animacion
+                this.element.className = 'asteroid large-asteroid-destroy';
+                this.element.addEventListener('animationend', () => {
+                    this.remove();
+                })
+                // Retornamos los nuevos asteroides para que Space los agregue a su arreglo de asteroides
+                const fragments = [fragmentedAsteroid1, fragmentedAsteroid2];
+                return fragments;
+        }
     }
 
     //Avance del asteroide.
-    move(speed){
-        this.x -= speed;
+    move(x, y) {
+        this.x -= x;
         this.element.style.left = this.x + 'px'
+        this.y -= y;
+        this.element.style.top = this.y + 'px'
     }
 
     isOffScreen() {
@@ -65,7 +107,14 @@ export class Asteroid extends Collision{
         this.element.remove();
     }
 
-    //Efecto de colision.
-    collision() {
+    setX(valorX) {
+        this.x = valorX;
+        this.element.style.left = this.x + 'px';
+    }
+
+    setY(valorY) {
+        this.y = valorY;
+        this.element.style.top = this.y + 'px';
+
     }
 }

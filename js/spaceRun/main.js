@@ -5,7 +5,7 @@ import { insertParallax, startMoveParallax, resetParallax } from './parallax/par
 
 const keysPressed = {
     w: false,
-    'shift': false // Barra espaciadora.
+    'shift': false
 };
 
 const gameContainer = document.getElementById('gameScreen');

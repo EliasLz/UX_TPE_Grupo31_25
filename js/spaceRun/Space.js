@@ -61,7 +61,7 @@ export class Space {
         // Movemos los elementos del nivel
         for (let i = this.arrAsteroids.length - 1; i >= 0; i--) {
             let ast = this.arrAsteroids[i];
-            ast.move(this.gameSpeed);
+            ast.move(this.gameSpeed, 0);
 
             if (ast.isOffScreen()) {
                 ast.remove();
@@ -141,7 +141,14 @@ export class Space {
                 this.spaceship.lossHp();
                 this.lifeHud();
                 this.spaceship.collision();
-                ast.remove();
+                //Si se divide en fragmentos al perder salud, agregamos los nuevos asteroides al arreglo
+                let asteroidFragments;
+                if ((asteroidFragments = ast.collision())) {
+                    asteroidFragments.forEach(asteroidFragment => {
+                        this.arrAsteroids.push(asteroidFragment);
+                    });
+                }
+                // Eliminamos del arreglo al asteroide original
                 this.arrAsteroids.splice(i, 1);
             }
         }
@@ -157,14 +164,16 @@ export class Space {
 
                 if (this.isColliding(astRect, bullRect)) {
 
-                    if (ast.hp > 1) {
-                        ast.lossHp();
-                    } else {
-                        this.upDateScoreHud(150);
-                        // aca le digo que se divida en 2 o 4 si es grande, 2 si es medio y nada si es chico
-                        ast.remove();
-                        this.arrAsteroids.splice(i, 1);
+                    let asteroidFragments;
+                    // Si se divide en fragmentos al perder salud, agregamos los nuevos asteroides al arreglo
+                    if ((asteroidFragments = ast.collision())) {
+                        asteroidFragments.forEach(asteroidFragment => {
+                            this.arrAsteroids.push(asteroidFragment);
+                        });
                     }
+                    this.upDateScoreHud(150);
+                    // Eliminamos del arreglo al asteroide original
+                    this.arrAsteroids.splice(i, 1);
                     bull.collision();
                     this.arrBullets.splice(j, 1);
                 }
@@ -212,15 +221,12 @@ export class Space {
         // Definimos su tamaño
         const size = Math.floor(Math.random() * 3) + 1;
 
-        // Definimos sus puntos de vida
-        const life = Math.floor(size * 1.5);
-
         // Lo craemos
-        let asteroid = new Asteroid(this.gameArea, size, life);
+        let asteroid = new Asteroid(this.gameArea, size);
         // Aseguramos que no colisione/superponga con otro asteroide al crearlo
         if (this.arrAsteroids.length > 0) {
             while (this.isColliding(this.arrAsteroids.at(-1).element.getBoundingClientRect(), asteroid.element.getBoundingClientRect())) {
-                asteroid = new Asteroid(this.gameArea, size, life);
+                asteroid = new Asteroid(this.gameArea, size);
             }
         }
         // Lo agregamos al arreglo de asteroides del nivel
@@ -255,62 +261,6 @@ export class Space {
             }
             this.arrBonus.push(bonus);
         }
-    }
-
-    addBrokenAst(referenceAst) {
-
-        const referenceRec = referenceAst.element.getBoundingClientRect();
-        // Obtenemos su segunda clase
-        const typeAst = referenceAst.classList[1];
-
-
-        switch (typeAst) {
-            
-            case 'small-asteroid':
-                this.element.className += 'small-asteroid';
-                this.width = 50;
-                this.height = 50;
-                break;
-            case 'medium-asteroid':
-                this.element.className += ' medium-asteroid';
-                this.width = 100;
-                this.height = 100;
-                break;
-            case 'large-asteroid':
-                this.element.className += ' large-asteroid';
-                this.width = 150;
-                this.height = 150;
-                break;
-        }
-
-
-
-        const x = this.spaceship.x + this.spaceship.width;
-        const y = this.spaceship.y + (this.spaceship.height / 2) - 2.5;
-
-        const bullet = new Bullet(x, y, this.gameArea);
-        this.arrBullets.push(bullet);
-
-
-
-        if (sizeAsteroid == 1) {
-            this.element.className += ' small-asteroid';
-            this.width = 50;
-            this.height = 50;
-        } else if (sizeAsteroid == 2) {
-            this.element.className += ' medium-asteroid';
-            this.width = 100;
-            this.height = 100;
-        } else if (sizeAsteroid == 3) {
-            this.element.className += ' large-asteroid';
-            this.width = 150;
-            this.height = 150;
-        }
-
-
-
-
-
     }
 
     //Movimientos de la nave.

@@ -1,35 +1,35 @@
 :root {
-    --color-primary: #00ffff; 
-    --color-secondary: #0000ff; 
+    --color-primary: #00ffff;
+    --color-secondary: #0000ff;
     --color-text: #ffffff;
     --background-color: #000000;
 }
 
-body{
+body {
     display: flex;
     justify-content: center;
 }
 
-.game2-container{
+.game2-container {
     width: 100%;
 }
 
-.menu-wrapper{
+.menu-wrapper {
     text-align: center;
     padding: 40px 60px;
-    
-    background: rgba(0, 0, 0, 0.4); 
-    
-    
-    border: 3px solid var(--color-primary); 
-    box-shadow: 0 0 30px var(--color-primary); 
-    
+
+    background: rgba(0, 0, 0, 0.4);
+
+
+    border: 3px solid var(--color-primary);
+    box-shadow: 0 0 30px var(--color-primary);
+
     border-radius: 10px;
     z-index: 10;
-    
-    
+
+
     position: absolute;
-    
+
     background-color: cadetblue;
     width: 600px;
     top: 50%;
@@ -37,18 +37,18 @@ body{
     transform: translate(-50%, -50%);
 }
 
-.menu-wrapper h2{
+.menu-wrapper h2 {
     font-size: 5em;
-    color: var(--color-text); 
-    text-shadow: 
-        0 0 15px var(--color-primary), 
-        0 0 30px var(--color-secondary), 
+    color: var(--color-text);
+    text-shadow:
+        0 0 15px var(--color-primary),
+        0 0 30px var(--color-secondary),
         0 0 60px var(--color-secondary);
     margin-bottom: 50px;
     letter-spacing: 15px;
 }
 
-.menu-wrapper button{
+.menu-wrapper button {
     background-color: var(--color-primary);
     color: var(--background-color);
     border: none;
@@ -64,35 +64,35 @@ body{
 #startGameBtn:hover {
     background-color: var(--color-text);
     color: var(--background-color);
-    transform: translateY(-2px); 
+    transform: translateY(-2px);
     box-shadow: 0 6px 0 var(--color-secondary);
 }
 
 #startGameBtn:active {
-    transform: translateY(2px); 
+    transform: translateY(2px);
     box-shadow: 0 0 0 var(--color-secondary);
 }
 
-.asteroid{
+.asteroid {
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.bonus{
+.bonus {
     position: absolute;
 }
 
-.weapon{
+.weapon {
     position: absolute;
 }
 
-.bullet{
+.bullet {
     position: absolute;
 }
 
-.spaceship{
+.spaceship {
     position: absolute;
     display: flex;
     justify-content: center;
@@ -104,93 +104,164 @@ body{
 
 /* --------------Asteroides-----------------*/
 
-.small-asteroid{
+.small-asteroid {
     width: 50px;
     height: 50px;
     background: url('../../assets/spaceRun/spritesheet/small-asteroid.png') repeat-x;
     animation: small-rotateAsteroid 2s steps(100) infinite;
 }
-.medium-asteroid{
+
+.medium-asteroid {
     width: 100px;
     height: 100px;
     background: url('../../assets/spaceRun/spritesheet/medium-Asteroid.png') repeat-x;
     animation: medium-rotateAsteroid 2s steps(100) infinite;
 }
-.large-asteroid{
+
+.medium-asteroid-destroy {
+    width: 100px;
+    height: 100px;
+    background: url('../assets/spaceRun/spritesheet/asteroid-destroy-100.png');
+    animation: medium-asteroid-destruction 1s steps(9);
+}
+
+.large-asteroid {
     width: 150px;
     height: 150px;
     background: url('../../assets/spaceRun/spritesheet/large-Asteroid.png') repeat-x;
     animation: large-rotateAsteroid 2s steps(100) infinite;
 }
 
-@keyframes small-rotateAsteroid{
-    0% { background-position: 0px; }
-    100% { background-position: -5000px; }
+
+.large-asteroid-destroy {
+    width: 150px;
+    height: 150px;
+    background: url('../assets/spaceRun/spritesheet/asteroid-destroy.png');
+    animation: large-asteroid-destruction 1s steps(9);
 }
-@keyframes medium-rotateAsteroid{
-    0% { background-position: 0px; }
-    100% { background-position: -10000px; }
+
+@keyframes medium-asteroid-destruction {
+    from {
+        background-position: 0;
+    }
+
+    to {
+        background-position: -900px;
+    }
 }
-@keyframes large-rotateAsteroid{
-    0% { background-position: 0px; }
-    100% { background-position: -15000px; }
+
+@keyframes large-asteroid-destruction {
+    from {
+        background-position: 0;
+    }
+
+    to {
+        background-position: -1350px;
+    }
+}
+
+@keyframes small-rotateAsteroid {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -5000px;
+    }
+}
+
+@keyframes medium-rotateAsteroid {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -10000px;
+    }
+}
+
+@keyframes large-rotateAsteroid {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -15000px;
+    }
 }
 
 
 /* --------------Spaceship-----------------*/
 
-.spaceship-down{
+.spaceship-down {
     width: 58px;
     height: 36px;
     background: url('../assets/spaceRun/objets/ovni-spritesheet.png');
     animation: spaceship-move 0.5s steps(4) infinite;
 }
 
-.spaceship-up{
+.spaceship-up {
     width: 58px;
     height: 48px;
     background: url('../assets/spaceRun/objets/ovniUp-spritesheet.png');
     animation: spaceship-move 0.5s steps(4) infinite;
 }
 
-.spaceship-explode{
+.spaceship-explode {
     position: absolute;
     width: 128px;
     height: 128px;
     background: url('../assets/spaceRun/objets/ovni-explode1.png');
-    animation: spaceship-explode 0.5s steps(5) ;
+    animation: spaceship-explode 0.5s steps(5);
 }
-.spaceship-sparks{
+
+.spaceship-sparks {
     width: 65px;
     height: 60px;
     background: url('../assets/spaceRun/objets/sparks.png');
-    animation: spaceship-sparks 0.3s steps(6) ;
+    animation: spaceship-sparks 0.3s steps(6);
 }
 
 @keyframes spaceship-move {
-    0% { background-position: 0px; }
-    100% { background-position: -233px; }
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -233px;
+    }
 }
 
 @keyframes spaceship-explode {
-    0% { background-position: 0px; }
-    100% { background-position: -640px; }
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -640px;
+    }
 }
 
 @keyframes spaceship-sparks {
-    0% { background-position: 0px; }
-    100% { background-position: -390px; }
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -390px;
+    }
 }
 
 /* --------------Bullet-----------------*/
 
-.bullet-move{
+.bullet-move {
     width: 50px;
     height: 50px;
     background: url('../assets/spaceRun/objets/bullet.png');
     animation: bullet-move 1s steps(5) infinite;
 }
-.bullet-explode{
+
+.bullet-explode {
     width: 50px;
     height: 50px;
     background: url('../assets/spaceRun/objets/bullet-explode.png');
@@ -198,24 +269,36 @@ body{
 }
 
 @keyframes bullet-move {
-    0% { background-position: 0px; }
-    100% { background-position: -250px; }
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -250px;
+    }
 }
+
 @keyframes bullet-explosion {
-    0% { background-position: 0px; }
-    100% { background-position: -250px; }
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -250px;
+    }
 }
 
 
 /* --------------Bonus-----------------*/
 
-.bonus-life{
+.bonus-life {
     width: 40px;
     height: 40px;
     background: url('../assets/spaceRun/objets/item-life.png');
     animation: bonus 1s steps(15) infinite;
 }
-.bonus-bullet{
+
+.bonus-bullet {
     width: 40px;
     height: 40px;
     background: url('../assets/spaceRun/objets/item-bullet.png');
@@ -223,14 +306,19 @@ body{
 }
 
 @keyframes bonus {
-    0% { background-position: 0px; }
-    100% { background-position: -600px; }
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -600px;
+    }
 }
 
 
 /* --------------Hud-----------------*/
 
-.hud-life{
+.hud-life {
     position: absolute;
     width: 106px;
     height: 40px;
@@ -239,7 +327,8 @@ body{
 
     background-position: 0px 0px;
 }
-.hud-ammunition{
+
+.hud-ammunition {
     position: absolute;
     width: 87px;
     height: 30px;
@@ -249,7 +338,7 @@ body{
     background-position: 0px 0px;
 }
 
-.hud-score{
+.hud-score {
     position: absolute;
     top: 3%;
     left: 84%;
@@ -262,19 +351,19 @@ body{
 }
 
 .hud-score p {
-  font-family: 'Press Start 2P', sans-serif;
-  color: white;
+    font-family: 'Press Start 2P', sans-serif;
+    color: white;
 }
 
 .current-record {
 
-  width: 100%;
-  height: 20%;
-  background: rgb(49, 47, 47); 
-  display: flex;
-  justify-content: center;
-  align-items: center;  
-  color: rgb(255, 115, 0);
-  border: solid 2px rgb(185, 155, 34);
-  border-radius: 14px;
+    width: 100%;
+    height: 20%;
+    background: rgb(49, 47, 47);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 115, 0);
+    border: solid 2px rgb(185, 155, 34);
+    border-radius: 14px;
 }
