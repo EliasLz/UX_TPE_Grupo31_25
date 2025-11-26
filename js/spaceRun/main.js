@@ -86,7 +86,7 @@ function keyDown(e) {
         keysPressed[key] = true;
     }
 
-    if (key === 'shift' && !keysPressed[' ']) {
+    if (key === 'shift') {
         space.spaceshipShoot();
         keysPressed['shift'] = true;
     }

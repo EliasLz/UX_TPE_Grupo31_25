@@ -26,7 +26,7 @@ export class EnemyBullet {
     }
 
     collision() {
-        this.element.className = 'bullet bullet-explode';
+        this.element.className = 'bullet enemy-bullet-explode';
         this.element.addEventListener('animationend', () => {
             this.remove();
         })

@@ -472,11 +472,12 @@ export class Space {
         this.arrBonus.forEach(bon => bon.remove());
         this.arrBullets.forEach(bull => bull.remove());
         this.arrEnemyBullets.forEach(enemyBull => enemyBull.remove());
-        this.enemyShip.removeEnemyShip();
+        if (this.enemyShip) {
+            this.enemyShip.removeEnemyShip();
+        }
         this.hudLife.remove();
         this.hudAmmunition.remove();
         this.hudAmmunition2.remove();
         this.hudScore.remove();
     }
-
 }

@@ -282,7 +282,7 @@ body {
     width: 50px;
     height: 50px;
     background: url('../assets/spaceRun/objets/bullet.png');
-    animation: bullet-move 0.7s steps(5) infinite;
+    animation: bullet-move 1s steps(7) infinite;
 }
 
 .bullet-explode {
@@ -297,6 +297,13 @@ body {
     height: 80px;
     background: url('../assets/spaceRun/objets/enemyShip-bullet.png');
     animation: enemy-bullet-move 0.7s steps(6) infinite;
+}
+
+.enemy-bullet-explode {
+    width: 50px;
+    height: 50px;
+    background: url('../assets/spaceRun/objets/bulletEnemy-explode.png');
+    animation: bullet-explosion 0.5s steps(5);
 }
 
 @keyframes enemy-bullet-move {
@@ -316,7 +323,7 @@ body {
     }
 
     100% {
-        background-position: -250px;
+        background-position: -350px;
     }
 }
 
