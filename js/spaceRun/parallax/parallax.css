@@ -123,7 +123,7 @@
     left: 1415px;
     width: 250px;
     height: 250px;
-    background: url(/assets/spaceRun/layer/neutronStar-spritesheet.png) left center;
+    background: url(/assets/spaceRun/layer/neutron-star-spritesheet.png) left center;
     background-repeat: no-repeat;
     animation: spritesheet-2000 1s steps(8) infinite,
     left-scroll 75s linear;
@@ -162,7 +162,7 @@
 }
 
 .layer-1 {
-    background-image: url(/assets/spaceRun/layer/init-MoonPlanet.png);
+    background-image: url(/assets/spaceRun/layer/init-moonp-planet.png);
     background-repeat: no-repeat;
     animation: scroll 10s linear forwards;
     animation-play-state: paused;

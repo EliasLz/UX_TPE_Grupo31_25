@@ -121,7 +121,7 @@ body {
 .medium-asteroid {
     width: 100px;
     height: 100px;
-    background: url('../../assets/spaceRun/spritesheet/medium-Asteroid.png') repeat-x;
+    background: url('../../assets/spaceRun/spritesheet/medium-asteroid.png') repeat-x;
     animation: medium-rotateAsteroid 2s steps(100) infinite;
 }
 
@@ -135,7 +135,7 @@ body {
 .large-asteroid {
     width: 150px;
     height: 150px;
-    background: url('../../assets/spaceRun/spritesheet/large-Asteroid.png') repeat-x;
+    background: url('../../assets/spaceRun/spritesheet/large-asteroid.png') repeat-x;
     animation: large-rotateAsteroid 2s steps(100) infinite;
 }
 
@@ -220,7 +220,7 @@ body {
 .spaceship-up {
     width: 58px;
     height: 48px;
-    background: url('../assets/spaceRun/objets/ovniUp-spritesheet.png');
+    background: url('../assets/spaceRun/objets/ovni-up-spritesheet.png');
     animation: spaceship-move 0.5s steps(4) infinite;
 }
 
@@ -242,7 +242,7 @@ body {
 .enemyShip-down {
     width: 58px;
     height: 36px;
-    background: url('../assets/spaceRun/objets/enemyShip-spritesheet.png');
+    background: url('../assets/spaceRun/objets/enemy-ship-spritesheet.png');
     animation: spaceship-move 0.5s steps(4) infinite;
 }
 
@@ -295,14 +295,14 @@ body {
 .enemy-bullet-move {
     width: 111px;
     height: 80px;
-    background: url('../assets/spaceRun/objets/enemyShip-bullet.png');
+    background: url('../assets/spaceRun/objets/enemy-ship-bullet.png');
     animation: enemy-bullet-move 0.7s steps(6) infinite;
 }
 
 .enemy-bullet-explode {
     width: 50px;
     height: 50px;
-    background: url('../assets/spaceRun/objets/bulletEnemy-explode.png');
+    background: url('../assets/spaceRun/objets/bullet-enemy-explode.png');
     animation: bullet-explosion 0.5s steps(5);
 }
 
@@ -371,7 +371,7 @@ body {
     position: absolute;
     width: 106px;
     height: 40px;
-    background: url('../assets/spaceRun/objets/life-Hud.png');
+    background: url('../assets/spaceRun/objets/life-hud.png');
     background-repeat: no-repeat;
 
     background-position: 0px 0px;
