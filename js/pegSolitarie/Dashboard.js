@@ -59,7 +59,7 @@ export class Dashboard {
     }
 
     //Cargar celdas, piezas y dibuja el tablero.
-    initDashboard(boardType) {
+    initDashboard(img, boardType, challengeMode) {
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
         for (let row = 0; row < 7; row++) {
             for (let col = 0; col < 7; col++) {
@@ -74,10 +74,14 @@ export class Dashboard {
 
         this.drawBackground();
         this.drawCells();
+        if(challengeMode){
+            this.initRandomPieces(img);
+        } else {
+            this.initPieces(img)
+        }
     }
 
-    initPieces(img, boardType){
-        this.initDashboard(boardType);
+    initPieces(img){
         this.cells.forEach(cell => {
             if (!(cell.x === this.margin + 3 * this.cellWidth && cell.y === this.margin + 3 * this.cellHeight)) {
                 let pieceX = cell.x + (this.cellWidth / 2);
@@ -87,6 +91,27 @@ export class Dashboard {
                 cell.setOccupied();
             }
         });
+        this.drawPieces();
+    }
+
+    initRandomPieces(img){
+        const size = this.cells.length - 1 ; // Excluimos la celda central
+        const numPiecesToRemove = Math.floor(Math.random() * 10) + 3; // Entre 3 y 8 piezas a remover
+        const indices = Array.from({ length: size }, (_, i) => i); // Indices de las celdas disponibles
+        for (let i = 0; i < numPiecesToRemove; i++) { 
+            const randomIndex = Math.floor(Math.random() * indices.length); 
+            indices.splice(randomIndex, 1);
+        }
+        this.cells.forEach((cell, index) => {
+            if (!(cell.x === this.margin + 3 * this.cellWidth && cell.y === this.margin + 3 * this.cellHeight) && indices.includes(index)) {
+                let pieceX = cell.x + (this.cellWidth / 2);
+                let pieceY = cell.y + (this.cellHeight / 2);
+                let piece = new Piece(pieceX, pieceY, this.ctx, img);
+                this.pieces.push(piece);
+                cell.setOccupied();
+            }
+        });
+
         this.drawPieces();
     }
 

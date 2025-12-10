@@ -43,6 +43,13 @@ export function showMenu(){
                     </label>
                 </div>
 
+                <div class="config-option">
+                    <h4> Modo desafio </h4>
+                    <label class="toggle-container">
+                        <input type="checkbox" id="challengeModeCheck" name="challengeModeCheck"/>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
                 
                 <div class="config-option">
                     <h3 for="timeTrialCheck">TIEMPO</h3>
@@ -77,6 +84,7 @@ export function showMenu(){
             e.preventDefault();
 
             const isTimeTrial = document.getElementById('timeTrialCheck').checked;
+            const isChallengeMode = document.getElementById('challengeModeCheck').checked;
             let timeValue = parseInt(document.getElementById('maxTime').value)
 
             let selectedPiece;
@@ -99,7 +107,8 @@ export function showMenu(){
                 selectedPiece : selectedPiece,
                 maxTime : isTimeTrial ? timeValue : 0,
                 isTimeTrial : isTimeTrial,
-                selectedBoard : selectedBoard
+                selectedBoard : selectedBoard,
+                challengeMode : isChallengeMode
             }
 
             gameScreen.removeChild(menuWrapper);
