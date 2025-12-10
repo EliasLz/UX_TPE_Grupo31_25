@@ -18,11 +18,17 @@ export class Dashboard {
         this.imgFondo.src = './assets/img-Peg-Solitarie/FondoPantalla.png';
         this.imageOnload = false;
         
+        this.boardType = 1; // 1: Clasico, 2: Cuadrado
+
         this.imgFondo.onload = () => {
             this.imageOnload = true;
+            this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+            this.drawBackground();
             // Prepara el tablero cuando se cargó la imagen
-            this.initDashboard();
+            //this.initDashboard();
         }
+
+
     }
 
     getPieces() {
@@ -53,13 +59,13 @@ export class Dashboard {
     }
 
     //Cargar celdas, piezas y dibuja el tablero.
-    initDashboard() {
+    initDashboard(boardType) {
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
         for (let row = 0; row < 7; row++) {
             for (let col = 0; col < 7; col++) {
                 let x = this.margin + col * this.cellWidth;
                 let y = this.margin + row * this.cellHeight;
-                if (this.isValidCell(x, y) === true) {
+                if (boardType == 2 || this.isValidCell(x, y) === true) {
                     let cell = new Cell(x, y, this.cellWidth, this.cellHeight, this.ctx);
                     this.cells.push(cell);
                 }
@@ -70,7 +76,8 @@ export class Dashboard {
         this.drawCells();
     }
 
-    initPieces(img){
+    initPieces(img, boardType){
+        this.initDashboard(boardType);
         this.cells.forEach(cell => {
             if (!(cell.x === this.margin + 3 * this.cellWidth && cell.y === this.margin + 3 * this.cellHeight)) {
                 let pieceX = cell.x + (this.cellWidth / 2);

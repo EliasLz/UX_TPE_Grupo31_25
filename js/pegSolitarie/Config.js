@@ -17,7 +17,7 @@ export function showMenu(){
         <div class="config-menu">
             <h2> Peg Solitarie </h2>
             <form id="configForm"> 
-            <label> Seleccione una pieza </label>
+                <h4> Seleccione una pieza </h4>
                 <div class="config-option-img">
                     <label class="picker">
                         <input type="radio" name="pieza" value="1" required>
@@ -29,6 +29,20 @@ export function showMenu(){
                         <img src="assets/img-Peg-Solitarie/Duff.png" alt="Duff">
                     </label>
                 </div>
+                
+                <h4> Seleccione la forma del tablero </h4>
+                <div class="config-option-img">
+                    <label class="picker">
+                        <input type="radio" name="tablero" value="1" required>
+                        <img src="assets/img-Peg-Solitarie/peg-Clasico.png" alt="Tablero">
+                    </label>
+
+                    <label class="picker">
+                        <input type="radio" name="tablero" value="2">
+                        <img src="assets/img-Peg-Solitarie/peg-Cuadrado.png" alt="Tablero">
+                    </label>
+                </div>
+
                 
                 <div class="config-option">
                     <h3 for="timeTrialCheck">TIEMPO</h3>
@@ -66,12 +80,16 @@ export function showMenu(){
             let timeValue = parseInt(document.getElementById('maxTime').value)
 
             let selectedPiece;
+            let selectedBoard;
 
             if(document.querySelector('input[name="pieza"]:checked').value == 1){
                 selectedPiece = PIECE_IMG[0];
             } else {
                 selectedPiece = PIECE_IMG[1];
             }
+
+            selectedBoard = document.querySelector('input[name="tablero"]:checked').value;
+  
 
             if (isTimeTrial && (isNaN(timeValue))) {
                 timeValue = 30; 
@@ -80,11 +98,11 @@ export function showMenu(){
             const selectedConfig = {
                 selectedPiece : selectedPiece,
                 maxTime : isTimeTrial ? timeValue : 0,
-                isTimeTrial : isTimeTrial
+                isTimeTrial : isTimeTrial,
+                selectedBoard : selectedBoard
             }
 
             gameScreen.removeChild(menuWrapper);
-
             resolve (selectedConfig);
         })
     });

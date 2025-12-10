@@ -85,7 +85,7 @@
 }
 
 .layer-10 {
-    background-image: url("../assets/spaceRun/layer/space.png");
+    background-image: url("../../../assets/spaceRun/layer/space.png");
     animation: scroll 1500s infinite linear;
     animation-play-state: paused;
 
@@ -96,7 +96,7 @@
     top: 375px;
     width: 125px;
     height: 125px;
-    background: url("../assets/spaceRun/layer/galaxy-spritesheet.png") left center;
+    background: url("../../../assets/spaceRun/layer/galaxy-spritesheet.png") left center;
     background-repeat: no-repeat;
     animation: spritesheet-1000 1s steps(8) infinite,
         left-scroll 250s infinite linear forwards;
@@ -105,14 +105,14 @@
 }
 
 .layer-8 {
-    background-image: url("../assets/spaceRun/layer/stars.png");
+    background-image: url("../../../assets/spaceRun/layer/stars.png");
     animation: scroll-3840 500s infinite linear;
     animation-play-state: paused;
 
 }
 
 .layer-7 {
-    background-image: url("../assets/spaceRun/layer/space-dust.jpg");
+    background-image: url("../../../assets/spaceRun/layer/space-dust.jpg");
     animation: scroll-5760 300s infinite 10s linear;
     opacity: 0.20;
     animation-play-state: paused;
@@ -123,7 +123,7 @@
     left: 1415px;
     width: 250px;
     height: 250px;
-    background: url("../assets/spaceRun/layer/neutron-star-spritesheet.png") left center;
+    background: url("../../../assets/spaceRun/layer/neutron-star-spritesheet.png") left center;
     background-repeat: no-repeat;
     animation: spritesheet-2000 1s steps(8) infinite,
     left-scroll 75s linear;
@@ -132,28 +132,28 @@
 }
 
 .layer-5 {
-    background-image: url("../assets/spaceRun/layer/far-planets.png");
+    background-image: url("../../../assets/spaceRun/layer/far-planets.png");
     animation: scroll-3840 125s infinite linear;
     animation-play-state: paused;
 
 }
 
 .layer-4 {
-    background-image: url("../assets/spaceRun/layer/planets.png");
+    background-image: url("../../../assets/spaceRun/layer/planets.png");
     animation: scroll-5760 90s infinite linear;
     animation-play-state: paused;
 
 }
 
 .layer-3 {
-    background-image: url("../assets/spaceRun/layer/near-planets.png");
+    background-image: url("../../../assets/spaceRun/layer/near-planets.png");
     animation: scroll-9600 90s infinite 10s linear;
     animation-play-state: paused;
 
 }
 
 .layer-2 {
-    background-image: url("../assets/spaceRun/layer/init-planet.png");
+    background-image: url("../../../assets/spaceRun/layer/init-planet.png");
     background-repeat: no-repeat;
     animation: scroll 20s linear forwards;
     animation-play-state: paused;
@@ -162,7 +162,7 @@
 }
 
 .layer-1 {
-    background-image: url("../assets/spaceRun/layer/init-moonp-planet.png");
+    background-image: url("../../../assets/spaceRun/layer/init-moonp-planet.png");
     background-repeat: no-repeat;
     animation: scroll 10s linear forwards;
     animation-play-state: paused;

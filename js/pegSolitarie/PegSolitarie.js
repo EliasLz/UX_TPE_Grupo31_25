@@ -50,7 +50,7 @@ export async function init(){
 
     let timer = new Timer(buttonBarContainer,config.maxTime)
 
-    dashboard.initPieces(config.selectedPiece);
+    dashboard.initPieces(config.selectedPiece, config.selectedBoard);
 
 
     playGame();
