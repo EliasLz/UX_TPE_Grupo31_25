@@ -6,7 +6,7 @@ export class Dashboard {
     constructor(canvasWidth, canvasHeight, ctx) {
         this.cells = [];
         this.pieces = [];
-        this.margin = 20;
+        this.margin = 60;
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.cellWidth = (canvasWidth - this.margin * 2) / 7;
@@ -17,6 +17,7 @@ export class Dashboard {
         this.imgFondo = new Image();
         this.imgFondo.src = './assets/img-Peg-Solitarie/FondoPantalla.png';
         this.imageOnload = false;
+        this.helpMode = false;
         
         this.boardType = 1; // 1: Clasico, 2: Cuadrado
 
@@ -24,8 +25,6 @@ export class Dashboard {
             this.imageOnload = true;
             this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
             this.drawBackground();
-            // Prepara el tablero cuando se cargó la imagen
-            //this.initDashboard();
         }
 
 
@@ -282,5 +281,13 @@ export class Dashboard {
         this.cells.forEach(cell => {
             cell = null;
         })
+    }
+
+    activeHelpMode(){
+        this.helpMode = true;
+    }
+
+    disableHelpMode(){
+        this.helpMode = false;
     }
 }

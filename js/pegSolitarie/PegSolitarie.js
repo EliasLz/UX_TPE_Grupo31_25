@@ -8,6 +8,7 @@ let lastPieceClicked = null;
 let lastCellClicked = null;
 let validNeighbodrsCells = [];
 let validNeighbodrsOfNeighbodrsCells = [];
+let helpButton = null;
 
 
 export function ejecutionPeg() {
@@ -45,6 +46,9 @@ export async function init(){
     let canvasWidth = canvas.width;
     let canvasHeight = canvas.height;
 
+
+
+
     let dashboard = new Dashboard(canvasWidth, canvasHeight, ctx);
     const config = await showMenu();
 
@@ -56,6 +60,17 @@ export async function init(){
     playGame();
 
     function playGame(){
+        //Creamos el boton de ayuda
+        helpButton = document.createElement('button');
+        helpButton.id = 'HelpButton';
+        helpButton.className = 'btn-help-game';
+        helpButton.innerHTML = ' <img src= "./assets/img-Peg-Solitarie/help.png" alt="Help" class="help-icon"> ';
+        containerGame.appendChild(helpButton);
+
+        helpButton.addEventListener('click', ()=>{
+            dashboard.activeHelpMode();
+            helpButton.classList.toggle('active-help-button');
+        })
 
         canvas.addEventListener('mousedown', onMouseDown, false);
         canvas.addEventListener('mouseup', onMouseUp, false);
@@ -108,11 +123,12 @@ export async function init(){
                 validNeighbodrsOfNeighbodrsCells = neighbodrss.at(1);
                 validNeighbodrsCells = neighbodrss.at(0);
                 
-                
-                validNeighbodrsOfNeighbodrsCells.forEach(cell =>{
-                    cell.setResaltada(true);
-                    cell.startPulse();   // empieza a “respirar”
-                })
+                if(!dashboard.helpMode){
+                    validNeighbodrsOfNeighbodrsCells.forEach(cell =>{
+                        cell.setResaltada(true);
+                        cell.startPulse();   // empieza a “respirar”
+                    })
+                }
                 
                 lastPieceClicked = clickedPiece;
                 lastCellClicked = clickedCell;
@@ -141,20 +157,28 @@ export async function init(){
                     return;
                 }
     
-                    //chequeo si el movimiento es valido
-                    let validMove = validNeighbodrsOfNeighbodrsCells.some(cell => cell.x == destineCell.x && cell.y == destineCell.y);
+                    let validMove = true;
+                    // si no estamos en modo ayuda, chequeamos si el movimiento es valido
+                    if(!dashboard.helpMode){
+                        //chequeo si el movimiento es valido
+                        validMove = validNeighbodrsOfNeighbodrsCells.some(cell => cell.x == destineCell.x && cell.y == destineCell.y);
+                    }
         
         
                     if(destineCell.isValid() && validMove){
                         lastPieceClicked.setPosition(destineCell.x + (dashboard.cellWidth/2), destineCell.y + (dashboard.cellHeight/2));
                         destineCell.setOccupied();
                         lastCellClicked.setEmpty();
-        
-                        dashboard.deleteNeighbodrsPiece(validNeighbodrsCells, validNeighbodrsOfNeighbodrsCells, destineCell);
+                        
+                        // Eliminamos la pieza solo si no esta en modo ayuda
+                        if(!dashboard.helpMode){
+                            dashboard.deleteNeighbodrsPiece(validNeighbodrsCells, validNeighbodrsOfNeighbodrsCells, destineCell);
+                        }
                         // quitar marca de arrastre
                         if (lastPieceClicked.getDragging() === true) {
                             lastPieceClicked.setDragging(false);
                         }
+                    
                         resetLastPositions();
                     
                 } else {
@@ -166,7 +190,10 @@ export async function init(){
                 }
                 
             }
-    
+            
+            // Sacamos el modo ayuda
+            dashboard.disableHelpMode();
+
             if(dashboard.isGameOver()){
                 timer.stop()
                 if(dashboard.getPieces().length == 1){
@@ -177,6 +204,10 @@ export async function init(){
                 dashboard.deleteElements();
                 cancelAnimationFrame(idLoop);
                 return;
+            }
+
+            if(!dashboard.helpMode){
+                helpButton.classList.remove('active-help-button');
             }
         }
         

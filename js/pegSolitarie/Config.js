@@ -134,9 +134,9 @@ export function showEndMenu(gameOver, time){
         <p> Tiempo: ${formatTime(time)} </p>
         <button id="restart" class="btn-Menu-game" > Reiniciar </button>
     </div>
-        `
-        gameScreen.innerHTML = menuHtml;
+        ` 
+    gameScreen.innerHTML = menuHtml;
 
-        document.getElementById('restart').addEventListener('click',init)
+    document.getElementById('restart').addEventListener('click',init)
 }
 
