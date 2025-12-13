@@ -4,13 +4,30 @@ export const GAME_DEFAULTS = {
     useHelp: false
 };
 
-export const IMAGE_BANK = [
-    'assets/img-Blocka/Loro.png', 
-    'assets/img-Blocka/Panda.jpg', 
-    'assets/img-Blocka/Pollo.png',
-    'assets/img-Blocka/Tigre.png',
-    'assets/img-Blocka/Zorro.png',
-    'assets/img-Blocka/Puma.jpg',
+export const IMAGE_ANIMAL = [
+    'assets/img-Blocka/animals/Loro.png', 
+    'assets/img-Blocka/animals/Panda.jpg', 
+    'assets/img-Blocka/animals/Pollo.png',
+    'assets/img-Blocka/animals/Tigre.png',
+    'assets/img-Blocka/animals/Zorro.png',
+    'assets/img-Blocka/animals/Puma.jpg',
+];
+
+export const IMAGE_AUTO = [
+    'assets/img-Blocka/autos/auto-Amarillo.png', 
+    'assets/img-Blocka/autos/auto-Azul.png', 
+    'assets/img-Blocka/autos/auto-Gris.png',
+    'assets/img-Blocka/autos/camion.png',
+    'assets/img-Blocka/autos/camioneta.png',
+    'assets/img-Blocka/autos/formula1.png',
+];
+export const IMAGE_MARAVILLA = [
+    'assets/img-Blocka/maravillas/cataratas-Misiones.png', 
+    'assets/img-Blocka/maravillas/chichenitza.png', 
+    'assets/img-Blocka/maravillas/coliceo.png',
+    'assets/img-Blocka/maravillas/machupichu.png',
+    'assets/img-Blocka/maravillas/muralla-China.png',
+    'assets/img-Blocka/maravillas/templo.png',
 ];
 
 export function configureGame() {
@@ -21,18 +38,18 @@ export function configureGame() {
                 <h1>MENU</h1>
                 <form id="configForm">
                     <div class="config-option">
-                        <h3 for="piecesCount" style="padding:10px">DIFICULTAD</h3>
+                        <h3 for="piecesCount" style="padding:10px">Dificultad</h3>
                         <select id="piecesCount" name="piecesCount">
-                            <option value="4" selected>4 Piezas (2x2) - Fácil</option>
-                            <option value="6">6 Piezas (3x2) - Medio</option> 
-                            <option value="8">8 Piezas (4x2) - Difícil</option>
+                            <option value="2" selected>4 Piezas (2x2) - Fácil</option>
+                            <option value="3">9 Piezas (3x3) - Medio</option> 
+                            <option value="4">16 Piezas (4x4) - Difícil</option>
                         </select>
                     </div>
 
                     <div>
                         
                         <div class="config-option">
-                            <h3 for="timeTrialCheck">TIEMPO</h3>
+                            <h3 for="timeTrialCheck">Tiempo</h3>
                             <h5 for="maxTime">Habilitar Modo Contrareloj</h5>
                             <div  style="display: flex; align-items: center; gap: 10px;">
                                 <label class="toggle-container">
@@ -46,12 +63,33 @@ export function configureGame() {
                     </div>
 
                     <div class="config-option">
-                        <h3 for="useHelp" style="color:black" >AYUDA</h3>
+                        <h3 for="useHelp" style="color:black" >Ayuda</h3>
                         <div style="display: flex; align-items: center; gap: 10px;">
                             <label class="toggle-container">
                                 <input type="checkbox" id="useHelp" name="useHelp"/>
                                 <span class="toggle-slider"></span>
                                 <span class="toggle-label">Habilitar "Ayudita" (5 segundos de penalización por uso).</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="config-option">
+                        <h3 for="useHelp" style="color:black" >Tematica</h3>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <label class="toggle-container-theme">
+                                <span class="toggle-label">Animales</span>
+                                <input type="radio" name="theme" id="useHelp" name="useHelp" value="1" checked/>
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <label class="toggle-container-theme">
+                                <span class="toggle-label">Automoviles</span>
+                                <input type="radio" name="theme" id="useHelp" name="useHelp" value="2"/>
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <label class="toggle-container-theme">
+                                <span class="toggle-label">Maravillas</span>
+                                <input type="radio" name="theme" id="useHelp" name="useHelp" value="3"/>
+                                <span class="toggle-slider"></span>
                             </label>
                         </div>
                     </div>
@@ -88,10 +126,15 @@ export function configureGame() {
                 timeValue = 30; 
             }
 
+            // Obtenemos la tematica seleccionada
+            let selectedTheme = 'animals'; // Valor por defecto
+            selectedTheme = document.querySelector('input[name="theme"]:checked').value;
+            
             const selectedConfig = {
                 piecesCount: parseInt(document.getElementById('piecesCount').value),
                 maxTime: isTimeTrial ? Math.max(30, timeValue) : 0,
-                useHelp: document.getElementById('useHelp').checked
+                useHelp: document.getElementById('useHelp').checked,
+                theme : selectedTheme
             };
 
             // por qué el elemento "configOverlay" no está en ninguna otra parte del codigo? que selecciona?

@@ -94,7 +94,7 @@ ul.breadcrumb li:last-child:hover {
     position: relative;
     background-image: url('../assets/img-Blocka/FondoPantalla.png');
     overflow: hidden;
-    width: 950px;
+    width: 860px;
     border: 3px solid black; 
     border-radius: 30px;
 }
@@ -539,6 +539,8 @@ button.play-button:active {
 }
 .config-option h3 {
     color: #000;
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
 
 .config-option h5 {
@@ -672,8 +674,21 @@ button.play-button:active {
     color: #5a3e2b;
     margin: 10px 0;
 }
+.toggle-container-theme {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+    color: #5a3e2b;
+    margin: 10px;
+}
 
 .toggle-container input[type="checkbox"] {
+    display: none;
+}
+.toggle-container-theme input[type="radio"] {
     display: none;
 }
 
@@ -705,6 +720,13 @@ button.play-button:active {
 }
 
 .toggle-container input[type="checkbox"]:checked + .toggle-slider::before {
+    transform: translateX(24px);
+}
+.toggle-container-theme input[type="radio"]:checked + .toggle-slider {
+    background-color: #f7a541;
+}
+
+.toggle-container-theme input[type="radio"]:checked + .toggle-slider::before {
     transform: translateX(24px);
 }
 

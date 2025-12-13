@@ -39,7 +39,7 @@ export const mockGame = [
         ],
         "genres": [
         {
-            "id": 7,
+            "id": 2,
             "name": "Puzzle"
         }
         ]

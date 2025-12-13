@@ -1,4 +1,4 @@
-import { configureGame, IMAGE_BANK } from './config.js';
+import { configureGame, IMAGE_ANIMAL, IMAGE_AUTO, IMAGE_MARAVILLA } from './config.js';
 import { randomOrder, formatTime } from './utils.js';
 import { prepareGame } from './puzzle.js';
 import { handlerGameOver, startTimer, gameTimerInterval, currentTime, totalTime, resetTotalTime } from './timer.js';
@@ -27,7 +27,9 @@ export async function initGame(){
     //gameContainer.innerHTML = '<h2>Cargando juego...</h2>'; //TODO:: Hacer una animacion.
 
     const gameConfig = await configureGame();
-    const randomImageOrder = randomOrder(IMAGE_BANK);
+
+    let thems = [IMAGE_ANIMAL, IMAGE_AUTO, IMAGE_MARAVILLA ]
+    const randomImageOrder = randomOrder( thems[ parseInt(gameConfig.theme)-1] );
     let currentImageIndex = 0;
 
     const initialTime = gameConfig.maxTime > 0 ? gameConfig.maxTime : 0;

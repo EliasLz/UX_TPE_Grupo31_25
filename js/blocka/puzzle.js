@@ -33,8 +33,8 @@ function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
     const ctx = canvas.getContext('2d');
 
     // Define en cuántas piezas quieres dividir la imagen
-    const COLUMNAS = pieces / 2;
-    const FILAS = 2;
+    const COLUMNAS = pieces ;
+    const FILAS = pieces;
 
     // Cargamos la Imagen
     const imagen = new Image();

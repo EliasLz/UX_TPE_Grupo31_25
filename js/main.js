@@ -83,10 +83,14 @@ function selectRecommendedGames(games) {
     let recommendedList = [];
     
     const pegSolitarie = games.find(game => game.id === 1); //--> Aseguramos que el Peg Solitarie este siempre.
+    const blocka = games.find(game => game.id === 2); 
     const spaceRun = games.find(game => game.id === 3); 
 
     if (pegSolitarie) {
         recommendedList.push(pegSolitarie);
+    }
+    if (blocka) {
+        recommendedList.push(blocka);
     }
     if (spaceRun) {
         recommendedList.push(spaceRun);
