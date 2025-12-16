@@ -1,12 +1,13 @@
 import { Collision } from "./Collision.js";
 
 export class Asteroid extends Collision {
-    constructor(gameArea, sizeAsteroid) {
+    constructor(gameArea, sizeAsteroid, y) {
         super();
         this.gameArea = gameArea;
         this.hp = sizeAsteroid;
         this.x = this.gameArea.clientWidth;
-        this.y = Math.floor(Math.random() * ((this.gameArea.clientHeight) - 150));
+        //this.y = Math.floor(Math.random() * ((this.gameArea.clientHeight) - 150));
+        this.y = y;
         this.direction = 'right';
 
         //Generamos el HTML 

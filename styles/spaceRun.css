@@ -246,6 +246,19 @@ body {
     animation: spaceship-move 0.5s steps(4) infinite;
 }
 
+.sheild-effect{
+    width: 60px;
+    height: 64px;
+    background: url('../assets/spaceRun/spritesheet/sheild.png');
+    animation: sheild-pulse 1s steps(4) infinite;
+}
+.sheild-destroyed{
+    width: 64px;
+    height: 50px;
+    background: url('../assets/spaceRun/spritesheet/sheild-destroyed.png');
+    animation: sheild-destroy 0.5s steps(4) ;
+}
+
 @keyframes spaceship-move {
     0% {
         background-position: 0px;
@@ -273,6 +286,24 @@ body {
 
     100% {
         background-position: -390px;
+    }
+}
+@keyframes sheild-pulse {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -240px;
+    }
+}
+@keyframes sheild-destroy {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -256px;
     }
 }
 
@@ -351,6 +382,12 @@ body {
     width: 40px;
     height: 40px;
     background: url('../assets/spaceRun/objets/item-bullet.png');
+    animation: bonus 1s steps(15) infinite;
+}
+.bonus-sheild {
+    width: 40px;
+    height: 40px;
+    background: url('../assets/spaceRun/objets/item-shield.png');
     animation: bonus 1s steps(15) infinite;
 }
 

@@ -2,6 +2,7 @@ import { Asteroid } from './Asteroid.js';
 import { Bullet } from './Bullet.js';
 import { Life } from './Bonus/Life.js';
 import { Weapon } from './Bonus/Weapon.js';
+import { Sheild } from './Bonus/Sheild.js';
 import { Spaceship } from './Spaceship.js';
 import { EnemyShip } from './EnemyShip.js';
 import { EnemyBullet } from './EnemyBullet.js';
@@ -10,7 +11,7 @@ import { EnemyBullet } from './EnemyBullet.js';
 export class Space {
     constructor(gameContainer) {
         this.gameArea = gameContainer;
-        this.gameSpeed = 1; //--> Velocidad del scroll.
+        this.gameSpeed = 0.5; //--> Velocidad del scroll.
 
         this.arrAsteroids = [];
         this.arrBonus = [];
@@ -22,8 +23,8 @@ export class Space {
         this.spaceship = new Spaceship(this.gameArea);
 
         //Temporizador para la creacion de asteroides
-        this.astSpawnTimer = 0;
-        this.astSpawnInterval = 100;
+        this.astSpawnInterval = 700;
+        this.astSpawnTimer = this.astSpawnInterval;
 
         //Temporizador para la creacion de items bonificadores
         this.bonSpawnTimer = 0;
@@ -151,7 +152,7 @@ export class Space {
             }
         }
         // Aceleracion del movimiento de los elementos 
-        this.gameSpeed += 0.0008;
+        this.gameSpeed += 0.0004;
 
         /* --- Aparicion de nuevos elementos del nivel ---*/
 
@@ -210,9 +211,13 @@ export class Space {
             const astRect = ast.hitbox.getBoundingClientRect();
 
             if (this.isColliding(spaceshipRec, astRect)) {
-                this.spaceship.lossHp();
-                this.lifeHud();
-                this.spaceship.collision();
+                if (this.spaceship.isSheilded){
+                    this.spaceship.removeSheild();
+                } else {
+                    this.spaceship.lossHp();
+                    this.lifeHud();
+                    this.spaceship.collision();
+                }
                 //Si se divide en fragmentos al perder salud, agregamos los nuevos asteroides al arreglo
                 let asteroidFragments;
                 if ((asteroidFragments = ast.collision())) {
@@ -284,62 +289,21 @@ export class Space {
                         this.spaceship.addHp();
                         this.lifeHud();
                     }
-                } else {
+                } else if (bon instanceof Weapon) {
                     if (this.spaceship.ammunition < 12) {
                         this.spaceship.enableShooting();
                         this.spaceship.addAmmunition(bon.getBonus());
                         this.ammunitiontHud();
+                    }
+                } else if(bon instanceof Sheild){
+                    if(this.spaceship.isSheilded === false){
+                        this.spaceship.addSheild();
                     }
                 }
                 bon.remove();
                 this.arrBonus.splice(i, 1);
                 break;
             }
-        }
-
-        // Chequeamos colisiones de asteroidoes con asteroides
-        let astsToRemove = [];
-        for (let j = this.arrAsteroids.length - 1; j >= 0; j--) {
-            const astJ = this.arrAsteroids[j];
-            const astJRect = astJ.element.getBoundingClientRect();
-
-            for (let i = this.arrAsteroids.length - 1; i >= 0; i--) {
-                const astI = this.arrAsteroids[i];
-                const astIRect = astI.hitbox.getBoundingClientRect();
-                if (i === j) {
-                    continue;
-                }
-                if (this.isColliding(astJRect, astIRect)) {
-
-                    let asteroidJFragments;
-                    if ((asteroidJFragments = astJ.collision())) {
-                        asteroidJFragments.forEach(asteroidJFragment => {
-                            this.arrAsteroids.push(asteroidJFragment);
-                        });
-                    }
-                    let asteroidIFragments;
-                    if ((asteroidIFragments = astI.collision())) {
-                        asteroidIFragments.forEach(asteroidIFragment => {
-                            this.arrAsteroids.push(asteroidIFragment);
-                        });
-                    }
-                    // Agregamos el index de los asteroides a eliminar luego de finalizar las iteraciones
-                    astsToRemove.push(j);
-                    astsToRemove.push(i);
-                    break;
-                }
-            }
-        }
-        // Finilizada las detecciones entre asteroides eliminamos todos los que están en colision
-        if (astsToRemove.length > 0) {
-            // Ordenamos los indices de mayor a menor
-            astsToRemove.sort((a, b) => b - a);
-            // Eliminamos indices repetidos
-            astsToRemove = new Set(astsToRemove);
-            // Eliminamos del arreglo segun los indices de la coleccion
-            astsToRemove.forEach(index => {
-                this.arrAsteroids.splice(index, 1);
-            });
         }
 
         // Colision de balas enemigas con nave player
@@ -349,9 +313,13 @@ export class Space {
                 const enemyBulletRect = enemyBullet.element.getBoundingClientRect();
 
                 if (this.isColliding(spaceshipRec, enemyBulletRect)) {
-                    this.spaceship.lossHpAmount(4);
-                    this.lifeHud();
-                    this.spaceship.collision();
+                    if (this.spaceship.isSheilded){
+                        this.spaceship.removeSheild();
+                    } else {
+                        this.spaceship.lossHpAmount();
+                        this.lifeHud();
+                        this.spaceship.collision();
+                    }
                     enemyBullet.collision();
                     // Eliminamos la bala enemiga del arreglo
                     this.arrEnemyBullets.splice(i, 1);
@@ -372,21 +340,32 @@ export class Space {
         );
     }
 
+    isCollidingAsteroid(e) {
+        return this.arrAsteroids.some( asteroid => this.isColliding(asteroid.hitbox.getBoundingClientRect(), e.element.getBoundingClientRect()));
+    }
+
     //Agregamos Asteroides al juego.
     addAsteroid() {
-        // Definimos su tamaño
-        const size = Math.floor(Math.random() * 3) + 1;
+        // Definimos que asteroide no crear
+        const pos = Math.floor(Math.random() * 4) + 1;
 
         // Lo craemos
-        let asteroid = new Asteroid(this.gameArea, size);
-        // Aseguramos que no colisione/superponga con otro asteroide al crearlo
-        if (this.arrAsteroids.length > 0) {
-            while (this.isColliding(this.arrAsteroids.at(-1).element.getBoundingClientRect(), asteroid.element.getBoundingClientRect())) {
-                asteroid = new Asteroid(this.gameArea, size);
-            }
-        }
-        // Lo agregamos al arreglo de asteroides del nivel
-        this.arrAsteroids.push(asteroid);
+        let asteroid1 = new Asteroid(this.gameArea, 3, -30);
+        let asteroid2 = new Asteroid(this.gameArea, 3, 130);
+        let asteroid3 = new Asteroid(this.gameArea, 3, 280);
+        let asteroid4 = new Asteroid(this.gameArea, 3, 430);
+
+        let asteroidsArray = [asteroid1, asteroid2, asteroid3, asteroid4];
+
+        // Removemos el asteroide que no se debe crear
+        asteroidsArray.splice(pos - 1, 1);
+
+        // Agregamos los asteroides al arregklo de asteroides del nivel
+        asteroidsArray.forEach( asteroid => {
+            this.arrAsteroids.push(asteroid);
+
+        })
+
     }
 
     //Agregamos la bala al juego.
@@ -409,19 +388,28 @@ export class Space {
     //Agregamos Bonus al juego.
     addBonus() {
         let rndSpawn = Math.floor(Math.random() * 10);
+        let bonus = null;
 
-        if (rndSpawn > 3) {
-            let bonus = new Weapon(this.gameArea, 5);
-            //aseguramos que no colisione al crearlo
-            while (this.isColliding(this.arrAsteroids.at(-1).element.getBoundingClientRect(), bonus.element.getBoundingClientRect())) {
-                bonus = new Weapon(this.gameArea, 5);
-            }
-            this.arrBonus.push(bonus);
+        if (rndSpawn >= 4 && rndSpawn <= 6) {
+            bonus = new Weapon(this.gameArea, 5);
+        } else if (rndSpawn >= 7){
+            bonus = new Sheild(this.gameArea, 1);
         } else {
-            let bonus = new Life(this.gameArea, 1);
-            //aseguramos que no colisione al crearlo
-            while (this.isColliding(this.arrAsteroids.at(-1).element.getBoundingClientRect(), bonus.element.getBoundingClientRect())) {
-                bonus = new Life(this.gameArea, 1);
+            bonus = new Life(this.gameArea, 1);
+        }
+
+        if(bonus){
+            if( this.arrAsteroids.length > 0){
+                //aseguramos que no colisione al crearlo
+                while (this.isCollidingAsteroid(bonus)){
+                    if (bonus instanceof Weapon) {
+                        bonus = new Weapon(this.gameArea, 5);
+                    } else if (bonus instanceof Sheild) {
+                        bonus = new Sheild(this.gameArea, 1);
+                    } else if (bonus instanceof Life) {
+                        bonus = new Life(this.gameArea, 1);
+                    }
+                }
             }
             this.arrBonus.push(bonus);
         }

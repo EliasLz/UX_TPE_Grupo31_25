@@ -15,36 +15,42 @@ export function showMenu(){
 
     menuWrapper.innerHTML = `
         <div class="config-menu">
-            <h2> Peg Solitarie </h2>
+            <h1> Peg Solitarie </h1>
             <form id="configForm"> 
-                <h4> Seleccione una pieza </h4>
-                <div class="config-option-img">
-                    <label class="picker">
-                        <input type="radio" name="pieza" value="1" required>
-                        <img src="assets/img-Peg-Solitarie/Rosca.png" alt="Rosca">
-                    </label>
+            
+                <div class="config-option">
+                    <h3> Seleccione una pieza </h3>
+                    <div class="config-option-img">
+                        <label class="picker">
+                            <img src="assets/img-Peg-Solitarie/Rosca.png" alt="Rosca">
+                            <input type="radio" name="pieza" value="1" required>
+                        </label>
 
-                    <label class="picker">
-                        <input type="radio" name="pieza" value="2">
-                        <img src="assets/img-Peg-Solitarie/Duff.png" alt="Duff">
-                    </label>
+                        <label class="picker">
+                            <img src="assets/img-Peg-Solitarie/Duff.png" alt="Duff">
+                            <input type="radio" name="pieza" value="2">
+                        </label>
+                    </div>
                 </div>
                 
-                <h4> Seleccione la forma del tablero </h4>
-                <div class="config-option-img">
-                    <label class="picker">
-                        <input type="radio" name="tablero" value="1" required>
-                        <img src="assets/img-Peg-Solitarie/peg-Clasico.png" alt="Tablero">
-                    </label>
+                <div class="config-option">
+                    <h3> Seleccione la forma del tablero </h3>
+                    <div class="config-option-img">
+                        <label class="picker">
+                            <img src="assets/img-Peg-Solitarie/peg-Clasico.png" alt="Tablero">
+                            <input type="radio" name="tablero" value="1" required>
+                        </label>
 
-                    <label class="picker">
-                        <input type="radio" name="tablero" value="2">
-                        <img src="assets/img-Peg-Solitarie/peg-Cuadrado.png" alt="Tablero">
-                    </label>
+                        <label class="picker">
+                            <img src="assets/img-Peg-Solitarie/peg-Cuadrado.png" alt="Tablero">
+                            <input type="radio" name="tablero" value="2">
+                        </label>
+                    </div>
                 </div>
 
+
                 <div class="config-option">
-                    <h4> Modo desafio </h4>
+                    <h3> Modo desafio </h3>
                     <label class="toggle-container">
                         <input type="checkbox" id="challengeModeCheck" name="challengeModeCheck"/>
                         <span class="toggle-slider"></span>

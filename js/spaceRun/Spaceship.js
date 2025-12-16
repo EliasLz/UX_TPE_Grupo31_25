@@ -23,6 +23,8 @@ export class Spaceship extends Collision{
         this.hp = 8;
         this.isEnabled = true;
         this.ammunition = 12;
+
+        this.isSheilded = false;
     }
 
     setPosition(x, y){
@@ -60,7 +62,7 @@ export class Spaceship extends Collision{
     }
 
     lossHpAmount(){
-        this.hp -= 4;
+        this.hp -= 2;
     }
     
     //Disparar.
@@ -85,6 +87,28 @@ export class Spaceship extends Collision{
         }
 
         this.ammunition += ammo;
+    }
+
+    // Agregamos el escudo y el efecto visual
+    addSheild(){
+        if (this.isSheilded) return; // Si ya tiene escudo, no hacemos nada
+        this.isSheilded = true;
+        let sheild = document.createElement('div');
+        sheild.id = 'sheild';
+        sheild.className = 'sheild-effect';
+        this.element.appendChild(sheild);
+    }
+
+    removeSheild(){
+        this.isSheilded = false;
+        let sheild = this.element.querySelector('#sheild');
+        console.log(sheild);
+        if(sheild){
+            sheild.className = 'sheild-destroyed';
+            sheild.addEventListener('animationend', ()=>{
+                sheild.remove();
+            })
+        }
     }
     
     //Efecto de colision
