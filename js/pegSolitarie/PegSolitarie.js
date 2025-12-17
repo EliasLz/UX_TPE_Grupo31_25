@@ -60,17 +60,8 @@ export async function init(){
     playGame();
 
     function playGame(){
-        //Creamos el boton de ayuda
-        helpButton = document.createElement('button');
-        helpButton.id = 'HelpButton';
-        helpButton.className = 'btn-help-game';
-        helpButton.innerHTML = ' <img src= "./assets/img-Peg-Solitarie/help.png" alt="Help" class="help-icon"> ';
-        containerGame.appendChild(helpButton);
 
-        helpButton.addEventListener('click', ()=>{
-            dashboard.activeHelpMode();
-            helpButton.classList.toggle('active-help-button');
-        })
+        createButtonHelp();
 
         canvas.addEventListener('mousedown', onMouseDown, false);
         canvas.addEventListener('mouseup', onMouseUp, false);
@@ -135,123 +126,153 @@ export async function init(){
             } 
         }
         
-        //Se suelta el click izquierdo
-        function onMouseUp(e){
+    //Se suelta el click izquierdo
+    function onMouseUp(e){
+        
+        if(e.button !== 0) return;
+        
+        isMouseDown = false;
+        
+        if(lastPieceClicked != null){
+            let mause = getMausePos(e);
+            let destineCell = dashboard.findClickedCell(mause.x, mause.y);
             
-            if(e.button !== 0) return;
-            
-            isMouseDown = false;
-            
-            if(lastPieceClicked != null){
-                let mause = getMausePos(e);
-                let destineCell = dashboard.findClickedCell(mause.x, mause.y);
-                
-                //no hacemos nada si destino es null o es la misma celda de origen
-                if(destineCell == null || (destineCell.x == lastCellClicked.x && destineCell.y == lastCellClicked.y)) {
-                    lastPieceClicked.setPosition(lastCellClicked.x + (dashboard.cellWidth/2), lastCellClicked.y + (dashboard.cellHeight/2));
+            //no hacemos nada si destino es null o es la misma celda de origen
+            if(destineCell == null || (destineCell.x == lastCellClicked.x && destineCell.y == lastCellClicked.y)) {
+                lastPieceClicked.setPosition(lastCellClicked.x + (dashboard.cellWidth/2), lastCellClicked.y + (dashboard.cellHeight/2));
+                // quitar marca de arrastre
+                if (lastPieceClicked.getDragging() === true) {
+                    lastPieceClicked.setDragging(false);
+                }
+                resetLastPositions();
+                return;
+            }
+
+                let validMove = true;
+                // si no estamos en modo ayuda, chequeamos si el movimiento es valido
+                if(!dashboard.helpMode){
+                    //chequeo si el movimiento es valido
+                    validMove = validNeighbodrsOfNeighbodrsCells.some(cell => cell.x == destineCell.x && cell.y == destineCell.y);
+                }
+    
+    
+                if(destineCell.isValid() && validMove){
+                    lastPieceClicked.setPosition(destineCell.x + (dashboard.cellWidth/2), destineCell.y + (dashboard.cellHeight/2));
+                    destineCell.setOccupied();
+                    lastCellClicked.setEmpty();
+                    
+                    // Eliminamos la pieza solo si no esta en modo ayuda
+                    if(!dashboard.helpMode){
+                        dashboard.deleteNeighbodrsPiece(validNeighbodrsCells, validNeighbodrsOfNeighbodrsCells, destineCell);
+                    }
                     // quitar marca de arrastre
                     if (lastPieceClicked.getDragging() === true) {
                         lastPieceClicked.setDragging(false);
                     }
-                    resetLastPositions();
-                    return;
-                }
-    
-                    let validMove = true;
-                    // si no estamos en modo ayuda, chequeamos si el movimiento es valido
-                    if(!dashboard.helpMode){
-                        //chequeo si el movimiento es valido
-                        validMove = validNeighbodrsOfNeighbodrsCells.some(cell => cell.x == destineCell.x && cell.y == destineCell.y);
-                    }
-        
-        
-                    if(destineCell.isValid() && validMove){
-                        lastPieceClicked.setPosition(destineCell.x + (dashboard.cellWidth/2), destineCell.y + (dashboard.cellHeight/2));
-                        destineCell.setOccupied();
-                        lastCellClicked.setEmpty();
-                        
-                        // Eliminamos la pieza solo si no esta en modo ayuda
-                        if(!dashboard.helpMode){
-                            dashboard.deleteNeighbodrsPiece(validNeighbodrsCells, validNeighbodrsOfNeighbodrsCells, destineCell);
-                        }
-                        // quitar marca de arrastre
-                        if (lastPieceClicked.getDragging() === true) {
-                            lastPieceClicked.setDragging(false);
-                        }
-                    
-                        resetLastPositions();
-                    
-                } else {
-                    lastPieceClicked.setPosition(lastCellClicked.x + (dashboard.cellWidth/2), lastCellClicked.y + (dashboard.cellHeight/2));
-                    if (lastPieceClicked.getDragging() === true) {
-                        lastPieceClicked.setDragging(false);
-                    }
-                    resetLastPositions();
-                }
                 
-            }
-            
-            // Sacamos el modo ayuda
-            dashboard.disableHelpMode();
-
-            if(dashboard.isGameOver()){
-                timer.stop()
-                if(dashboard.getPieces().length == 1){
-                    showEndMenu(true, timer.getTime());
-                } else {
-                    showEndMenu(false, timer.getTime());
-                }
-                dashboard.deleteElements();
-                cancelAnimationFrame(idLoop);
-                return;
-            }
-
-            if(!dashboard.helpMode){
-                helpButton.classList.remove('active-help-button');
-            }
-        }
-        
-        //Se mantiene el click
-        function onMouseMove(e){
-            if(isMouseDown && lastPieceClicked != null){
-                let mause = getMausePos(e);
-                lastPieceClicked.setPosition(mause.x, mause.y);
-            }
-        }
-    
-        //obtenemos la posicion del mouse
-        function getMausePos(event){     //TODO:: Chequear que ande con el re escalado en el canvas
-            const rect = canvas.getBoundingClientRect();
-
-            const scaleX = canvas.width / rect.width;
-            const scaleY = canvas.height / rect.height;
-    
-            const clientX = event.clientX - rect.left;
-            const clientY = event.clientY - rect.top;
-            return {
-                x : Math.round(clientX * scaleX),
-                y : Math.round(clientY * scaleY)
-            }
-        }
-    
-        //borramos las ultimas posiciones resaltadas y el estado de las piezas
-        function resetLastPositions(){
-            validNeighbodrsOfNeighbodrsCells.forEach(cell =>{
-                cell.setResaltada(false);
-                cell.stopPulse(); 
-            })
-            if (lastPieceClicked) {
-                // asegurar que ya no esté marcado como arrastrando
+                    resetLastPositions();
+                
+            } else {
+                lastPieceClicked.setPosition(lastCellClicked.x + (dashboard.cellWidth/2), lastCellClicked.y + (dashboard.cellHeight/2));
                 if (lastPieceClicked.getDragging() === true) {
                     lastPieceClicked.setDragging(false);
                 }
-                lastPieceClicked.setResaltada(false);
-                lastPieceClicked.draw();
+                resetLastPositions();
             }
-            lastPieceClicked = null;
-            lastCellClicked = null;
-
-            validNeighbodrsCells = [];
-            validNeighbodrsOfNeighbodrsCells = [];
+            
         }
+        
+        // Sacamos el modo ayuda
+        dashboard.disableHelpMode();
+
+        if(dashboard.isGameOver()){
+            timer.stop()
+            if(dashboard.getPieces().length == 1){
+                showEndMenu(true, timer.getTime());
+            } else {
+                showEndMenu(false, timer.getTime());
+            }
+            dashboard.deleteElements();
+            cancelAnimationFrame(idLoop);
+            return;
+        }
+
+        if(!dashboard.helpMode){
+            helpButton.classList.remove('active-help-button');
+            }
+    }
+    
+    //Se mantiene el click
+    function onMouseMove(e){
+        if(isMouseDown && lastPieceClicked != null){
+            let mause = getMausePos(e);
+            lastPieceClicked.setPosition(mause.x, mause.y);
+        }
+    }
+
+    //obtenemos la posicion del mouse
+    function getMausePos(event){     //TODO:: Chequear que ande con el re escalado en el canvas
+        const rect = canvas.getBoundingClientRect();
+
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+
+        const clientX = event.clientX - rect.left;
+        const clientY = event.clientY - rect.top;
+        return {
+            x : Math.round(clientX * scaleX),
+            y : Math.round(clientY * scaleY)
+        }
+    }
+
+    //borramos las ultimas posiciones resaltadas y el estado de las piezas
+    function resetLastPositions(){
+        validNeighbodrsOfNeighbodrsCells.forEach(cell =>{
+            cell.setResaltada(false);
+            cell.stopPulse(); 
+        })
+        if (lastPieceClicked) {
+            // asegurar que ya no esté marcado como arrastrando
+            if (lastPieceClicked.getDragging() === true) {
+                lastPieceClicked.setDragging(false);
+            }
+            lastPieceClicked.setResaltada(false);
+            lastPieceClicked.draw();
+        }
+        lastPieceClicked = null;
+        lastCellClicked = null;
+
+        validNeighbodrsCells = [];
+        validNeighbodrsOfNeighbodrsCells = [];
+    }
+
+    function createButtonHelp(){
+        //Creamos el boton de ayuda
+        let containerHelp = document.createElement('div');
+        containerHelp.className = ' button-help-wrapper';
+
+        helpButton = document.createElement('button');
+        helpButton.id = 'HelpButton';
+        helpButton.className = 'btn-help-game';
+        helpButton.innerHTML = ' <img src= "./assets/img-Peg-Solitarie/help.png" alt="Help" class="help-icon"> ';
+        containerHelp.appendChild(helpButton);
+        
+        let messageHidden = document.createElement('div');
+        messageHidden.className = ' help-message';
+        messageHidden.innerHTML = 'Ayuda: al activarlo, puedes mover una pieza libremente sin restricciones.'
+        containerHelp.appendChild(messageHidden);
+
+        containerGame.appendChild(containerHelp);
+
+        helpButton.addEventListener('click', ()=>{
+            if(!dashboard.helpMode){
+                dashboard.activeHelpMode();
+                helpButton.classList.toggle('active-help-button');
+            } else {
+                dashboard.disableHelpMode();
+                helpButton.classList.remove('active-help-button');
+            }
+        })
+    }
+
 }

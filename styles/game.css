@@ -161,7 +161,7 @@ ul.breadcrumb li:last-child:hover {
     flex-direction: column;
     align-items: center;
     background-color: orange;
-    margin: 15rem 10rem;
+    margin: 10rem 10rem;
     padding: 50px;
     border-radius: 30px;
     box-shadow: 0 4px 1px #b39e71;
@@ -762,7 +762,7 @@ button.play-button:active {
 
 .guide-image{
 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     outline: 2px solid currentColor;
     outline-offset: 2px;
     border-radius: 4px;
@@ -770,9 +770,8 @@ button.play-button:active {
 }
 
 .btn-help-game{
-    position: absolute;
-    top: 10px;
-    left: 10px;
+    position: relative;
+    
     z-index: 5;
     background-color: rgba(255, 255, 255, 0.7);
     border: none;
@@ -793,4 +792,34 @@ button.play-button:active {
 .help-icon{
     width: 98%;
     height: 98%;
+}
+
+.button-help-wrapper {
+    position: absolute;
+    display: inline-block;
+    left: 0px;
+    top: 0px;
+    margin: 10px;
+}
+
+.help-message{
+    display: none;
+    position: absolute;
+    
+    top: 50%;
+    left: 100%; 
+    transform: translateY(-50%); 
+    
+    margin-left: 10px; 
+    white-space: nowrap; 
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    z-index: 5;
+}
+
+.button-help-wrapper:hover .help-message {
+    display: block; /* Aparece de forma instantánea */
 }

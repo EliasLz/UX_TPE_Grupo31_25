@@ -54,6 +54,7 @@ export function showMenu(){
                     <label class="toggle-container">
                         <input type="checkbox" id="challengeModeCheck" name="challengeModeCheck"/>
                         <span class="toggle-slider"></span>
+                        <p style="margin: 0;" > Habilitar Modo Desafio: El tablero se generara con una cantidad de fichas aleatorias. </p>
                     </label>
                 </div>
                 
