@@ -121,7 +121,6 @@ function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
 
                 if( puzzlePieces[piezaIndex].rotation === 0){
                     //Reproducir sonido de pieza alineada
-                    console.log('pieza alineada')
                     let sound = new Audio('assets/sound/blocka/correct.wav');
                     sound.volume = 0.3;
                     sound.play();
@@ -268,7 +267,10 @@ export function accommodatePice(){
     const rdmPiece = unordenerPieces[randomIndex]
     
     rdmPiece.rotation = 0;
-    
+    let sound = new Audio('assets/sound/blocka/correct.wav');
+    sound.volume = 0.3;
+    sound.play();
+
     if (puzzleContext) {
         redrawPiece(
             puzzleContext, 
