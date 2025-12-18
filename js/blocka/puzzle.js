@@ -112,12 +112,25 @@ function playGame(pieces, imagenUrl, onLevelComplete, currentImageIndex){
             if(evento.button === 0){
                 rotation = 90;
             }else if(evento.button === 2){
-            rotation = -90;
+                rotation = -90;
             }
             
             if(rotation !== 0){
                 puzzlePieces[piezaIndex].rotation += rotation;
                 puzzlePieces[piezaIndex].rotation = (puzzlePieces[piezaIndex].rotation + 360 ) % 360;
+
+                if( puzzlePieces[piezaIndex].rotation === 0){
+                    //Reproducir sonido de pieza alineada
+                    console.log('pieza alineada')
+                    let sound = new Audio('assets/sound/blocka/correct.wav');
+                    sound.volume = 0.3;
+                    sound.play();
+                } else {
+                    let sound = new Audio('assets/sound/blocka/incorrect.wav');
+                    sound.volume = 0.3;
+                    sound.play();
+                }
+                
                 // redibujar solo la pieza modificada
                 const pieza = puzzlePieces[piezaIndex];
                 redrawPiece(ctx, imagen, pieza, anchoPieza, altoPieza, currentImageIndex);

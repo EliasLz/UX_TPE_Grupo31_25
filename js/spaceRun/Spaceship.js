@@ -1,9 +1,10 @@
 import { Collision } from "./Collision.js";
 
 export class Spaceship extends Collision{
-    constructor(gameArea){
+    constructor(gameArea, spaceshipChoice){
         super()
         this.gameArea = gameArea;
+        this.spaceshipType = spaceshipChoice;
 
         this.width = 58;
         this.height = 36;
@@ -13,7 +14,7 @@ export class Spaceship extends Collision{
 
         //Generamos el HTML de la nave 
         this.element = document.createElement('div');
-        this.element.className = 'spaceship spaceship-down';
+        this.element.className = 'spaceship spaceship'+ this.spaceshipType +'-down';
         this.element.style.left = this.x + 'px';
         this.element.style.top = this.y + 'px';
 
@@ -45,11 +46,11 @@ export class Spaceship extends Collision{
 
     //Auxiliares de movimiento.
     upMove(){
-        this.element.className = 'spaceship spaceship-up';
+        this.element.className = 'spaceship spaceship' + this.spaceshipType + '-up';
         this.setPosition(this.x, this.y - 1);
     }
     downMove(){
-        this.element.className = 'spaceship spaceship-down';
+        this.element.className = 'spaceship spaceship' + this.spaceshipType + '-down';
         this.setPosition(this.x, this.y + 1);
     }
 

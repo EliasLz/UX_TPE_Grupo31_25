@@ -28,21 +28,21 @@ export function ejecutionSpaceRun() {
     });
 }
 
-export function init() {
-    showMenu();
-
+export async function init() {
+    const config = await showMenu();
+    
+    
     if (currentScoreRecord > 0) {
         showCurrentRecord(currentScoreRecord);
     }
-    let playButton = document.getElementById('startGameBtn');
-    playButton.addEventListener('click', () => {
-        hiddenMenu();
-        playGame();
-    });
+
+    hiddenMenu();
+    playGame( config);
+    
 
 }
 
-export function playGame() {
+export function playGame(config) {
     if (currentScoreRecord == 0) {
         startMoveParallax();
     } else {
@@ -50,7 +50,8 @@ export function playGame() {
     }
     document.addEventListener('keydown', keyDown);
     document.addEventListener('keyup', keyUp);
-    space = new Space(gameContainer);
+    
+    space = new Space(gameContainer, config.spaceshipChoice);
     startGame();
 }
 

@@ -97,7 +97,7 @@ function selectRecommendedGames(games) {
     }
 
     const candidates = games.filter(game => 
-        game.rating > 4.3 && game.id !== 1
+        game.rating > 4.3 && game.id !== 1 && game.id !== 2 && game.id !== 3
     );
     
 

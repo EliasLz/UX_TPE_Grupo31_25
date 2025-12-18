@@ -9,7 +9,7 @@ import { EnemyBullet } from './EnemyBullet.js';
 
 
 export class Space {
-    constructor(gameContainer) {
+    constructor(gameContainer, spaceshipChoice) {
         this.gameArea = gameContainer;
         this.gameSpeed = 0.5; //--> Velocidad del scroll.
 
@@ -20,7 +20,7 @@ export class Space {
         this.enemyShip = null;
 
         //Instanciamos la nave
-        this.spaceship = new Spaceship(this.gameArea);
+        this.spaceship = new Spaceship(this.gameArea, spaceshipChoice);
 
         //Temporizador para la creacion de asteroides
         this.astSpawnInterval = 700;
