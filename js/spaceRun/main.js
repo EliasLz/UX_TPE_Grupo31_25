@@ -29,13 +29,8 @@ export function ejecutionSpaceRun() {
 }
 
 export async function init() {
-    const config = await showMenu();
+    const config = await showMenu(currentScoreRecord);
     
-    
-    if (currentScoreRecord > 0) {
-        showCurrentRecord(currentScoreRecord);
-    }
-
     hiddenMenu();
     playGame( config);
     

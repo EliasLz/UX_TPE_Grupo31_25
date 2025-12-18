@@ -1,7 +1,7 @@
 
 const gameScreen = document.getElementById('gameScreen');
 
-export function showMenu() {
+export function showMenu(currentScoreRecord) {
 
     const menuWrapper = document.createElement('div');
 
@@ -28,6 +28,10 @@ export function showMenu() {
 
 
     gameScreen.appendChild(menuWrapper);
+
+    if (currentScoreRecord > 0) {
+        showCurrentRecord(currentScoreRecord);
+    }
 
     return new Promise( resolve => {
         const config = menuWrapper.querySelector('#menuForm');
