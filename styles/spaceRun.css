@@ -1,0 +1,515 @@
+:root {
+    --color-primary: #00ffff;
+    --color-secondary: #0000ff;
+    --color-text: #ffffff;
+    --background-color: #000000;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.game2-container {
+    width: 100%;
+}
+
+.menu-wrapper {
+    text-align: center;
+    padding: 40px 60px;
+
+    background: rgba(0, 0, 0, 0.4);
+
+
+    border: 3px solid var(--color-primary);
+    box-shadow: 0 0 30px var(--color-primary);
+
+    border-radius: 10px;
+    z-index: 10;
+
+
+    position: absolute;
+
+    background-color: cadetblue;
+    width: 600px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.menu-wrapper h2 {
+    font-size: 5em;
+    color: var(--color-text);
+    text-shadow:
+        0 0 15px var(--color-primary),
+        0 0 30px var(--color-secondary),
+        0 0 60px var(--color-secondary);
+    margin: 10px;
+    letter-spacing: 15px;
+}
+
+.menu-wrapper button {
+    background-color: var(--color-primary);
+    color: var(--background-color);
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 0 var(--color-secondary);
+}
+
+.picker {
+    display: inline-flex;
+    align-items: center; 
+    justify-content: center;
+    width: 90px; 
+    height: 90px;
+    border: 3px solid #ccc;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #2c3e50;
+    margin: 10px;
+    overflow: hidden; 
+}
+
+.picker input[type="radio"] {
+    display: none;
+}
+
+
+.picker:has(input:checked) {
+    border-color: #f1c40f; 
+    box-shadow: 0 0 15px rgba(241, 196, 15, 0.6);
+    background-color: #34495e;
+}
+
+.picker img {
+    max-width: 80%; 
+    max-height: 80%;
+    object-fit: contain; 
+    transition: transform 0.2s ease;
+    width: auto;
+    height: auto;
+    filter: grayscale(100%);
+    opacity: 0.7;
+}
+
+.picker:has(input:checked) img {
+    transform: scale(1.1);
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+
+
+
+#startGameBtn:hover {
+    background-color: var(--color-text);
+    color: var(--background-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 var(--color-secondary);
+}
+
+#startGameBtn:active {
+    transform: translateY(2px);
+    box-shadow: 0 0 0 var(--color-secondary);
+}
+
+.asteroid {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bonus {
+    position: absolute;
+}
+
+.weapon {
+    position: absolute;
+}
+
+.bullet {
+    position: absolute;
+}
+
+.spaceship {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* ANIMACIONES */
+
+/* --------------Asteroides-----------------*/
+
+.small-asteroid {
+    width: 50px;
+    height: 50px;
+    background: url('../../assets/spaceRun/spritesheet/small-asteroid.png') repeat-x;
+    animation: small-rotateAsteroid 2s steps(100) infinite;
+}
+
+.small-asteroid-destroy {
+    width: 50px;
+    height: 50px;
+    background: url('../assets/spaceRun/spritesheet/asteroid-destroy-50.png');
+    animation: small-asteroid-destruction 1s steps(9);
+}
+
+.medium-asteroid {
+    width: 100px;
+    height: 100px;
+    background: url('../../assets/spaceRun/spritesheet/medium-asteroid.png') repeat-x;
+    animation: medium-rotateAsteroid 2s steps(100) infinite;
+}
+
+.medium-asteroid-destroy {
+    width: 100px;
+    height: 100px;
+    background: url('../assets/spaceRun/spritesheet/asteroid-destroy-100.png');
+    animation: medium-asteroid-destruction 1s steps(9);
+}
+
+.large-asteroid {
+    width: 150px;
+    height: 150px;
+    background: url('../../assets/spaceRun/spritesheet/large-asteroid.png') repeat-x;
+    animation: large-rotateAsteroid 2s steps(100) infinite;
+}
+
+
+.large-asteroid-destroy {
+    width: 150px;
+    height: 150px;
+    background: url('../assets/spaceRun/spritesheet/asteroid-destroy.png');
+    animation: large-asteroid-destruction 1s steps(9);
+}
+
+@keyframes small-asteroid-destruction {
+    from {
+        background-position: 0;
+    }
+
+    to {
+        background-position: -450px;
+    }
+}
+
+@keyframes medium-asteroid-destruction {
+    from {
+        background-position: 0;
+    }
+
+    to {
+        background-position: -900px;
+    }
+}
+
+@keyframes large-asteroid-destruction {
+    from {
+        background-position: 0;
+    }
+
+    to {
+        background-position: -1350px;
+    }
+}
+
+@keyframes small-rotateAsteroid {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -5000px;
+    }
+}
+
+@keyframes medium-rotateAsteroid {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -10000px;
+    }
+}
+
+@keyframes large-rotateAsteroid {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -15000px;
+    }
+}
+
+
+/* --------------Spaceship and EnemyShip-----------------*/
+
+
+
+.spaceship1-down {
+    width: 58px;
+    height: 36px;
+    background: url('../assets/spaceRun/objets/ovni-spritesheet.png');
+    animation: spaceship-move 0.5s steps(4) infinite;
+}
+.spaceship2-down {
+    width: 58px;
+    height: 36px;
+    background: url('../assets/spaceRun/objets/ovni-spritesheet2.png');
+    animation: spaceship-move 0.5s steps(4) infinite;
+}
+
+.spaceship1-up {
+    width: 58px;
+    height: 48px;
+    background: url('../assets/spaceRun/objets/ovni-up-spritesheet.png');
+    animation: spaceship-move 0.5s steps(4) infinite;
+}
+.spaceship2-up {
+    width: 58px;
+    height: 48px;
+    background: url('../assets/spaceRun/objets/ovni-up-spritesheet2.png');
+    animation: spaceship-move 0.5s steps(4) infinite;
+}
+
+.spaceship-explode {
+    position: absolute;
+    width: 128px;
+    height: 128px;
+    background: url('../assets/spaceRun/objets/ovni-explode1.png');
+    animation: spaceship-explode 0.5s steps(5);
+}
+
+.spaceship-sparks {
+    width: 65px;
+    height: 60px;
+    background: url('../assets/spaceRun/objets/sparks.png');
+    animation: spaceship-sparks 0.3s steps(6);
+}
+
+.enemyShip-down {
+    width: 58px;
+    height: 36px;
+    background: url('../assets/spaceRun/objets/enemy-ship-spritesheet.png');
+    animation: spaceship-move 0.5s steps(4) infinite;
+}
+
+.sheild-effect{
+    width: 60px;
+    height: 64px;
+    background: url('../assets/spaceRun/spritesheet/sheild.png');
+    animation: sheild-pulse 1s steps(4) infinite;
+}
+.sheild-destroyed{
+    width: 64px;
+    height: 50px;
+    background: url('../assets/spaceRun/spritesheet/sheild-destroyed.png');
+    animation: sheild-destroy 0.5s steps(4) ;
+}
+
+@keyframes spaceship-move {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -233px;
+    }
+}
+
+@keyframes spaceship-explode {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -640px;
+    }
+}
+
+@keyframes spaceship-sparks {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -390px;
+    }
+}
+@keyframes sheild-pulse {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -240px;
+    }
+}
+@keyframes sheild-destroy {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -256px;
+    }
+}
+
+/* --------------Bullet-----------------*/
+
+.bullet-move {
+    width: 50px;
+    height: 50px;
+    background: url('../assets/spaceRun/objets/bullet.png');
+    animation: bullet-move 1s steps(7) infinite;
+}
+
+.bullet-explode {
+    width: 50px;
+    height: 50px;
+    background: url('../assets/spaceRun/objets/bullet-explode.png');
+    animation: bullet-explosion 0.5s steps(5);
+}
+
+.enemy-bullet-move {
+    width: 111px;
+    height: 80px;
+    background: url('../assets/spaceRun/objets/enemy-ship-bullet.png');
+    animation: enemy-bullet-move 0.7s steps(6) infinite;
+}
+
+.enemy-bullet-explode {
+    width: 50px;
+    height: 50px;
+    background: url('../assets/spaceRun/objets/bullet-enemy-explode.png');
+    animation: bullet-explosion 0.5s steps(5);
+}
+
+@keyframes enemy-bullet-move {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -666px;
+    }
+}
+
+
+@keyframes bullet-move {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -350px;
+    }
+}
+
+@keyframes bullet-explosion {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -250px;
+    }
+}
+
+
+/* --------------Bonus-----------------*/
+
+.bonus-life {
+    width: 40px;
+    height: 40px;
+    background: url('../assets/spaceRun/objets/item-life.png');
+    animation: bonus 1s steps(15) infinite;
+}
+
+.bonus-bullet {
+    width: 40px;
+    height: 40px;
+    background: url('../assets/spaceRun/objets/item-bullet.png');
+    animation: bonus 1s steps(15) infinite;
+}
+.bonus-sheild {
+    width: 40px;
+    height: 40px;
+    background: url('../assets/spaceRun/objets/item-shield.png');
+    animation: bonus 1s steps(15) infinite;
+}
+
+@keyframes bonus {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: -600px;
+    }
+}
+
+
+/* --------------Hud-----------------*/
+
+.hud-life {
+    position: absolute;
+    width: 106px;
+    height: 40px;
+    background: url('../assets/spaceRun/objets/life-hud.png');
+    background-repeat: no-repeat;
+
+    background-position: 0px 0px;
+}
+
+.hud-ammunition {
+    position: absolute;
+    width: 87px;
+    height: 30px;
+    background: url('../assets/spaceRun/objets/ammunition-hud.png');
+    background-repeat: no-repeat;
+
+    background-position: 0px 0px;
+}
+
+.hud-score {
+    position: absolute;
+    top: 3%;
+    left: 84%;
+    width: 15%;
+    height: 30px;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hud-score p {
+    font-family: 'Press Start 2P', sans-serif;
+    color: white;
+}
+
+.current-record {
+
+    width: 100%;
+    height: 20%;
+    background: rgb(49, 47, 47);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 115, 0);
+    border: solid 2px rgb(185, 155, 34);
+    border-radius: 14px;
+}

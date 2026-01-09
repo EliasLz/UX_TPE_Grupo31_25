@@ -1,0 +1,235 @@
+header{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-secundarioDorado-300);
+    height: 63px;
+    padding: 0 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    z-index: 1002;
+
+    position: relative; 
+}
+
+button{
+    border: 0;
+    padding: 0;
+}
+form .doubleCenterFlex{
+    display: flex;
+    flex-direction: row;
+}
+
+form input .searchInputContainer{
+    margin: 0;
+}
+
+.options{
+    
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.options img{
+    margin-left: 23px;
+    height: 32px;
+    width: auto;
+}
+
+.options a img{
+    height: 55px;
+    width: auto;
+}
+
+.searchInput {
+    position: relative;
+    width: 230px;
+    background: var(--color-primario-100);
+    border: 2px solid var(--color-texto-100);
+    border-radius: 28px;
+    padding: 12px;
+    box-sizing: border-box;
+}
+.searchInputContainer{
+    position: relative;
+}
+.searchInput:focus-within {
+    border-color: var(--color-secundarioDorado-200);
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+.searchInput div{
+    position: relative;
+    background-color: var(--color-secundarioDorado-300);
+    line-height: 0;
+}
+/* tiene este nombre feo porque si lo combio deja de funcionar. Sí, no tiene sentido, pero es así */
+.sesss{
+    align-items: center;
+    position: absolute;
+    left: 85%;
+    bottom: 15%;
+    transform: translateX(-50%);
+}
+
+.languageImg{
+    background-color: var(--color-secundarioDorado-300);
+    line-height: 0;
+
+}
+.languageImg img {
+    height: 40px;
+    width: auto;
+}
+
+
+
+/*Menu hamburguesa*/
+.menu{
+    display: flex;
+    /* justify-content: flex-start;
+    align-items: center; */
+    padding: 0 10px 20px;
+    color: white;
+    /* position: relative; 
+    z-index: 1001; 
+    width: max-content; */
+
+    position: absolute; 
+    top: 63px;
+    left: 0; 
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.8s ease-in-out;
+
+    width: 300px;
+    z-index: 1000; 
+    padding: 0; 
+}
+
+.menu.active {
+    max-height: 1200px;
+    padding-bottom: 20px;
+}
+
+#userToggle{
+    cursor: pointer;
+    border-radius: 100%;
+    height: 50px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+}
+
+#userToggle:hover{
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.6);
+}
+.user{
+    background-color: var(--color-secundarioDorado-300);
+    border-radius: 0 0 25px 25px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+}
+
+.config{
+    position: absolute;
+    right: 0; 
+    left: auto;
+}
+.card-user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    
+}
+.card-user h3{
+    margin: 0;
+}
+
+.user-logo{
+    height: 75px;
+    margin: 5px;
+} 
+
+.info-user{
+    background-color: var(--color-secundarioDorado-400);
+    margin: 0 10px 3px 10px;
+    border-radius: 25px 25px 0 0;
+    padding: 10px;
+    width: 93%;
+    text-align: center;
+}
+
+.config-menu-user{
+    background-color: var(--color-secundarioDorado-400);
+    margin: 0 10px 5px 10px;
+    border-radius:  0 0 25px 25px;
+    padding: 20px;
+}
+
+.config-menu-user ul{
+    text-align: left;
+    padding-top: 10px;
+}
+
+.user-vip{
+    display: flex;
+    justify-content: center;
+    width: max-content;
+    background-color: var(--color-texto-400);
+    border-radius: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+.user-vip p{
+    font-size: var(--tamano-titulo-sm);
+    color: var(--color-secundarioDorado-400);
+    margin: 5px 15px;
+    cursor: pointer;
+}
+
+.networks-menu ul{
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 10px;
+    padding-left: 0;
+}
+
+.category{
+    background-color: var(--color-secundarioDorado-400);
+    border-radius: 0 0 50px 50px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    padding: 0 10% 10% 10%;
+    z-index: -1;
+}
+
+.tittle-category{
+    background-color: var(--color-baseFondo-200);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 60px;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    cursor: pointer;
+}
+
+ul li:hover{
+    background-color: #a14f18;
+    color: white ;
+    border-radius: 30px;
+}
+ul li:hover a {
+    color: white; 
+}
+
+#menuToggle{
+    padding: 5px;
+    cursor: pointer;
+}
+
+#menuToggle:hover{
+    background-color: #c5712d;
+    border-radius: 5px;
+}

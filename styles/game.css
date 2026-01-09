@@ -1,0 +1,826 @@
+main {
+    margin: 0 30px;
+    align-items: center;
+}
+
+button:hover {
+    opacity: 0.8;
+    transform: scale(1.1);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+button:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+#gameScreen{
+    position: relative;
+    width: 100%; 
+}
+
+#canvasContainer {
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+#menu-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+
+/*Para separar contenido del main veticalmente */
+.widthContainer {
+    display: flex;
+    justify-content: center;
+    gap: 3%;
+}
+
+/* El Breadcrumb */
+ul.breadcrumb {
+    list-style: none;
+    display: flex;
+    background-color: var(--color-baseFondo-200);
+    margin: 5px 0;
+    padding: 10px 32px;
+}
+
+/* Decoración del Breadcrumb */
+ul.breadcrumb li + li::before {
+    content: ">>";
+    margin: 0 8px;
+}
+
+ul.breadcrumb li:last-child:hover {
+  background-color: transparent;
+  color: inherit;
+  border-radius: 0;
+  list-style: none;
+  cursor: default;
+}
+
+.game1-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    width: 750px;
+    border: 3px solid black; 
+    border-radius: 30px;
+}
+
+.game2-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+    background-image: url('../assets/img-Blocka/FondoPantalla.png');
+    overflow: hidden;
+    width: 860px;
+    border: 3px solid black; 
+    border-radius: 30px;
+}
+
+.game3-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    border: 3px solid black; 
+    border-radius: 30px;
+}
+
+.game1Screen{
+    width: 100%;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    display: block;
+    width: 750px;
+    background-color: #000;
+}
+
+.game2Screen{
+    width: 100%;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    display: contents;
+}
+
+.game2Background{
+  background-image: linear-gradient(to top right, #114357, #F29492);
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;
+}
+
+.game2Timer{
+  position: absolute;
+  top: 5%;
+  left: 10%;
+  width: 10%;
+  height: 5%;
+  background: rgb(49, 47, 47); 
+  z-index: 10;           /* Sobre el canvas */
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  color: white;
+  font-size: 24px;
+  border: solid 2px rgb(185, 155, 34);
+  border-radius: 14px;
+}
+
+.gameCover {
+    width: 100%;
+    height: 100%;
+}
+
+.final-screen{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: orange;
+    margin: 10rem 10rem;
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 4px 1px #b39e71;
+    border: 4px solid #fffbeb;
+    color: white;
+    font-size: xx-large;
+}
+
+.partial-screen{    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: orange;
+    margin: 15rem 10rem;
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 4px 1px #b39e71;
+    border: 4px solid #fffbeb;
+    color: white;
+    font-size: xx-large;
+
+}
+
+.btn-Menu-game {
+    background-color: rgb(255, 115, 0);
+    top: 85%;
+    left: 35%;
+    border-radius:30px;
+    padding: 12px 25px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.nextLevelButton {
+    background-color: rgb(169, 211, 16);
+    top: 85%;
+    left: 65%;
+    border-radius:30px;
+    padding: 12px 25px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+@keyframes pulseGold {
+    0% {
+        transform: scale(1);
+        box-shadow: none;
+    }
+    50% {
+        transform: scale(1.3);
+        box-shadow: 0 0 0 3px gold;
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: none;
+    }
+}
+
+.time-registered {
+    animation: pulseGold 0.5s ease-in-out;
+}
+
+.timerDisplay {
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    margin: 5px;
+    align-items: center;
+    display: flex;
+    font-size: xx-large;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(255, 0, 0, 0.6);
+    z-index: 2;
+}
+
+/* ANIMACIÓN: Implementación */
+@keyframes pulseButton {
+    0% {
+        transform: translateX(-50%) scale(1);
+    }
+    50% {
+        transform: translateX(-50%) scale(1.05);
+    }
+    100% {
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+/*Boton iniciar juego*/
+
+.play-button {
+    /* Posición */
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 140px;
+    height: 38px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 40%;
+    /* Estilo */
+    font-family: var(--fuente-principal);
+    color: #EDF2F7;
+    background-color: var(--color-primario-400);
+    padding: 5px 5px;
+    border: 1px solid var(--color-texto-500);
+    border-radius: 10px;
+    font-size: 13px;
+    cursor: pointer;
+    /* Se invoca la animación */
+    animation-name: pulseButton;
+    /* Se define su duración */
+    animation-duration: 1.5s;
+    /* Se define timing que tendra la animación durante su tiempo de vida */
+    animation-timing-function: ease-in-out;
+    /* Se define el delay de inicio */
+    animation-delay: 0.5s;
+    /* Se define cuantas veces se va repite */
+    animation-iteration-count: infinite;
+}
+
+/* Estados del boton iniciar juego */
+button.play-button:hover {
+    transform: translateX(-50%);
+    animation-play-state: paused;
+}
+
+button.play-button:active {
+    transform: translateX(-50%);
+    border-color: var(--color-secundarioDorado-200);
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+/* Icono del boton iniciar juego */
+.playIcon {
+    height: 100%;
+    width: auto;
+    background: transparent;
+}
+
+/* Botonera de la ventana de ejecución */
+.gameButtonbar {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--color-texto-300);
+    height: 38px;
+    padding: 0 30px;
+    border-top: 3px solid black;
+    overflow: hidden;
+}
+
+/* Grupo botones izquierdos y derechos */
+.buttonGroup {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+}
+
+.iconButton {
+    background: transparent;
+    height: 70%;
+    transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.iconButton img {
+    background: transparent;
+    width: 100%;
+    height: 100%;
+}
+
+/* Contenedores para contenidos con parrafos */
+.textContent {
+    background-color: var(--color-baseFondo-200);
+    border-radius: 30px;
+    box-sizing: border-box;
+    padding: 15px 110px 15px 50px;
+    width: 1000px;
+    height: 100%;
+    max-width: 100%;
+    hyphens: auto;
+}
+
+#noPuedoCreerQueTengaQueHacerUnIdSoloPorEsto {
+    gap: 40px;
+}
+
+/* Calificación de estrellas */
+.gameQuality {
+    display: flex;
+    gap: 0;
+    width: 500px;
+    height: 20px;
+}
+
+.likesValue {
+    margin-left: 10px;
+}
+
+.commentInputContainer {
+    position: relative;
+    display: flex;
+    align-items: self-end;
+    justify-content: space-between;
+    height: auto;
+}
+
+.commentInput {
+    position: relative;
+    width: 600px;
+    background: var(--color-primario-100);
+    border: 2px solid var(--color-texto-100);
+    border-radius: 8px;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.commentInput:focus-within {
+    border-color: var(--color-secundarioDorado-200);
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+.comentAvatarImg {
+    min-width: 55px;
+    min-height: 55px;
+}
+
+/* Contenedor general de comentarios publicados */
+.usersCommentsConteiner {
+    flex-direction: column;
+    position: relative;
+}
+
+.commentButton {
+    box-sizing: border-box;
+    width: 140px;
+    height: 38px;
+    color: var(--color-texto-500);
+    background-color: var(--color-primario-200);
+    padding: 5px 5px;
+    border: 1px solid var(--color-texto-500);
+    border-radius: 10px;
+    font-size: 13px;
+
+}
+
+/* Contenedor individual de comentario publicado */
+.userCommentConteiner {
+    display: flex;
+    align-items: flex-start;
+    justify-content: left; /* navegador ignora esta linea */
+    gap: 100px;
+    padding: 10px 100px 20px 20px;
+    margin: 10px 0 10px 0;
+    border-bottom: solid var(--color-texto-500) 1px;
+    flex-shrink: 0;
+
+}
+
+/* Contenedor perfil + info usuario */
+.profileConteiner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Contenedor imagen de perfil */
+.avatarCotainer {
+    flex-direction: column;
+    width: 79px;
+    height: 77px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+/* Indice páginas de comentarios */
+.pageIndex {
+    display: flex;
+    list-style: none;
+    gap: 12px;
+    align-items: center;
+}
+
+.pageIndex a:hover {
+    color: var(--color-texto-300);
+}
+
+.pageIndex li:first-child a {
+    color: var(--color-secundarioDorado-400);
+    text-decoration: underline;
+}
+
+.pagehome{
+    display: flex;
+}
+
+.btnHelp{
+    width: min-content;
+    border-radius: 100%;
+    background-color: initial;
+    position: absolute;    
+    top: 0;
+    cursor: pointer;
+}
+
+.btnHelp img{
+    width: 70px;
+    height: 70px;
+}
+
+
+/* --------------------------------------------------------------------------- */
+/* BORRADOR: cambiar por publis tipo carruseles y cards  */
+.proxCarruselPubli {
+    position: relative;
+    width: 82%;
+    height: 155px;
+    margin: 10px 0;
+    border-radius: 10px;
+    background-image: url('../assets/img/cocacola.svg');
+    background-size: cover;
+}
+
+.proxCardPubli {
+    background-color: var(--color-baseFondo-200);
+    width: 440px;
+    height: auto;
+    border-radius: 30px;
+}
+
+
+/* -------------- */
+
+/* CSS básico para el menú de configuración */
+.overlay {
+    position: absolute; /* O absolute, dependiendo del contenedor */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro semitransparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegura que esté por encima de todo */
+}
+
+.config-menu {
+    background-color:rgba(253, 225, 166, 0.75);
+    padding: 10px 40px; 
+    border-radius: 25px;
+    box-shadow: 0 4px 1px #b39e71;
+    border: 4px solid #fffbeb;
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+    color: #333;
+    align-self: center;
+    max-width: 500px;
+    animation: fadeIn 0.3s ease-out;
+    margin: 15px;
+}
+
+.config-menu h1 {
+    font-weight: 900;
+    color:  #93510a;
+    text-align: center;
+    margin: 10px;
+}
+.config-option h3 {
+    color: #000;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.config-option h5 {
+    color: #a75900;
+    margin: 10px;
+}
+
+.config-option {
+    margin-bottom: 15px;
+    background-color: rgba(254, 244, 201, .55);
+    border-radius: 10px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start;   
+    padding: 0px 30px 10px 10px;
+}
+.config-option-img{
+    margin-bottom: 15px;
+    border-radius: 10px;
+    padding: 30px;
+
+    display: flex;
+    flex-direction: row; 
+    align-items: flex-start;   
+    padding: 0px 30px 10px 10px;
+    height: 80px;
+}
+
+.config-option label {
+    font-weight: 900;
+    margin-bottom: 5px;
+    color: #a75900;
+}
+
+.config-option select,
+.config-option input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    border:  2px solid #e5c37a;
+    box-shadow: 0px 2.5px 1px #e5c37a;
+    border-radius: 15px;
+    box-sizing: border-box; 
+    text-align: left;
+    color: #673f11;
+    font-weight: 700;
+}
+
+.config-option input[type="checkbox"] {
+    width: auto;
+    margin-right: 10px;
+    /* Ajustes visuales si son necesarios */
+}
+
+.config-option small {
+    display: block;
+    margin-top: 4px;
+    color: var(--color-texto-300);
+    font-size: var(--tamano-texto-meta);
+}
+
+/* Estilo para el botón de comenzar juego (btn-game) */
+.btn-game {
+    display: inline-flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    PADDING: 10PX;
+
+    color: white; 
+    background-color: #fe8e10;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 15px;
+    font-size: x-large;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: solid 3px #d35003;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    font-weight: 600;
+}
+
+
+/* Animación opcional */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Carruseles verticales*/
+.proxCardPubli{
+    background-color: var(--color-baseFondo-200);
+    width: 440px;
+    height: auto;
+    max-height: 1733px;
+    border-radius: 30px;
+    display: flex;
+    padding: 10px;
+    justify-content: space-evenly;
+}
+
+.carousel-track {
+    flex-direction: column;
+    margin-left: 0 !important; 
+}
+
+.carousel-section{
+    overflow: hidden;
+}
+
+.picker{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.picker img{
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Estilos para los inputs tipo checkbox*/
+.toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+    color: #5a3e2b;
+    margin: 10px 0;
+}
+.toggle-container-theme {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+    color: #5a3e2b;
+    margin: 10px;
+}
+
+.toggle-container input[type="checkbox"] {
+    display: none;
+}
+.toggle-container-theme input[type="radio"] {
+    display: none;
+}
+
+.toggle-slider {
+    position: relative;
+    min-width: 50px;
+    height: 26px;
+    background-color: #a75913;
+    border-radius: 13px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-slider::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.toggle-container input[type="checkbox"]:checked + .toggle-slider {
+    background-color: #f7a541;
+}
+
+.toggle-container input[type="checkbox"]:checked + .toggle-slider::before {
+    transform: translateX(24px);
+}
+.toggle-container-theme input[type="radio"]:checked + .toggle-slider {
+    background-color: #f7a541;
+}
+
+.toggle-container-theme input[type="radio"]:checked + .toggle-slider::before {
+    transform: translateX(24px);
+}
+
+
+/* Estilos Peg Solitarie */
+.menuPegSolitarie{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* background-color: rgba(255, 255, 255, 0.9); */
+    background-color: #f1c524;
+    padding: 5%;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    width: 50%;
+    height: 50%;
+    border: 4px solid #fffbeb;
+    color: white;
+    font-size: xx-large;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.guide-image{
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    border-radius: 4px;
+    border-radius: 5cap;
+}
+
+.btn-help-game{
+    position: relative;
+    
+    z-index: 5;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.active-help-button{
+    background-color: rgba(72, 255, 0, 0.9);
+}
+
+.help-icon{
+    width: 98%;
+    height: 98%;
+}
+
+.button-help-wrapper {
+    position: absolute;
+    display: inline-block;
+    left: 0px;
+    top: 0px;
+    margin: 10px;
+}
+
+.help-message{
+    display: none;
+    position: absolute;
+    
+    top: 50%;
+    left: 100%; 
+    transform: translateY(-50%); 
+    
+    margin-left: 10px; 
+    white-space: nowrap; 
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    z-index: 5;
+}
+
+.button-help-wrapper:hover .help-message {
+    display: block; /* Aparece de forma instantánea */
+}
